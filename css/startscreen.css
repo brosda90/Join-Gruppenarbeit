@@ -1,0 +1,161 @@
+body {
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    margin: 0;
+    background-color: #f6f7f8;
+  }
+  
+  .logo-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 2s;
+    margin-top: 40px;
+    margin-left: 40px;
+  }
+  
+  #logo {
+    width: 100%; /* Anfangsgröße. Sie können dies an Ihre Bedürfnisse anpassen. */
+    transition: all 2s;
+  }
+  
+  .login-container {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    
+    width: 652px;
+    height: 505px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 30px;
+    box-shadow: 0px 0px 8px 6px rgba(156, 155, 155, 0.2);
+
+  }
+
+  h2 {
+    font-size: 64px;
+    font-weight: 700;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    position: relative; /* Damit das Pseudo-Element relativ zum h2 positioniert wird */
+    display: inline-block; /* Damit das h2-Element nur so groß ist wie der Text */
+}
+
+h2::after {
+    content: ''; /* Das macht das Pseudo-Element sichtbar */
+    position: absolute;
+    left: 50%; /* Startet das Pseudo-Element in der Mitte des h2-Elements */
+    bottom: -10px; /* Dieser Wert gibt den Abstand (Gap) zum Text an. Sie können ihn anpassen. */
+    height: 2px; /* Dicke des Unterstrichs */
+    width: 100%; 
+    max-width: calc(100% - 2 * 10px); /* Damit der Unterstrich nicht breiter als der Text ist */
+    background-color: #29abe2; /* Farbe des Unterstrichs */
+    transform: translateX(-50%); /* Zentriert das Pseudo-Element horizontal unter dem Text */
+    
+}
+
+.form-outline{
+    width: 60% ;
+}
+
+.login-buttons > .btn:not(:last-child) {
+    margin-right: 35px; 
+}
+
+.btn{
+    background-color: #2a3647  ; 
+}
+
+#logInBtn{
+    background-color: #2a3647;
+    color: white;
+    border: none;
+}
+
+#logInBtn:hover{
+    cursor: pointer;
+    background-color: #29abe2;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
+}
+
+#guestLogIn{
+    background-color: white;
+    color: #2a3647;
+    border: 1px solid #2a3647;
+}
+
+#guestLogIn:hover{
+    cursor: pointer;
+    color: #29abe2;
+    border: 1px solid #29abe2;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
+}
+
+.icon-rtl {
+    background: url(/template/icons-login/password.png) no-repeat right ;
+    background-size: 18px;
+    background-position: calc(100% - 16px) center;
+}
+
+.icon-name{
+  background: url(/template/summary-icons/person.svg) no-repeat right ;
+    background-size: 24px;
+    background-position: calc(100% - 16px) center;
+}
+
+.icon-mail{
+    background: url(/template/icons-login/email.png) no-repeat right ;
+    background-size: 18px;
+    background-position: calc(100% - 16px) center;
+}
+    
+ 
+
+  .forgot-password a{
+    text-decoration: none;
+    color: #29abe2;
+  }
+
+  .form-check-input{
+    color: #2a3647 !important;
+    background-color: #f6f7f8;
+  }
+
+.form-control{
+    font-size: 1.2rem !important;
+}
+
+.sign-up-area{
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  top: 50px;
+  right: 80px;
+}
+
+.sign-up-area p {
+  padding-right: 20px;
+  font-size: 18px;
+}
+
+.sign-up-area .btn{
+  border: none;
+}
+
+.sign-up-area .btn:hover{
+  cursor: pointer;
+  background-color: #29abe2;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
+}

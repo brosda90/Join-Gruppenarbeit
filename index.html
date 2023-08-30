@@ -1,11 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Join</title>
+  </head>
+
+  <!--Bootstrap files-->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+    crossorigin="anonymous"
+  />
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+    crossorigin="anonymous"
+  ></script>
+
+  <script src="js/storage.js"></script>
+  <script src="js/login.js"></script>
+  <script src="js/startscreen.js"></script>
+  <link rel="stylesheet" href="css/startscreen.css" />
+  <body>
+    <div class="logo-container">
+      <img id="logo" src="img/Join start logo.svg" alt="Logo" />
+    </div>
+
+
+     <div class="sign-up-area">
+      <p>Not a Join user?</p>
+      <button type="button" class="btn btn-primary mr-4 mb-4 " onclick="openSignUpInNewWindow()">Sign up</button>
+     </div>
+
+    <form class="login-container" id="loginContainer">
+      <h2>Log in</h2>
+      <!-- Email input -->
+      <div
+        class="form-outline mb-4 mt-4 "
+      >
+        <input
+          type="email"
+          id="email"
+          placeholder="Email"
+          class="form-control icon-mail"
+          required
+        />
+      </div>
+
+      <!-- Password input -->
+      <div
+        class="form-outline mb-4 "
+      >
+        <input
+          type="password"
+          id="passwordLogin"
+          placeholder="Password"
+          class="form-control icon-rtl"
+          required
+        />
+      </div>
+
+      
+      <div class="row d-flex justify-content-center mb-4 mt-4">
+        <div class="col-auto text-center">
+            <!-- Checkbox -->
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" value="" id="form2Example31" checked />
+                <label class="form-check-label" for="form2Example31">Remember me</label>
+            </div>
+        </div>
     
-</body>
+        <div class="col-auto forgot-password">
+           
+            <a href="#!">i forgot my password</a>
+        </div>
+    </div>
+
+     
+      <div class="login-buttons d-flex justify-content-between mt-4">
+      <button onclick="login()" type="button" id="logInBtn" class="btn btn-primary mr-4 mb-4 ">
+        Log in
+      </button>
+      <button type="button" id="guestLogIn" class="btn btn-primary mb-4  ">
+        Guest Log in
+      </button>
+    </div>
+    </form>
+  </body>
 </html>
