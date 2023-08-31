@@ -1,0 +1,166 @@
+@font-face {
+    font-family: Inter;
+    src: url('../assets/fonts/inter-v12-latin-regular.woff2');
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: Inter;
+    src: url('../assets/fonts/inter-v12-latin-100.woff2');
+    font-weight: 100;
+}
+
+@font-face {
+    font-family: Inter;
+    src: url('../assets/fonts/inter-v12-latin-200.woff2');
+    font-weight: 200;
+}
+
+@font-face {
+    font-family: Inter;
+    src: url('../assets/fonts/inter-v12-latin-300.woff2');
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: Inter;
+    src: url('../assets/fonts/inter-v12-latin-500.woff2');
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: Inter;
+    src: url('../assets/fonts/inter-v12-latin-600.woff2');
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: Inter;
+    src: url('..assets/fonts/inter-v12-latin-700.woff2');
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: Inter;
+    src: url('../assets/fonts/inter-v12-latin-800.woff2');
+    font-weight: 800;
+}
+
+@font-face {
+    font-family: Inter;
+    src: url('../assets/fonts/inter-v12-latin-900.woff2');
+    font-weight: 900;
+}
+
+/* ------------------------------------------------------------ */
+/* ------------------------------------------------------------ */
+/* ------------------------------------------------------------ */
+:root {
+    --col-main: #2a3647;
+    --col-main-active: #091931;
+    --col-white: #fff;
+    --col-shadow: rgba(0,0,0,0.1);
+    --col-hr: #d1d1d1;
+    --col-link: #007cee;
+    --grad-contact-hover: linear-gradient(180deg, rgba(249,249,249,1) 0%, rgba(243,243,243,1) 100%);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Inter;
+    font-size: 16px;
+}
+
+div {
+    box-sizing: border-box;
+}
+
+.insert-top {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 1;
+    height: 80px;
+    width: 100%;
+    background: #fff;
+    box-shadow: 0 4px 4px 0 rgba(0,0,0,0.1);
+}
+
+.insert-bottom {
+    position: fixed;
+    inset: auto 0 0 0;
+    z-index: 1;
+    height: 80px;
+    width: 100%;
+    background-color: var(--col-main);
+}
+
+/* ------------------------------------------------------------ */
+/* ----- For contactlistmain ---------------------------------- */
+/* ------------------------------------------------------------ */
+.contact-list-main {
+    position: relative;
+    top: 80px;
+    height: calc(100% - 160px);
+    background-color: #fff;
+}
+
+.contact-list {
+    position: relative;
+    width: calc(100% - 28px);
+    left: 14px;
+    padding: 24px;
+}
+
+.contact-letterbox {
+    width: 100%;
+    padding: 17px 36px;
+}
+
+.contact-letter {
+    font-family: Inter;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+}
+
+.contact-hr {
+    width: 100%;
+    height: 1px;
+    margin: 8px 0;
+    background-color:  var(--col-hr);
+}
+
+/* ------------------------------------------------------------ */
+/* ----- For contact-listbox ---------------------------------- */
+/* ------------------------------------------------------------ */
+.contact-listbox {
+    width: 100%;
+    padding: 15px 24px;
+    border-radius: 10px;
+    background: var(--grad-contact-hover);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+
+
+
+.contact-listbox-namebox {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-listbox-name {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+}
+
+.contact-listbox-mail {
+    color: var(--col-link);
+    font-family: Inter;
+    font-size: 16px;
+    line-height: 19.2px;
+}
