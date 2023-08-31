@@ -1,11 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="./css/addtask.css">
+    <script src=""></script>
+    <title>Join-Add-Task</title>
 </head>
+
 <body>
-    
+    <section class="mainAddTask">
+        <div class="headAddTask">
+            <h1>Add Task</h1>
+        </div>
+        <div class="taskInfo width-396">
+            <div class="title h4-gap">
+                <h4>Title</h4>
+                <form action="">
+                    <input class="titleInput brd-r10 item" type="text" placeholder="Enter a title"
+                        id="addTaskTitle">
+                </form>
+            </div>
+            <div class="description h4-gap">
+                <h4>Description</h4>
+                <form action="">
+                    <textarea class="descriptionInput brd-r10 item" name="" id=""
+                        placeholder="Enter a Description"></textarea>
+                </form>
+            </div>
+            <div class="prio h4-gap width-396 ">
+                <h4>Prio</h4>
+                <div class="btnSection width-396">
+                    <a class="item brd-r10">Urgent <img src="./assets/img/capa2.svg" alt=""></a>
+                    <a class="item brd-r10">Medium <img src="./assets/img/prio-media.svg" alt=""></a>
+                    <a class="item brd-r10">Low <img src="./assets/img/prio-baja.svg" alt=""></a>
+                </div>
+            </div>
+            <div class="h4-gap">
+                 <h4>Due date</h4>
+                 <input class="date brd-r10" type="date">
+            </div>
+            <div class="selectCategory h4-gap">
+                <h4>Category</h4>
+                <div>
+                    <select class="brd-r10 item" name="" id="">
+                        <option value="0">Select task category</option>
+                        <option value="1">Technical Task</option>
+                        <option value="2">User Story</option>
+                    </select>
+                </div>
+            </div>
+            <div class="assignedTo">
+
+            </div>
+
+        </div>
+    </section>
+
 </body>
+
 </html>
