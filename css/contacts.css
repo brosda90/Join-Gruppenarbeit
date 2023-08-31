@@ -1,6 +1,7 @@
 @font-face {
     font-family: Inter;
     src: url('../assets/fonts/inter-v12-latin-regular.woff2');
+    font-weight: 400;
     font-weight: normal;
 }
 
@@ -36,7 +37,7 @@
 
 @font-face {
     font-family: Inter;
-    src: url('..assets/fonts/inter-v12-latin-700.woff2');
+    src: url('../assets/fonts/inter-v12-latin-700.woff2');
     font-weight: 700;
 }
 
@@ -56,14 +57,17 @@
 /* ------------------------------------------------------------ */
 /* ------------------------------------------------------------ */
 :root {
-    --col-main: #2a3647;
+    --col-main: #2A3647;
     --col-main-active: #091931;
-    --col-white: #fff;
+    --col-main-bg: #F6F7F8;
+    --col-white: #FFFFFF;
     --col-shadow: rgba(0,0,0,0.1);
-    --col-hr: #d1d1d1;
-    --col-link: #007cee;
+    --col-hr: #D1D1D1;
+    --col-link: #007CEE;
+    --col-btn: var(--col-main);
+    --col-btn-activ: #29ABE2;
 
-    --col-contact-badge-1: #ff7a00;
+    --col-contact-badge-1: #FF7A00;
     --col-contact-badge-2: #9327FF;
     --col-contact-badge-3: #6E52FF;
     --col-contact-badge-4: #FC71FF;
@@ -71,6 +75,7 @@
     --col-contact-badge-6: #1FD7C1;
     --col-contact-badge-7: #462F8A;
     --col-contact-badge-8: #FF4646;
+    --col-contact-badge-9: #FFC700;
 
     --grad-contact-hover: linear-gradient(180deg, rgba(249,249,249,1) 0%, rgba(243,243,243,1) 100%);
 }
@@ -80,10 +85,17 @@ body {
     padding: 0;
     font-family: Inter;
     font-size: 16px;
+    position: relative;
 }
 
 div {
     box-sizing: border-box;
+}
+
+span {
+    font-family: Inter;
+    font-size: 20px;
+    line-height: 24px;
 }
 
 .insert-top {
@@ -92,7 +104,8 @@ div {
     z-index: 1;
     height: 80px;
     width: 100%;
-    background: #fff;
+    /* background: var(--col-white); */
+    background-color: #ffffffc0;
     box-shadow: 0 4px 4px 0 rgba(0,0,0,0.1);
 }
 
@@ -103,17 +116,60 @@ div {
     height: 80px;
     width: 100%;
     background-color: var(--col-main);
+    background-color: #2A3647c0;
+}
+
+.email {
+    color: var(--col-link);
+    font-family: Inter;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19.2px;
+}
+
+/* ------------------------------------------------------------ */
+/* ----- For contact-add -------------------------------------- */
+/* ------------------------------------------------------------ */
+.contact-add-main {
+    position: fixed;
+    z-index: 2;
+    right: 16px;
+    bottom: 112px;
+    cursor: pointer;
+}
+
+.contact-add-main:hover .contact-add-mainbox {
+    background-color: var(--col-btn-activ);
+    border-color: var(--col-btn-activ);
+}
+
+.contact-add-mainbox {
+    width: 56px;
+    height: 56px;
+    background-color: var(--col-main);
+    border: 1px solid var(--col-main);
+    border-radius: 500px;
+    box-shadow: 0 4px 4px 0 rgba(0,0,0,0.25);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contact-add-img {
+    object-fit: contain;
 }
 
 /* ------------------------------------------------------------ */
 /* ----- For contactlistmain ---------------------------------- */
 /* ------------------------------------------------------------ */
 .contact-list-main {
-    position: relative;
-    top: 80px;
+    width: 100%;
+    position: fixed;
     height: calc(100% - 160px);
-    background-color: #fff;
     padding-bottom: 80px;
+    top: 80px;
+    background-color: #fff;
+    overflow-y: auto;
 }
 
 .contact-list {
@@ -197,9 +253,370 @@ div {
 .contact-listbox-mail {
     color: var(--col-link);
     font-family: Inter;
+    font-weight: 400;
     font-size: 16px;
     line-height: 19.2px;
 }
+
+.contact-list-endbox {
+    width: 100%;
+    height: 56px;
+}
+
+/* ------------------------------------------------------------ */
+/* ----- for contact-single ----------------------------------- */
+/* ------------------------------------------------------------ */
+.contact-single-main {
+    position: fixed;
+    z-index: 0;
+    top: 80px;
+    width: 100%;
+    height: calc(100% - 160px);
+    overflow-y: auto;
+    background-color: var(--col-main-bg);
+}
+
+.backarrow {
+    position: fixed;
+    width: 32px;
+    height: 32px;
+    top: 128px;
+    right: 16px;
+    background-color: var(--col-main-bg);
+    border-radius: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.backarrow:hover {
+    background-color: #eee;
+}
+
+/* ------------------------------------------------------------ */
+.contact-btn-option-box {
+    position: fixed;
+    right: 16px;
+    bottom: 112px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.contact-btn-option-box:hover .contact-btn-option {
+    background-color: var(--col-btn-activ);
+}
+
+.contact-btn-option {
+    width: 56px;
+    height: 56px;
+    background-color: var(--col-main);
+    border-radius: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ------------------------------------------------------------ */
+.contact-single-title-box {
+    position: fixed;
+    left: 16px;
+    top: 128px;
+    width: fit-content;
+    height: 90px;
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-single-title-text {
+    width: fit-content;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.contact-single-title-text-main {
+    font-size: 47px;
+    font-weight: 700;
+    line-height: 56.4px;
+}
+
+.contact-single-title-text-second {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+}
+
+.contact-single-title-text::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -16px;
+    height: 3px;
+    width: 90px;
+    background-color: var(--col-btn-activ);
+    border: none;
+}
+
+/* ------------------------------------------------------------ */
+.contact-single-info-box {
+    position: relative;
+    top: 200px;
+    left: 16px;
+    width: calc(100% - 32px);
+}
+
+.contact-single-info-top {
+    display: flex;
+    align-items: center;
+    gap: 21px;
+    margin-bottom: 20px;
+}
+
+.contact-single-info-badge {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.contact-single-info-badge-circle {
+    width: 80px;
+    height: 80px;
+    background-color: var(--col-contact-badge-1);
+    border-radius: 500px;
+}
+
+.contact-single-info-badge-text {
+    position: absolute;
+    width: 80px;
+    color: var(--col-white);
+    font-size: 27px;
+    font-weight: 400;
+    line-height: 32.4px;
+    text-align: center;
+}
+
+.contact-single-info-name-text {
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 43.2px;
+    word-wrap: break-word;
+}
+
+/* ------------------------------------------------------------ */
+.contact-single-info-sencond {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    margin-bottom: 30px;
+}
+
+/* ------------------------------------------------------------ */
+.contact-single-info-details {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.contact-single-info-details-box {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.contact-details-title {
+    display: block;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 19.2px;
+}
+
+.contact-details-text {
+    display: block;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19.2px;
+}
+
+
+
+
+
+
+
+
+
+/* ------------------------------------------------------------ */
+/* ----- for contact-option-popup ----------------------------- */
+/* ------------------------------------------------------------ */
+
+
+
+
+
+
+
+/* ------------------------------------------------------------ */
+/* ----- for contact-add-popup -------------------------------- */
+/* ------------------------------------------------------------ */
+.popup-addcon-main {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999;
+    background-color: #00000040;
+    object-position: top center;
+    pointer-events: none;
+}
+
+.popup-addcon-background {
+    z-index: 999;
+    position: absolute;
+    left: 16px;
+    top: calc(100% + 10px);
+    width: calc(100% - 32px);
+    height: calc(100% - 166px);
+    background-color: var(--col-white);
+    border-radius: 30px;
+    box-shadow: 0 0 4px 0 var(--col-shadow);
+    transition: top 300ms;
+}
+
+.popup-addcon-main.inview .popup-addcon-background {
+    top: 83px;
+}
+
+.popup-addcon-main.inview {
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+    pointer-events: all;
+}
+
+.popup-addcon-main:not(.inview) .popup.popup-addcon-background {
+    top: calc(100% + 10px);
+}
+
+.popup-addcon-main:not(.inview) {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+
+
+
+
+/* ------------------------------------------------------------ */
+.popup-top-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 352px;
+    background-color: var(--col-main);
+    border-radius: 30px 30px 0 0;
+}
+
+.popup-top-titlebox {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.popup-top-textbox {
+    position: relative;
+    left: 16px;
+    display: flex;
+    align-items: center;
+}
+
+.popup-top-textbox::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -16px;
+    height: 3px;
+    width: 90px;
+    background-color: var(--col-btn-activ);
+    border: none;
+}
+
+.popup-top-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.popup-top-titletext {
+    color: var(--col-white);
+    font-size: 47px;
+    font-weight: 700;
+    line-height: 56.4px;
+}
+
+.popup-top-secondtext {
+    color: var(--col-white);
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+}
+
+
+
+/* ------------------------------------------------------------ */
+.close-x {
+    position: absolute;
+    top: 24px;
+    right: 16px;
+    width: 32px;
+    height: 32px;
+    background-color: transparent;
+    border-radius: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.close-x:hover {
+    background-color: var(--col-btn-activ);
+}
+
+/* ------------------------------------------------------------ */
+.popup-person-imgbox {
+    position: absolute;
+    top: 292px;
+    left: calc(50% - 60px);
+    width: 120px;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--col-hr);
+    border: 3px solid var(--col-white);
+    border-radius: 500px;
+    box-shadow: 0 0 4px 0 var(--col-shadow);
+}
+
+
+
+
+
+
+
+
+/* ------------------------------------------------------------ */
+/* ----- for contact-edit-popup ------------------------------- */
+/* ------------------------------------------------------------ */
+
+
+
+
 
 
 
@@ -238,3 +655,9 @@ div {
     background-color: var(--col-contact-badge-8);
 }
 
+/* ------------------------------------------------------------ */
+/* ------------------------------------------------------------ */
+/* ------------------------------------------------------------ */
+.d-none {
+    display: none;
+}

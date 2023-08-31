@@ -4,19 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/contacts.css">
+    <script src="./js/contacts.js"></script>
     <title>Join - Contacts</title>
 </head>
 <body tabindex=0>
     <div class="insert-top"></div>
-    <div class="contact-list-main">
+    <div class="insert-bottom"></div>
+    <div id="contact-list" class="contact-list-main">
+        <div class="contact-add-main" onclick="openAddCon()">
+            <div class="contact-add-mainbox">
+                <img src="./assets/img/person_add.png" class="contact-add-img">
+            </div>
+        </div>
         <div class="contact-list">
-            <!--  -->
+            <!-- Letter and HR -->
             <div class="contact-letterbox">
                 <span class="contact-letter">A</span>
             </div>
             <div class="contact-hr"></div>
-            <!--  -->
-            <div class="contact-listbox" onclick="">
+            <!-- One or more entries of names -->
+            <div class="contact-listbox" onclick="openContact(1)">
                 <div class="contact-listbox-badgebox">
                     <div class="contact-listbox-badge">
                         <div class="contact-listbox-badge-circle bg_contact_1">
@@ -29,7 +36,7 @@
                     <span class="contact-listbox-mail">antom@gmail.com</span>
                 </div>
             </div>
-            <div class="contact-listbox" onclick="">
+            <div class="contact-listbox" onclick="openContact(1)">
                 <div class="contact-listbox-badgebox">
                     <div class="contact-listbox-badge">
                         <div class="contact-listbox-badge-circle bg_contact_2">
@@ -42,13 +49,13 @@
                     <span class="contact-listbox-mail">schulz@hotmail.com</span>
                 </div>
             </div>
-            <!--  -->
+            <!-- Letter and HR -->
             <div class="contact-letterbox">
                 <span class="contact-letter">B</span>
             </div>
             <div class="contact-hr"></div>
-            <!--  -->
-            <div class="contact-listbox" onclick="">
+            <!-- One or more entries of names -->
+            <div class="contact-listbox" onclick="openContact(1)">
                 <div class="contact-listbox-badgebox">
                     <div class="contact-listbox-badge">
                         <div class="contact-listbox-badge-circle bg_contact_3">
@@ -61,13 +68,13 @@
                     <span class="contact-listbox-mail">benedikt@gmail.com</span>
                 </div>
             </div>
-            <!--  -->
+            <!-- Letter and HR -->
             <div class="contact-letterbox">
                 <span class="contact-letter">D</span>
             </div>
             <div class="contact-hr"></div>
-            <!--  -->
-            <div class="contact-listbox" onclick="">
+            <!-- One or more entries of names -->
+            <div class="contact-listbox" onclick="openContact(1)">
                 <div class="contact-listbox-badgebox">
                     <div class="contact-listbox-badge">
                         <div class="contact-listbox-badge-circle bg_contact_4">
@@ -80,13 +87,13 @@
                     <span class="contact-listbox-mail">davidberg@gmail.com</span>
                 </div>
             </div>
-            <!--  -->
+            <!-- Letter and HR -->
             <div class="contact-letterbox">
                 <span class="contact-letter">E</span>
             </div>
             <div class="contact-hr"></div>
-            <!--  -->
-            <div class="contact-listbox" onclick="">
+            <!-- One or more entries of names -->
+            <div class="contact-listbox" onclick="openContact(1)">
                 <div class="contact-listbox-badgebox">
                     <div class="contact-listbox-badge">
                         <div class="contact-listbox-badge-circle bg_contact_5">
@@ -99,8 +106,7 @@
                     <span class="contact-listbox-mail">eva@gmail.com</span>
                 </div>
             </div>
-            <!--  -->
-            <div class="contact-listbox" onclick="">
+            <div class="contact-listbox" onclick="openContact(1)">
                 <div class="contact-listbox-badgebox">
                     <div class="contact-listbox-badge">
                         <div class="contact-listbox-badge-circle bg_contact_6">
@@ -113,13 +119,13 @@
                     <span class="contact-listbox-mail">emmanuelma@gmail.com</span>
                 </div>
             </div>
-            <!--  -->
+            <!-- Letter and HR -->
             <div class="contact-letterbox">
                 <span class="contact-letter">M</span>
             </div>
             <div class="contact-hr"></div>
-            <!--  -->
-            <div class="contact-listbox" onclick="">
+            <!-- One or more entries of names -->
+            <div class="contact-listbox" onclick="openContact(1)">
                 <div class="contact-listbox-badgebox">
                     <div class="contact-listbox-badge">
                         <div class="contact-listbox-badge-circle bg_contact_7">
@@ -132,13 +138,13 @@
                     <span class="contact-listbox-mail">bauer@gmail.com</span>
                 </div>
             </div>
-            <!--  -->
+            <!-- Letter and HR -->
             <div class="contact-letterbox">
                 <span class="contact-letter">T</span>
             </div>
             <div class="contact-hr"></div>
-            <!--  -->
-            <div class="contact-listbox" onclick="">
+            <!-- One or more entries of names -->
+            <div class="contact-listbox" onclick="openContact(1)">
                 <div class="contact-listbox-badgebox">
                     <div class="contact-listbox-badge">
                         <div class="contact-listbox-badge-circle bg_contact_8">
@@ -152,8 +158,75 @@
                 </div>
             </div>
             <!--  -->
+            <div class="contact-list-endbox"></div>
         </div>
     </div>
-    <div class="insert-bottom"></div>
+    <!-- Contact single-view -->
+    <div id="contact-single" class="contact-single-main d-none">
+        <div class="backarrow" onclick="openContact(false)">
+            <img src="./assets/img/arrow_left.png">
+        </div>
+        <div class="contact-btn-option-box" onclick="">
+            <div class="contact-btn-option">
+                <img src="./assets/img/more_vert.png">
+            </div>
+        </div>
+        <div class="contact-single-title-box">
+            <div class="contact-single-title-text">
+                <span class="contact-single-title-text-main">Contacts</span>
+                <span class="contact-single-title-text-second">Better with a team</span>
+            </div>
+        </div>
+        <div class="contact-single-info-box">
+            <div class="contact-single-info-top">
+                <div class="contact-single-info-badge">
+                    <div class="contact-single-info-badge-circle"></div>
+                    <span class="contact-single-info-badge-text">AM</span>
+                </div>
+                <div class="contact-single-info-name">
+                    <span class="contact-single-info-name-text">Anton Mayer</span>
+                </div>
+            </div>
+            <div class="contact-single-info-sencond">
+                <span>Contact Information</span>
+            </div>
+            <div class="contact-single-info-details">
+                <div class="contact-single-info-details-box">
+                    <span class="contact-details-title">Email</span>
+                    <span class="contact-details-text email">antom@gmail.com</span>
+                </div>
+                <div class="contact-single-info-details-box">
+                    <span class="contact-details-title">Phone</span>
+                    <span class="contact-details-text">+49 1111 111 11 1</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Popup - Add contact -->
+    <div id="popup-addcon" class="popup-addcon-main">
+        <div class="popup-addcon-background">
+            <div class="popup-top-bg add-contact-title">
+                <div class="popup-top-titlebox">
+                    <div class="popup-top-textbox">
+                        <div class="popup-top-text">
+                            <span class="popup-top-titletext">
+                                Add contact
+                            </span>
+                            <span class="popup-top-secondtext">
+                                Tasks are better with a team!
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="close-x" onclick="openAddCon()">
+                <img src="./assets/img/close.png">
+            </div>
+            <div class="popup-person-imgbox">
+                <img src="./assets/img/person64.png">
+            </div>
+        </div>
+    </div>
+    <!-- Popup - Edit contact -->
 </body>
 </html>
