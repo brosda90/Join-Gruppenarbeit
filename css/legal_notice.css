@@ -1,0 +1,27 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+header h1 {
+    margin-block-start: 8px;
+}
+
+header img:hover {
+    cursor: pointer;
+}
+
+.legalNotice {
+    padding: 16px;
+}
+
+.legalNotice h3 {
+    margin-block-end: 0;
+}
