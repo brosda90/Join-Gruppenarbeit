@@ -2,6 +2,10 @@ function openAddCon() {
     document.getElementById('popup-addcon').classList.toggle('inview');
 }
 
+function openEditCon() {
+    document.getElementById('popup-editcon').classList.toggle('inview');
+}
+
 function openContact(boolean) {
     if(boolean) {
         document.getElementById('contact-list').classList.add('d-none');
@@ -14,4 +18,14 @@ function openContact(boolean) {
 
 function notClose(event) {
     event.stopPropagation();
+}
+
+
+function saveNewContact() {
+    // New Contact
+}
+
+
+function saveEditContact() {
+    // Edit Contact
 }

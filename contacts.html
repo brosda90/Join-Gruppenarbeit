@@ -166,11 +166,6 @@
         <div class="backarrow" onclick="openContact(false)">
             <img src="./assets/img/arrow_left.png">
         </div>
-        <div class="contact-btn-option-box" onclick="">
-            <div class="contact-btn-option">
-                <img src="./assets/img/more_vert.png">
-            </div>
-        </div>
         <div class="contact-single-title-box">
             <div class="contact-single-title-text">
                 <span class="contact-single-title-text-main">Contacts</span>
@@ -201,11 +196,16 @@
                 </div>
             </div>
         </div>
+        <div class="contact-btn-option-box" onclick="openEditCon()">
+            <div class="contact-btn-option">
+                <img src="./assets/img/more_vert.png">
+            </div>
+        </div>
     </div>
     <!-- Popup - Add contact -->
     <div id="popup-addcon" class="popup-addcon-main">
         <div class="popup-addcon-background">
-            <div class="popup-top-bg add-contact-title">
+            <div class="popup-top-bg">
                 <div class="popup-top-titlebox">
                     <div class="popup-top-textbox">
                         <div class="popup-top-text">
@@ -216,17 +216,107 @@
                                 Tasks are better with a team!
                             </span>
                         </div>
+                        <div class="after90"></div>
                     </div>
                 </div>
+                <div class="popup-person-imgbox">
+                    <img src="./assets/img/person64.png">
+                </div>
+            </div>
+            <div class="popup-addcon-inputbox">
+                <form class="popup-addcon-inputbox-form" onsubmit="saveNewContact();return false;" autocomplete="off">
+                    <div class="popup-addcon-input-box border">
+                        <div class="popup-addcon-input-innerbox">
+                            <input type="text" id="addconname" placeholder="Name">
+                            <div class="popup-addcon-input-imgbox">
+                                <img src="./assets/img/person16.png">
+                            </div>
+                        </div>
+                    </div>
+                    <!--  -->
+                    <div class="popup-addcon-input-box border">
+                        <div class="popup-addcon-input-innerbox">
+                            <input type="text" id="addconemail" placeholder="Email">
+                            <div class="popup-addcon-input-imgbox">
+                                <img src="./assets/img/mail_20x16.png">
+                            </div>
+                        </div>
+                    </div>
+                    <!--  -->
+                    <div class="popup-addcon-input-box border">
+                        <div class="popup-addcon-input-innerbox">
+                            <input type="text" id="addconphone" placeholder="Phone">
+                            <div class="popup-addcon-input-imgbox">
+                                <img src="./assets/img/call18.png">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="popup-addcon-btn">
+                        <button class="dark">Create contact<div><img src="./assets/img/check.png"></div></button>
+                    </div>
+                </form>
             </div>
             <div class="close-x" onclick="openAddCon()">
                 <img src="./assets/img/close.png">
             </div>
-            <div class="popup-person-imgbox">
-                <img src="./assets/img/person64.png">
-            </div>
         </div>
     </div>
     <!-- Popup - Edit contact -->
+    <div id="popup-editcon" class="popup-editcon-main">
+        <div class="popup-editcon-background">
+            <div class="popup-top-bg">
+                <div class="popup-top-titlebox">
+                    <div class="popup-top-textbox">
+                        <div class="popup-top-text">
+                            <span class="popup-top-titletext">
+                                Edit contact
+                            </span>
+                        </div>
+                        <div class="after90"></div>
+                    </div>
+                </div>
+                <div class="popup-person-imgbox">
+                    <span class="popup-person-imgbox-text">AM</span>
+                </div>
+            </div>
+            <div class="popup-editcon-inputbox">
+                <form class="popup-editcon-inputbox-form" onsubmit="saveEditContact();return false;" autocomplete="off">
+                    <div class="popup-editcon-input-box border">
+                        <div class="popup-editcon-input-innerbox">
+                            <input type="text" id="editconname" placeholder="Name">
+                            <div class="popup-editcon-input-imgbox">
+                                <img src="./assets/img/person16.png">
+                            </div>
+                        </div>
+                    </div>
+                    <!--  -->
+                    <div class="popup-editcon-input-box border">
+                        <div class="popup-editcon-input-innerbox">
+                            <input type="text" id="editconemail" placeholder="Email">
+                            <div class="popup-editcon-input-imgbox">
+                                <img src="./assets/img/mail_20x16.png">
+                            </div>
+                        </div>
+                    </div>
+                    <!--  -->
+                    <div class="popup-editcon-input-box border">
+                        <div class="popup-editcon-input-innerbox">
+                            <input type="text" id="editconphone" placeholder="Phone">
+                            <div class="popup-editcon-input-imgbox">
+                                <img src="./assets/img/call18.png">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="popup-editcon-btn">
+                        <button class="dark">Save<div><img src="./assets/img/check.png"></div></button>
+                    </div>
+                </form>
+            </div>
+            <div class="close-x" onclick="openEditCon()">
+                <img src="./assets/img/close.png">
+            </div>
+        </div>
+    </div>
+    <!-- Page END -->
 </body>
 </html>
