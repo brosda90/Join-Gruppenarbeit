@@ -1,161 +1,316 @@
+@font-face {
+  font-family: Inter;
+  src: url("../assets/fonts/inter-v12-latin-regular.woff2");
+  font-weight: 400;
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: Inter;
+  src: url("../assets/fonts/inter-v12-latin-100.woff2");
+  font-weight: 100;
+}
+
+@font-face {
+  font-family: Inter;
+  src: url("../assets/fonts/inter-v12-latin-200.woff2");
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: Inter;
+  src: url("../assets/fonts/inter-v12-latin-300.woff2");
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: Inter;
+  src: url("../assets/fonts/inter-v12-latin-500.woff2");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: Inter;
+  src: url("../assets/fonts/inter-v12-latin-600.woff2");
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: Inter;
+  src: url("../assets/fonts/inter-v12-latin-700.woff2");
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: Inter;
+  src: url("../assets/fonts/inter-v12-latin-800.woff2");
+  font-weight: 800;
+}
+
+@font-face {
+  font-family: Inter;
+  src: url("../assets/fonts/inter-v12-latin-900.woff2");
+  font-weight: 900;
+}
+
+/* ------------------------------------------------------------ */
+/* ------------------------------------------------------------ */
+/* ------------------------------------------------------------ */
+
 body {
-    font-family: 'Arial', sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    overflow: hidden;
-    margin: 0;
-    background-color: #f6f7f8;
-  }
-  
-  .logo-container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    transition: all 2s;
-    margin-top: 40px;
-    margin-left: 40px;
-  }
-  
-  #logo {
-    width: 100%; /* Anfangsgröße. Sie können dies an Ihre Bedürfnisse anpassen. */
-    transition: all 2s;
-  }
-  
-  .login-container {
-    display: none;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    
-    width: 652px;
-    height: 505px;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border-radius: 30px;
-    box-shadow: 0px 0px 8px 6px rgba(156, 155, 155, 0.2);
+  font-family: "Inter";
+  height: 100vh;
+  background-color: #f6f7f8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
 
-  }
+.logo-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 2s;
+  z-index: 105;
+}
 
-  h2 {
-    font-size: 64px;
-    font-weight: 700;
-    margin-top: 30px;
-    margin-bottom: 20px;
-    position: relative; /* Damit das Pseudo-Element relativ zum h2 positioniert wird */
-    display: inline-block; /* Damit das h2-Element nur so groß ist wie der Text */
+#logo {
+  width: 100%;
+  transition: all 2s;
+}
+
+a:hover {
+  cursor: pointer;
+}
+
+.login-container {
+  text-align: center;
+  width: 396px;
+  height: 550px;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 30px;
+  box-shadow: 0px 0px 14px 3px #0000000a;
+}
+
+h2 {
+  color: black;
+  font-size: 47px;
+  font-weight: 700;
+  line-height: 56.4px;
+  position: relative;
+  display: inline-block;
+  margin-bottom: 16px;
 }
 
 h2::after {
-    content: ''; /* Das macht das Pseudo-Element sichtbar */
-    position: absolute;
-    left: 50%; /* Startet das Pseudo-Element in der Mitte des h2-Elements */
-    bottom: -10px; /* Dieser Wert gibt den Abstand (Gap) zum Text an. Sie können ihn anpassen. */
-    height: 2px; /* Dicke des Unterstrichs */
-    width: 100%; 
-    max-width: calc(100% - 2 * 10px); /* Damit der Unterstrich nicht breiter als der Text ist */
-    background-color: #29abe2; /* Farbe des Unterstrichs */
-    transform: translateX(-50%); /* Zentriert das Pseudo-Element horizontal unter dem Text */
-    
+  background-color: #29abe2; /* Farbe des Unterstrichs */
+  content: ""; /* macht das Element sichtbar */
+  position: absolute;
+  left: 50%; /* Startet Element in der Mitte des h2-Elements */
+  bottom: -16px;
+  height: 4px;
+  width: 65%;
+  max-width: calc(
+    100% - 2 * 10px
+  ); /* Damit der Unterstrich nicht breiter als der Text ist */
+
+  transform: translateX(
+    -50%
+  ); /* Zentriert das Pseudo-Element horizontal unter dem Text */
+  border-bottom-left-radius: 3px;
+  border-top-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  border-top-right-radius: 3px;
 }
 
-.form-outline{
-    width: 60% ;
+.form-outline {
+  width: 90%;
 }
 
-.login-buttons > .btn:not(:last-child) {
-    margin-right: 35px; 
+.btn {
+  background-color: #2a3647;
 }
 
-.btn{
-    background-color: #2a3647  ; 
+#logInBtn {
+  font-weight: 600;
+  width: 180px;
+  background-color: #2a3647;
+  color: white;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 8px;
 }
 
-#logInBtn{
-    background-color: #2a3647;
-    color: white;
-    border: none;
+#logInBtn:hover {
+  cursor: pointer;
+  background-color: #29abe2;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
 }
 
-#logInBtn:hover{
-    cursor: pointer;
-    background-color: #29abe2;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
+#guestLogIn {
+  font-weight: 600;
+  width: 180px;
+  background-color: white;
+  color: #2a3647;
+  padding: 15px 30px;
+  border: 1px solid #2a3647;
+  border-radius: 8px;
 }
 
-#guestLogIn{
-    background-color: white;
-    color: #2a3647;
-    border: 1px solid #2a3647;
+#guestLogIn:hover {
+  cursor: pointer;
+  color: #29abe2;
+  border: 1px solid #29abe2;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
 }
 
-#guestLogIn:hover{
-    cursor: pointer;
-    color: #29abe2;
-    border: 1px solid #29abe2;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
+.sign-up-button {
+  font-weight: 600;
+  background-color: #2a3647;
+  color: white;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 8px;
 }
 
-.icon-rtl {
-    background: url(/template/icons-login/password.png) no-repeat right ;
-    background-size: 18px;
-    background-position: calc(100% - 16px) center;
+.sign-up-button:hover {
+  cursor: pointer;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
 }
 
-.icon-name{
-  background: url(/template/summary-icons/person.svg) no-repeat right ;
-    background-size: 24px;
-    background-position: calc(100% - 16px) center;
+.form-check-input {
+  color: #2a3647 !important;
+  background-color: #f6f7f8;
 }
 
-.icon-mail{
-    background: url(/template/icons-login/email.png) no-repeat right ;
-    background-size: 18px;
-    background-position: calc(100% - 16px) center;
-}
-    
- 
-
-  .forgot-password a{
-    text-decoration: none;
-    color: #29abe2;
-  }
-
-  .form-check-input{
-    color: #2a3647 !important;
-    background-color: #f6f7f8;
-  }
-
-.form-control{
-    font-size: 1.2rem !important;
+.form-control::placeholder {
+  color: #a8a8a8;
 }
 
-.sign-up-area{
+.form-control {
+  font-family: "Inter";
+  font-size: 20px !important;
+  font-weight: 400;
+  line-height: 42px;
+  color: #d1d1d1 !important;
+  padding-left: 22px;
+  border-radius: 10px;
+}
+
+.icon-mail {
+  background: url(/assets/img/mail.svg) no-repeat right;
+  background-position: calc(100% - 16px) center;
+}
+
+.icon-pw {
+  background: url(/assets/img/lock.svg) no-repeat right;
+  background-position: calc(100% - 16px) center;
+}
+
+.forgot-password a {
+  text-decoration: none;
+  color: #29abe2;
+}
+
+.sign-up-area {
   position: absolute;
   display: flex;
   justify-content: space-between;
   align-items: center;
   text-align: center;
-  top: 50px;
-  right: 80px;
+  bottom: 69px;
 }
 
 .sign-up-area p {
-  padding-right: 20px;
   font-size: 18px;
+  padding-right: 20px;
 }
 
-.sign-up-area .btn{
+.sign-up-area .btn {
   border: none;
 }
 
-.sign-up-area .btn:hover{
+.sign-up-area .btn:hover {
   cursor: pointer;
   background-color: #29abe2;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
+}
+
+.check-box {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19.2px;
+  width: 100%;
+  display: flex;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  padding-left: 35px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+#colorOverlay {
+  background-color: #2a3647;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  transition: opacity 0.5s;
+}
+
+footer {
+  color: #a8a8a8;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: 30px;
+  gap: 30px;
+}
+
+.custom-checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-top: 10px;
+}
+
+.custom-checkbox-input {
+  display: none; /* Versteckte Standard-Checkbox */
+}
+
+.custom-checkbox-label {
+  width: 16px;
+  height: 16px;
+  background-color: #ffffff;
+  position: relative;
+  border: 2px solid #2a3647;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.custom-checkbox-input:checked + .custom-checkbox-label::before {
+  content: "\2713"; /* Unicode für das Check-Symbol */
+  font-size: 20px;
+  font-weight: 800;
+  color: #2a3647;
+  position: absolute;
+  top: 37%;
+  left: 65%;
+  transform: translate(-50%, -50%);
+}
+
+.remember-me-label {
+  cursor: pointer;
 }
