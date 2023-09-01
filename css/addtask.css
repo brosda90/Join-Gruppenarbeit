@@ -197,3 +197,31 @@
   select option {
     padding: 10px;
   }
+
+.selectedSvg {
+    filter: brightness(0%) invert(100%);
+}
+
+.disableBtn {
+    pointer-events: none;
+}
+
+.urgentBtn {
+    color: white;
+    background-color: #ff3d00 !important;
+}
+
+.mediumBtn {
+    color: white;
+    background-color: #ffa800 !important;
+}
+
+.lowBtn {
+    color: white;
+    background-color: #7ae229 !important;
+}
+
+
+  
+
+  

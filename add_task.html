@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/addtask.css">
-    <script src=""></script>
+    <script src="./js/add_task.js"></script>
     <title>Join-Add-Task</title>
 </head>
 
@@ -32,9 +32,9 @@
             <div class="prio h4-gap width-396 ">
                 <h4>Prio</h4>
                 <div class="btnSection width-396">
-                    <a class="item brd-r10">Urgent <img src="./assets/img/capa2.svg" alt=""></a>
-                    <a class="item brd-r10">Medium <img src="./assets/img/prio-media.svg" alt=""></a>
-                    <a class="item brd-r10">Low <img src="./assets/img/prio-baja.svg" alt=""></a>
+                    <a id="urgentBtn" class="item brd-r10" onclick="selectPrio(1)">Urgent <img id="urgent" src="./assets/img/capa2.svg" alt=""></a>
+                    <a id="mediumBtn" class="item brd-r10" onclick="selectPrio(2)">Medium <img id="medium" src="./assets/img/prio-media.svg" alt=""></a>
+                    <a id="lowBtn" class="item brd-r10" onclick="selectPrio(3)">Low <img id="low" src="./assets/img/prio-baja.svg" alt=""></a>
                 </div>
             </div>
             <div class="h4-gap">
