@@ -19,26 +19,25 @@
     crossorigin="anonymous"
   ></script>
 
-  
   <link rel="stylesheet" href="css/startscreen.css" />
-  <link rel="stylesheet" href="css/sign_up.css">
+  <link rel="stylesheet" href="css/sign_up.css" />
   <body>
     <div class="logo-position">
-        <img id="logo" src="assets/img/mobile-start-animation-black.svg" alt="Logo Black" />
-        
+      <img
+        id="logo"
+        src="assets/img/mobile-start-animation-black.svg"
+        alt="Logo Black"
+      />
     </div>
 
     <div class="arrow-back" onclick="">
-      <img src="./assets/img/arrow_left.png">
-  </div>
-    
+      <img src="./assets/img/arrow_left.png" />
+    </div>
 
     <form class="signUp-container" id="signUpContainer">
       <h2>Sign Up</h2>
       <!-- Name input -->
-      <div
-        class="form-outline  mt-4 "
-      >
+      <div class="form-outline mt-4">
         <input
           type="text"
           id="name"
@@ -49,9 +48,7 @@
       </div>
 
       <!-- Email input -->
-      <div
-        class="form-outline mb-4 mt-4 "
-      >
+      <div class="form-outline mb-4 mt-4">
         <input
           type="email"
           id="email"
@@ -62,9 +59,7 @@
       </div>
 
       <!-- Password input -->
-      <div
-        class="form-outline mb-4 "
-      >
+      <div class="form-outline mb-4">
         <input
           type="password"
           id="passwordLogin"
@@ -73,55 +68,52 @@
           required
         />
       </div>
-       <!-- Password input -->
-       <div
-       class="form-outline mb-4 "
-     >
-       <input
-         type="password"
-         id="passwordLogin"
-         placeholder=" Confirm Password "
-         class="form-control icon-pw mb-2"
-         required
-       />
-     </div>
+      <!-- Password input -->
+      <div class="form-outline mb-4">
+        <input
+          type="password"
+          id="passwordLogin"
+          placeholder=" Confirm Password "
+          class="form-control icon-pw mb-2"
+          required
+        />
+      </div>
 
-     <div class="accept-privacy-box">
-      <div class="row text-center">
-        <!-- Checkbox -->
-       
+      <div class="accept-privacy-box">
+        <div class="row text-center">
+          <!-- Checkbox -->
 
-        <div class="custom-checkbox-container mb-2">
-          <input
-            class="custom-checkbox-input"
-            type="checkbox"
-            id="form2Example31"
-            required
-          />
-          <label class="custom-checkbox-label" for="form2Example31"></label>
-          <label class="accept-privacy" for="form2Example31"
-            >I accept the <a href="#">Privacy policy</a></label
-          >
+          <div class="custom-checkbox-container mb-2">
+            <input
+              class="custom-checkbox-input"
+              type="checkbox"
+              id="form2Example31"
+              required
+            />
+            <label class="custom-checkbox-label" for="form2Example31"></label>
+            <label class="accept-privacy" for="form2Example31"
+              >I accept the <a href="#">Privacy policy</a></label
+            >
+          </div>
         </div>
       </div>
-    </div>
-      
-     
-    
-        
-    </div>
 
-     
-      <div class="login-buttons d-flex flex-column justify-content-between mt-4">
-      <button onclick="login()" type="button" id="logInBtn" class="btn btn-primary mb-3  login-site ">
-        Sign Up
-      </button>
-      
-    </div>
+      <div
+        class="login-buttons d-flex flex-column justify-content-between mt-4"
+      >
+        <button
+          onclick="login()"
+          type="button"
+          id="logInBtn"
+          class="btn btn-primary mb-3 login-site"
+        >
+          Sign Up
+        </button>
+      </div>
     </form>
-  <footer>
-    <span>Privacy Policy</span>
-    <span>Legal notice</span>
-  </footer>
+    <footer>
+      <span>Privacy Policy</span>
+      <span>Legal notice</span>
+    </footer>
   </body>
 </html>
