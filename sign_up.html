@@ -27,6 +27,10 @@
         <img id="logo" src="assets/img/mobile-start-animation-black.svg" alt="Logo Black" />
         
     </div>
+
+    <div class="arrow-back" onclick="">
+      <img src="./assets/img/arrow_left.png">
+  </div>
     
 
     <form class="signUp-container" id="signUpContainer">
@@ -39,7 +43,7 @@
           type="text"
           id="name"
           placeholder="Name"
-          class="form-control icon-name"
+          class="form-control icon-person"
           required
         />
       </div>
@@ -76,12 +80,31 @@
        <input
          type="password"
          id="passwordLogin"
-         placeholder="Password"
-         class="form-control icon-pw-confirm"
+         placeholder=" Confirm Password "
+         class="form-control icon-pw mb-2"
          required
        />
      </div>
 
+     <div class="accept-privacy-box">
+      <div class="row text-center">
+        <!-- Checkbox -->
+       
+
+        <div class="custom-checkbox-container mb-2">
+          <input
+            class="custom-checkbox-input"
+            type="checkbox"
+            id="form2Example31"
+            required
+          />
+          <label class="custom-checkbox-label" for="form2Example31"></label>
+          <label class="accept-privacy" for="form2Example31"
+            >I accept the <a href="#">Privacy policy</a></label
+          >
+        </div>
+      </div>
+    </div>
       
      
     
