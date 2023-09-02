@@ -14,61 +14,69 @@
         <div class="headAddTask">
             <h1>Add Task</h1>
         </div>
-        <div class="taskInfo width-396">
-            <div class="title h4-gap">
-                <h4>Title</h4>
-                <form action="">
-                    <input class="titleInput brd-r10 item" type="text" placeholder="Enter a title" id="addTaskTitle">
-                </form>
-            </div>
-            <div class="description h4-gap">
-                <h4>Description</h4>
-                <form action="">
-                    <textarea class="descriptionInput brd-r10 item" name="" id=""
-                        placeholder="Enter a Description"></textarea>
-                </form>
-            </div>
-            <div class="prio h4-gap width-396 ">
-                <h4>Prio</h4>
-                <div class="btnSection width-396">
-                    <a id="urgentBtn" class="item brd-r10" onclick="selectPrio(1)">Urgent <img id="urgent"
-                            src="./assets/img/capa2.svg" alt=""></a>
-                    <a id="mediumBtn" class="item brd-r10" onclick="selectPrio(2)">Medium <img id="medium"
-                            src="./assets/img/prio-media.svg" alt=""></a>
-                    <a id="lowBtn" class="item brd-r10" onclick="selectPrio(3)">Low <img id="low"
-                            src="./assets/img/prio-baja.svg" alt=""></a>
+        <div class="taskInfo">
+            <div class="leftSite">
+                <div class="title h4-gap">
+                    <h4>Title</h4>
+                    <form action="">
+                        <input class="titleInput brd-r10 item" type="text" placeholder="Enter a title"
+                            id="addTaskTitle">
+                    </form>
+                </div>
+                <div class="description h4-gap">
+                    <h4>Description</h4>
+                    <form action="">
+                        <textarea class="descriptionInput brd-r10 item" name="" id=""
+                            placeholder="Enter a Description"></textarea>
+                    </form>
+                </div>
+                <div class="prio h4-gap width-396 ">
+                    <h4>Prio</h4>
+                    <div class="btnSection width-396">
+                        <a id="urgentBtn" class="item brd-r10" onclick="selectPrio(1)">Urgent <img id="urgent"
+                                src="./assets/img/capa2.svg" alt=""></a>
+                        <a id="mediumBtn" class="item brd-r10" onclick="selectPrio(2)">Medium <img id="medium"
+                                src="./assets/img/prio-media.svg" alt=""></a>
+                        <a id="lowBtn" class="item brd-r10" onclick="selectPrio(3)">Low <img id="low"
+                                src="./assets/img/prio-baja.svg" alt=""></a>
+                    </div>
                 </div>
             </div>
-            <div class="h4-gap">
-                <h4>Due date</h4>
-                <input class="date item brd-r10" type="date">
+            <div class="border d-none">
             </div>
-            <div class="selectCategory h4-gap">
-                <h4>Category</h4>
-                <div>
-                    <select class="brd-r10 item" name="" id="categorySelector">
-                        <option value="0">Select task category</option>
-                        <option value="1">Technical Task</option>
-                        <option value="2">User Story</option>
-                    </select>
+            <div class="rightSite">
+                <div class="h4-gap">
+                    <h4>Due date</h4>
+                    <input class="date item brd-r10" type="date">
                 </div>
-            </div>
-            <div class="assignedTo h4-gap">
-                <h4>Assigned to</h4>
-                <div>
-                    <select class="brd-r10 item" name="" id="contactSelector">
-                    </select>
+                <div class="selectCategory h4-gap">
+                    <h4>Category</h4>
+                    <div>
+                        <select class="brd-r10 item" name="" id="categorySelector">
+                            <option value="0">Select task category</option>
+                            <option value="1">Technical Task</option>
+                            <option value="2">User Story</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
-            <div class="subTasks h4-gap">
-                <h4>Subtasks</h4>
-                <div class="subTaskInput">
-                    <input type="text" placeholder="Add new subtask">
-                    <button><img src="./assets/img/add.svg" alt=""></button>
+                <div class="assignedTo h4-gap">
+                    <h4>Assigned to</h4>
+                    <div>
+                        <select class="brd-r10 item" name="" id="contactSelector">
+                        </select>
+                    </div>
                 </div>
-            </div>
-            <div class="createBtn">
-                <button class="brd-r10">Create Task <img src="./assets/img/check.png" alt=""></button>
+                <div class="subTasks h4-gap">
+                    <h4>Subtasks</h4>
+                    <div class="subTaskInput">
+                        <input type="text" placeholder="Add new subtask">
+                        <button><img src="./assets/img/add.svg" alt=""></button>
+                    </div>
+                </div>
+                <div class="createBtn">
+                    <a class="clear brd-r10 d-none">Clear <img src="./assets/img/close.svg" alt=""></a>
+                    <a class="create brd-r10">Create Task <img src="./assets/img/check.png" alt=""></a>
+                </div>
             </div>
         </div>
     </section>

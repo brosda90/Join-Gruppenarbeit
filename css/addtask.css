@@ -259,6 +259,7 @@ select option {
 
 .subTaskInput {
     width: 100%;
+    display: flex;
 }
 
 .subTaskInput input {
@@ -292,20 +293,84 @@ select option {
     display: flex;
     justify-content: flex-end;
     margin-top: 50px;
+    gap: 10px;
 }
 
-.createBtn button {
+.create {
     width: 160px;
-    min-height: 50px;
     color: white;
     background-color: #2a3647;
-    font-size: 20px;
 }
 
-.createBtn button:hover {
+.clear {
+    width: 100px;
+    background-color: transparent;
+    color: black;
+    border: 1px solid #2a3647;
+}
+
+.createBtn a {
+    min-height: 50px;
+    font-size: 20px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.create:hover {
     cursor: pointer;
     background-color: #29abe2;
     border: transparent;
     -webkit-box-shadow: 1px 8px 11px -3px rgba(0, 0, 0, 0.43);
     box-shadow: 1px 8px 11px -3px rgba(0, 0, 0, 0.43);
+}
+
+.clear:hover {
+    cursor: pointer;
+    border-color: #29abe2;
+    color: #29abe2;
+    -webkit-box-shadow: 1px 8px 11px -3px rgba(0, 0, 0, 0.43);
+    box-shadow: 1px 8px 11px -3px rgba(0, 0, 0, 0.43);
+}
+
+.border {
+    width: 1px;
+    height: 350px;
+    margin-top: 25px;
+    background-color: #D1D1D1;
+}
+
+.d-none {
+    display: none !important;
+}
+
+@media (min-width: 1200px) {
+
+    .mainAddTask {
+        display: flex;
+        align-items: flex-start;
+        margin-left: 140px;
+    }
+
+    .headAddTask {
+        text-align: start;
+    }
+
+    .taskInfo {
+        width: 90%;
+        display: flex;
+        gap: 24px;
+    }
+
+    .rightSite {
+        max-width: 40%;
+    }
+
+    .border {
+        display: block !important;
+    }
+
+    .clear {
+        display: flex !important;
+    }
 }
