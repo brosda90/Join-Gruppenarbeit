@@ -354,8 +354,8 @@ select option {
     fill: #29abe2;
     color: #29abe2;
     -webkit-box-shadow: 1px 8px 11px -3px rgba(0, 0, 0, 0.43);
-    box-shadow: 1px 8px 11px -3px rgba(0, 0, 0, 0.43);
     filter: brightness(0) saturate(100%) invert(54%) sepia(98%) saturate(894%) hue-rotate(165deg) brightness(93%) contrast(91%);
+    box-shadow: 1px 8px 11px -3px rgba(0, 0, 0, 0.43) !important;
 }
 
 .border {
