@@ -55,4 +55,8 @@ function checkBtn(button, urgent, medium, low) {
     }
 }
 
+function today() {
+    document.getElementById('dateToday').min = new Date().toISOString().split("T")[0];
+}
+
 

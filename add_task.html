@@ -47,13 +47,13 @@
             <div class="rightSite">
                 <div class="h4-gap">
                     <h4>Due date</h4>
-                    <input class="date item brd-r10" type="date">
+                    <input onclick="today()" class="date item brd-r10" type="date" id="dateToday">
                 </div>
                 <div class="selectCategory h4-gap">
                     <h4>Category</h4>
                     <div>
-                        <select class="brd-r10 item" name="" id="categorySelector">
-                            <option value="0">Select task category</option>
+                        <select class="selector brd-r10 item" name="" id="categorySelector">
+                            <option>Select task category</option>
                             <option value="1">Technical Task</option>
                             <option value="2">User Story</option>
                         </select>
@@ -62,7 +62,7 @@
                 <div class="assignedTo h4-gap">
                     <h4>Assigned to</h4>
                     <div>
-                        <select class="brd-r10 item" name="" id="contactSelector">
+                        <select class="selector brd-r10 item" name="" id="contactSelector">
                         </select>
                     </div>
                 </div>

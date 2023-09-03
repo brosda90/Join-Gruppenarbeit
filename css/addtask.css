@@ -135,6 +135,10 @@ h4 {
     cursor: pointer;
 }
 
+.item::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+}
+
 h1 {
     font-size: 47px;
     padding-left: 16px;
@@ -170,13 +174,17 @@ h1 {
 }
 
 textarea::placeholder {
-    padding: 10px;
+    padding-left: 2px;
     font-family: 'Inter';
     color: #D1D1D1;
 }
 
+textarea:focus {
+    outline: none !important;
+}
+
 input::placeholder {
-    padding: 10px;
+    padding: 2px;
     font-family: 'Inter';
     color: #D1D1D1;
 }
@@ -190,10 +198,6 @@ input[type="date"] {
 }
 
 input:focus {
-    outline: none !important;
-}
-
-textarea:focus {
     outline: none !important;
 }
 
@@ -230,6 +234,20 @@ select {
     padding-right: 10px;
 }
 
+.selector {
+    background-color: white !important;
+    background: url(../assets/img/arrow_drop_down.svg) no-repeat;
+    background-position: right 14px top 18px;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    padding: 5px 5px;
+}
+
+.selector:focus {
+    outline: none;
+}
+
 select option {
     padding: 10px;
 }
@@ -263,7 +281,7 @@ select option {
 }
 
 .subTaskInput input {
-    width: 81%;
+    width: 89%;
     margin-right: -6px;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
@@ -276,6 +294,7 @@ select option {
 }
 
 .subTaskInput button {
+    padding: 0 !important;
     width: 14%;
     height: 44px;
     border: 1px solid #D1D1D1;
@@ -283,6 +302,10 @@ select option {
     background-color: white;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
+}
+
+.subTaskInput button {
+    width: 34px;
 }
 
 .subTaskInput button img:hover {
@@ -328,9 +351,11 @@ select option {
 .clear:hover {
     cursor: pointer;
     border-color: #29abe2;
+    fill: #29abe2;
     color: #29abe2;
     -webkit-box-shadow: 1px 8px 11px -3px rgba(0, 0, 0, 0.43);
     box-shadow: 1px 8px 11px -3px rgba(0, 0, 0, 0.43);
+    filter: brightness(0) saturate(100%) invert(54%) sepia(98%) saturate(894%) hue-rotate(165deg) brightness(93%) contrast(91%);
 }
 
 .border {
