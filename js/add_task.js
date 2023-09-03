@@ -1,7 +1,3 @@
-function init() {
-    createSelectBox();
-}
-
 function selectPrio(button) {
     let urgent = document.getElementById('urgent');
     let medium = document.getElementById('medium');
@@ -11,20 +7,18 @@ function selectPrio(button) {
 }
 
 function checkPrio(button, urgent, medium, low) {
+    urgent.classList.remove('selectedSvg');
+    medium.classList.remove('selectedSvg');
+    low.classList.remove('selectedSvg');
+
     if (button == 1) {
-        urgent.classList.toggle('selectedSvg');
-        medium.classList.remove('selectedSvg');
-        low.classList.remove('selectedSvg');
+        urgent.classList.add('selectedSvg');
     }
     if (button == 2) {
-        medium.classList.toggle('selectedSvg');
-        urgent.classList.remove('selectedSvg');
-        low.classList.remove('selectedSvg');
+        medium.classList.add('selectedSvg');
     }
     if (button == 3) {
-        low.classList.toggle('selectedSvg');
-        urgent.classList.remove('selectedSvg');
-        medium.classList.remove('selectedSvg');
+        low.classList.add('selectedSvg');
     }
     selectBtn(button);
 }
@@ -38,20 +32,18 @@ function selectBtn(button) {
 }
 
 function checkBtn(button, urgent, medium, low) {
+    urgent.classList.remove('urgentBtn');
+    medium.classList.remove('mediumBtn');
+    low.classList.remove('lowBtn');
+
     if (button == 1) {
-        urgent.classList.toggle('urgentBtn');
-        medium.classList.remove('mediumBtn');
-        low.classList.remove('lowBtn');
+        urgent.classList.add('urgentBtn');
     }
     if (button == 2) {
-        medium.classList.toggle('mediumBtn');
-        urgent.classList.remove('urgentBtn');
-        low.classList.remove('lowBtn');
+        medium.classList.add('mediumBtn');
     }
     if (button == 3) {
-        low.classList.toggle('lowBtn');
-        medium.classList.remove('mediumBtn');
-        urgent.classList.remove('urgentBtn');
+        low.classList.add('lowBtn');
     }
 }
 
