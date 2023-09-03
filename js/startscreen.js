@@ -1,7 +1,7 @@
 window.addEventListener("DOMContentLoaded", (event) => {
     setTimeout(() => {
       moveLogoAndShowLogin();
-    }, 600); 
+    }, 300); 
   });
   
   function moveLogoAndShowLogin() {
@@ -15,12 +15,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
     logoContainer.style.left = "10px";
     logoContainer.style.transform = "none";
     
-    //Overlay div transparent machen
-    setTimeout(() => {
-        overlay.style.transition = "opacity 0.8s ease-out";
-        overlay.style.opacity = "0"; 
-    }, 800); // zeitversetzt starten
-  
+    
     // Logo ändern und overlay div entfernen wegen mobile touch funktion
     setTimeout(() => {
         logo.src = "assets/img/mobile-start-animation-black.svg";
