@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="./css/addtask.css">
     <link rel="stylesheet" href="./css/fonts.css">
     <script src="./js/add_task.js"></script>
+    <script src="./js/data.js"></script>
     <title>Join-Add-Task</title>
 </head>
 
@@ -16,18 +17,18 @@
             <h1>Add Task</h1>
         </div>
         <div class="taskInfo">
-            <div class="leftSite">
+            <div class="leftSite width-396">
                 <div class="title h4-gap">
                     <h4>Title</h4>
                     <form action="">
                         <input class="titleInput brd-r10 item" type="text" placeholder="Enter a title"
-                            id="addTaskTitle">
+                            id="titleInput">
                     </form>
                 </div>
                 <div class="description h4-gap">
                     <h4>Description</h4>
                     <form action="">
-                        <textarea class="descriptionInput brd-r10 item" name="" id=""
+                        <textarea class="descriptionInput brd-r10 item" name="" id="descriptionInput"
                             placeholder="Enter a Description"></textarea>
                     </form>
                 </div>
@@ -45,7 +46,7 @@
             </div>
             <div class="border d-none">
             </div>
-            <div class="rightSite">
+            <div class="rightSite width-396">
                 <div class="h4-gap">
                     <h4>Due date</h4>
                     <input onclick="today()" class="date item brd-r10" type="date" id="dateToday">
@@ -55,8 +56,8 @@
                     <div>
                         <select class="selector brd-r10 item" name="" id="categorySelector">
                             <option>Select task category</option>
-                            <option value="1">Technical Task</option>
-                            <option value="2">User Story</option>
+                            <option value="Technical Task">Technical Task</option>
+                            <option value="User Story">User Story</option>
                         </select>
                     </div>
                 </div>
@@ -75,8 +76,8 @@
                     </div>
                 </div>
                 <div class="createBtn">
-                    <a class="clear brd-r10 d-none">Clear <img src="./assets/img/close.svg" alt=""></a>
-                    <a class="create brd-r10">Create Task <img src="./assets/img/check.png" alt=""></a>
+                    <a class="clear brd-r10 d-none" onclick="clearTaskInput()">Clear <img src="./assets/img/close.svg" alt=""></a>
+                    <a class="create brd-r10" onclick="createTask()">Create Task <img src="./assets/img/check.png" alt=""></a>
                 </div>
             </div>
         </div>
