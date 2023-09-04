@@ -11,7 +11,7 @@
     <title>Join-Add-Task</title>
 </head>
 
-<body>
+<body onload="init()">
     <section class="mainAddTask">
         <div class="headAddTask">
             <h1>Add Task</h1>
@@ -53,20 +53,28 @@
                 </div>
                 <div class="selectCategory h4-gap">
                     <h4>Category</h4>
-                    <div>
-                        <select class="selector brd-r10 item" name="" id="categorySelector">
-                            <option>Select task category</option>
-                            <option value="Technical Task">Technical Task</option>
-                            <option value="User Story">User Story</option>
-                        </select>
+                    <div class="custom-select">
+                        <div class="categorySelect">
+                            <div class="categorySelector brd-r10 item" onclick="selectCategory()">
+                                <span id="chosenCategory">Select task category</span>
+                                <img id="categoryArrow" src="./assets/img/arrow_drop_down.svg" alt="">
+                            </div>
+                            <div id="allOptions" class="brd-r10 d-none">
+                                <div class="option item" onclick="selectOption(this)">Technical Task</div>
+                                <div class="option item" onclick="selectOption(this)">User Story</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="assignedTo h4-gap">
+                <div class="assignedTo">
                     <h4>Assigned to</h4>
-                    <div>
-                        <select class="selector brd-r10 item" name="" id="contactSelector">
-                        </select>
+                    <div class="selectContacts" onclick="showContacts()">
+                        <div class="contactSelector brd-r10 item" name="" id="contactSelector">
+                            <img id="contactsArrow" src="./assets/img/arrow_drop_down.svg" alt="">
+                        </div>
                     </div>
+                    <div class="overSelect"></div>
+                    <div id="checkBoxes" class="d-none brd-r10"></div>
                 </div>
                 <div class="subTasks h4-gap">
                     <h4>Subtasks</h4>
