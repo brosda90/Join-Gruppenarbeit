@@ -29,7 +29,7 @@
   position: relative;
   width: 32px;
   height: 32px;
-  top: -251px;
+  top: -230px;
   right: 138px;
 }
 
@@ -45,4 +45,29 @@
   text-decoration: none;
   color: #29abe2;
   cursor: pointer;
+}
+
+#confirmationMessage {
+  padding: 10px;
+  border: 1px solid green;
+  background-color: #e8ffe8;
+  display: none;
+}
+
+#passwordInfo {
+  position: absolute;
+  top: 334px;
+  left: 26px;
+  background-color: #29abe2;
+  color: white;
+  z-index: 10;
+  border-radius: 10px;
+  margin-top: 12px ;
+  padding: 10px;
+  text-align: initial;
+  box-shadow: 0px 0px 14px 3px #0000000a;
+}
+
+.h2-32px {
+  margin-bottom: 32px;
 }

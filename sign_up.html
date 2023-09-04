@@ -18,10 +18,16 @@
     integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
     crossorigin="anonymous"
   ></script>
-
+  <link rel="stylesheet" href="css/fonts.css" />
   <link rel="stylesheet" href="css/startscreen.css" />
+  <link rel="stylesheet" href="css/elem_predesign.css" />
   <link rel="stylesheet" href="css/sign_up.css" />
+  <script src="js/storage.js"></script>
+  <script src="js/sign_up.js"></script>
+
   <body>
+    <div id="confirmationMessage"></div>
+
     <div class="logo-position">
       <img
         id="logo"
@@ -30,53 +36,97 @@
       />
     </div>
 
-    <div class="arrow-back" onclick="">
+    <div class="arrow-back" onclick="backToLogin()">
       <img src="./assets/img/arrow_left.png" />
     </div>
 
-    <form class="signUp-container" id="signUpContainer">
-      <h2>Sign Up</h2>
+    <form
+      class="signUp-container"
+      id="signUpContainer"
+      onsubmit="return false;"
+    >
+      <h2 class="mb-5">Sign Up</h2>
       <!-- Name input -->
-      <div class="form-outline mt-4">
-        <input
-          type="text"
-          id="name"
-          placeholder="Name"
-          class="form-control icon-person"
-          required
-        />
+      <div class="elementbox border-none">
+        <div class="input-border">
+          <div class="input-innerbox">
+            <input
+              class="input-field"
+              type="text"
+              id="nameField"
+              placeholder="Name"
+              required
+            />
+            <div class="input-imgbox">
+              <img src="./assets/img/person16.png" />
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- Email input -->
-      <div class="form-outline mb-4 mt-4">
-        <input
-          type="email"
-          id="email"
-          placeholder="Email"
-          class="form-control icon-mail"
-          required
-        />
+      <div class="elementbox border-none">
+        <div class="input-border">
+          <div class="input-innerbox">
+            <input
+              class="input-field"
+              type="email"
+              id="emailField"
+              placeholder="Email"
+              required
+            />
+            <div class="input-imgbox">
+              <img src="./assets/img/mail.svg" />
+            </div>
+          </div>
+        </div>
       </div>
 
-      <!-- Password input -->
-      <div class="form-outline mb-4">
-        <input
-          type="password"
-          id="passwordLogin"
-          placeholder="Password"
-          class="form-control icon-pw"
-          required
-        />
+      <div class="elementbox border-none">
+        <div class="input-border">
+          <div class="input-innerbox">
+            <input
+              class="input-field"
+              type="password"
+              id="password"
+              placeholder="Password"
+              required
+              onclick="showPasswordRequirements(); setVisibilityOff('password', 'passwordImg')"
+            />
+            <div
+              class="input-imgbox"
+              onclick="togglePasswordVisibility('password', 'passwordImg')"
+            >
+              <img id="passwordImg" src="./assets/img/lock.svg" />
+            </div>
+          </div>
+        </div>
       </div>
-      <!-- Password input -->
-      <div class="form-outline mb-4">
-        <input
-          type="password"
-          id="passwordLogin"
-          placeholder=" Confirm Password "
-          class="form-control icon-pw mb-2"
-          required
-        />
+      <div id="passwordInfo" style="display:none">
+        -mindestens 8 Zeichen <br />-mindestens eine Zahl <br />-einen
+        Großbuchstaben <br />-einen Kleinbuchstaben <br />-ein Sonderzeichen
+      </div>
+
+      <!-- Password Confirm input -->
+      <div class="elementbox border-none">
+        <div class="input-border">
+          <div class="input-innerbox">
+            <input
+              class="input-field"
+              type="password"
+              id="passwordConf"
+              placeholder="Password Confirm"
+              required
+              onclick="setVisibilityOff('passwordConf', 'passwordConfImg')"
+            />
+            <div
+              class="input-imgbox"
+              onclick="togglePasswordVisibility('passwordConf', 'passwordConfImg')"
+            >
+              <img id="passwordConfImg" src="./assets/img/lock.svg" />
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="accept-privacy-box">
@@ -92,7 +142,8 @@
             />
             <label class="custom-checkbox-label" for="form2Example31"></label>
             <label class="accept-privacy" for="form2Example31"
-              >I accept the <a href="#">Privacy policy</a></label
+              >I accept the
+              <a href="privacy_policy.html">Privacy policy</a></label
             >
           </div>
         </div>
@@ -102,7 +153,7 @@
         class="login-buttons d-flex flex-column justify-content-between mt-4"
       >
         <button
-          onclick="login()"
+          onclick="registerUser();"
           type="button"
           id="logInBtn"
           class="btn btn-primary mb-3 login-site"
@@ -112,8 +163,8 @@
       </div>
     </form>
     <footer>
-      <span>Privacy Policy</span>
-      <span>Legal notice</span>
+      <a href="privacy_policy.html">Privacy Policy</a>
+      <a href="legal_notice.html">Legal notice</a>
     </footer>
   </body>
 </html>

@@ -18,10 +18,15 @@
     integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
     crossorigin="anonymous"
   ></script>
-
-  <script src="js/login.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/sign_up.js"></script>
   <script src="js/startscreen.js"></script>
+  <script src="js/login.js"></script>
+  <link rel="stylesheet" href="css/fonts.css" />
+  <link rel="stylesheet" href="css/elem_predesign.css" />
   <link rel="stylesheet" href="css/startscreen.css" />
+
   <body>
     <div id="colorOverlay"></div>
     <div class="logo-container">
@@ -44,34 +49,52 @@
     </div>
 
     <form class="login-container" id="loginContainer">
-      <h2>Log in</h2>
+      <h2 class="mb-4">Log in</h2>
       <!-- Email input -->
-      <div class="form-outline mb-4 mt-4">
-        <input
-          type="email"
-          id="email"
-          placeholder="Email"
-          class="form-control icon-mail"
-          required
-        />
+      <div class="elementbox border-none">
+        <div class="input-border">
+          <div class="input-innerbox">
+            <input
+              class="input-field"
+              type="email"
+              id="emailLogin"
+              placeholder="Email"
+              required
+            />
+            <div class="input-imgbox">
+              <img src="./assets/img/mail.svg" />
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- Password input -->
-      <div class="form-outline mb-4">
-        <input
-          type="password"
-          id="passwordLogin"
-          placeholder="Password"
-          class="form-control icon-pw"
-          required
-        />
+      <div class="elementbox border-none">
+        <div class="input-border">
+          <div class="input-innerbox">
+            <input
+              class="input-field"
+              type="password"
+              id="passwordLogin"
+              placeholder="Password"
+              required
+              onfocus="setVisibilityOff('passwordLogin', 'toggleVisibility')"
+            />
+            <div class="input-imgbox">
+              <img
+                id="toggleVisibility"
+                onclick="togglePasswordVisibility('passwordLogin', 'toggleVisibility')"
+                src="./assets/img/lock.svg"
+              />
+            </div>
+          </div>
+        </div>
       </div>
-
       <div class="check-box d-flex">
         <div class="col-auto text-center">
           <!-- Checkbox -->
           <div class="col-auto forgot-password mb-2">
-            <a href="#!">Forgot my password</a>
+            <a href="forgot_password.html">Forgot my password</a>
           </div>
 
           <div class="custom-checkbox-container">
@@ -104,14 +127,15 @@
           type="button"
           id="guestLogIn"
           class="btn btn-primary login-site"
+          onclick="guestLogin()"
         >
           Guest Log in
         </button>
       </div>
     </form>
     <footer>
-      <span>Privacy Policy</span>
-      <span>Legal notice</span>
+      <a href="privacy_policy.html">Privacy Policy</a>
+      <a href="legal_notice.html">Legal notice</a>
     </footer>
   </body>
 </html>
