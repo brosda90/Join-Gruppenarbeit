@@ -1,6 +1,8 @@
 let expanded = false;
 let selectTrigger = document.querySelector('.select-trigger');
 
+let addedContacts = [];
+
 function init() {
     renderContacts();
 }
@@ -78,11 +80,11 @@ function createTask() {
     let assignedTo = getSelectedAssignedTo();
     let subtasks = getSubtasks();
     document.getElementById('checkBoxes').classList.remove('d-block');
-    
-    addNewTask(title,description,priority, date, category, assignedTo, subtasks);
+
+    addNewTask(title, description, priority, date, category, assignedTo, subtasks);
 }
 
-function addNewTask(title,description,priority, date, category, assignedTo, subtasks) {
+function addNewTask(title, description, priority, date, category, assignedTo, subtasks) {
     let newTask = {
         'id': tasks.length + 1,
         'category': category,
@@ -119,13 +121,12 @@ function getSelectedAssignedTo() {
 
     checkboxes.forEach(function (checkbox, index) {
         if (checkbox.checked) {
-            selectedAssignedTo.push(index); 
+            selectedAssignedTo.push(index);
         }
     });
 
     return selectedAssignedTo;
 }
-
 
 function getSubtasks() {
     let subtasks = [];
@@ -169,7 +170,16 @@ function showContacts() {
     }
 }
 
+function addedContact(index) {
+    let checked = document.getElementById(`check${index}`);
+    let src = checked.getAttribute("src");
 
+    if (src === './assets/img/check_button_unchecked.svg') {
+        checked.src = './assets/img/check_button_checked.svg';
+    } else if (src === './assets/img/check_button_checked.svg') {
+        checked.src = './assets/img/check_button_unchecked.svg';
+    };
+}
 
 function clearTaskInput() {
     document.getElementById('titleInput').value = "";
@@ -208,8 +218,8 @@ function resetCheckBox() {
 
 function renderContactHTML(index, contact) {
     return `
-        <label for="${index}">
+        <div id="contact${index}" class="singleContact option item" onclick="addedContact(${index})">
             <span>${contact['name']}</span>
-            <input class="eachContact" type="checkbox" id="${index}">
-        </label>`;
+            <img id="check${index}" src="./assets/img/check_button_unchecked.svg">
+        </div>`;
 }
