@@ -61,7 +61,9 @@
     --col-main-active: #091931;
     --col-main-bg: #F6F7F8;
     --col-white: #FFFFFF;
+    --col-black: #000000;
     --col-hr: #D1D1D1;
+    --col-btn-hover: #EEEEEE;
     --col-link: #007CEE;
     --col-btn: var(--col-main);
     --col-btn-activ: #29ABE2;
@@ -69,15 +71,15 @@
     --col-shadow10:  0 4px 4px 0 rgba(0,0,0,0.1);
     --col-shadow25:  0 4px 4px 0 rgba(0,0,0,0.25);
 
-    --col-contact-badge-1: #FF7A00;
-    --col-contact-badge-2: #9327FF;
-    --col-contact-badge-3: #6E52FF;
-    --col-contact-badge-4: #FC71FF;
-    --col-contact-badge-5: #FFBB2B;
-    --col-contact-badge-6: #1FD7C1;
-    --col-contact-badge-7: #462F8A;
-    --col-contact-badge-8: #FF4646;
-    --col-contact-badge-9: #FFC700;
+    --col-badge-1: #FF7A00;
+    --col-badge-2: #9327FF;
+    --col-badge-3: #6E52FF;
+    --col-badge-4: #FC71FF;
+    --col-badge-5: #FFBB2B;
+    --col-badge-6: #1FD7C1;
+    --col-badge-7: #462F8A;
+    --col-badge-8: #FF4646;
+    --col-badge-9: #FFC700;
 
 
     --col-set-0: #6E52FF;
@@ -112,9 +114,13 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: Inter;
+    font-family: Inter, sans-serif;
     font-size: 16px;
     position: relative;
+}
+
+button {
+    font-family: Inter, sans-serif;
 }
 
 div {
@@ -122,7 +128,7 @@ div {
 }
 
 span {
-    font-family: Inter;
+    font-family: Inter, sans-serif;
     font-size: 20px;
     line-height: 24px;
 }
@@ -556,23 +562,38 @@ footer {
 .options {
     position: fixed;
     bottom: 100px;
-    right: 8px;
+    right: calc(-100% + 10px);
     z-index: 4;
     padding: 10px;
     border-radius: 20px 20px 0 20px;
     background-color: var(--col-white);
-    box-shadow: 0 4px 4px 0 var(--col-shadow25);
+    box-shadow: var(--col-shadow25);
     display: flex;
     flex-direction: column;
+    transition: right 300ms ease-out 0s;
+}
+
+.options:hover, .contact-btn-option-box:hover .options {
+    right: 8px;
+}
+
+.options:active {
+    right: calc(-100% + 10px);
 }
 
 .options-row {
     padding: 8px;
     display: flex;
+    border-radius: 8px;
+    background-color: var(--col-white);
     flex-direction: row;
     align-items: center;
     flex-wrap: nowrap;
     gap: 8px;
+}
+
+.options-row:hover {
+    background-color: var(--col-btn-hover);
 }
 
 .options-row span {
@@ -715,20 +736,39 @@ input::placeholder {
 }
 
 /* ------------------------------------------------------------ */
-button.dark {
+.btn-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+
+
+.btn {
     padding: 12px 10px;
-    background-color: var(--col-main);
     border-radius: 10px;
-    color: var(--col-white);
     font-size: 22px;
     font-weight: 400;
     line-height: 24px;
+    outline: none;
     display: flex;
     align-items: center;
     gap: 4px;
 }
 
-button.dark div {
+.btn.dark {
+    background-color: var(--col-main);
+    color: var(--col-white);
+}
+
+.btn.light {
+    background-color: var(--col-white);
+    color: var(--col-black);
+    border: 1px solid var(--col-black);
+}
+
+.btn div {
     width: 24px;
     height: 24px;
     display: flex;
@@ -918,35 +958,35 @@ button.dark div {
 /* ----- Color-Classes ---------------------------------------- */
 /* ------------------------------------------------------------ */
 .bg_contact_1 {
-    background-color: var(--col-contact-badge-1);
+    background-color: var(--col-badge-1);
 }
 
 .bg_contact_2 {
-    background-color: var(--col-contact-badge-2);
+    background-color: var(--col-badge-2);
 }
 
 .bg_contact_3 {
-    background-color: var(--col-contact-badge-3);
+    background-color: var(--col-badge-3);
 }
 
 .bg_contact_4 {
-    background-color: var(--col-contact-badge-4);
+    background-color: var(--col-badge-4);
 }
 
 .bg_contact_5 {
-    background-color: var(--col-contact-badge-5);
+    background-color: var(--col-badge-5);
 }
 
 .bg_contact_6 {
-    background-color: var(--col-contact-badge-6);
+    background-color: var(--col-badge-6);
 }
 
 .bg_contact_7 {
-    background-color: var(--col-contact-badge-7);
+    background-color: var(--col-badge-7);
 }
 
 .bg_contact_8 {
-    background-color: var(--col-contact-badge-8);
+    background-color: var(--col-badge-8);
 }
 
 /* ------------------------------------------------------------ */
