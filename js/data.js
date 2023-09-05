@@ -56,7 +56,7 @@ let users = [
         'name' : 'Manuel Bauer',
         'initials' : 'MB',
         'email' : 'manuelbauer@gmail.de',
-        'password' : 'passwort',
+        'password' : '!P4Lm?',
         'phone' : '0123456788',
         'badge-color' : 2,
         'contacts' : [1,2]
@@ -66,7 +66,7 @@ let users = [
         'name' : 'Anna Mayer',
         'initials' : 'AM',
         'email' : 'annamayer@gmail.de',
-        'password' : 'Passwort',
+        'password' : '!P5Lm?',
         'phone' : '0123456787',
         'badge-color' : 2,
         'contacts' : [1,2,3]

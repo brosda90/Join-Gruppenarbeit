@@ -1,3 +1,23 @@
+let expanded = false;
+let selectTrigger = document.querySelector('.select-trigger');
+
+let addedContacts = [];
+
+function init() {
+    renderContacts();
+}
+
+
+function renderContacts() {
+    let assignedToContact = document.getElementById('checkBoxes');
+
+    for (let i = 0; i < contacts.length; i++) {
+        const contact = contacts[i];
+
+        assignedToContact.innerHTML += renderContactHTML(i, contact)
+    }
+}
+
 function selectPrio(button) {
     let urgent = document.getElementById('urgent');
     let medium = document.getElementById('medium');
@@ -56,14 +76,15 @@ function createTask() {
     let description = document.getElementById('descriptionInput').value;
     let priority = getSelectedPrio();
     let date = document.getElementById('dateToday').value;
-    let category = document.getElementById('categorySelector').value;
+    let category = document.getElementById('chosenCategory').innerHTML;
     let assignedTo = getSelectedAssignedTo();
     let subtasks = getSubtasks();
+    document.getElementById('checkBoxes').classList.remove('d-block');
 
-    addNewTask(title,description,priority, date, category, assignedTo, subtasks);
+    addNewTask(title, description, priority, date, category, assignedTo, subtasks);
 }
 
-function addNewTask(title,description,priority, date, category, assignedTo, subtasks) {
+function addNewTask(title, description, priority, date, category, assignedTo, subtasks) {
     let newTask = {
         'id': tasks.length + 1,
         'category': category,
@@ -96,13 +117,13 @@ function getSelectedPrio() {
 
 function getSelectedAssignedTo() {
     let selectedAssignedTo = [];
-    let contactSelector = document.getElementById('contactSelector');
+    let checkboxes = document.querySelectorAll('.eachContact');
 
-    for (let i = 0; i < contactSelector.options.length; i++) {
-        if (contactSelector.options[i].selected) {
-            selectedAssignedTo.push(parseInt(contactSelector.options[i].value));
+    checkboxes.forEach(function (checkbox, index) {
+        if (checkbox.checked) {
+            selectedAssignedTo.push(index);
         }
-    };
+    });
 
     return selectedAssignedTo;
 }
@@ -116,6 +137,50 @@ function getSubtasks() {
     return subtasks;
 }
 
+function selectCategory() {
+    let arrow = document.getElementById('categoryArrow');
+    let options = document.getElementById('allOptions');
+
+    options.classList.toggle('d-none');
+    if (options.classList.contains('d-none')) {
+        arrow.src = "./assets/img/arrow_drop_down.svg"
+    } else {
+        arrow.src = "./assets/img/arrow_up.svg"
+    };
+}
+
+function selectOption(option) {
+    const selectedValue = option.textContent;
+    const categorySelector = document.getElementById('chosenCategory');
+    categorySelector.innerHTML = selectedValue;
+    selectCategory();
+}
+
+function showContacts() {
+    let arrow = document.getElementById('contactsArrow');
+    let checkboxes = document.getElementById('checkBoxes');
+    if (!expanded) {
+        checkboxes.classList.add('d-block');
+        expanded = true;
+        arrow.src = "./assets/img/arrow_up.svg"
+    } else {
+        checkboxes.classList.remove('d-block');
+        expanded = false;
+        arrow.src = "./assets/img/arrow_drop_down.svg"
+    }
+}
+
+function addedContact(index) {
+    let checked = document.getElementById(`check${index}`);
+    let src = checked.getAttribute("src");
+
+    if (src === './assets/img/check_button_unchecked.svg') {
+        checked.src = './assets/img/check_button_checked.svg';
+    } else if (src === './assets/img/check_button_checked.svg') {
+        checked.src = './assets/img/check_button_unchecked.svg';
+    };
+}
+
 function clearTaskInput() {
     document.getElementById('titleInput').value = "";
     document.getElementById('descriptionInput').value = "";
@@ -126,4 +191,35 @@ function clearTaskInput() {
     document.getElementById('lowBtn').classList.remove('lowBtn');
     document.getElementById('low').classList.remove('selectedSvg');
     document.getElementById('dateToday').value = "";
+
+    resetCategory();
+}
+
+function resetCategory() {
+    let category = document.getElementById('chosenCategory');
+
+    category.innerHTML = 'Select task Category';
+
+    resetCheckBox();
+}
+
+function resetCheckBox() {
+    let arrow = document.getElementById('contactsArrow');
+    let checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach(function (checkbox) {
+        checkbox.checked = false;
+    });
+
+    if (arrow.src = "./assets/img/arrow_up.svg") {
+        arrow.src = "./assets/img/arrow_drop_down.svg"
+    }
+    document.getElementById('checkBoxes').classList.remove('d-block');
+}
+
+function renderContactHTML(index, contact) {
+    return `
+        <div id="contact${index}" class="singleContact option item" onclick="addedContact(${index})">
+            <span>${contact['name']}</span>
+            <img id="check${index}" src="./assets/img/check_button_unchecked.svg">
+        </div>`;
 }

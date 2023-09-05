@@ -1,4 +1,6 @@
-
+.border-none {
+  border: none !important;
+}
 
 body {
   font-family: "Inter";
@@ -73,10 +75,6 @@ h2::after {
   border-top-left-radius: 3px;
   border-bottom-right-radius: 3px;
   border-top-right-radius: 3px;
-}
-
-.form-outline {
-  width: 90%;
 }
 
 .btn {
@@ -266,14 +264,29 @@ footer {
   width: 100%;
   height: 100%;
   z-index: 100;
-  
+
   animation-name: fadeOutOverlay;
-  animation-duration: 2s; 
+  animation-duration: 2s;
   animation-timing-function: ease-out;
   animation-fill-mode: forwards;
 }
 
 @keyframes fadeOutOverlay {
-  0%   {background-color: #2a3647;}
-  100% {background-color: transparent;}
+  0% {
+    background-color: #2a3647;
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+.input-imgbox img {
+  cursor: pointer;
+}
+
+footer a {
+  color: #a8a8a8;
+  font-size: 16px;
+  font-weight: 400;
+  text-decoration: none;
 }
