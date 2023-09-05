@@ -4,6 +4,13 @@
   flex-direction: row;
   margin-top: 20px;
   margin-bottom: 40px;
+  margin-left: 20px;
+}
+
+.main {
+  display: none; /* Am Anfang versteckt */
+  transition: opacity 1s; /* Übergang für die Sichtbarkeit */
+  opacity: 0; /* Unsichtbar am Anfang */
 }
 
 .blue-line {
@@ -47,7 +54,6 @@
 }
 
 .second-container {
-
   width: 396px;
   height: 116px;
   display: flex;
@@ -56,10 +62,10 @@
   margin-left: 13px;
 }
 
-.urgent-left{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.urgent-left {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .third-container {
@@ -85,7 +91,7 @@ h3 {
   padding-top: 20px;
   padding-bottom: 20px;
   border-radius: 20px;
-  box-shadow: 0px 0px 9px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 4px 0px #00000031;
 }
 
 #taskInProgress {
@@ -98,7 +104,7 @@ h3 {
   padding-top: 20px;
   padding-bottom: 20px;
   border-radius: 20px;
-  box-shadow: 0px 0px 9px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 4px 0px #00000031;
 }
 
 #awaitingfeedback {
@@ -111,11 +117,11 @@ h3 {
   padding-top: 20px;
   padding-bottom: 20px;
   border-radius: 20px;
-  box-shadow: 0px 0px 9px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 4px 0px #00000031;
 }
 
 #urgent {
-    font-size: 14px;
+  font-size: 14px;
   width: 100%;
   display: flex;
   justify-content: space-evenly;
@@ -124,7 +130,7 @@ h3 {
   padding-top: 20px;
   padding-bottom: 20px;
   border-radius: 20px;
-  box-shadow: 0px 0px 9px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 4px 0px #00000031;
 }
 
 #urgent img {
@@ -144,17 +150,17 @@ h3 {
   padding-top: 20px;
   padding-bottom: 20px;
   border-radius: 20px;
-  box-shadow: 0px 0px 9px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 4px 0px #00000031;
 }
 
-#toDo img{
-    width: 40px;
-    height: 40px;
-    margin-right: 13px;
+#toDo img {
+  width: 40px;
+  height: 40px;
+  margin-right: 13px;
 }
 #done {
- width: 186px;
- height: 110px;
+  width: 186px;
+  height: 110px;
   display: flex;
   justify-content: center;
   text-align: center;
@@ -162,28 +168,31 @@ h3 {
   padding-top: 20px;
   padding-bottom: 20px;
   border-radius: 20px;
-  box-shadow: 0px 0px 9px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 4px 0px #00000031;
 }
 
-#done img{
-    width: 40px;
-    height: 40px;
-    margin-right: 13px;
+#done img {
+  width: 40px;
+  height: 40px;
+  margin-right: 13px;
 }
-
-
 
 .right-container {
-  display: none;
-  margin-left: -100px;
-  width: 40%;
+  background-color: #ffffff;
+  display: flex;
+  position: absolute;
+  justify-content: center;
+  z-index: 20;
+  top: 85px;
+  height: 82%;
+  width: 100vw;
   flex-direction: column;
+  transition: opacity 1s;
 }
 
 .right-container p:first-child {
   text-align: center;
-  font-size: 48px;
-  font-weight: bold;
+  font-size: 36px;
 }
 
 .right-container p:last-child {
@@ -194,8 +203,9 @@ h3 {
 }
 
 .grey-line {
-  border: 1px solid grey;
-  height: 100px;
+  border: 2px solid #d1d1d1;
+  height: 70px;
+  border-radius: 10px;
 }
 
 #taskInBoard,
@@ -207,6 +217,7 @@ h3 {
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
 }
+
 #taskInBoard:hover,
 #taskInProgress:hover,
 #awaitingfeedback:hover,
@@ -217,4 +228,15 @@ h3 {
   color: white;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   transform: scale(1.05);
+}
+
+.upcoming-deadline p {
+  font-size: 14px;
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+
+.upcoming-deadline p:first-child {
+  font-size: 16px;
+  font-weight: 700;
 }
