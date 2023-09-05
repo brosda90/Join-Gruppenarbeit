@@ -2,6 +2,7 @@ let expanded = false;
 let selectTrigger = document.querySelector('.select-trigger');
 
 let addedContacts = [];
+let addedSubTasks = [];
 
 function init() {
     renderContacts();
@@ -10,6 +11,7 @@ function init() {
 
 function renderContacts() {
     let assignedToContact = document.getElementById('checkBoxes');
+    assignedToContact.innerHTML = '';
 
     for (let i = 0; i < contacts.length; i++) {
         const contact = contacts[i];
@@ -77,8 +79,8 @@ function createTask() {
     let priority = getSelectedPrio();
     let date = document.getElementById('dateToday').value;
     let category = document.getElementById('chosenCategory').innerHTML;
-    let assignedTo = getSelectedAssignedTo();
-    let subtasks = getSubtasks();
+    let assignedTo = addedContacts;
+    let subtasks = addedSubTasks;
     document.getElementById('checkBoxes').classList.remove('d-block');
 
     addNewTask(title, description, priority, date, category, assignedTo, subtasks);
@@ -101,7 +103,6 @@ function addNewTask(title, description, priority, date, category, assignedTo, su
     clearTaskInput();
 }
 
-
 function getSelectedPrio() {
     let selectedPriority;
     if (document.getElementById('urgentBtn').classList.contains('urgentBtn')) {
@@ -113,19 +114,6 @@ function getSelectedPrio() {
     };
 
     return selectedPriority;
-}
-
-function getSelectedAssignedTo() {
-    let selectedAssignedTo = [];
-    let checkboxes = document.querySelectorAll('.eachContact');
-
-    checkboxes.forEach(function (checkbox, index) {
-        if (checkbox.checked) {
-            selectedAssignedTo.push(index);
-        }
-    });
-
-    return selectedAssignedTo;
 }
 
 function getSubtasks() {
@@ -173,11 +161,39 @@ function showContacts() {
 function addedContact(index) {
     let checked = document.getElementById(`check${index}`);
     let src = checked.getAttribute("src");
+    let id = index + 1;
 
     if (src === './assets/img/check_button_unchecked.svg') {
         checked.src = './assets/img/check_button_checked.svg';
+        addedContacts.push(id);  
     } else if (src === './assets/img/check_button_checked.svg') {
         checked.src = './assets/img/check_button_unchecked.svg';
+        const indexOfId = addedContacts.indexOf(id);
+        if (indexOfId !== -1) {
+            addedContacts.splice(indexOfId, 1);
+        }
+    };
+
+    showContactsSum();
+}
+
+function showContactsSum() {
+    let sumContacts = document.getElementById('sumAddedContacts');
+
+    sumContacts.innerHTML = addedContacts.length + ' added Contacts';
+}
+
+function createSubTask() {
+    let newSubTask = document.getElementById('newSub');
+    let showSubs = document.getElementById('subTaskList');
+
+    addedSubTasks.push(newSubTask.value);
+    newSubTask.value = '';
+    showSubs.innerHTML = '';
+
+    for (let j = 0; j < addedSubTasks.length; j++) {
+      const sub = addedSubTasks[j];
+        showSubs.innerHTML += `<li>${sub}</li>`;
     };
 }
 
@@ -192,18 +208,21 @@ function clearTaskInput() {
     document.getElementById('low').classList.remove('selectedSvg');
     document.getElementById('dateToday').value = "";
 
-    resetCategory();
+    resetTaskData();
 }
 
-function resetCategory() {
+function resetTaskData() {
     let category = document.getElementById('chosenCategory');
 
     category.innerHTML = 'Select task Category';
+    addedContacts = [];
+    addedSubTasks = [];
 
-    resetCheckBox();
+    showContactsSum();
+    resetCheckBoxArrow();
 }
 
-function resetCheckBox() {
+function resetCheckBoxArrow() {
     let arrow = document.getElementById('contactsArrow');
     let checkboxes = document.querySelectorAll('input[type="checkbox"]');
     checkboxes.forEach(function (checkbox) {
@@ -214,6 +233,8 @@ function resetCheckBox() {
         arrow.src = "./assets/img/arrow_drop_down.svg"
     }
     document.getElementById('checkBoxes').classList.remove('d-block');
+
+    renderContacts();
 }
 
 function renderContactHTML(index, contact) {

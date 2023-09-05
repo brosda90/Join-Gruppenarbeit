@@ -70,6 +70,7 @@
                     <h4>Assigned to</h4>
                     <div class="selectContacts" onclick="showContacts()">
                         <div class="contactSelector brd-r10 item" name="" id="contactSelector">
+                            <span id="sumAddedContacts">0 added Contacts</span>
                             <img id="contactsArrow" src="./assets/img/arrow_drop_down.svg" alt="">
                         </div>
                     </div>
@@ -79,8 +80,11 @@
                 <div class="subTasks h4-gap">
                     <h4>Subtasks</h4>
                     <div class="subTaskInput">
-                        <input type="text" placeholder="Add new subtask">
-                        <button><img src="./assets/img/add.svg" alt=""></button>
+                        <input id="newSub" type="text" placeholder="Add new subtask">
+                        <button onclick="createSubTask()"><img src="./assets/img/add.svg" alt=""></button>
+                    </div>
+                    <div>
+                        <ul id="subTaskList"></ul>
                     </div>
                 </div>
                 <div class="createBtn">
