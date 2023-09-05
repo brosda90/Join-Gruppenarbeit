@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/fonts.css">
     <link rel="stylesheet" href="./css/contacts.css">
     <!-- <script src="./js/data.js"></script> -->
     <script src="./js/storage.js"></script>
@@ -67,13 +68,13 @@
         </footer>
     </div>
     <!-- Contact list-view -->
-    <div id="contact-list" class="contact-list-main">
+    <div class="contact-list-main">
         <div class="contact-add-main" onclick="openAddCon()">
             <div class="contact-add-mainbox">
                 <img src="./assets/img/person_add.png" class="contact-add-img">
             </div>
         </div>
-        <div class="contact-list">
+        <div id="contact-list" class="contact-list">
             <!-- Letter and HR -->
             <div class="contact-letterbox">
                 <span class="contact-letter">A</span>
@@ -295,10 +296,10 @@
                 </div>
             </div>
             <div class="popup-addcon-inputbox">
-                <form class="popup-addcon-inputbox-form" onsubmit="saveNewContact();return false;" autocomplete="off">
+                <form class="popup-addcon-inputbox-form" onsubmit="saveNewContact(); return false;" autocomplete="off">
                     <div class="popup-addcon-input-box border">
                         <div class="popup-addcon-input-innerbox">
-                            <input type="text" id="addconname" placeholder="Name">
+                            <input type="text" id="addconname" required placeholder="Name">
                             <div class="popup-addcon-input-imgbox">
                                 <img src="./assets/img/person16.png">
                             </div>
@@ -307,7 +308,7 @@
                     <!--  -->
                     <div class="popup-addcon-input-box border">
                         <div class="popup-addcon-input-innerbox">
-                            <input type="text" id="addconemail" placeholder="Email">
+                            <input type="email" id="addconemail" required placeholder="Email">
                             <div class="popup-addcon-input-imgbox">
                                 <img src="./assets/img/mail_20x16.png">
                             </div>
@@ -316,7 +317,7 @@
                     <!--  -->
                     <div class="popup-addcon-input-box border">
                         <div class="popup-addcon-input-innerbox">
-                            <input type="text" id="addconphone" placeholder="Phone">
+                            <input type="tel" id="addconphone" required placeholder="Phone">
                             <div class="popup-addcon-input-imgbox">
                                 <img src="./assets/img/call18.png">
                             </div>

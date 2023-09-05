@@ -1,4 +1,4 @@
-@font-face {
+/* @font-face {
     font-family: Inter;
     src: url('../assets/fonts/inter-v12-latin-regular.woff2');
     font-weight: 400;
@@ -51,66 +51,71 @@
     font-family: Inter;
     src: url('../assets/fonts/inter-v12-latin-900.woff2');
     font-weight: 900;
-}
+} */
 
 /* ------------------------------------------------------------ */
 /* ------------------------------------------------------------ */
 /* ------------------------------------------------------------ */
 :root {
-    --col-main: #2A3647;
+    --col-main: #2a3647;
     --col-main-active: #091931;
-    --col-main-bg: #F6F7F8;
-    --col-white: #FFFFFF;
+    --col-main-bg: #f6f7f8;
+    --col-white: #ffffff;
     --col-black: #000000;
-    --col-hr: #D1D1D1;
-    --col-btn-hover: #EEEEEE;
-    --col-link: #007CEE;
+    --col-hr: #d1d1d1;
+    --col-btn-hover: #eeeeee;
+    --col-link: #007cee;
     --col-btn: var(--col-main);
-    --col-btn-activ: #29ABE2;
+    --col-btn-activ: #29abe2;
 
-    --col-shadow10:  0 4px 4px 0 rgba(0,0,0,0.1);
-    --col-shadow25:  0 4px 4px 0 rgba(0,0,0,0.25);
+    --col-shadow10: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
+    --col-shadow25: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
 
-    --col-badge-1: #FF7A00;
-    --col-badge-2: #9327FF;
-    --col-badge-3: #6E52FF;
-    --col-badge-4: #FC71FF;
-    --col-badge-5: #FFBB2B;
-    --col-badge-6: #1FD7C1;
-    --col-badge-7: #462F8A;
-    --col-badge-8: #FF4646;
-    --col-badge-9: #FFC700;
+    --col-badge-1: #ff7a00;
+    --col-badge-2: #9327ff;
+    --col-badge-3: #6e52ff;
+    --col-badge-4: #fc71ff;
+    --col-badge-5: #ffbb2b;
+    --col-badge-6: #1fd7c1;
+    --col-badge-7: #462f8a;
+    --col-badge-8: #ff4646;
+    --col-badge-9: #ffc700;
 
+    --col-set-0: #ff7a00;
+    --col-set-1: #ff5eb3;
+    --col-set-2: #6e52ff;
+    --col-set-3: #9327ff;
+    --col-set-4: #00bee8;
+    --col-set-5: #1fd7c1;
+    --col-set-6: #ff745e;
+    --col-set-7: #ffa35e;
+    --col-set-8: #fc71ff;
+    --col-set-9: #ffc701;
+    --col-set-10: #0038ff;
+    --col-set-11: #c3ff2b;
+    --col-set-12: #ffe62b;
+    --col-set-13: #ff4646;
+    --col-set-14: #ffbb2b;
 
-    --col-set-0: #6E52FF;
-    --col-set-1: #FFA35E;
-    --col-set-2: #FFE62B;
-    --col-set-3: #00BEE8;
-    --col-set-4: #FF5EB3;
-    --col-set-5: #FFBB2B;
-    --col-set-6: #FF745E;
-    --col-set-7: #FF745E;
-    --col-set-8: #;
-    --col-set-9: #;
-    --col-set-10: #;
-    --col-set-11: #;
-    --col-set-12: #;
-    --col-set-13: #;
-    --col-set-14: #;
+    --grad-contact-hover: linear-gradient(
+        180deg,
+        rgba(249, 249, 249, 1) 0%,
+        rgba(243, 243, 243, 1) 100%
+    );
 
-    --grad-contact-hover: linear-gradient(180deg, rgba(249,249,249,1) 0%, rgba(243,243,243,1) 100%);
-
-    --color-blue: #2AABE2;
-    --color-dark-blue: #2A3647;
+    --color-blue: #2aabe2;
+    --color-dark-blue: #2a3647;
     --color-darker-blue: #091931;
-    --color-white: #FFFFFF;
-    --color-darker-white: #F6F7F8;
-    --color-lightest-grey: #E7E7E7;
-    --color-lighter-grey: #D1D1D1;
-    --color-light-grey: #CDCDCD;
-    --color-grey: #A8A8A8;
+    --color-white: #ffffff;
+    --color-darker-white: #f6f7f8;
+    --color-lightest-grey: #e7e7e7;
+    --color-lighter-grey: #d1d1d1;
+    --color-light-grey: #cdcdcd;
+    --color-grey: #a8a8a8;
 }
 
+/* ########################################################### */
+/* ########################################################### */
 body {
     margin: 0;
     padding: 0;
@@ -160,7 +165,6 @@ span {
     line-height: 19.2px;
 }
 
-
 /* ------------------------------------------------------------ */
 /* ------------------------------------------------------------ */
 /* ------------------------------------------------------------ */
@@ -181,7 +185,7 @@ header {
     align-items: center;
     justify-content: center;
     border-radius: 100%;
-    border: 2px solid black; 
+    border: 2px solid black;
 }
 
 .user-name {
@@ -193,7 +197,6 @@ footer {
     height: 80px;
     padding: 2px 16px;
     background-color: var(--color-dark-blue);
-    
 }
 
 .nav-menu {
@@ -203,8 +206,8 @@ footer {
     justify-content: space-between;
 }
 
-.nav-menu-link  {
-    font-family: 'Open Sans';
+.nav-menu-link {
+    font-family: "Open Sans";
     text-decoration: none;
     color: var(--color-light-grey);
     font-size: 14px;
@@ -239,10 +242,6 @@ footer {
 /* ------------------------------------------------------------ */
 /* ------------------------------------------------------------ */
 
-
-
-
-
 /* ------------------------------------------------------------ */
 /* ----- For contact-add -------------------------------------- */
 /* ------------------------------------------------------------ */
@@ -265,7 +264,7 @@ footer {
     background-color: var(--col-main);
     border: 1px solid var(--col-main);
     border-radius: 500px;
-    box-shadow: 0 4px 4px 0 rgba(0,0,0,0.25);
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -309,7 +308,7 @@ footer {
     width: 100%;
     height: 1px;
     margin: 8px 0;
-    background-color:  var(--col-hr);
+    background-color: var(--col-hr);
 }
 
 /* ------------------------------------------------------------ */
@@ -466,7 +465,7 @@ footer {
 }
 
 .contact-single-title-text::after {
-    content: '';
+    content: "";
     position: absolute;
     left: 0;
     bottom: -16px;
@@ -573,7 +572,8 @@ footer {
     transition: right 300ms ease-out 0s;
 }
 
-.options:hover, .contact-btn-option-box:hover .options {
+.options:hover,
+.contact-btn-option-box:hover .options {
     right: 8px;
 }
 
@@ -611,10 +611,6 @@ footer {
     align-items: center;
 }
 
-
-
-
-
 /* ------------------------------------------------------------ */
 /* ----- for all popups --------------------------------------- */
 /* ------------------------------------------------------------ */
@@ -649,7 +645,7 @@ footer {
 }
 
 .after90::after {
-    content: '';
+    content: "";
     position: absolute;
     left: 0;
     bottom: 0px;
@@ -743,8 +739,6 @@ input::placeholder {
     gap: 20px;
 }
 
-
-
 .btn {
     padding: 12px 10px;
     border-radius: 10px;
@@ -755,6 +749,7 @@ input::placeholder {
     display: flex;
     align-items: center;
     gap: 4px;
+    cursor: pointer;
 }
 
 .btn.dark {
@@ -957,36 +952,64 @@ input::placeholder {
 /* ------------------------------------------------------------ */
 /* ----- Color-Classes ---------------------------------------- */
 /* ------------------------------------------------------------ */
+.bg_contact_0 {
+    background-color: var(--col-set-0);
+}
+
 .bg_contact_1 {
-    background-color: var(--col-badge-1);
+    background-color: var(--col-set-1);
 }
 
 .bg_contact_2 {
-    background-color: var(--col-badge-2);
+    background-color: var(--col-set-2);
 }
 
 .bg_contact_3 {
-    background-color: var(--col-badge-3);
+    background-color: var(--col-set-3);
 }
 
 .bg_contact_4 {
-    background-color: var(--col-badge-4);
+    background-color: var(--col-set-4);
 }
 
 .bg_contact_5 {
-    background-color: var(--col-badge-5);
+    background-color: var(--col-set-5);
 }
 
 .bg_contact_6 {
-    background-color: var(--col-badge-6);
+    background-color: var(--col-set-6);
 }
 
 .bg_contact_7 {
-    background-color: var(--col-badge-7);
+    background-color: var(--col-set-7);
 }
 
 .bg_contact_8 {
-    background-color: var(--col-badge-8);
+    background-color: var(--col-set-8);
+}
+
+.bg_contact_9 {
+    background-color: var(--col-set-9);
+}
+
+.bg_contact_10 {
+    background-color: var(--col-set-10);
+}
+
+.bg_contact_11 {
+    background-color: var(--col-set-11);
+}
+
+.bg_contact_12 {
+    background-color: var(--col-set-12);
+}
+
+.bg_contact_13 {
+    background-color: var(--col-set-13);
+}
+
+.bg_contact_14 {
+    background-color: var(--col-set-14);
 }
 
 /* ------------------------------------------------------------ */
