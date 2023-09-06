@@ -666,10 +666,12 @@ footer {
 .contactsuccess {
     z-index: 99999;
     position: fixed;
-    top: calc(00% + 10px);
-    left: calc(50% - (width / 2));
-
+    top: calc(100% + 10px);
+    left: calc(50% - (326px / 2));
+    width: 326px;
+    height: 74px;
     background-color: var(--col-main);
+    border-radius: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -680,6 +682,16 @@ footer {
     font-weight: 400;
     line-height: 24px;
     color: var(--col-white);
+}
+
+.contactsuccess.shortpopup {
+    top: calc(100% - 240px);
+    transition-delay: 400ms;
+    transition: top 100ms ease-in;
+}
+
+.contactsuccess:not(.shortpopup) {
+    transition: top 100ms ease-out;
 }
 
 /* ------------------------------------------------------------ */

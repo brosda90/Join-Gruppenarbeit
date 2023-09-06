@@ -134,6 +134,10 @@ async function saveNewContact() {
     await saveData('contacts',contactList);
     sortContacts(contactList);
     renderContactList();
+    document.getElementById('contactsuccess').classList.add('shortpopup');
+    setTimeout(() => {
+        document.getElementById('contactsuccess').classList.remove('shortpopup');
+    }, '800');
 }
 
 
