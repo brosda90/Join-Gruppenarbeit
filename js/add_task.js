@@ -2,7 +2,9 @@ let expanded = false;
 let selectTrigger = document.querySelector('.select-trigger');
 
 let addedContacts = [];
+let addedContactInitial = [];
 let addedSubTasks = [];
+
 
 function init() {
     renderContacts();
@@ -16,8 +18,10 @@ function renderContacts() {
     for (let i = 0; i < contacts.length; i++) {
         const contact = contacts[i];
 
-        assignedToContact.innerHTML += renderContactHTML(i, contact)
+        assignedToContact.innerHTML += renderContactHTML(i, contact);
+        addedContactInitial.push(contact['initials']);
     }
+
 }
 
 function selectPrio(button) {
@@ -173,9 +177,25 @@ function addedContact(index) {
             addedContacts.splice(indexOfId, 1);
         }
     };
-
+    renderContactInitials();
     showContactsSum();
 }
+
+function renderContactInitials() {
+    let contactInitialDivs = document.querySelectorAll('.contact-initial');
+    
+    for (let i = 0; i < contactInitialDivs.length; i++) {
+        const contactInitialDiv = contactInitialDivs[i];
+        const contactInitial = addedContactInitial[i];
+
+        if (addedContacts.includes(i + 1)) {
+            contactInitialDiv.innerHTML = contactInitial;
+        } else {
+            contactInitialDiv.innerHTML = '';
+        }
+    }
+}
+
 
 function showContactsSum() {
     let sumContacts = document.getElementById('sumAddedContacts');
