@@ -19,9 +19,7 @@ function renderContacts() {
         const contact = contacts[i];
 
         assignedToContact.innerHTML += renderContactHTML(i, contact);
-        addedContactInitial.push(contact['initials']);
     }
-
 }
 
 function selectPrio(button) {
@@ -165,16 +163,18 @@ function showContacts() {
 function addedContact(index) {
     let checked = document.getElementById(`check${index}`);
     let src = checked.getAttribute("src");
-    let id = index + 1;
+    let id = index + 1;   //set each Contact ID compaired to the contact JSON from data.js
 
     if (src === './assets/img/check_button_unchecked.svg') {
         checked.src = './assets/img/check_button_checked.svg';
-        addedContacts.push(id);  
+        addedContacts.push(id);
+        addedContactInitial.push(contacts[index]['initials']);
     } else if (src === './assets/img/check_button_checked.svg') {
         checked.src = './assets/img/check_button_unchecked.svg';
         const indexOfId = addedContacts.indexOf(id);
         if (indexOfId !== -1) {
             addedContacts.splice(indexOfId, 1);
+            addedContactInitial.splice(indexOfId, 1);
         }
     };
     renderContactInitials();
@@ -182,20 +182,15 @@ function addedContact(index) {
 }
 
 function renderContactInitials() {
-    let contactInitialDivs = document.querySelectorAll('.contact-initial');
-    
-    for (let i = 0; i < contactInitialDivs.length; i++) {
-        const contactInitialDiv = contactInitialDivs[i];
-        const contactInitial = addedContactInitial[i];
+    let contactInitialDivs = document.getElementById('contactInitial');
+    contactInitialDivs.innerHTML = '';
 
-        if (addedContacts.includes(i + 1)) {
-            contactInitialDiv.innerHTML = contactInitial;
-        } else {
-            contactInitialDiv.innerHTML = '';
-        }
-    }
+    for (let l = 0; l < addedContactInitial.length; l++) {
+        const inital = addedContactInitial[l];
+
+        contactInitialDivs.innerHTML += `<div class="profile-badge bc-${l + 1} brd-white">${inital}</div>`;
+    };
 }
-
 
 function showContactsSum() {
     let sumContacts = document.getElementById('sumAddedContacts');
@@ -212,7 +207,7 @@ function createSubTask() {
     showSubs.innerHTML = '';
 
     for (let j = 0; j < addedSubTasks.length; j++) {
-      const sub = addedSubTasks[j];
+        const sub = addedSubTasks[j];
         showSubs.innerHTML += `<li>${sub}</li>`;
     };
 }
@@ -237,6 +232,7 @@ function resetTaskData() {
     category.innerHTML = 'Select task Category';
     addedContacts = [];
     addedSubTasks = [];
+    addedContactInitial = [];
 
     showContactsSum();
     resetCheckBoxArrow();
@@ -254,7 +250,8 @@ function resetCheckBoxArrow() {
     }
     document.getElementById('checkBoxes').classList.remove('d-block');
 
-    renderContacts();
+    renderContacts();   //render Contacts to clear the Contact Checkboxes
+    renderContactInitials();   //render Contact Initials to clear the contactInitial div
 }
 
 function renderContactHTML(index, contact) {

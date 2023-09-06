@@ -28,6 +28,10 @@ h4 {
     border-radius: 10px;
 }
 
+.brd-white {
+    border: 3px solid white !important;
+}
+
 .width-396 {
     width: 396px;
 }
@@ -199,7 +203,7 @@ select option {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-right: 16px;
+    padding-right: 10px;
     width: 14%;
     height: 44px;
     border: 1px solid #D1D1D1;
@@ -319,6 +323,12 @@ select option {
     display: flex;
     justify-content: space-between;
     flex-direction: column;
+}
+
+#contactInitial {
+    display: flex;
+    padding: 10px;
+    gap: 4px;
 }
 
 .d-none {
