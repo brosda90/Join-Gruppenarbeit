@@ -22,14 +22,16 @@ function openEditCon() {
 }
 
 
-function openContact(boolean) {
-    if(boolean) {
-        document.getElementById('contact-list').classList.add('d-none');
-        document.getElementById('contact-single').classList.remove('d-none');
-    } else {
-        document.getElementById('contact-list').classList.remove('d-none');
-        document.getElementById('contact-single').classList.add('d-none');
-    }
+function openContact(id) {
+    renderSingleView(id);
+    // document.getElementById('contact-list').classList.add('d-none');
+    document.getElementById('contact-single').classList.remove('d-none');
+}
+
+
+function closeContact() {
+    // document.getElementById('contact-list').classList.remove('d-none');
+    document.getElementById('contact-single').classList.add('d-none');
 }
 
 
@@ -72,10 +74,8 @@ function initialsFrom(string) { // Die Initialen vom Namen erstellen
 // ############################################################
 async function initContacts() {
     await loadContactsFromStorage();
-    cLog('contactList:', contactList);
     await loadLastContactId();
-    cLog('lastContactId:', lastContactId);
-    document.getElementById('contact-list').innerHTML = renderContactList();
+    renderContactList();
 }
 
 
@@ -110,7 +110,6 @@ async function loadData(key, defaultValue) {
 
 async function saveData(key, value) {
     let saveData = await setItem(key, JSON.stringify(value));
-    console.log(saveData);
     if(saveData.status == 'success') {
         return true;
     } else {
@@ -127,9 +126,19 @@ function cLog(text, value) {
 
 
 // ############################################################
-async function saveNewContact() { // Neuen Kontakt auch im Storage speichern
-    // From New Contact-Popup
-    let newDataSet = [{
+async function saveNewContact() {
+    let newDataSet = readNewInputs();
+    await saveData('lastContactId', ++lastContactId);
+    clearAddPopup();
+    contactList.push(newDataSet[0]);
+    await saveData('contacts',contactList);
+    sortContacts(contactList);
+    renderContactList();
+}
+
+
+function readNewInputs() {
+    return [{
         'id': lastContactId,
         'name': document.getElementById('addconname').value,
         'initials' : initialsFrom(document.getElementById('addconname').value),
@@ -137,14 +146,6 @@ async function saveNewContact() { // Neuen Kontakt auch im Storage speichern
         'phone': document.getElementById('addconphone').value,
         'badge-color': randomBadgeColor()
     }];
-    await saveData('lastContactId', ++lastContactId);
-    clearAddPopup();
-    cLog('contactList:', contactList);
-    cLog('newDataSet:', newDataSet);
-    contactList.push(newDataSet[0]);
-    await saveData('contacts',contactList);
-    sortContacts(contactList);
-    document.getElementById('contact-list').innerHTML = renderContactList();
 }
 
 
@@ -161,14 +162,31 @@ function clearAddPopup() {
 }
 
 
-function saveEditContact(id) { // Änderung auch im Storage speichern
-    // From Edit Contact-Popup
+// ############################################################
+async function saveEditContact() {
+    let id = document.getElementById('editconid').value;
     let index = idToIndex(id, contactList);
     contactList[index].name = document.getElementById('editconname').value;
     contactList[index].initials = initialsFrom(document.getElementById('editconname').value);
     contactList[index].email = document.getElementById('editconemail').value;
     contactList[index].phone = document.getElementById('editconphone').value;
+    await saveData('contacts', contactList);
     sortContacts(contactList);
+    renderContactList();
+    renderSingleView(id);
+    openEditCon();
+}
+
+
+// ############################################################
+async function deleteContact(id) {
+    let index = idToIndex(id, contactList);
+    contactList.splice(index,1);
+    await saveData('contacts', contactList);
+    sortContacts(contactList);
+    renderContactList();
+    closeContact();
+    document.getElementById('popup-editcon').classList.remove('inview');
 }
 
 
@@ -178,7 +196,6 @@ function sortContacts(arr) {
     sortedContactList.sort(
         (c1, c2) => 
         (c1.initials < c2.initials) ? -1 : (c1.initials > c2.initials) ? 1 : 0);
-    cLog('SortContacts:', sortedContactList);            
 }
 
 
@@ -198,7 +215,7 @@ function renderContactList() {
     if(newContent == '') {
         newContent += renderLetterbox();
     }
-    return newContent;
+    document.getElementById('contact-list').innerHTML = newContent;
 }
 
 
@@ -214,10 +231,10 @@ function renderLetterbox(letter = 'No Contacts') {
 
 function renderListEntry(i) {
     return `
-        <div class="contact-listbox" onclick="openContact(1)">
+        <div class="contact-listbox" onclick="openContact(${sortedContactList[i].id})">
             <div class="contact-listbox-badgebox">
                 <div class="contact-listbox-badge">
-                    <div class="contact-listbox-badge-circle bg_contact_${sortedContactList[i]['badge-color']}">
+                    <div class="contact-listbox-badge-circle bg-contact-${sortedContactList[i]['badge-color']}">
                         <span class="contact-listbox-badge-text">${sortedContactList[i].initials}</span>
                     </div>
                 </div>
@@ -227,5 +244,68 @@ function renderListEntry(i) {
                 <span class="contact-listbox-mail">${sortedContactList[i].email}</span>
             </div>
         </div>
+    `;
+}
+
+
+// ############################################################
+function renderSingleView(id) {
+    let index = idToIndex(id, sortedContactList);
+    document.getElementById('contact-single-info-badge-text').innerHTML = sortedContactList[index].initials;
+    document.getElementById('contact-single-info-name-text').innerHTML = sortedContactList[index].name;
+    document.getElementById('contact-single-info-email-text').innerHTML = sortedContactList[index].email;
+    document.getElementById('contact-single-info-phone-text').innerHTML = sortedContactList[index].phone;
+    document.getElementById('contact-single-info-badge-circle').className = `contact-single-info-badge-circle bg-contact-${sortedContactList[index]['badge-color']}`;
+    document.getElementById('options').innerHTML = renderOptions(id);
+    renderPopupEdit(id);
+}
+
+
+function renderOptions(id) {
+    let content = '';
+    content += renderOptionEdit(id);
+    content += renderOptionDelete(id);
+    return content;
+}
+
+
+function renderOptionEdit(id) {
+    let content = `
+        <div class="options-row" onclick="openEditCon(${id})">
+            <div class="options-imgbox">
+                <img class="options-img" src="./assets/img/edit.png">
+            </div>
+            <span>Edit</span>
+        </div>
+    `;
+    return content;
+}
+
+
+function renderOptionDelete(id) {
+    let content = `
+        <div class="options-row" onclick="deleteContact(${id})">
+            <div class="options-imgbox">
+                <img class="options-img" src="./assets/img/delete.png">
+            </div>
+            <span>Delete</span>
+        </div>
+    `;
+    return content;
+}
+
+
+// ############################################################
+function renderPopupEdit(id) {
+    let index = idToIndex(id, sortedContactList);
+    document.getElementById('popup-person-imgbox').className = `popup-person-imgbox bg-contact-${sortedContactList[index]['badge-color']}`;
+    document.getElementById('popup-person-imgbox-text').innerHTML = sortedContactList[index].initials;
+    document.getElementById('editconid').value = sortedContactList[index].id;
+    document.getElementById('editconname').value = sortedContactList[index].name;
+    document.getElementById('editconemail').value = sortedContactList[index].email;
+    document.getElementById('editconphone').value = sortedContactList[index].phone;
+
+    document.getElementById('popup-editcon-btn-delete').innerHTML = `
+        <button onclick='deleteContact(${id})' type="button" class="btn light">Delete</button>
     `;
 }

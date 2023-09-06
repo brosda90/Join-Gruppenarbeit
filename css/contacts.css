@@ -1,58 +1,3 @@
-/* @font-face {
-    font-family: Inter;
-    src: url('../assets/fonts/inter-v12-latin-regular.woff2');
-    font-weight: 400;
-    font-weight: normal;
-}
-
-@font-face {
-    font-family: Inter;
-    src: url('../assets/fonts/inter-v12-latin-100.woff2');
-    font-weight: 100;
-}
-
-@font-face {
-    font-family: Inter;
-    src: url('../assets/fonts/inter-v12-latin-200.woff2');
-    font-weight: 200;
-}
-
-@font-face {
-    font-family: Inter;
-    src: url('../assets/fonts/inter-v12-latin-300.woff2');
-    font-weight: 300;
-}
-
-@font-face {
-    font-family: Inter;
-    src: url('../assets/fonts/inter-v12-latin-500.woff2');
-    font-weight: 500;
-}
-
-@font-face {
-    font-family: Inter;
-    src: url('../assets/fonts/inter-v12-latin-600.woff2');
-    font-weight: 600;
-}
-
-@font-face {
-    font-family: Inter;
-    src: url('../assets/fonts/inter-v12-latin-700.woff2');
-    font-weight: 700;
-}
-
-@font-face {
-    font-family: Inter;
-    src: url('../assets/fonts/inter-v12-latin-800.woff2');
-    font-weight: 800;
-}
-
-@font-face {
-    font-family: Inter;
-    src: url('../assets/fonts/inter-v12-latin-900.woff2');
-    font-weight: 900;
-} */
-
 /* ------------------------------------------------------------ */
 /* ------------------------------------------------------------ */
 /* ------------------------------------------------------------ */
@@ -90,7 +35,7 @@
     --col-set-6: #ff745e;
     --col-set-7: #ffa35e;
     --col-set-8: #fc71ff;
-    --col-set-9: #ffc701;
+    --col-set-9: #ffc700;
     --col-set-10: #0038ff;
     --col-set-11: #c3ff2b;
     --col-set-12: #ffe62b;
@@ -499,7 +444,7 @@ footer {
 .contact-single-info-badge-circle {
     width: 80px;
     height: 80px;
-    background-color: var(--col-contact-badge-1);
+    /* background-color: var(--col-contact-badge-1); */
     border-radius: 500px;
 }
 
@@ -692,6 +637,13 @@ footer {
     box-shadow: 0 0 4px 0 var(--col-shadow10);
 }
 
+.popup-person-imgbox-text {
+    font-size: 47px;
+    font-weight: 500;
+    line-height: 56.4px;
+    color: var(--col-white);
+}
+
 /* ------------------------------------------------------------ */
 .close-x {
     position: absolute;
@@ -709,6 +661,25 @@ footer {
 
 .close-x:hover {
     background-color: var(--col-btn-activ);
+}
+
+.contactsuccess {
+    z-index: 99999;
+    position: fixed;
+    top: calc(00% + 10px);
+    left: calc(50% - (width / 2));
+
+    background-color: var(--col-main);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contactsuccess span {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    color: var(--col-white);
 }
 
 /* ------------------------------------------------------------ */
@@ -952,63 +923,63 @@ input::placeholder {
 /* ------------------------------------------------------------ */
 /* ----- Color-Classes ---------------------------------------- */
 /* ------------------------------------------------------------ */
-.bg_contact_0 {
+.bg-contact-0 {
     background-color: var(--col-set-0);
 }
 
-.bg_contact_1 {
+.bg-contact-1 {
     background-color: var(--col-set-1);
 }
 
-.bg_contact_2 {
+.bg-contact-2 {
     background-color: var(--col-set-2);
 }
 
-.bg_contact_3 {
+.bg-contact-3 {
     background-color: var(--col-set-3);
 }
 
-.bg_contact_4 {
+.bg-contact-4 {
     background-color: var(--col-set-4);
 }
 
-.bg_contact_5 {
+.bg-contact-5 {
     background-color: var(--col-set-5);
 }
 
-.bg_contact_6 {
+.bg-contact-6 {
     background-color: var(--col-set-6);
 }
 
-.bg_contact_7 {
+.bg-contact-7 {
     background-color: var(--col-set-7);
 }
 
-.bg_contact_8 {
+.bg-contact-8 {
     background-color: var(--col-set-8);
 }
 
-.bg_contact_9 {
+.bg-contact-9 {
     background-color: var(--col-set-9);
 }
 
-.bg_contact_10 {
+.bg-contact-10 {
     background-color: var(--col-set-10);
 }
 
-.bg_contact_11 {
+.bg-contact-11 {
     background-color: var(--col-set-11);
 }
 
-.bg_contact_12 {
+.bg-contact-12 {
     background-color: var(--col-set-12);
 }
 
-.bg_contact_13 {
+.bg-contact-13 {
     background-color: var(--col-set-13);
 }
 
-.bg_contact_14 {
+.bg-contact-14 {
     background-color: var(--col-set-14);
 }
 
