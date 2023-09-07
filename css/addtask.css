@@ -296,13 +296,22 @@ select option {
     padding: 10px;
 }
 
+.assignedTo {
+    width: 100%;
+}
+
 .assignedTo h4 {
     padding-bottom: 8px;
 }
 
-#checkBoxes {
+.selector {
+    max-height: 120px;
+    overflow: auto;
+    width: 396px;
+    position: absolute;
     background-color: white;
     border: 1px solid #D1D1D1;
+    z-index: 999;
 }
 
 .singleContact {
