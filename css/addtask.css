@@ -337,6 +337,7 @@ select option {
 #contactInitial {
     display: flex;
     padding: 10px;
+    padding-bottom: 0;
     gap: 4px;
 }
 

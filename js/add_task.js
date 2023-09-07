@@ -181,14 +181,14 @@ function addedContact(index) {  //set each Contact ID compaired to the contact J
     showContactsSum();
 }
 
-function checkContactLength() {
+function checkContactLength() {   //check if any Contacts are added and displays Initial Badges
     let contactDisplay = document.getElementById('contactInitial');
 
-    if (contactDisplay.innerHTML == "") {
-        contactDisplay.classList.remove('d-none');
-    } else {
+    if (addedContacts.length === 0) {
         contactDisplay.classList.add('d-none');
-    };
+    } else  {
+        contactDisplay.classList.remove('d-none');
+    }
 }
 
 function renderContactInitials() {   //render Contact Initals from added Contacts
