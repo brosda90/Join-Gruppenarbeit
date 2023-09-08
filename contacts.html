@@ -27,6 +27,11 @@
     </div>
     <div class="insert-bottom">
         <footer>
+            <div class="desktop-join-logo">
+                <div class="join-logo">
+                    <img src="./assets/img/desktop_navbox_mainlogo.png">
+                </div>
+            </div>
             <nav class="nav-menu">
                 <a class="nav-menu-link" href="/summary.html">
                     <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -70,6 +75,7 @@
     <div class="contact-list-main">
         <div class="contact-add-main" onclick="openAddCon()">
             <div class="contact-add-mainbox">
+                <span>Add new contact</span>
                 <img src="./assets/img/person_add.png" class="contact-add-img">
             </div>
         </div>
@@ -99,7 +105,7 @@
     </div>
     <!-- Contact single-view -->
     <div id="contact-single" class="contact-single-main d-none">
-        <div class="backarrow" onclick="closeContact()">
+        <div id="backarrow" class="backarrow" onclick="closeContact()">
             <img src="./assets/img/arrow_left.png">
         </div>
         <div class="contact-single-title-box">
@@ -132,7 +138,7 @@
                 </div>
             </div>
         </div>
-        <div class="contact-btn-option-box">
+        <div id="contact-btn-option-box" class="contact-btn-option-box">
             <div class="contact-btn-option">
                 <img src="./assets/img/more_vert.png">
             </div>
