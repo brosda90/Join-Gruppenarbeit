@@ -38,6 +38,29 @@ let contacts = [
         'phone' : '0123456788',
         'badge-color' : 2,
     },
+    {
+        'id' : 3,
+        'name' : 'Tina Meier',
+        'initials' : 'TM',
+        'email' : 'tinameier@gmail.de',
+        'phone' : '0839920239',
+        'badge-color' : 3,
+    },{
+        'id' : 4,
+        'name' : 'Alex Schmidt',
+        'initials' : 'AS',
+        'email' : 'alexschmidt@gmail.de',
+        'phone' : '0173902384',
+        'badge-color' : 4,
+    },
+    {
+        'id' : 5,
+        'name' : 'Sina Reuter',
+        'initials' : 'SR',
+        'email' : 'sindreuter@gmail.de',
+        'phone' : '0190234312',
+        'badge-color' : 5,
+    }
 ]
 
 let users = [

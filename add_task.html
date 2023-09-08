@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/addtask.css">
     <link rel="stylesheet" href="./css/fonts.css">
+    <link rel="stylesheet" href="./css/components_library.css">
     <script src="./js/add_task.js"></script>
     <script src="./js/data.js"></script>
     <title>Join-Add-Task</title>
@@ -21,8 +22,7 @@
                 <div class="title h4-gap">
                     <h4>Title</h4>
                     <form action="">
-                        <input class="titleInput brd-r10 item" type="text" placeholder="Enter a title"
-                            id="titleInput">
+                        <input class="titleInput brd-r10 item" type="text" placeholder="Enter a title" id="titleInput">
                     </form>
                 </div>
                 <div class="description h4-gap">
@@ -59,7 +59,7 @@
                                 <span id="chosenCategory">Select task category</span>
                                 <img id="categoryArrow" src="./assets/img/arrow_drop_down.svg" alt="">
                             </div>
-                            <div id="allOptions" class="brd-r10 d-none">
+                            <div id="allOptions" class="selector brd-r10 d-none">
                                 <div class="option item" onclick="selectOption(this)">Technical Task</div>
                                 <div class="option item" onclick="selectOption(this)">User Story</div>
                             </div>
@@ -74,8 +74,8 @@
                             <img id="contactsArrow" src="./assets/img/arrow_drop_down.svg" alt="">
                         </div>
                     </div>
-                    <div id="checkBoxes" class="d-none brd-r10"></div>
-                    <div id="contactInitial"></div>
+                    <div id="checkBoxes" class="selector d-none brd-r10"></div>
+                    <div id="contactInitial" class="d-none"></div>
                 </div>
                 <div class="subTasks h4-gap">
                     <h4>Subtasks</h4>
@@ -83,13 +83,19 @@
                         <input id="newSub" type="text" placeholder="Add new subtask">
                         <button onclick="createSubTask()"><img src="./assets/img/add.svg" alt=""></button>
                     </div>
+                    <div id="emptySubInput" class="subTaskInput"></div>
+                    <div id="subInput" class="subTaskInput d-none"></div>
                     <div>
-                        <ul id="subTaskList"></ul>
+                        <div class="listedSubTasks">
+                            <ul id="subTaskList"></ul>
+                        </div>
                     </div>
                 </div>
                 <div class="createBtn">
-                    <a class="clear brd-r10 d-none" onclick="clearTaskInput()">Clear <img src="./assets/img/close.svg" alt=""></a>
-                    <a class="create brd-r10" onclick="createTask()">Create Task <img src="./assets/img/check.png" alt=""></a>
+                    <a class="clear brd-r10 d-none" onclick="clearTaskInput()">Clear <img src="./assets/img/close.svg"
+                            alt=""></a>
+                    <a class="create brd-r10" onclick="createTask()">Create Task <img src="./assets/img/check.png"
+                            alt=""></a>
                 </div>
             </div>
         </div>

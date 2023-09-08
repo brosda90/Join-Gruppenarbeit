@@ -10,7 +10,6 @@ function init() {
     renderContacts();
 }
 
-
 function renderContacts() {
     let assignedToContact = document.getElementById('checkBoxes');
     assignedToContact.innerHTML = '';
@@ -19,12 +18,10 @@ function renderContacts() {
         const contact = contacts[i];
 
         assignedToContact.innerHTML += renderContactHTML(i, contact);
-        addedContactInitial.push(contact['initials']);
     }
-
 }
 
-function selectPrio(button) {
+function selectPrio(button) {   
     let urgent = document.getElementById('urgent');
     let medium = document.getElementById('medium');
     let low = document.getElementById('low');
@@ -32,7 +29,7 @@ function selectPrio(button) {
     checkPrio(button, urgent, medium, low)
 }
 
-function checkPrio(button, urgent, medium, low) {
+function checkPrio(button, urgent, medium, low) {   //style selected Prio Button Svg
     urgent.classList.remove('selectedSvg');
     medium.classList.remove('selectedSvg');
     low.classList.remove('selectedSvg');
@@ -49,7 +46,7 @@ function checkPrio(button, urgent, medium, low) {
     selectBtn(button);
 }
 
-function selectBtn(button) {
+function selectBtn(button) {   
     let urgent = document.getElementById('urgentBtn');
     let medium = document.getElementById('mediumBtn');
     let low = document.getElementById('lowBtn');
@@ -57,8 +54,8 @@ function selectBtn(button) {
     checkBtn(button, urgent, medium, low);
 }
 
-function checkBtn(button, urgent, medium, low) {
-    urgent.classList.remove('urgentBtn');
+function checkBtn(button, urgent, medium, low) {   //style selected Prio Button Backgroundcolor
+    urgent.classList.remove('urgentBtn'); 
     medium.classList.remove('mediumBtn');
     low.classList.remove('lowBtn');
 
@@ -73,11 +70,11 @@ function checkBtn(button, urgent, medium, low) {
     }
 }
 
-function today() {
+function today() {   //set min Date to actual Date
     document.getElementById('dateToday').min = new Date().toISOString().split("T")[0];
 }
 
-function createTask() {
+function createTask() {   //get all Values for the new Task
     let title = document.getElementById('titleInput').value;
     let description = document.getElementById('descriptionInput').value;
     let priority = getSelectedPrio();
@@ -90,7 +87,7 @@ function createTask() {
     addNewTask(title, description, priority, date, category, assignedTo, subtasks);
 }
 
-function addNewTask(title, description, priority, date, category, assignedTo, subtasks) {
+function addNewTask(title, description, priority, date, category, assignedTo, subtasks) {   //push new created Task
     let newTask = {
         'id': tasks.length + 1,
         'category': category,
@@ -107,7 +104,7 @@ function addNewTask(title, description, priority, date, category, assignedTo, su
     clearTaskInput();
 }
 
-function getSelectedPrio() {
+function getSelectedPrio() {  //get selected Prio Button Value for new Task
     let selectedPriority;
     if (document.getElementById('urgentBtn').classList.contains('urgentBtn')) {
         selectedPriority = 1;
@@ -120,7 +117,7 @@ function getSelectedPrio() {
     return selectedPriority;
 }
 
-function getSubtasks() {
+function getSubtasks() {  //get Subtask Value for new Task
     let subtasks = [];
     let subtaskInputs = document.querySelectorAll('subTaskInput input');
     subtaskInputs.forEach(function (input) {
@@ -129,7 +126,7 @@ function getSubtasks() {
     return subtasks;
 }
 
-function selectCategory() {
+function selectCategory() {  //get Category for new Task
     let arrow = document.getElementById('categoryArrow');
     let options = document.getElementById('allOptions');
 
@@ -141,14 +138,14 @@ function selectCategory() {
     };
 }
 
-function selectOption(option) {
+function selectOption(option) {  //show selected Category in Category selector
     const selectedValue = option.textContent;
     const categorySelector = document.getElementById('chosenCategory');
     categorySelector.innerHTML = selectedValue;
     selectCategory();
 }
 
-function showContacts() {
+function showContacts() {   //show all Contacts in dropdown Menu
     let arrow = document.getElementById('contactsArrow');
     let checkboxes = document.getElementById('checkBoxes');
     if (!expanded) {
@@ -162,48 +159,56 @@ function showContacts() {
     }
 }
 
-function addedContact(index) {
+function addedContact(index) {  //set each Contact ID compaired to the contact JSON from data.js
     let checked = document.getElementById(`check${index}`);
     let src = checked.getAttribute("src");
-    let id = index + 1;
+    let id = index + 1;   
 
     if (src === './assets/img/check_button_unchecked.svg') {
         checked.src = './assets/img/check_button_checked.svg';
-        addedContacts.push(id);  
+        addedContacts.push(id);
+        addedContactInitial.push(contacts[index]['initials']);
     } else if (src === './assets/img/check_button_checked.svg') {
         checked.src = './assets/img/check_button_unchecked.svg';
         const indexOfId = addedContacts.indexOf(id);
         if (indexOfId !== -1) {
             addedContacts.splice(indexOfId, 1);
+            addedContactInitial.splice(indexOfId, 1);
         }
     };
+    checkContactLength();
     renderContactInitials();
     showContactsSum();
 }
 
-function renderContactInitials() {
-    let contactInitialDivs = document.querySelectorAll('.contact-initial');
-    
-    for (let i = 0; i < contactInitialDivs.length; i++) {
-        const contactInitialDiv = contactInitialDivs[i];
-        const contactInitial = addedContactInitial[i];
+function checkContactLength() {   //check if any Contacts are added and displays Initial Badges
+    let contactDisplay = document.getElementById('contactInitial');
 
-        if (addedContacts.includes(i + 1)) {
-            contactInitialDiv.innerHTML = contactInitial;
-        } else {
-            contactInitialDiv.innerHTML = '';
-        }
+    if (addedContacts.length === 0) {
+        contactDisplay.classList.add('d-none');
+    } else  {
+        contactDisplay.classList.remove('d-none');
     }
 }
 
+function renderContactInitials() {   //render Contact Initals from added Contacts
+    let contactInitialDivs = document.getElementById('contactInitial');
+    contactInitialDivs.innerHTML = '';
 
-function showContactsSum() {
+    for (let l = 0; l < addedContactInitial.length; l++) {
+        const inital = addedContactInitial[l];
+
+        contactInitialDivs.innerHTML += `<div class="profile-badge bc-${l + 1} brd-white">${inital}</div>`;
+    };
+}
+
+function showContactsSum() {   //show summary of choosen Contacts
     let sumContacts = document.getElementById('sumAddedContacts');
 
     sumContacts.innerHTML = addedContacts.length + ' added Contacts';
 }
 
-function createSubTask() {
+function createSubTask() {   //create and push Subtask
     let newSubTask = document.getElementById('newSub');
     let showSubs = document.getElementById('subTaskList');
 
@@ -212,12 +217,12 @@ function createSubTask() {
     showSubs.innerHTML = '';
 
     for (let j = 0; j < addedSubTasks.length; j++) {
-      const sub = addedSubTasks[j];
-        showSubs.innerHTML += `<li>${sub}</li>`;
+        const sub = addedSubTasks[j];
+        showSubs.innerHTML += renderSubHTML(sub, j);
     };
 }
 
-function clearTaskInput() {
+function clearTaskInput() {   //clear all Input Data form new created Task
     document.getElementById('titleInput').value = "";
     document.getElementById('descriptionInput').value = "";
     document.getElementById('urgentBtn').classList.remove('urgentBtn');
@@ -231,18 +236,19 @@ function clearTaskInput() {
     resetTaskData();
 }
 
-function resetTaskData() {
+function resetTaskData() {   //clear all arrays form new created Task
     let category = document.getElementById('chosenCategory');
 
     category.innerHTML = 'Select task Category';
     addedContacts = [];
     addedSubTasks = [];
+    addedContactInitial = [];
 
     showContactsSum();
     resetCheckBoxArrow();
 }
 
-function resetCheckBoxArrow() {
+function resetCheckBoxArrow() {   //resest all clicked Checkboxes 
     let arrow = document.getElementById('contactsArrow');
     let checkboxes = document.querySelectorAll('input[type="checkbox"]');
     checkboxes.forEach(function (checkbox) {
@@ -254,7 +260,8 @@ function resetCheckBoxArrow() {
     }
     document.getElementById('checkBoxes').classList.remove('d-block');
 
-    renderContacts();
+    renderContacts();   //render Contacts to clear the Contact Checkboxes
+    renderContactInitials();   //render Contact Initials to clear the contactInitial div
 }
 
 function renderContactHTML(index, contact) {
@@ -263,4 +270,14 @@ function renderContactHTML(index, contact) {
             <span>${contact['name']}</span>
             <img id="check${index}" src="./assets/img/check_button_unchecked.svg">
         </div>`;
+}
+
+function renderSubHTML(sub, index) {
+    return `<li class="subListElement">
+                ${sub} 
+                <img src="./assets/img/edit_icon.svg" alt="">
+                <div class="subBorder"></div>
+                <img src="./assets/img/delete_icon.svg" alt="">
+            </li>`;
+
 }

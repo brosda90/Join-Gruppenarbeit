@@ -3,7 +3,11 @@
 
 main {
     overflow: scroll;
-    background-color: var(--color-darkerwhite);
+    background-color: var(--color-darker-white);
+}
+
+main::-webkit-scrollbar {
+    display: none;
 }
 
 h1 {
@@ -152,6 +156,7 @@ button {
     position: relative;
     overflow-x: scroll;
     overflow-y: visible;
+    padding: 10px;
 }
 
 .task-section-body::-webkit-scrollbar {
@@ -188,17 +193,27 @@ button {
     align-items: center;
     border: 1px dashed var(--color-grey);
     border-radius: 10px;
+    transition: transform 125ms;
 }
 
 /* TASK CONTAINER */
 .task-container {
     min-width: 252px;
+    width: 252px;
     padding: 16px;
     border-radius: 24px;
     box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.08);
     display: flex;
     flex-direction: column;
     gap: 24px;
+    background-color: var(--color-white);
+    cursor: pointer;
+}
+
+.task-container:active {
+    cursor: grabbing;
+    transform: rotate(5deg);
+    opacity: 0.5;
 }
 
 .task-category {
@@ -250,16 +265,11 @@ button {
 
 .task-assignments {
     display: flex;
+    flex-wrap: wrap;
 }
 
-.task-assignments .profile-badge:nth-of-type(2) {
+.task-assignments .profile-badge {
     position: relative;
-    left: -8px;
-}
-
-.task-assignments .profile-badge:nth-of-type(3) {
-    position: relative;
-    left: -16px;
 }
 
 .task-prio {
@@ -288,7 +298,7 @@ button {
 }
 
 .popup-task-container {
-    min-height:726px;
+    /* min-height:726px; */
     width: 100%;
     padding: 32px 24px;
     background-color: var(--color-white);
@@ -503,3 +513,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     align-items: center;
     gap: 4px;
 }
+
+
+
+
