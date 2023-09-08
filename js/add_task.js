@@ -218,7 +218,7 @@ function createSubTask() {   //create and push Subtask
 
     for (let j = 0; j < addedSubTasks.length; j++) {
         const sub = addedSubTasks[j];
-        showSubs.innerHTML += `<li>${sub}</li>`;
+        showSubs.innerHTML += renderSubHTML(sub, j);
     };
 }
 
@@ -270,4 +270,14 @@ function renderContactHTML(index, contact) {
             <span>${contact['name']}</span>
             <img id="check${index}" src="./assets/img/check_button_unchecked.svg">
         </div>`;
+}
+
+function renderSubHTML(sub, index) {
+    return `<li class="subListElement">
+                ${sub} 
+                <img src="./assets/img/edit_icon.svg" alt="">
+                <div class="subBorder"></div>
+                <img src="./assets/img/delete_icon.svg" alt="">
+            </li>`;
+
 }

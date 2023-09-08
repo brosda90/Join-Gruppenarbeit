@@ -22,8 +22,7 @@
                 <div class="title h4-gap">
                     <h4>Title</h4>
                     <form action="">
-                        <input class="titleInput brd-r10 item" type="text" placeholder="Enter a title"
-                            id="titleInput">
+                        <input class="titleInput brd-r10 item" type="text" placeholder="Enter a title" id="titleInput">
                     </form>
                 </div>
                 <div class="description h4-gap">
@@ -84,13 +83,19 @@
                         <input id="newSub" type="text" placeholder="Add new subtask">
                         <button onclick="createSubTask()"><img src="./assets/img/add.svg" alt=""></button>
                     </div>
-                    <div class="listedSubTasks">
-                        <ul id="subTaskList"></ul>
+                    <div id="emptySubInput" class="subTaskInput"></div>
+                    <div id="subInput" class="subTaskInput d-none"></div>
+                    <div>
+                        <div class="listedSubTasks">
+                            <ul id="subTaskList"></ul>
+                        </div>
                     </div>
                 </div>
                 <div class="createBtn">
-                    <a class="clear brd-r10 d-none" onclick="clearTaskInput()">Clear <img src="./assets/img/close.svg" alt=""></a>
-                    <a class="create brd-r10" onclick="createTask()">Create Task <img src="./assets/img/check.png" alt=""></a>
+                    <a class="clear brd-r10 d-none" onclick="clearTaskInput()">Clear <img src="./assets/img/close.svg"
+                            alt=""></a>
+                    <a class="create brd-r10" onclick="createTask()">Create Task <img src="./assets/img/check.png"
+                            alt=""></a>
                 </div>
             </div>
         </div>
