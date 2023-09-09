@@ -13,7 +13,7 @@ let lastContactId = 0;
 // ############################################################
 
 function openAddCon() {
-    document.getElementById('popup-addcon').classList.toggle('inview');
+    document.getElementById('popup-addcon').classList.add('inview');
 }
 
 
@@ -24,14 +24,28 @@ function openEditCon() {
 
 function openContact(id) {
     renderSingleView(id);
-    // document.getElementById('contact-list').classList.add('d-none');
     document.getElementById('contact-single').classList.remove('d-none');
+    unselectContactList();
+    selectContactList(id);
+}
+
+
+function unselectContactList() {
+    let obj = document.getElementsByClassName('contact-listbox');
+    for(let i = 0; i < obj.length; i++) {
+        obj[i].classList.remove('select');
+    }
+}
+
+
+function selectContactList(id) {
+    document.getElementById(`contact-listbox-${id}`).classList.add('select');
 }
 
 
 function closeContact() {
-    // document.getElementById('contact-list').classList.remove('d-none');
     document.getElementById('contact-single').classList.add('d-none');
+    unselectContactList();
 }
 
 
@@ -43,7 +57,7 @@ function notClose(event) {
 // ############################################################
 // ----- Wichtige Funktionen für Alle Contacts-Zugriffe  ------
 // ############################################################
-function idToIndex(id, arr = contactList) { // Die Index-Position im Array aus der ID ermitteln
+function idToIndex(id, arr = contactList) {
     let index = -1;
     for(let i = 0; i < arr.length; i++) {
         if(id == arr[i].id) {
@@ -54,7 +68,7 @@ function idToIndex(id, arr = contactList) { // Die Index-Position im Array aus d
 }
 
 
-function initialsFrom(string) { // Die Initialen vom Namen erstellen
+function initialsFrom(string) {
     let wordlist = string.split(" ");
     let words = wordlist.length;
     let result = '';
@@ -159,7 +173,7 @@ function randomBadgeColor() {
 
 
 function clearAddPopup() {
-    document.getElementById('popup-addcon').classList.toggle('inview');
+    document.getElementById('popup-addcon').classList.remove('inview');
     document.getElementById('addconname').value = '';
     document.getElementById('addconemail').value = '';
     document.getElementById('addconphone').value = '';
@@ -235,7 +249,7 @@ function renderLetterbox(letter = 'No Contacts') {
 
 function renderListEntry(i) {
     return `
-        <div class="contact-listbox" onclick="openContact(${sortedContactList[i].id})">
+        <div id="contact-listbox-${sortedContactList[i].id}" class="contact-listbox" onclick="openContact(${sortedContactList[i].id})">
             <div class="contact-listbox-badgebox">
                 <div class="contact-listbox-badge">
                     <div class="contact-listbox-badge-circle bg-contact-${sortedContactList[i]['badge-color']}">
@@ -261,6 +275,7 @@ function renderSingleView(id) {
     document.getElementById('contact-single-info-phone-text').innerHTML = sortedContactList[index].phone;
     document.getElementById('contact-single-info-badge-circle').className = `contact-single-info-badge-circle bg-contact-${sortedContactList[index]['badge-color']}`;
     document.getElementById('options').innerHTML = renderOptions(id);
+    document.getElementById('contact-single-info-options').innerHTML = renderOptions(id);
     renderPopupEdit(id);
 }
 

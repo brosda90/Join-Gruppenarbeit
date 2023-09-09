@@ -86,7 +86,7 @@
             </div>
             <div class="contact-hr"></div>
             <!-- One or more entries of names -->
-            <div class="contact-listbox" onclick="openContact(1)">
+            <div id="contact-listbox-1" class="contact-listbox" onclick="openContact(1)">
                 <div class="contact-listbox-badgebox">
                     <div class="contact-listbox-badge">
                         <div class="contact-listbox-badge-circle bg_contact_1">
@@ -101,6 +101,15 @@
             </div>
             <!--  -->
             <div class="contact-list-endbox"></div>
+        </div>
+    </div>
+    <!-- Desktop single-standard -->
+    <div id="contact-desktop-title" class="contact-desktop-title-main">
+        <div class="contact-single-title-box">
+            <div class="contact-single-title-text">
+                <span class="contact-single-title-text-main">Contacts</span>
+                <span class="contact-single-title-text-second">Better with a team</span>
+            </div>
         </div>
     </div>
     <!-- Contact single-view -->
@@ -122,6 +131,7 @@
                 </div>
                 <div class="contact-single-info-name">
                     <span id="contact-single-info-name-text" class="contact-single-info-name-text">Anton Mayer</span>
+                    <div id="contact-single-info-options" class="contact-single-info-options"></div>
                 </div>
             </div>
             <div class="contact-single-info-sencond">
@@ -157,13 +167,18 @@
                 </div>
             </div>
         </div>
-        </div>
+    </div>
     <!-- Popup - Add contact -->
     <div id="popup-addcon" class="popup-addcon-main">
         <div class="popup-addcon-background">
             <div class="popup-top-bg">
                 <div class="popup-top-titlebox">
                     <div class="popup-top-textbox">
+                        <div class="desktop-popup-logo">
+                            <div class="join-popup-logo">
+                                <img src="./assets/img/desktop_popup_mainlogo.png">
+                            </div>
+                        </div>
                         <div class="popup-top-text">
                             <span class="popup-top-titletext">
                                 Add contact
@@ -201,7 +216,7 @@
                     <!--  -->
                     <div class="popup-addcon-input-box border">
                         <div class="popup-addcon-input-innerbox">
-                            <input type="tel" id="addconphone" required placeholder="Phone">
+                            <input type="tel" id="addconphone" required pattern="(\+|00)\d{5,20}" title="International-Format: +49... or 0049... and at least 5 digits after the + or 00" placeholder="Phone">
                             <div class="popup-addcon-input-imgbox">
                                 <img src="./assets/img/call18.png">
                             </div>
@@ -212,7 +227,7 @@
                     </div>
                 </form>
             </div>
-            <div class="close-x" onclick="openAddCon()">
+            <div class="close-x" onclick="clearAddPopup()">
                 <img src="./assets/img/close.png">
             </div>
         </div>
@@ -227,6 +242,11 @@
             <div class="popup-top-bg">
                 <div class="popup-top-titlebox">
                     <div class="popup-top-textbox">
+                        <div class="desktop-popup-logo">
+                            <div class="join-popup-logo">
+                                <img src="./assets/img/desktop_popup_mainlogo.png">
+                            </div>
+                        </div>
                         <div class="popup-top-text">
                             <span class="popup-top-titletext">
                                 Edit contact
@@ -244,7 +264,7 @@
                     <div class="popup-editcon-input-box border">
                         <div class="popup-editcon-input-innerbox">
                             <input type="hidden" id="editconid" value="">
-                            <input type="text" id="editconname" placeholder="Name">
+                            <input type="text" id="editconname" required placeholder="Name">
                             <div class="popup-editcon-input-imgbox">
                                 <img src="./assets/img/person16.png">
                             </div>
@@ -253,7 +273,7 @@
                     <!--  -->
                     <div class="popup-editcon-input-box border">
                         <div class="popup-editcon-input-innerbox">
-                            <input type="text" id="editconemail" placeholder="Email">
+                            <input type="email" id="editconemail" required placeholder="Email">
                             <div class="popup-editcon-input-imgbox">
                                 <img src="./assets/img/mail_20x16.png">
                             </div>
@@ -262,7 +282,7 @@
                     <!--  -->
                     <div class="popup-editcon-input-box border">
                         <div class="popup-editcon-input-innerbox">
-                            <input type="text" id="editconphone" placeholder="Phone">
+                            <input type="tel" id="editconphone" required pattern="(\+|00)\d{5,20}" title="International-Format: +49... or 0049... and at least 5 digits after the + or 00" placeholder="Phone">
                             <div class="popup-editcon-input-imgbox">
                                 <img src="./assets/img/call18.png">
                             </div>

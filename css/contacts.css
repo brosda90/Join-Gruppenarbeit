@@ -47,6 +47,11 @@
         rgba(249, 249, 249, 1) 0%,
         rgba(243, 243, 243, 1) 100%
     );
+    --grad-contact-active: linear-gradient(
+        180deg,
+        rgba(50, 62, 79, 1) 0%,
+        rgba(42, 54, 71, 1) 100%
+    );
 
     --color-blue: #2aabe2;
     --color-dark-blue: #2a3647;
@@ -292,6 +297,14 @@ footer {
     background: var(--grad-contact-hover);
 }
 
+.contact-listbox.select {
+    background: var(--grad-contact-active);
+}
+
+.contact-listbox.select .contact-listbox-namebox span:first-child {
+    color: var(--col-white);
+}
+
 .contact-listbox-badge {
     display: flex;
     flex-direction: row;
@@ -338,6 +351,19 @@ footer {
 .contact-list-endbox {
     width: 100%;
     height: 56px;
+}
+
+/* ------------------------------------------------------------ */
+/* ----- for contact-desktop ---------------------------------- */
+/* ------------------------------------------------------------ */
+.contact-desktop-title-main {
+    position: fixed;
+    z-index: -1;
+    top: 80px;
+    width: 100%;
+    height: calc(100% - 160px);
+    overflow-y: auto;
+    background-color: var(--col-main-bg);
 }
 
 /* ------------------------------------------------------------ */
@@ -554,6 +580,7 @@ footer {
     align-items: center;
     flex-wrap: nowrap;
     gap: 8px;
+    cursor: pointer;
 }
 
 .options-row:hover {
@@ -573,6 +600,11 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+/* ---------- */
+.contact-single-info-options {
+    display: none;
 }
 
 /* ------------------------------------------------------------ */
@@ -601,6 +633,10 @@ footer {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+}
+
+.desktop-popup-logo {
+    display: none;
 }
 
 .after90 {
@@ -738,11 +774,12 @@ input::placeholder {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 20px;
+    gap: 25px;
 }
 
 .btn {
-    padding: 12px 10px;
+    /* padding: 12px 10px; */
+    padding: 16px;
     border-radius: 10px;
     font-size: 22px;
     font-weight: 400;
@@ -757,12 +794,14 @@ input::placeholder {
 .btn.dark {
     background-color: var(--col-main);
     color: var(--col-white);
+    padding: 16px;
 }
 
 .btn.light {
     background-color: var(--col-white);
     color: var(--col-black);
     border: 1px solid var(--col-black);
+    padding: 15px 24px;
 }
 
 .btn div {
@@ -1017,7 +1056,7 @@ input::placeholder {
 /* ------------------------------------------------------------ */
 /* ----- Media-Queries ---------------------------------------- */
 /* ------------------------------------------------------------ */
-@media (min-width: 400px) {
+@media (orientation: portrait) and (min-width: 400px) {
     .popup-top-bg {
         height: 352px;
     }
@@ -1047,6 +1086,8 @@ input::placeholder {
     }
 
 
+    /* ------------------------------------------------------------ */
+    /* ----- Menue ------------------------------------------------ */
     /* ------------------------------------------------------------ */
     .insert-bottom {
         width: 232px;
@@ -1149,6 +1190,16 @@ input::placeholder {
     }
 
     /* ------------------------------------------------------------ */
+    .contact-desktop-title-main {
+        position: fixed;
+        min-width: 472px;
+        width: calc(100% - 688px);
+        height: calc(100% - 96px);
+        left: 688px;
+        top: 96px;
+    }
+
+    /* ------------------------------------------------------------ */
     .contact-single-main {
         position: fixed;
         min-width: 472px;
@@ -1211,6 +1262,110 @@ input::placeholder {
         line-height: 120%;
     }
 
+    .contact-single-info-options {
+        display: flex;
+        flex-direction: row;
+        gap: 16px;
+    }
+
+
+    /* ------------------------------------------------------------ */
+    /* ----- Popup's ---------------------------------------------- */
+    /* ------------------------------------------------------------ */
+    /* ----- popup-addcon ----- */
+    .popup-addcon-main.inview .popup-addcon-background {
+        top: calc(50% - 296px);
+    }
+    
+    .popup-addcon-background {
+        display: flex;
+        flex-direction: row;
+        max-height: 592px;
+    }
+
+    .popup-top-bg {
+        left: -1px;
+        border-radius: 30px 0 0 30px;
+        height: 100%;
+        width: 470px;
+        padding: 66px 48px;
+    }
+
+    .popup-top-titlebox {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+    }
+
+    .popup-top-textbox {
+        position: relative;
+    }
+
+    .desktop-popup-logo {
+        display: block;
+        position: absolute;
+        top: -78px;
+        left: 0;
+    }
+
+    .popup-top-text {
+        gap: 8px;
+    }
+
+    .popup-top-titletext {
+        font-size: 61px;
+        line-height: 120%;
+    }
+
+    .popup-top-secondtext {
+        font-size: 27px;
+        line-height: 120%;
+    }
+
+    .popup-person-imgbox {
+        left: auto;
+        right: -203px;
+        bottom: calc(57% - 60px);
+    }
+
+    .popup-addcon-inputbox, .popup-editcon-inputbox {
+        width: calc(100% - 470px - 275px);
+        padding: 48px 48px 48px 275px;
+    }
+
+    .popup-addcon-inputbox-form, .popup-editcon-inputbox-form {
+        align-items: flex-start;
+        gap: 32px;
+    }
+
+    .popup-addcon-input-box, .popup-editcon-input-box {
+        width: 100%;
+    }
+
+    /* ----- */
+    .close-x {
+        top: 48px;
+        right: 48px;
+    }
+
+    .close-x img {
+        content: url('../assets/img/close_dark.png');
+    }
+
+    /* ----- popup-editcon ----- */
+    .popup-editcon-main.inview .popup-editcon-background {
+        top: calc(50% - 296px);
+    }
+    
+    .popup-editcon-background {
+        display: flex;
+        flex-direction: row;
+        max-height: 592px;
+    }
+
+    
+
 
 
 
@@ -1261,6 +1416,12 @@ input::placeholder {
     }
 
     /* ----- */
+    .contact-desktop-title-main {
+        left: calc(232px + 334px);
+        width: calc(100% - 232px - 334px);
+    }
+
+    /* ----- */
     .contact-single-main {
         left: calc(232px + 334px);
         width: calc(100% - 232px - 334px);
@@ -1299,6 +1460,32 @@ input::placeholder {
     .contact-single-info-name-text {
         font-size: 28px;
     }
+
+    /* ----- */
+    .popup-top-bg {
+        width: 370px;
+    }
+
+    .popup-top-titletext {
+        font-size: 45px;
+    }
+
+    .popup-top-secondtext {
+        font-size: 19px;
+    }
+
+    .popup-person-imgbox {
+        right: -163px;
+    }
+
+    .popup-addcon-inputbox {
+        padding: 48px 48px 48px 205px;
+    }
+
+
+
+
+
 }
 
 
