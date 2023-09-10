@@ -71,18 +71,17 @@ function idToIndex(id, arr = contactList) {
 function initialsFrom(string) {
     let wordlist = string.split(" ");
     let words = wordlist.length;
-    let result = '';
-    if(words == 1 && wordlist[0].length >= 2) {
-        for(let i = 0; i < 2; i++) {
-            result += wordlist[0][i];
-        }
-    } else if(words >= 2) {
-        for(let i = 0; i < 2; i++) {
-            result += wordlist[i][0];
-        }
+    let result = '--';
+    if(words == 1) {
+        result = wordlist[0][0];
+        result += (wordlist[0].length > 1) ? wordlist[0][1] : '-';
+    } else if(words > 1) {
+        result = wordlist[0][0] + wordlist[1][0];
     }
     return result.toUpperCase();
 }
+
+
 // ############################################################
 // ----- Wichtige Funktionen für Contacts im Allgemeinen ------
 // ############################################################

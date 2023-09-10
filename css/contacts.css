@@ -143,6 +143,14 @@ header {
     /* box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1); */
 }
 
+.header-title {
+    margin-left: 116px;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 120%;
+    display: none;
+}
+
 .user-icon {
     background-color: white;
     width: 40px;
@@ -1085,6 +1093,14 @@ input::placeholder {
         width: 100%;
     }
 
+    header svg {
+        display: none;
+    }
+
+    .header-title {
+        display: block;
+    }
+
 
     /* ------------------------------------------------------------ */
     /* ----- Menue ------------------------------------------------ */
@@ -1385,6 +1401,10 @@ input::placeholder {
 }
 
 @media (min-width: 1000px) and (max-width: 1199px) {
+    .header-title {
+        margin-left: 86px;
+    }
+
     .contact-list-main {
         padding-left: 0;
         width: 334px;
