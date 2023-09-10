@@ -34,7 +34,7 @@
                 </div>
                 <div class="prio h4-gap width-396 ">
                     <h4>Prio</h4>
-                    <div class="btnSection width-396">
+                    <div id="btnSection" class="btnSection width-396 brd-r10">
                         <a id="urgentBtn" class="item brd-r10" onclick="selectPrio(1)">Urgent <img id="urgent"
                                 src="./assets/img/capa2.svg" alt=""></a>
                         <a id="mediumBtn" class="item brd-r10" onclick="selectPrio(2)">Medium <img id="medium"
@@ -55,7 +55,7 @@
                     <h4>Category</h4>
                     <div class="custom-select">
                         <div class="categorySelect">
-                            <div class="categorySelector brd-r10 item" onclick="selectCategory()">
+                            <div id="categoryInput" class="categorySelector brd-r10 item" onclick="selectCategory()">
                                 <span id="chosenCategory">Select task category</span>
                                 <img id="categoryArrow" src="./assets/img/arrow_drop_down.svg" alt="">
                             </div>
@@ -69,26 +69,29 @@
                 <div class="assignedTo">
                     <h4>Assigned to</h4>
                     <div class="selectContacts" onclick="showContacts()">
-                        <div class="contactSelector brd-r10 item" name="" id="contactSelector">
-                            <span id="sumAddedContacts">0 added Contacts</span>
+                        <div class="categorySelector brd-r10 item" name="" id="contactSelector">
+                            <span id="sumAddedContacts">0 Contacts added</span>
                             <img id="contactsArrow" src="./assets/img/arrow_drop_down.svg" alt="">
                         </div>
                     </div>
-                    <div id="checkBoxes" class="selector d-none brd-r10"></div>
+                    <div id="checkBoxes" class="selector scrollbar d-none brd-r10"></div>
                     <div id="contactInitial" class="d-none"></div>
                 </div>
                 <div class="subTasks h4-gap">
                     <h4>Subtasks</h4>
-                    <div class="subTaskInput">
-                        <input id="newSub" type="text" placeholder="Add new subtask">
-                        <button onclick="createSubTask()"><img src="./assets/img/add.svg" alt=""></button>
+                    <div id="subTaskInputCover" class="item brd-r10" onclick="toggleSubTaskInput()">
+                        <span>Add new subtask</span>
+                        <img src="./assets/img/add.svg" alt="">
                     </div>
-                    <div id="emptySubInput" class="subTaskInput"></div>
-                    <div id="subInput" class="subTaskInput d-none"></div>
-                    <div>
-                        <div class="listedSubTasks">
-                            <ul id="subTaskList"></ul>
+                    <div id="realSubInput" class="subTaskInput d-none">
+                        <input id="newSub" type="text" placeholder="Add new subtask">
+                        <div class="subInputButton">
+                            <img class="item" src="./assets/img/close.svg" onclick="toggleSubTaskInput()" alt="">
+                            <div class="subBorder"></div>
+                            <img class="item" src="./assets/img/input_check.svg" onclick="createSubTask()" alt="">
                         </div>
+                    </div>
+                    <div id="subTaskList" class="listedSubTasks scrollbar">
                     </div>
                 </div>
                 <div class="createBtn">

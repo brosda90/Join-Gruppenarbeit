@@ -5,7 +5,6 @@ let addedContacts = [];
 let addedContactInitial = [];
 let addedSubTasks = [];
 
-
 function init() {
     renderContacts();
 }
@@ -21,7 +20,7 @@ function renderContacts() {
     }
 }
 
-function selectPrio(button) {   
+function selectPrio(button) {
     let urgent = document.getElementById('urgent');
     let medium = document.getElementById('medium');
     let low = document.getElementById('low');
@@ -46,7 +45,7 @@ function checkPrio(button, urgent, medium, low) {   //style selected Prio Button
     selectBtn(button);
 }
 
-function selectBtn(button) {   
+function selectBtn(button) {
     let urgent = document.getElementById('urgentBtn');
     let medium = document.getElementById('mediumBtn');
     let low = document.getElementById('lowBtn');
@@ -55,7 +54,7 @@ function selectBtn(button) {
 }
 
 function checkBtn(button, urgent, medium, low) {   //style selected Prio Button Backgroundcolor
-    urgent.classList.remove('urgentBtn'); 
+    urgent.classList.remove('urgentBtn');
     medium.classList.remove('mediumBtn');
     low.classList.remove('lowBtn');
 
@@ -75,16 +74,64 @@ function today() {   //set min Date to actual Date
 }
 
 function createTask() {   //get all Values for the new Task
-    let title = document.getElementById('titleInput').value;
-    let description = document.getElementById('descriptionInput').value;
-    let priority = getSelectedPrio();
-    let date = document.getElementById('dateToday').value;
-    let category = document.getElementById('chosenCategory').innerHTML;
-    let assignedTo = addedContacts;
-    let subtasks = addedSubTasks;
-    document.getElementById('checkBoxes').classList.remove('d-block');
+    if (checkInputData()) {
+        let title = document.getElementById('titleInput').value;
+        let description = document.getElementById('descriptionInput').value;
+        let priority = getSelectedPrio();
+        let date = document.getElementById('dateToday').value;
+        let category = document.getElementById('chosenCategory').innerHTML;
+        let assignedTo = addedContacts;
+        let subtasks = addedSubTasks;
+        document.getElementById('checkBoxes').classList.remove('d-block');
 
-    addNewTask(title, description, priority, date, category, assignedTo, subtasks);
+        addNewTask(title, description, priority, date, category, assignedTo, subtasks);
+    };
+}
+
+function checkInputData() {
+    const titleInput = document.getElementById('titleInput');
+    const descriptionInput = document.getElementById('descriptionInput');
+    const dateInput = document.getElementById('dateToday');
+    const categoryInput = document.getElementById('chosenCategory');
+    const selectedPriority = getSelectedPrio();
+    const selectedContacts = addedContacts;
+
+    let checked = true;
+
+    if (isEmpty(titleInput)) {
+        titleInput.classList.add('brd-red');
+        checked = false;
+    }
+    if (isEmpty(descriptionInput)) {
+        descriptionInput.classList.add('brd-red');
+        checked = false;
+    }
+    if (isEmpty(dateInput)) {
+        dateInput.classList.add('brd-red');
+        checked = false;
+    }
+    if (categoryInput.innerHTML === 'Select task category') {
+        document.getElementById('categoryInput').classList.add('brd-red');
+        checked = false;
+    }
+    if (selectedPriority === null) {
+        document.getElementById('btnSection').classList.add('brd-red');
+        checked = false;
+    }
+    if (selectedContacts.length === 0) {
+        document.getElementById('contactSelector').classList.add('brd-red');
+        checked = false;
+    }
+
+    return checked;
+}
+
+function isEmpty(inputField) {
+    return inputField.value === '';
+}
+
+function removeRedBorder() {
+    this.classList.remove('brd-red');
 }
 
 function addNewTask(title, description, priority, date, category, assignedTo, subtasks) {   //push new created Task
@@ -162,7 +209,7 @@ function showContacts() {   //show all Contacts in dropdown Menu
 function addedContact(index) {  //set each Contact ID compaired to the contact JSON from data.js
     let checked = document.getElementById(`check${index}`);
     let src = checked.getAttribute("src");
-    let id = index + 1;   
+    let id = index + 1;
 
     if (src === './assets/img/check_button_unchecked.svg') {
         checked.src = './assets/img/check_button_checked.svg';
@@ -186,7 +233,7 @@ function checkContactLength() {   //check if any Contacts are added and displays
 
     if (addedContacts.length === 0) {
         contactDisplay.classList.add('d-none');
-    } else  {
+    } else {
         contactDisplay.classList.remove('d-none');
     }
 }
@@ -208,6 +255,14 @@ function showContactsSum() {   //show summary of choosen Contacts
     sumContacts.innerHTML = addedContacts.length + ' added Contacts';
 }
 
+function toggleSubTaskInput() {   //displays Sub Task Input
+    let inputCover = document.getElementById('subTaskInputCover');
+    let realInput = document.getElementById('realSubInput');
+
+    inputCover.classList.toggle('d-none');
+    realInput.classList.toggle('d-none');
+}
+
 function createSubTask() {   //create and push Subtask
     let newSubTask = document.getElementById('newSub');
     let showSubs = document.getElementById('subTaskList');
@@ -220,6 +275,8 @@ function createSubTask() {   //create and push Subtask
         const sub = addedSubTasks[j];
         showSubs.innerHTML += renderSubHTML(sub, j);
     };
+
+    toggleSubTaskInput();
 }
 
 function clearTaskInput() {   //clear all Input Data form new created Task
@@ -238,8 +295,10 @@ function clearTaskInput() {   //clear all Input Data form new created Task
 
 function resetTaskData() {   //clear all arrays form new created Task
     let category = document.getElementById('chosenCategory');
+    let subTasks = document.getElementById('subTaskList');
 
     category.innerHTML = 'Select task Category';
+    subTasks.innerHTML = '';
     addedContacts = [];
     addedSubTasks = [];
     addedContactInitial = [];
@@ -264,6 +323,47 @@ function resetCheckBoxArrow() {   //resest all clicked Checkboxes
     renderContactInitials();   //render Contact Initials to clear the contactInitial div
 }
 
+function editSubElement(index) {   //edit Sub Task
+    let subValue = document.getElementById(`editSubTask${index}`);
+
+    toggleEditSubInput(index);
+
+    subValue.value = addedSubTasks[index];
+}
+
+function setNewSubValue(index) {   
+    let newSubValue = document.getElementById(`editSubTask${index}`).value;
+    addedSubTasks[index] = newSubValue;
+
+    renderSubTaskUpdate();
+}
+
+function deleteSub(index) {   //delete Sub Task
+    if (index >= 0 && index < addedSubTasks.length) {
+        addedSubTasks.splice(index, 1);
+        renderSubTaskUpdate();
+    }
+}
+
+
+function renderSubTaskUpdate() {   //reload edited Sub Task
+    let showSubs = document.getElementById('subTaskList');
+    showSubs.innerHTML = '';
+
+    for (let j = 0; j < addedSubTasks.length; j++) {
+        const sub = addedSubTasks[j];
+        showSubs.innerHTML += renderSubHTML(sub, j);
+    };
+}
+
+function toggleEditSubInput(index) {
+    let subListElement = document.getElementById(`listElement${index}`);
+    let editSubInput = document.getElementById(`editListElement${index}`);
+
+    subListElement.classList.toggle('d-none');
+    editSubInput.classList.toggle('d-none');
+}
+
 function renderContactHTML(index, contact) {
     return `
         <div id="contact${index}" class="singleContact option item" onclick="addedContact(${index})">
@@ -273,11 +373,23 @@ function renderContactHTML(index, contact) {
 }
 
 function renderSubHTML(sub, index) {
-    return `<li class="subListElement">
-                ${sub} 
-                <img src="./assets/img/edit_icon.svg" alt="">
-                <div class="subBorder"></div>
-                <img src="./assets/img/delete_icon.svg" alt="">
-            </li>`;
-
+    return `<div id="listElement${index}" class="subListElement">
+                <div class="subListInnerElement">
+                    <img src="./assets/img/dot.png" alt="">
+                    ${sub} 
+                </div>
+                <div class="subListInnerElement">
+                    <img class="item" src="./assets/img/edit_icon.svg" onclick="editSubElement(${index})">
+                    <div class="subBorder"></div>
+                    <img class="item" src="./assets/img/delete_icon.svg" onclick="deleteSub(${index})">
+                </div>
+            </div>
+            <div id="editListElement${index}" class="editSub d-none">
+                <input id="editSubTask${index}" type="text">
+                <div class="editListElementButton">
+                    <img class="item" src="./assets/img/delete_icon.svg" onclick="deleteSub(${index})">
+                    <div class="subBorder"></div>
+                    <img  class="item" src="./assets/img/input_check.svg" onclick="setNewSubValue(${index})">
+                </div>
+            </div>`;
 }

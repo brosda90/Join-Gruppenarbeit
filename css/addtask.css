@@ -28,6 +28,10 @@ h4 {
     border-radius: 10px;
 }
 
+.brd-red {
+    border: 1px solid red !important;
+}
+
 .brd-white {
     border: 3px solid white !important;
 }
@@ -181,6 +185,20 @@ select option {
     background-color: #7ae229 !important;
 }
 
+#subTaskInputCover {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #D1D1D1;
+    font-size: 13px;
+    height: 40px;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 374px;
+    background-color: white;
+    border: 1px solid #D1D1D1;
+}
+
 .subTaskInput {
     height: 40px;
     width: 100%;
@@ -196,30 +214,39 @@ select option {
     padding-right: 10px;
     font-family: 'Inter';
     height: 100%;
-    border: 1px solid #D1D1D1;
+    border: 1px solid #29abe2;
     border-right: transparent !important;
 }
 
-.subTaskInput button {
+.subInputButton {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     padding-right: 10px;
-    width: 14%;
-    height: 43px;
-    border: 1px solid #D1D1D1;
+    width: 15%;
+    height: 42px;
+    border: 1px solid #29abe2;
     border-left: transparent !important;
     background-color: white;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
 }
 
-.subTaskInput button {
-    width: 34px;
+.selectedSubInput {
+    border: 1px solid #29abe2 !important;
 }
 
-.subTaskInput button img:hover {
-    cursor: pointer;
+.subListElement {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.subListElementButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .createBtn {
@@ -308,11 +335,29 @@ select option {
 .selector {
     max-height: 120px;
     overflow: auto;
-    width: 396px;
+    width: 394px;
     position: absolute;
     background-color: white;
     border: 1px solid #D1D1D1;
     z-index: 999;
+}
+
+.scrollbar::-webkit-scrollbar-track {
+
+	border-radius: 10px;
+	background-color: #F6F7F8;
+}
+
+.scrollbar::-webkit-scrollbar {
+    padding: 10px;
+	width: 10px;
+	background-color: white;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+    padding: 10px;
+	border-radius: 10px;
+	background-color: #D1D1D1;
 }
 
 .singleContact {
@@ -347,16 +392,43 @@ select option {
     overflow: auto;
 }
 
-.subListElement {
+.subListElement .subListInnerElement {
    display: flex;
    justify-content: space-between;
    align-items: center;
+   gap: 8px;
+   padding: 16px 8px 0px 8px;
 }
 
 .subBorder {
     height: 20px;
     width: 1px;
     background-color: #D1D1D1;
+}
+
+.editSub {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.editSub input {
+    width: 80%;
+    height: 30px;
+    padding-left: 10px;
+    border: transparent;
+    border-bottom: 1px solid #29abe2;
+}
+
+.editListElementButton {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: white;
+    padding: 4px 6px 4px 0px;
+    width: 20%;
+    border-bottom: 1px solid #29abe2;
 }
 
 .d-none {
