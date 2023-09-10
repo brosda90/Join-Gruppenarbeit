@@ -246,6 +246,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     gap: 10px;
   }
 
+  .gap-16 {
+    gap: 16px;
+  }
+
   .font-21px-700 {
     font-size: 21px;
     font-weight: 700;

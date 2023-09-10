@@ -26,7 +26,7 @@
                 </button>
                 <!-- SEARCHBAR -->
                 <div class="board-searchbar-container">
-                    <input type="text" name="" id="board-searchbar" class="board-searchbar" placeholder="Find Task">
+                    <input type="text" name="" id="board-searchbar" class="board-searchbar" placeholder="Find Task" onkeyup="searchTasks()">
                     <div class="board-searchbar-container-inner-right">
                         <div class="v-line-separator"></div>
                         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -43,7 +43,7 @@
             </div>
             <div class="board-body">
                 <!-- TO DO -->
-                <section id="section-to-do" class="task-section">
+                <section id="section-to-do" class="task-section" ondrop="moveTo('to-do')" ondragover="allowDrop(event,'section-to-do-tasks-container')" ondragleave="removeTaskDropIndication('section-to-do-tasks-container')">
                     <div class="task-section-header">
                         <h3>To do</h3>
                         <button class="add-task-button-outlined" onclick="addTask('to-do')">
@@ -53,14 +53,14 @@
                             </svg>    
                         </button>
                     </div>
-                    <div id="section-to-do-tasks-container" class="task-section-body" ondrop="moveTo('to-do')" ondragover="allowDrop(event)">
+                    <div id="section-to-do-tasks-container" class="task-section-body" >
                         <!-- <div class="no-task-container">
                             <span>No tasks To do</span>
                         </div> -->
                     </div>
                 </section>
                 <!-- In Progress -->
-                <section id="section-in-progress" class="task-section" ondrop="moveTo('in-progress')" ondragover="allowDrop(event)">
+                <section id="section-in-progress" class="task-section" ondrop="moveTo('in-progress')" ondragover="allowDrop(event,'section-in-progress-tasks-container')" ondragleave="removeTaskDropIndication('section-in-progress-tasks-container')">
                     <div class="task-section-header">
                         <h3>In progress</h3>
                         <button class="add-task-button-outlined" onclick="addTask('to-do')">
@@ -120,7 +120,7 @@
                     </div>
                 </section>
                 <!-- Await Feedback -->
-                <section id="section-await-feedback" class="task-section" ondrop="moveTo('await-feedback')" ondragover="allowDrop(event)">
+                <section id="section-await-feedback" class="task-section" ondrop="moveTo('await-feedback')" ondragover="allowDrop(event,'section-await-feedback-tasks-container')" ondragleave="removeTaskDropIndication('section-await-feedback-tasks-container')">
                     <div class="task-section-header">
                         <h3>Await feedback</h3>
                         <button class="add-task-button-outlined" onclick="addTask('to-do')">
@@ -134,7 +134,7 @@
                     </div>
                 </section>
                 <!-- Done -->
-                <section id="section-done" class="task-section" ondrop="moveTo('done')" ondragover="allowDrop(event)">
+                <section id="section-done" class="task-section" ondrop="moveTo('done')" ondragover="allowDrop(event,'section-done-tasks-container')" ondragleave="removeTaskDropIndication('section-done-tasks-container')">
                     <div class="task-section-header">
                         <h3>Done</h3>
                         <button class="add-task-button-outlined" onclick="addTask('done')">
@@ -237,7 +237,7 @@
             </div> -->
         </div>
         <!-- POPUP EDIT -->
-        <div class="popup-container" style="display: none;">
+        <!-- <div class="popup-container" style="display: none;">
             <div class="popup-task-container">
                 <div class="popup-task-header">
                     <div class="empty"></div>
@@ -252,21 +252,21 @@
                         </svg>                            
                     </button>
                 </div>
-                <!-- Title -->
+                
                 <div class="popup-task-edit-info-container">
                     <div class="popup-task-edit-info-headline">Title</div>
                     <div class="input-field-container">
                         <input id="input-title" type="text" value="Kochwelt Page & Recipe Recommander">
                     </div>
                 </div>
-                <!-- Description -->
+                
                 <div class="popup-task-edit-info-container">
                     <div class="popup-task-edit-info-headline">Description</div>
                     <div class="textarea-field-container">
                         <textarea id="input-description" type="text">Build start page with recipe recommendation.</textarea>
                     </div>
                 </div>
-                 <!-- Due Date -->
+                 
                  <div class="popup-task-edit-info-container">
                     <div class="popup-task-edit-info-headline">Due Date</div>
                     <div class="input-field-container">
@@ -281,7 +281,7 @@
                         </svg>    
                     </div>
                 </div>
-                 <!-- Prio -->
+                 
                  <div class="popup-task-edit-info-container">
                     <div class="popup-task-edit-info-headline">Priority</div>
                     <div class="prio-buttons-container">
@@ -322,7 +322,7 @@
                         </button>
                     </div>
                 </div>
-                 <!-- Assigned To -->
+                
                  <div class="popup-task-edit-info-container">
                     <div class="popup-task-edit-info-headline">Assigned to</div>
                     <div class="select-field-container contact-select">
@@ -343,7 +343,7 @@
                         <div class="profile-badge bc-orange width-40">AM</div>
                     </div>
                 </div>
-                 <!-- Subtasks -->
+                 
                  <div class="popup-task-edit-info-container">
                     <div class="popup-task-edit-info-headline">Subtasks</div>
                     <div class="input-field-container">
@@ -357,7 +357,7 @@
                     </div>
                     <div class="subtasks-container">
                         <div class="subtask-list-item">
-                            <!-- TODO:  Change -->
+                            
                             <ul style="margin-left: 16px;">
                                 <li>Implement Recipe Recommendation</li>
                             </ul>
@@ -388,7 +388,7 @@
                         
                     </div>
                 </div>
-                <!-- OK Button -->
+                
                 <div class="popup-task-edit-footer">
                     <button class="ok-button" type="submit">
                         <span>Ok</span>
@@ -403,7 +403,7 @@
                     </button>
                 </div>
             </div>
-        </div>
+        </div> -->
     </main>
     <footer w3-include-html="./assets/template/mobile_footer_template.html">
     </footer>
