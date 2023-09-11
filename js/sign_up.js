@@ -53,6 +53,21 @@ async function registerUser() {
   const passwordConf = passwordConfField.value;
   const privacyCheckBox = document.getElementById("PrivacyCheckBox");
 
+  document.getElementById("nameField").addEventListener("input", function () {
+    checkAndRemoveErrorClass(this);
+  });
+  document.getElementById("emailField").addEventListener("input", function () {
+    checkAndRemoveErrorClass(this);
+  });
+  document.getElementById("password").addEventListener("input", function () {
+    checkAndRemoveErrorClass(this);
+  });
+  document
+    .getElementById("passwordConf")
+    .addEventListener("input", function () {
+      checkAndRemoveErrorClass(this);
+    });
+
   // Überprüfung, ob die Felder leer sind
   if (
     !name.trim() ||
@@ -107,6 +122,12 @@ async function registerUser() {
   return false;
 }
 
+function checkAndRemoveErrorClass(field) {
+  if (field.value.trim()) {
+    field.closest(".elementbox").classList.remove("elementbox-error");
+  }
+}
+
 //################ USER ID + 1 #############################//
 function getNextUserId() {
   if (users.length === 0) return 1;
@@ -125,9 +146,12 @@ function getInitials(name) {
 
 //################ CHECKS IF EMAIL EXISTS #############################//
 async function checkEmailExists() {
+  const email = document.getElementById("emailField").value;
+
+  if (!email.trim()) return; // Diese Zeile hinzufügen, um zu überprüfen, ob das E-Mail-Feld leer ist.
+
   await loadUsers();
 
-  const email = document.getElementById("emailField").value;
   const emailExists = users.some((user) => user.email === email);
 
   if (emailExists) {
@@ -139,6 +163,8 @@ async function checkEmailExists() {
 function validatePasswordRequirements() {
   const passwordField = document.getElementById("password");
   const password = passwordField.value;
+
+  if (!password.trim()) return; // Füge diese Zeile hinzu, um zu überprüfen, ob das Passwortfeld leer ist.
 
   const regex =
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/;
@@ -175,6 +201,7 @@ function showWrongPasswordPopup() {
 
 function closeEmailExist() {
   document.getElementById("errorEmailExists").style.display = "none";
+  document.getElementById("emailField").value = "";
 }
 
 function showEmailExistPopup() {

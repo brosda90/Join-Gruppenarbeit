@@ -74,7 +74,7 @@
               id="emailField"
               placeholder="Email"
               required
-              onblur="checkEmailExists()"
+              onblur="if(this.value.trim()) { checkEmailExists(); }"
             />
             <div class="input-imgbox">
               <img src="./assets/img/mail.svg" />
@@ -93,8 +93,9 @@
               placeholder="Password"
               required
               onclick="showPasswordRequirements(); setVisibilityOff('password', 'passwordImg')"
-              onblur="validatePasswordRequirements(); checkPasswordsMatch();"
+              onblur="if(this.value.trim()) { validatePasswordRequirements(); checkPasswordsMatch(); }"
             />
+            <!--"if(this.value.trim()) Überrpüft ob das feld leer ist -->
 
             <div
               class="input-imgbox"
