@@ -62,7 +62,7 @@
   color: white;
   z-index: 10;
   border-radius: 10px;
-  margin-top: 12px ;
+  margin-top: 12px;
   padding: 10px;
   text-align: initial;
   box-shadow: 0px 0px 14px 3px #0000000a;
@@ -70,4 +70,12 @@
 
 .h2-32px {
   margin-bottom: 32px;
+}
+
+#weakPasswordNotification {
+  background-color: #ffe3e3;
+  padding: 10px;
+  border: 1px solid red;
+  border-radius: 5px;
+  margin-top: 10px;
 }

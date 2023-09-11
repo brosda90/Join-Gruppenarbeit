@@ -1,3 +1,5 @@
+let users = [];
+
 // Passwort sichtbar machen
 function togglePasswordVisibility(fieldId, imgId) {
   const passwordField = document.getElementById(fieldId);
@@ -31,8 +33,6 @@ function showPasswordRequirements() {
   }, 3000);
 }
 
-let users = []; // Initialisierung der Benutzerliste. Dies sollte eigentlich aus dem Speicher geladen werden.
-
 async function loadUsers() {
   let storedUsers = await getItem("users");
   if (storedUsers) {
@@ -40,36 +40,53 @@ async function loadUsers() {
   }
 }
 
-//################ CHECKING CHECKBOX PRIVACY POLICY  #############################//
-document
-  .getElementById("PrivacyCheckBox")
-  .addEventListener("change", function () {
-    const btn = document.getElementById("logInBtn");
-    if (this.checked) {
-      btn.disabled = false;
-    } else {
-      btn.disabled = true;
-    }
-  });
-
 //################  USER REGISTER #############################//
 async function registerUser() {
-  await loadUsers(); // Laden der aktuellen Benutzerliste.
+  const nameField = document.getElementById("nameField");
+  const emailField = document.getElementById("emailField");
+  const passwordField = document.getElementById("password");
+  const passwordConfField = document.getElementById("passwordConf");
 
-  const name = document.getElementById("nameField").value;
-  const email = document.getElementById("emailField").value;
-  const password = document.getElementById("password").value;
-  const passwordConf = document.getElementById("passwordConf").value;
+  const name = nameField.value;
+  const email = emailField.value;
+  const password = passwordField.value;
+  const passwordConf = passwordConfField.value;
+  const privacyCheckBox = document.getElementById("PrivacyCheckBox");
 
+  // Überprüfung, ob die Felder leer sind
+  if (
+    !name.trim() ||
+    !email.trim() ||
+    !password.trim() ||
+    !passwordConf.trim()
+  ) {
+    [nameField, emailField, passwordField, passwordConfField].forEach(
+      (field) => {
+        if (!field.value.trim()) {
+          field.closest(".elementbox").classList.add("elementbox-error");
+        }
+      }
+    );
+    return;
+  }
+
+  // Überprüfung, ob die Datenschutzrichtlinie angeklickt wurde
+  if (!privacyCheckBox.checked) {
+    showPrivacyPopup();
+    return;
+  }
+
+  // Wenn das Passwort mit der Passwortbestätigung übereinstimmt
   if (password !== passwordConf) {
     showWrongPasswordPopup();
     return;
   }
 
+  await loadUsers();
+
   // Prüfen, ob die E-Mail bereits vorhanden exisitiert.
   const emailExists = users.some((user) => user.email === email);
   if (emailExists) {
-    showEmailExistPopup();
     return;
   }
 
@@ -83,9 +100,11 @@ async function registerUser() {
 
   users.push(newUser);
 
-  await setItem("users", JSON.stringify(users)); // Speichern aktualisierte Benutzerliste.
+  await setItem("users", JSON.stringify(users));
 
-  alert("Erfolgreich registriert!");
+  showRegistrationSuccess();
+
+  return false;
 }
 
 //################ USER ID + 1 #############################//
@@ -116,6 +135,35 @@ async function checkEmailExists() {
   }
 }
 
+//################ TEST IF PASSWORD MEETS REGULATIONS  #############################//
+function validatePasswordRequirements() {
+  const passwordField = document.getElementById("password");
+  const password = passwordField.value;
+
+  const regex =
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/;
+
+  if (!regex.test(password)) {
+    document.getElementById("passwordNotSecure").style.display = "flex";
+    return false;
+  }
+  return true;
+}
+
+//################ PASSWORD MATCH CHECK #############################//
+
+function checkPasswordsMatch() {
+  const passwordField = document.getElementById("password");
+  const passwordConfField = document.getElementById("passwordConf");
+
+  const password = passwordField.value;
+  const passwordConf = passwordConfField.value;
+
+  if (password.trim() && passwordConf.trim() && password !== passwordConf) {
+    showWrongPasswordPopup();
+  }
+}
+
 //################ SHOW AND CLOSE POPUP FUNCTIONS #############################//
 function closeWrongPassword() {
   document.getElementById("errorPassword").style.display = "none";
@@ -131,4 +179,29 @@ function closeEmailExist() {
 
 function showEmailExistPopup() {
   document.getElementById("errorEmailExists").style.display = "flex";
+}
+
+function closePrivacyAlert() {
+  document.getElementById("errorPrivacy").style.display = "none";
+}
+
+function showPrivacyPopup() {
+  document.getElementById("errorPrivacy").style.display = "flex";
+}
+
+function showRegistrationSuccess() {
+  document.getElementById("successRegistration").style.display = "flex";
+
+  // Weiterleitung nach 2 Sekunden
+  setTimeout(function () {
+    window.location.href = "index.html";
+  }, 2000);
+}
+
+function closeRegistrationSuccess() {
+  document.getElementById("successRegistration").style.display = "none";
+}
+
+function closePasswordNotSecurePopup() {
+  document.getElementById("passwordNotSecure").style.display = "none";
 }

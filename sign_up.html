@@ -43,7 +43,7 @@
     <form
       class="signUp-container"
       id="signUpContainer"
-      onsubmit="return false;"
+      onsubmit="return registerUser();"
     >
       <h2 class="mb-5">Sign Up</h2>
       <!-- Name input -->
@@ -93,7 +93,9 @@
               placeholder="Password"
               required
               onclick="showPasswordRequirements(); setVisibilityOff('password', 'passwordImg')"
+              onblur="validatePasswordRequirements(); checkPasswordsMatch();"
             />
+
             <div
               class="input-imgbox"
               onclick="togglePasswordVisibility('password', 'passwordImg')"
@@ -119,6 +121,7 @@
               placeholder="Password Confirm"
               required
               onclick="setVisibilityOff('passwordConf', 'passwordConfImg')"
+              onblur="checkPasswordsMatch()"
             />
             <div
               class="input-imgbox"
@@ -141,7 +144,7 @@
               id="PrivacyCheckBox"
               required
             />
-            <label class="custom-checkbox-label" for="form2Example31"></label>
+            <label class="custom-checkbox-label" for="PrivacyCheckBox"></label>
             <label class="accept-privacy" for="form2Example31"
               >I accept the
               <a href="privacy_policy.html">Privacy policy</a></label
@@ -177,6 +180,31 @@
         E-Mail existiert bereits. Bitte versuchen Sie es mit einer anderen
         E-Mail.
         <button class="close-button" onclick="closeEmailExist()">
+          Schließen
+        </button>
+      </div>
+    </div>
+    <div id="successRegistration" class="custom-report">
+      <div class="report-content">
+        Erfolgreich registriert!
+        <button class="close-button" onclick="closeRegistrationSuccess()">
+          Schließen
+        </button>
+      </div>
+    </div>
+    <div id="errorPrivacy" class="custom-report">
+      <div class="report-content">
+        Bitte bestätigen Sie die Datenschutzrichtlinien.
+        <button class="close-button" onclick="closePrivacyAlert()">
+          Schließen
+        </button>
+      </div>
+    </div>
+    <div id="passwordNotSecure" class="custom-report">
+      <div class="report-content">
+        Ihr Passwort erfüllt nicht die Mindestanforderungen. Bitte geben Sie ein
+        stärkeres Passwort ein.
+        <button class="close-button" onclick="closePasswordNotSecurePopup()">
           Schließen
         </button>
       </div>
