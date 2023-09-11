@@ -137,7 +137,7 @@ function checkSelectDataFields(categoryInput, selectedPriority, selectedContacts
         selectsValid = false;
     }
     if (selectedContacts.length === 0) {
-        emptyInputAlert(document.getElementById('contactSelector'));
+        emptyInputAlert(document.getElementById('searchContact'));
         selectsValid = false;
     }
 
@@ -228,6 +228,10 @@ function showContacts() {   //show all Contacts in dropdown Menu
         expanded = false;
         arrow.src = "./assets/img/arrow_drop_down.svg"
     }
+}
+
+function searchContacts() {
+
 }
 
 function addedContact(index) {  //set each Contact ID compaired to the contact JSON from data.js

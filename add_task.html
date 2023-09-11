@@ -68,10 +68,10 @@
                 </div>
                 <div class="assignedTo">
                     <h4>Assigned to</h4>
-                    <div class="selectContacts" onclick="showContacts()">
-                        <div class="categorySelector brd-r10 item" name="" id="contactSelector">
-                            <span id="sumAddedContacts">0 Contacts added</span>
-                            <img id="contactsArrow" src="./assets/img/arrow_drop_down.svg" alt="">
+                    <div class="selectContacts">
+                        <div id="searchContact" class="categorySelector brd-r10">
+                            <input type="text" class="brd-transparent width-100" name="" id="searchContactInput" placeholder="Select contacts to assign" onclick="showContacts()" onkeyup="searchContact()">
+                            <img id="contactsArrow" class="item" src="./assets/img/arrow_drop_down.svg" onclick="showContacts()">
                         </div>
                     </div>
                     <div id="checkBoxes" class="selector scrollbar d-none brd-r10"></div>
