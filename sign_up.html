@@ -74,6 +74,7 @@
               id="emailField"
               placeholder="Email"
               required
+              onblur="checkEmailExists()"
             />
             <div class="input-imgbox">
               <img src="./assets/img/mail.svg" />
@@ -102,7 +103,7 @@
           </div>
         </div>
       </div>
-      <div id="passwordInfo" style="display:none">
+      <div id="passwordInfo" style="display: none">
         -mindestens 8 Zeichen <br />-mindestens eine Zahl <br />-einen
         Großbuchstaben <br />-einen Kleinbuchstaben <br />-ein Sonderzeichen
       </div>
@@ -137,7 +138,7 @@
             <input
               class="custom-checkbox-input"
               type="checkbox"
-              id="form2Example31"
+              id="PrivacyCheckBox"
               required
             />
             <label class="custom-checkbox-label" for="form2Example31"></label>
@@ -162,6 +163,24 @@
         </button>
       </div>
     </form>
+    <div id="errorPassword" class="custom-report">
+      <div class="report-content">
+        Passwörter stimmen nicht überein. Bitte versuchen Sie es erneut.
+        <button class="close-button" onclick="closeWrongPassword()">
+          Schließen
+        </button>
+      </div>
+    </div>
+
+    <div id="errorEmailExists" class="custom-report">
+      <div class="report-content">
+        E-Mail existiert bereits. Bitte versuchen Sie es mit einer anderen
+        E-Mail.
+        <button class="close-button" onclick="closeEmailExist()">
+          Schließen
+        </button>
+      </div>
+    </div>
     <footer>
       <a href="privacy_policy.html">Privacy Policy</a>
       <a href="legal_notice.html">Legal notice</a>

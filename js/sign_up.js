@@ -1,135 +1,134 @@
-
-// Passwort sichtbar machen 
+// Passwort sichtbar machen
 function togglePasswordVisibility(fieldId, imgId) {
-    const passwordField = document.getElementById(fieldId);
-    
-    if (passwordField.type === "password") {
-        passwordField.type = "text";
-        if (imgId) {
-            const imageElement = document.getElementById(imgId);
-            imageElement.src = "./assets/img/visibility.svg";
-        }
-    } else {
-        passwordField.type = "password";
-        if (imgId) {
-            const imageElement = document.getElementById(imgId);
-            imageElement.src = "./assets/img/visibility_off.svg";
-        }
+  const passwordField = document.getElementById(fieldId);
+
+  if (passwordField.type === "password") {
+    passwordField.type = "text";
+    if (imgId) {
+      const imageElement = document.getElementById(imgId);
+      imageElement.src = "./assets/img/visibility.svg";
     }
+  } else {
+    passwordField.type = "password";
+    if (imgId) {
+      const imageElement = document.getElementById(imgId);
+      imageElement.src = "./assets/img/visibility_off.svg";
+    }
+  }
 }
 
 function setVisibilityOff(fieldId, imgId) {
-    const imageElement = document.getElementById(imgId);
-    imageElement.src = "./assets/img/visibility_off.svg";
+  const imageElement = document.getElementById(imgId);
+  imageElement.src = "./assets/img/visibility_off.svg";
 }
 
 function showPasswordRequirements() {
+  document.getElementById("passwordInfo").style.display = "block";
 
-    document.getElementById("passwordInfo").style.display = "block";
-    
-    //Zeig info bei klick für 3 sekunden an
-    setTimeout(function() {
-        document.getElementById("passwordInfo").style.display = "none";
-    }, 3000);
+  //Zeig info bei klick für 3 sekunden an
+  setTimeout(function () {
+    document.getElementById("passwordInfo").style.display = "none";
+  }, 3000);
 }
 
+let users = []; // Initialisierung der Benutzerliste. Dies sollte eigentlich aus dem Speicher geladen werden.
 
-
-
-
-async function getAllUsers() {
-    return await getItem('users') || [];
+async function loadUsers() {
+  let storedUsers = await getItem("users");
+  if (storedUsers) {
+    users = JSON.parse(storedUsers);
+  }
 }
 
-
-async function registerUser() {
-    
-    let name = document.getElementById("nameField");
-    let email = document.getElementById("emailField");
-    let password = document.getElementById("password");
-    let passwordconf = document.getElementById("passwordConf");
-
-    let users = await getAllUsers();
-
-    console.log("Users nach dem Abrufen:", users);
-  
-    // Passwort bestätigung überprüfen
-    if (password.value !== passwordconf.value) {
-      alert("Passwörter stimmen nicht überein!");
-      return;
-    }
-  
-    // Passwortstandarts überprüfen
-    const passwordRegex =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{5,}$/;
-    
-      if (!passwordRegex.test(password.value)) {
-        document.getElementById("passwordError").style.display = "block";
-        return;
+//################ CHECKING CHECKBOX PRIVACY POLICY  #############################//
+document
+  .getElementById("PrivacyCheckBox")
+  .addEventListener("change", function () {
+    const btn = document.getElementById("logInBtn");
+    if (this.checked) {
+      btn.disabled = false;
     } else {
-        document.getElementById("passwordError").style.display = "none";
+      btn.disabled = true;
     }
-  
-    // Gucken ob die Daten in einer Array struktur sind
-    if (!Array.isArray(users)) {
-        console.error("Fehler: Nicht ein Array", users);
-        return;
-      }
-  
-    //E-Mails aller Benutzer ausorteren aus dem array
-    const existingUserEmails = users.map((user) => user.email);
-  
-    // Gucken ob die Email bereits existiert 
-    if (existingUserEmails.includes(email.value)) {
-      alert("E-Mail existiert bereits!");
-      return;
-    }
-  
-  
-    // Beide Anfangsbuchstaben der namen rausfiltern und als initials speichern
-    const nameParts = name.value.split(" ");
-    let initials = "";
-    if (nameParts.length > 1) {
-      initials = nameParts[0][0] + nameParts[1][0];
-    } else if (nameParts.length === 1) {
-      initials = nameParts[0][0];
-    }
-  
-    // Array auf Server anlegen
-    let newUser = {
-      name: name.value,
-      initials: initials.toUpperCase(),
-      email: email.value,
-      password: password.value,
-      phone: "",
-      "badge-color": Math.floor(Math.random() * 150) + 1, // Zufällige Farbnummer 
-      contacts: [],
-    };
-  
-    // Neuen Benutzer zum Benutzerarray hinzufügen
-    users.push(newUser);
-  
-    // Den aktualisierten Benutzerarray speichern
-    await saveAllUsers(users);
-  
+  });
 
-    document.getElementById("nameField").value = "";
-    document.getElementById("emailField").value = "";
-    document.getElementById("password").value = "";
-    document.getElementById("passwordConf").value = "";
+//################  USER REGISTER #############################//
+async function registerUser() {
+  await loadUsers(); // Laden der aktuellen Benutzerliste.
 
-    async function saveAllUsers(allUsers) {
-        return await setItem('users', allUsers);
-    }
+  const name = document.getElementById("nameField").value;
+  const email = document.getElementById("emailField").value;
+  const password = document.getElementById("password").value;
+  const passwordConf = document.getElementById("passwordConf").value;
 
+  if (password !== passwordConf) {
+    showWrongPasswordPopup();
+    return;
+  }
+
+  // Prüfen, ob die E-Mail bereits vorhanden exisitiert.
+  const emailExists = users.some((user) => user.email === email);
+  if (emailExists) {
+    showEmailExistPopup();
+    return;
+  }
+
+  const newUser = {
+    id: getNextUserId(),
+    name: name,
+    initials: getInitials(name),
+    email: email,
+    password: password,
+  };
+
+  users.push(newUser);
+
+  await setItem("users", JSON.stringify(users)); // Speichern aktualisierte Benutzerliste.
+
+  alert("Erfolgreich registriert!");
 }
 
-function backToLogin() {
-  window.location.href = "index.html";
+//################ USER ID + 1 #############################//
+function getNextUserId() {
+  if (users.length === 0) return 1;
+  return users[users.length - 1].id + 1;
 }
 
-    
+//################ Get the first two letters and the name and capitalize them #############################//
+function getInitials(name) {
+  const parts = name.split(" ");
+  let initials = "";
+  for (let i = 0; i < parts.length; i++) {
+    initials += parts[i].charAt(0);
+  }
+  return initials.toUpperCase();
+}
 
+//################ CHECKS IF EMAIL EXISTS #############################//
+async function checkEmailExists() {
+  await loadUsers();
 
+  const email = document.getElementById("emailField").value;
+  const emailExists = users.some((user) => user.email === email);
 
+  if (emailExists) {
+    showEmailExistPopup();
+  }
+}
 
+//################ SHOW AND CLOSE POPUP FUNCTIONS #############################//
+function closeWrongPassword() {
+  document.getElementById("errorPassword").style.display = "none";
+}
+
+function showWrongPasswordPopup() {
+  document.getElementById("errorPassword").style.display = "flex";
+}
+
+function closeEmailExist() {
+  document.getElementById("errorEmailExists").style.display = "none";
+}
+
+function showEmailExistPopup() {
+  document.getElementById("errorEmailExists").style.display = "flex";
+}

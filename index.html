@@ -20,7 +20,6 @@
   ></script>
   <script src="js/data.js"></script>
   <script src="js/storage.js"></script>
-  <script src="js/sign_up.js"></script>
   <script src="js/startscreen.js"></script>
   <script src="js/login.js"></script>
   <link rel="stylesheet" href="css/fonts.css" />
@@ -101,7 +100,7 @@
             <input
               class="custom-checkbox-input"
               type="checkbox"
-              id="form2Example31"
+              id="rememberBox"
               required
             />
             <label class="custom-checkbox-label" for="form2Example31"></label>
@@ -133,6 +132,15 @@
         </button>
       </div>
     </form>
+    <div id="errorReport" class="custom-report">
+      <div class="report-content">
+        Falsche E-Mail-Adresse oder Passwort. Bitte versuchen Sie es erneut.
+        <button class="close-button" onclick="closeWrongLogin()">
+          Schließen
+        </button>
+      </div>
+    </div>
+
     <footer>
       <a href="privacy_policy.html">Privacy Policy</a>
       <a href="legal_notice.html">Legal notice</a>
