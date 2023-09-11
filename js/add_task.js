@@ -10,7 +10,7 @@ function init() {
 }
 
 function renderContacts() {
-    let assignedToContact = document.getElementById('checkBoxes');
+    let assignedToContact = document.getElementById('contactDropDown');
     assignedToContact.innerHTML = '';
 
     for (let i = 0; i < contacts.length; i++) {
@@ -231,7 +231,22 @@ function showContacts() {   //show all Contacts in dropdown Menu
 }
 
 function searchContacts() {
+    const searchInput = document.getElementById('searchContactInput').value.toLowerCase();
+    const dropDown = document.getElementById('contactDropDown');
+    const contacts = dropDown.getElementsByClassName('singleContact');
 
+    for (let l = 0; l < contacts.length; l++) {
+        const contact = contacts[l];
+        const contactName = contact.getElementsByTagName('span')[0].textContent.toLowerCase();
+
+        if (searchInput === '') {
+            contact.classList.remove('d-none');
+        } else if (contactName.includes(searchInput)){
+            contact.classList.remove('d-none');
+        } else {
+            contact.classList.add('d-none');
+        }
+    }
 }
 
 function addedContact(index) {  //set each Contact ID compaired to the contact JSON from data.js
@@ -243,7 +258,6 @@ function addedContact(index) {  //set each Contact ID compaired to the contact J
 
     checkContactLength();
     renderContactInitials();
-    showContactsSum();
 }
 
 function addedContactsCheckBox(checked, src, id, index) {   //toggle Checkbox icon of each Contact
@@ -280,12 +294,6 @@ function renderContactInitials() {   //render Contact Initals from added Contact
 
         contactInitialDivs.innerHTML += `<div class="profile-badge bc-${l + 1} brd-white">${inital}</div>`;
     };
-}
-
-function showContactsSum() {   //show summary of choosen Contacts
-    let sumContacts = document.getElementById('sumAddedContacts');
-
-    sumContacts.innerHTML = addedContacts.length + ' Contacts added';
 }
 
 function toggleSubTaskInput() {   //displays Sub Task Input
@@ -345,7 +353,6 @@ function resetTaskData() {   //clear all arrays form new created Task
     addedSubTasks = [];
     addedContactInitial = [];
 
-    showContactsSum();
     resetCheckBoxArrow();
 }
 

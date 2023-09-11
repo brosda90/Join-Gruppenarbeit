@@ -70,11 +70,22 @@
                     <h4>Assigned to</h4>
                     <div class="selectContacts">
                         <div id="searchContact" class="categorySelector brd-r10">
-                            <input type="text" class="brd-transparent width-100" name="" id="searchContactInput" placeholder="Select contacts to assign" onclick="showContacts()" onkeyup="searchContact()">
-                            <img id="contactsArrow" class="item" src="./assets/img/arrow_drop_down.svg" onclick="showContacts()">
+                            <input type="text" class="brd-transparent width-100" name="" id="searchContactInput"
+                                placeholder="Select contacts to assign" onclick="showContacts()"
+                                onkeyup="searchContacts()">
+                            <img id="contactsArrow" class="item" src="./assets/img/arrow_drop_down.svg"
+                                onclick="showContacts()">
                         </div>
                     </div>
-                    <div id="checkBoxes" class="selector scrollbar d-none brd-r10"></div>
+                    <div>
+                        <div id="checkBoxes" class="selector scrollbar brd-r10 d-none">
+                            <div id="contactDropDown"></div>
+                            <div class="addNewContact">
+                                <button class="addNewContactBtn brd-r10 item">Add new contact <img
+                                        src="./assets/img/person_add.svg" alt=""></button>
+                            </div>
+                        </div>
+                    </div>
                     <div id="contactInitial" class="d-none"></div>
                 </div>
                 <div class="subTasks h4-gap">
