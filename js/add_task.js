@@ -7,7 +7,8 @@ let addedContacts = [];
 let addedContactInitial = [];
 let addedSubTasks = [];
 
-async function init() {
+async function initAddTask() {
+    await includeHTML()
     await loadContactsFromStorage();
     await loadTasksFromRemoteStorage();
     renderContacts();

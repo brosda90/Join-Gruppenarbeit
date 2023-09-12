@@ -5,6 +5,21 @@ body {
     background-color: #F6F7F8;
 }
 
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+    padding: 0 16px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
+}
+
+footer {
+    height: 80px;
+    padding: 2px 16px;
+    background-color: var(--color-dark-blue);
+}
+
 .mainAddTask {
     display: flex;
     justify-content: center;
@@ -17,7 +32,7 @@ body {
 }
 
 .taskInfo {
-    width: 396px;
+    width: 396px !important;
 }
 
 h4 {
@@ -29,7 +44,7 @@ h4 {
 }
 
 .brd-red {
-    border: 1px solid #ff3d00 !important;
+    border: 2px solid #ff3d00 !important;
 }
 
 .brd-white {
@@ -110,6 +125,7 @@ input[type="date"] {
     padding-left: 10px;
     padding-right: 10px;
     font-family: 'Inter';
+    width: 374px;
     height: 40px;
     border: 1px solid #D1D1D1;
 }
@@ -352,20 +368,20 @@ select option {
 
 .scrollbar::-webkit-scrollbar-track {
 
-	border-radius: 10px;
-	background-color: #F6F7F8;
+    border-radius: 10px;
+    background-color: #F6F7F8;
 }
 
 .scrollbar::-webkit-scrollbar {
     padding: 10px;
-	width: 10px;
-	background-color: white;
+    width: 10px;
+    background-color: white;
 }
 
 .scrollbar::-webkit-scrollbar-thumb {
     padding: 10px;
-	border-radius: 10px;
-	background-color: #D1D1D1;
+    border-radius: 10px;
+    background-color: #D1D1D1;
 }
 
 .singleContact {
@@ -419,11 +435,11 @@ select option {
 }
 
 .subListElement .subListInnerElement {
-   display: flex;
-   justify-content: space-between;
-   align-items: center;
-   gap: 8px;
-   padding: 16px 8px 0px 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    padding: 16px 8px 0px 8px;
 }
 
 .subBorder {
@@ -463,35 +479,4 @@ select option {
 
 .d-block {
     display: block !important;
-}
-
-@media (min-width: 1200px) {
-
-    .mainAddTask {
-        display: flex;
-        align-items: flex-start;
-        margin-left: 140px;
-    }
-
-    .headAddTask {
-        text-align: start;
-    }
-
-    .taskInfo {
-        width: 90%;
-        display: flex;
-        gap: 24px;
-    }
-
-    .rightSite {
-        max-width: 40%;
-    }
-
-    .border {
-        display: block !important;
-    }
-
-    .clear {
-        display: flex !important;
-    }
 }

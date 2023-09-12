@@ -1,0 +1,108 @@
+@media (max-width: 1100px) {
+    .mainAddTask {
+        margin-left: 40px !important;
+    }
+}
+
+@media (min-width: 980px) {
+
+    .mainAddTask {
+        display: flex;
+        align-items: flex-start;
+        margin-left: 140px;
+    }
+
+    .headAddTask {
+        text-align: start;
+    }
+
+    .taskInfo {
+        width: 90% !important;
+        display: flex;
+        gap: 24px;
+    }
+
+    .border {
+        display: block !important;
+        width: 1px;
+        z-index: 999;
+    }
+
+    .clear {
+        display: flex !important;
+    }
+}
+
+@media (max-width: 600px) {
+    .mainAddTask {
+        display: flex;
+        justify-content: center;
+        margin-left: 0 !important;
+    }
+}
+
+@media (max-width: 420px) {
+    h1 {
+        margin-block-start: 16px;
+        margin-block-end: 0px;
+        padding-left: 0;
+    }
+
+    h4 {
+        margin-block-start: 20px;
+    }
+
+    .headAddTask {
+        width: 315px;
+    }
+
+    .width-396 {
+        width: 315px;
+    }
+
+    .taskInfo {
+        width: 315px !important;
+    }
+
+    .titleInput {
+        width: 300px;
+    }
+
+    .descriptionInput {
+        width: 300px;
+    }
+
+    .btnSection {
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .prio a {
+        width: 60%;
+    }
+
+    input[type="date"] {
+        width: 293px;
+    }
+
+    .categorySelector {
+        width: 287px;
+    }
+
+    .selector {
+        width: 312px;
+    }
+
+    #allOptions {
+        width: 293px;
+    }
+
+    #subTaskInputCover {
+        width: 293px;
+    }
+
+    .createBtn {
+        margin-top: 30px;
+    }
+}
