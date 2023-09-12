@@ -56,7 +56,7 @@
     --color-blue: #2aabe2;
     --color-dark-blue: #2a3647;
     --color-darker-blue: #091931;
-    --color-white: #ffffff;
+    /* --color-white: #ffffff; */
     --color-darker-white: #f6f7f8;
     --color-lightest-grey: #e7e7e7;
     --color-lighter-grey: #d1d1d1;
@@ -134,7 +134,7 @@ span {
 /* ------------------------------------------------------------ */
 /* ------------------------------------------------------------ */
 /* ------------------------------------------------------------ */
-header {
+.header {
     height: 80px;
     padding: 0 16px;
     display: flex;
@@ -167,7 +167,7 @@ header {
     color: var(--color-blue);
 }
 
-footer {
+.footer {
     height: 80px;
     padding: 2px 16px;
     background-color: var(--color-dark-blue);
@@ -1089,11 +1089,11 @@ input::placeholder {
         transition-duration: 75ms, 75ms;
     }
 
-    header {
+    .header {
         width: 100%;
     }
 
-    header svg {
+    .header svg {
         display: none;
     }
 
@@ -1107,8 +1107,6 @@ input::placeholder {
     /* ------------------------------------------------------------ */
     .insert-bottom {
         width: 232px;
-        /* left: 0; */
-        /* top: 0; */
         bottom: 0;
         right: auto;
         height: 100%;
@@ -1118,7 +1116,7 @@ input::placeholder {
         transition-duration: 75ms, 75ms, 75ms;
         }
 
-    footer {
+    .footer {
         padding: 0;
     }
 

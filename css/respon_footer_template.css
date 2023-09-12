@@ -1,0 +1,179 @@
+:root {
+    --col-main: #2a3647;
+    --col-main-active: #091931;
+    --col-main-bg: #f6f7f8;
+    --col-white: #ffffff;
+    --col-black: #000000;
+    --col-hr: #d1d1d1;
+    --col-btn-hover: #eeeeee;
+    --col-link: #007cee;
+    --col-btn: var(--col-main);
+    --col-btn-activ: #29abe2;
+
+    --col-shadow10: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
+    --col-shadow25: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+
+    --color-light-grey: #cdcdcd;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Inter, sans-serif;
+    font-size: 16px;
+    position: relative;
+  }
+
+button {
+    font-family: Inter, sans-serif;
+}
+
+div, nav, main, span, ::after {
+    box-sizing: border-box;
+    transition: all 75ms ease-in;
+}
+
+span {
+    font-family: Inter, sans-serif;
+    font-size: 20px;
+    line-height: 24px;
+    text-overflow: ellipsis;
+}
+
+/* ################################################################ */
+/* ### Ab hier CSS für den Footer */
+/* ################################################################ */
+.insert-bottom {
+    position: fixed;
+    top: auto;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 1;
+    height: 80px;
+    width: 100%;
+    background-color: var(--col-main);
+    transition-property: width, height;
+    transition-delay: 75ms, 0ms;
+    transition-duration: 75ms, 75ms;
+}
+
+.footer {
+    height: 80px;
+    padding: 2px 16px;
+    background-color: var(--col-main);
+}
+
+.nav-menu {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-menu-link {
+    font-family: "Open Sans";
+    text-decoration: none;
+    color: var(--color-light-grey);
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    height: 100%;
+    width: 80px;
+    aspect-ratio: 1 / 1;
+}
+
+.nav-menu-link span {
+    font-size: 14px;
+    color: var(--color-light-grey);
+    white-space: nowrap;
+}
+
+.link-selected {
+    background-color: var(--col-main-active);
+    border-radius: 8px;
+}
+
+.nav-menu-link:hover {
+    cursor: pointer;
+    background-color: var(--col-main-active);
+    border-radius: 8px;
+}
+
+
+
+
+
+@media (min-width: 1000px) {
+    .insert-bottom {
+        width: 232px;
+        bottom: 0;
+        right: auto;
+        height: 100%;
+        flex-direction: column;
+        transition-property: width, height, top;
+        transition-delay: 0ms, 75ms, 75ms;
+        transition-duration: 75ms, 75ms, 75ms;
+    }
+
+    .footer {
+        padding: 0;
+    }
+
+    .desktop-join-logo {
+        width: 100%;
+        padding: 64px 0px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .nav-menu {
+        width: 100%;
+        padding: 0;
+        margin-top: 50px;
+        box-sizing: border-box;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .nav-menu-link {
+        width: 100%;
+        height: 24px;
+        padding: 12px 0;
+        border-radius: 0;
+        flex-direction: row;
+        justify-content: flex-start;
+        gap: 8px;
+    }
+
+    .nav-menu-link:hover {
+        border-radius: 0;
+    }
+
+    .nav-menu-link svg {
+        width: 30px;
+        height: 30px;
+        margin-left: 50px;
+    }
+
+    .nav-menu-link span {
+        font-size: 16px;
+        line-height: 19.2px;
+    }
+
+}
+
+
+@media (max-width: 999px) {
+    .desktop-join-logo {
+        display: none;
+    }
+}
+
+.d-none {
+    display: none;
+}

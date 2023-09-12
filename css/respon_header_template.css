@@ -1,0 +1,131 @@
+:root {
+    --col-main: #2a3647;
+    --col-main-active: #091931;
+    --col-main-bg: #f6f7f8;
+    --col-white: #ffffff;
+    --col-black: #000000;
+    --col-hr: #d1d1d1;
+    --col-btn-hover: #eeeeee;
+    --col-link: #007cee;
+    --col-btn: var(--col-main);
+    --col-btn-activ: #29abe2;
+
+    --col-shadow10: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
+    --col-shadow25: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Inter, sans-serif;
+    font-size: 16px;
+    position: relative;
+  }
+
+button {
+    font-family: Inter, sans-serif;
+}
+
+div, nav, main, span, ::after {
+    box-sizing: border-box;
+    transition: all 75ms ease-in;
+}
+
+span {
+    font-family: Inter, sans-serif;
+    font-size: 20px;
+    line-height: 24px;
+    text-overflow: ellipsis;
+}
+
+/* ################################################################ */
+/* ### Ab hier CSS für den Header */
+/* ################################################################ */
+.insert-top {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 1;
+    height: 80px;
+    max-width: 100%;
+    width: 100%;
+    background: var(--col-white);
+    box-shadow: var(--col-shadow10);
+    transition-property: width, height;
+    transition-delay: 75ms, 0ms;
+    transition-duration: 75ms, 75ms;
+}
+
+.header {
+    height: 80px;
+    padding: 0 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-title {
+    margin-left: 116px;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 120%;
+    display: none;
+}
+
+.user-icon {
+    background-color: var(--col-white);
+    width: 40px;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+    border: 2px solid var(--col-black);
+}
+
+.user-name {
+    font-weight: 700;
+    color: var(--col-btn-activ);
+}
+
+
+
+@media (min-width: 1000px) {
+    .insert-top {
+        left: auto;
+        right: 0;
+        max-width: calc(100% - 232px);
+        width: 100%;
+        height: 96px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition-property: max-width, height;
+        transition-delay: 0ms, 75ms;
+        transition-duration: 75ms, 75ms;
+    }
+
+    .header {
+        width: 100%;
+    }
+
+    .header svg {
+        display: none;
+    }
+
+    .header-title {
+        display: block;
+    }
+}
+
+
+
+@media (min-width: 1000px) and (max-width: 1199px) {
+    .header-title {
+        margin-left: 86px;
+    }
+}
+
+.d-none {
+    display: none;
+}
