@@ -29,7 +29,7 @@ h4 {
 }
 
 .brd-red {
-    border: 1px solid red !important;
+    border: 1px solid #ff3d00 !important;
 }
 
 .brd-white {
@@ -341,7 +341,7 @@ select option {
 }
 
 .selector {
-    max-height: 120px;
+    max-height: 130px;
     overflow: auto;
     width: 394px;
     position: absolute;

@@ -1,12 +1,24 @@
 let expanded = false;
 let selectTrigger = document.querySelector('.select-trigger');
 
+let contacts = [];
+let tasks = [];
 let addedContacts = [];
 let addedContactInitial = [];
 let addedSubTasks = [];
 
-function init() {
+async function init() {
+    await loadContactsFromStorage();
+    await loadTasksFromRemoteStorage();
     renderContacts();
+}
+
+async function loadContactsFromStorage() {
+    contacts = JSON.parse(await getItem('contacts'));
+}
+
+async function loadTasksFromRemoteStorage () {
+    tasks = JSON.parse(await getItem('tasks'));
 }
 
 function renderContacts() {
@@ -20,7 +32,7 @@ function renderContacts() {
     }
 }
 
-function selectPrio(button) {
+function selectPrio(button) {   //set prio button icon variable
     let urgent = document.getElementById('urgent');
     let medium = document.getElementById('medium');
     let low = document.getElementById('low');
@@ -45,7 +57,7 @@ function checkPrio(button, urgent, medium, low) {   //style selected Prio Button
     selectBtn(button);
 }
 
-function selectBtn(button) {
+function selectBtn(button) {   //set prio button variable
     let urgent = document.getElementById('urgentBtn');
     let medium = document.getElementById('mediumBtn');
     let low = document.getElementById('lowBtn');
@@ -90,7 +102,7 @@ function createTask() {   //get all Values for the new Task
     };
 }
 
-function checkInputData() {
+function checkInputData() {   //check required Input Data
     const titleInput = document.getElementById('titleInput');
     const descriptionInput = document.getElementById('descriptionInput');
     const dateInput = document.getElementById('dateToday');
@@ -104,7 +116,7 @@ function checkInputData() {
     return fieldsValid && selectsValid;
 }
 
-function checkInputDataFields(titleInput, descriptionInput, dateInput) {
+function checkInputDataFields(titleInput, descriptionInput, dateInput) {   //check required Input Fields
     let fieldsValid = true;
 
     if (isEmpty(titleInput)) {
@@ -123,7 +135,7 @@ function checkInputDataFields(titleInput, descriptionInput, dateInput) {
     return fieldsValid;
 }
 
-function checkSelectDataFields(categoryInput, selectedPriority, selectedContacts) {
+function checkSelectDataFields(categoryInput, selectedPriority, selectedContacts) {   //check required Select Elements
     let selectsValid = true;
 
     if (categoryInput.innerHTML === 'Select task Category') {
@@ -148,7 +160,7 @@ function isEmpty(inputField) {
     return inputField.value === '';
 }
 
-function emptyInputAlert(input) {
+function emptyInputAlert(input) {   //add red border with timeout if required element is empty 
     input.classList.add('brd-red');
 
     setTimeout(function () {
@@ -156,7 +168,8 @@ function emptyInputAlert(input) {
     }, 2500);
 }
 
-function addNewTask(title, description, priority, date, category, assignedTo, subtasks) {   //push new created Task
+async function addNewTask(title, description, priority, date, category, assignedTo, subtasks) {   //push new created Task
+    await loadTasksFromRemoteStorage();
     let newTask = {
         'id': tasks.length + 1,
         'category': category,
@@ -169,7 +182,7 @@ function addNewTask(title, description, priority, date, category, assignedTo, su
     };
 
     tasks.push(newTask);
-    console.log(tasks);
+    await setItem('tasks', JSON.stringify(tasks));
     clearTaskInput();
 }
 
@@ -227,10 +240,12 @@ function showContacts() {   //show all Contacts in dropdown Menu
         checkboxes.classList.remove('d-block');
         expanded = false;
         arrow.src = "./assets/img/arrow_drop_down.svg"
+        document.getElementById('searchContactInput').value = "";
+        searchContacts();
     }
 }
 
-function searchContacts() {
+function searchContacts() {   //search contact in contact drop down menu
     const searchInput = document.getElementById('searchContactInput').value.toLowerCase();
     const dropDown = document.getElementById('contactDropDown');
     const contacts = dropDown.getElementsByClassName('singleContact');
@@ -241,7 +256,7 @@ function searchContacts() {
 
         if (searchInput === '') {
             contact.classList.remove('d-none');
-        } else if (contactName.includes(searchInput)){
+        } else if (contactName.includes(searchInput)) {
             contact.classList.remove('d-none');
         } else {
             contact.classList.add('d-none');
@@ -252,7 +267,7 @@ function searchContacts() {
 function addedContact(index) {  //set each Contact ID compaired to the contact JSON from data.js
     let checked = document.getElementById(`check${index}`);
     let src = checked.getAttribute("src");
-    let id = index + 1;
+    let id = index + 1;   //set index from Contacts to ID
 
     addedContactsCheckBox(checked, src, id, index);
 
@@ -265,6 +280,7 @@ function addedContactsCheckBox(checked, src, id, index) {   //toggle Checkbox ic
         checked.src = './assets/img/check_button_checked.svg';
         addedContacts.push(id);
         addedContactInitial.push(contacts[index]['initials']);
+        document.getElementById('searchContactInput').value = "";
     } else if (src === './assets/img/check_button_checked.svg') {
         checked.src = './assets/img/check_button_unchecked.svg';
         const indexOfId = addedContacts.indexOf(id);
@@ -368,8 +384,8 @@ function resetCheckBoxArrow() {   //resest all clicked Checkboxes
     }
     document.getElementById('checkBoxes').classList.remove('d-block');
 
-    renderContacts();   //render Contacts to clear the Contact Checkboxes
-    renderContactInitials();   //render Contact Initials to clear the contactInitial div
+    renderContacts();
+    renderContactInitials();
 }
 
 function editSubElement(index) {   //edit Sub Task
@@ -380,7 +396,7 @@ function editSubElement(index) {   //edit Sub Task
     subValue.value = addedSubTasks[index];
 }
 
-function setNewSubValue(index) {
+function setNewSubValue(index) {   //set new Sub Task Value
     let newSubValue = document.getElementById(`editSubTask${index}`).value;
     addedSubTasks[index] = newSubValue;
 
@@ -404,16 +420,12 @@ function renderSubTaskUpdate() {   //reload edited Sub Task
     };
 }
 
-function toggleEditSubInput(index) {
+function toggleEditSubInput(index) {   //toggle Sub Task edit input
     let subListElement = document.getElementById(`listElement${index}`);
     let editSubInput = document.getElementById(`editListElement${index}`);
 
     subListElement.classList.toggle('d-none');
     editSubInput.classList.toggle('d-none');
-}
-
-function selectInput() {
-    document.getElementById('descriptionInput').classList.remove('brd-red')
 }
 
 function renderContactHTML(index, contact) {
