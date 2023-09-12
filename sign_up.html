@@ -30,7 +30,7 @@
 
     <div class="logo-position">
       <img
-        id="logo"
+        id="signUpLogo"
         src="assets/img/mobile-start-animation-black.svg"
         alt="Logo Black"
       />
@@ -45,13 +45,13 @@
       id="signUpContainer"
       onsubmit="return registerUser();"
     >
-      <h2 class="mb-5">Sign Up</h2>
+      <h2 class="mb-5 size-61px">Sign Up</h2>
       <!-- Name input -->
       <div class="elementbox border-none">
         <div class="input-border">
           <div class="input-innerbox">
             <input
-              class="input-field"
+              class="input-field sign-up-field"
               type="text"
               id="nameField"
               placeholder="Name"
@@ -69,7 +69,7 @@
         <div class="input-border">
           <div class="input-innerbox">
             <input
-              class="input-field"
+              class="input-field sign-up-field"
               type="email"
               id="emailField"
               placeholder="Email"
@@ -87,7 +87,7 @@
         <div class="input-border">
           <div class="input-innerbox">
             <input
-              class="input-field"
+              class="input-field sign-up-field"
               type="password"
               id="password"
               placeholder="Password"
@@ -95,7 +95,6 @@
               onclick="showPasswordRequirements(); setVisibilityOff('password', 'passwordImg')"
               onblur="if(this.value.trim()) { validatePasswordRequirements(); checkPasswordsMatch(); }"
             />
-            <!--"if(this.value.trim()) Überrpüft ob das feld leer ist -->
 
             <div
               class="input-imgbox"
@@ -116,7 +115,7 @@
         <div class="input-border">
           <div class="input-innerbox">
             <input
-              class="input-field"
+              class="input-field sign-up-field"
               type="password"
               id="passwordConf"
               placeholder="Password Confirm"
@@ -160,7 +159,7 @@
         <button
           onclick="registerUser();"
           type="button"
-          id="logInBtn"
+          id="signUpBtn"
           class="btn btn-primary mb-3 login-site"
         >
           Sign Up
@@ -187,10 +186,8 @@
     </div>
     <div id="successRegistration" class="custom-report">
       <div class="report-content">
-        Erfolgreich registriert!
-        <button class="close-button" onclick="closeRegistrationSuccess()">
-          Schließen
-        </button>
+        Erfolgreich registriert!<br />
+        wir leiten Sie zurück zum Log in Bereich
       </div>
     </div>
     <div id="errorPrivacy" class="custom-report">

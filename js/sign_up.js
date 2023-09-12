@@ -148,7 +148,7 @@ function getInitials(name) {
 async function checkEmailExists() {
   const email = document.getElementById("emailField").value;
 
-  if (!email.trim()) return; // Diese Zeile hinzufügen, um zu überprüfen, ob das E-Mail-Feld leer ist.
+  if (!email.trim()) return; // Überprüfung ob Emailfeld leer ist.
 
   await loadUsers();
 
@@ -164,7 +164,7 @@ function validatePasswordRequirements() {
   const passwordField = document.getElementById("password");
   const password = passwordField.value;
 
-  if (!password.trim()) return; // Füge diese Zeile hinzu, um zu überprüfen, ob das Passwortfeld leer ist.
+  if (!password.trim()) return; // Überprüfen ob Passwortfeld leer ist.
 
   const regex =
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/;
@@ -225,10 +225,12 @@ function showRegistrationSuccess() {
   }, 2000);
 }
 
-function closeRegistrationSuccess() {
-  document.getElementById("successRegistration").style.display = "none";
-}
-
 function closePasswordNotSecurePopup() {
   document.getElementById("passwordNotSecure").style.display = "none";
+}
+
+//################ DELETE ALL USERS FROM SERVER #############################//
+async function deleteAllUsers() {
+  users = [];
+  await setItem("users", JSON.stringify(users));
 }
