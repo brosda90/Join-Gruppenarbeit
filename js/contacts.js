@@ -57,7 +57,7 @@ function notClose(event) {
 // ############################################################
 // ----- Wichtige Funktionen für Alle Contacts-Zugriffe  ------
 // ############################################################
-function idToIndex(id, arr = contactList) {
+function oldidToIndex(id, arr = contactList) {
     let index = -1;
     for(let i = 0; i < arr.length; i++) {
         if(id == arr[i].id) {
@@ -65,6 +65,11 @@ function idToIndex(id, arr = contactList) {
         }
     }
     return index;
+}
+
+
+function idToIndex(id, arr = contactList) {
+    return arr.findIndex(function(item, i){return item.id === id});
 }
 
 
@@ -112,11 +117,11 @@ async function loadLastContactId() {
 
 
 async function loadData(key, defaultValue) {
-    let loadData = await getItem(key);
+    let loadedData = await getItem(key);
     if(loadData == null) {
         await saveData(key, defaultValue);
     } else {
-        return JSON.parse(loadData);
+        return JSON.parse(loadedData);
     }
 }
 

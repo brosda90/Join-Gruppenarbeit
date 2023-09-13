@@ -212,6 +212,10 @@ span {
     border-radius: 8px;
 }
 
+.nav-bottom-linkbox {
+    display: none;
+}
+
 /* ------------------------------------------------------------ */
 /* ------------------------------------------------------------ */
 /* ------------------------------------------------------------ */
@@ -1117,7 +1121,12 @@ input::placeholder {
         }
 
     .footer {
-        padding: 0;
+        height: 100%;
+        padding: 64px 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        flex-shrink: 0;
     }
 
     .desktop-join-logo {
@@ -1129,6 +1138,7 @@ input::placeholder {
 
     .nav-menu {
         width: 100%;
+        height: fit-content;
         padding: 0;
         margin-top: 50px;
         box-sizing: border-box;
@@ -1162,6 +1172,25 @@ input::placeholder {
         line-height: 19.2px;
     }
 
+    .nav-bottom-linkbox {
+        width: 100%;
+        padding: 243px 0 0 52px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    
+    .nav-bottom-link {
+        padding: 8px;
+        text-decoration: none;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 120%;
+        color: #a8a8a8;
+    }
+    
     /* ------------------------------------------------------------ */
     .contact-list-main {
         width: 456px;
