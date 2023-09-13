@@ -1,5 +1,9 @@
 let users = [];
 
+function backToLogin() {
+  window.location.href = "index.html";
+}
+
 // Passwort sichtbar machen
 function togglePasswordVisibility(fieldId, imgId) {
   const passwordField = document.getElementById(fieldId);
@@ -48,7 +52,7 @@ async function registerUser() {
   const passwordConfField = document.getElementById("passwordConf");
 
   const name = nameField.value;
-  const email = emailField.value;
+  const email = emailField.value.toLowerCase();
   const password = passwordField.value;
   const passwordConf = passwordConfField.value;
   const privacyCheckBox = document.getElementById("PrivacyCheckBox");
@@ -146,7 +150,7 @@ function getInitials(name) {
 
 //################ CHECKS IF EMAIL EXISTS #############################//
 async function checkEmailExists() {
-  const email = document.getElementById("emailField").value;
+  const email = document.getElementById("emailField").value.toLowerCase();
 
   if (!email.trim()) return; // Überprüfung ob Emailfeld leer ist.
 
