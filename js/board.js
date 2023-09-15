@@ -53,6 +53,27 @@ let tasks = [
       },
     ],
   },
+  {
+    id: 2,
+    status: "await-feedback",
+    category: "Technical Task",
+    category_color: 5,
+    title: "CSS Architecture Planning",
+    description: "Define CSS naming conventions and structure.",
+    due_date: "2023-09-15",
+    priority: 1,
+    assigned_to: [2,3],
+    subtasks: [
+      {
+        done: true,
+        subtask: "Establish CSS Methodology",
+      },
+      {
+        done: true,
+        subtask: "Setup Base Styles",
+      },
+    ],
+  },
 ];
 
 let users = [
@@ -151,6 +172,7 @@ let users = [
 let contacts = [
   {
       'id' : 1,
+      'userID' : 1,
       'name' : 'Emanuel Müller',
       'initials' : 'EM',
       'email' : 'emanuelmüller@gmail.de',
@@ -159,6 +181,7 @@ let contacts = [
   },
   {
       'id' : 2,
+      'userID' : 2,
       'name' : 'Manuel Bauer',
       'initials' : 'MB',
       'email' : 'manuelbauer@gmail.de',
@@ -167,6 +190,7 @@ let contacts = [
   },
   {
       'id' : 3,
+      'userID' : -1, // Contact who isn't an active JOIN User
       'name' : 'Tina Meier',
       'initials' : 'TM',
       'email' : 'tinameier@gmail.de',
@@ -174,6 +198,7 @@ let contacts = [
       'badge-color' : 3,
   },{
       'id' : 4,
+      'userID' : -1,
       'name' : 'Alex Schmidt',
       'initials' : 'AS',
       'email' : 'alexschmidt@gmail.de',
@@ -182,6 +207,7 @@ let contacts = [
   },
   {
       'id' : 5,
+      'userID' : -1,
       'name' : 'Sina Reuter',
       'initials' : 'SR',
       'email' : 'sindreuter@gmail.de',
@@ -202,6 +228,10 @@ let currentUser =
     'contacts' : [2]
   }
 ;
+
+// #############################################################################################################################################
+
+let currentTask;
 
 let taskStateCategories = ["to-do", "in-progress", "await-feedback", "done"];
 
@@ -306,11 +336,11 @@ function replaceHyphenWithSpaceAndCapitalize(string) {
  */
 function generateBoardTaskHTML(taskJSON) {
   return /*html*/ `
-    <div id="task-${taskJSON['id']}-container" class="task-container" onclick="openPopup(${taskJSON['id']})" draggable="true" ondragstart="startDragging(${taskJSON['id']},event)" ondrag="drag(event)"  ondragend="dragEnd(event)"  ontouchstart="startTouchDragging(${taskJSON['id']},event)" ontouchmove="touchDrag(event)" ontouchend="touchDrop(event)">
+    <div id="task-${taskJSON['id']}-container" class="task-container" onclick="openPopup(${taskJSON['id']})" draggable="true" ondragstart="startDragging(${taskJSON['id']},event)" ondrag="drag(event)"  ondragend="dragEnd(event)"  ontouchstart="touchStart(${taskJSON['id']},event)" ontouchmove="touchDrag(event)" ontouchend="touchEnd(event)">
         <div class="task-category bc-${taskJSON['category_color']}">${taskJSON['category']}</div>
         <div class="task-text">
             <div class="task-title">${taskJSON['title']}</div>
-            <div class="task-description">${taskJSON['description']}</div>
+            <div class="task-description">${shortenString(taskJSON['description'],50)}</div>
         </div>
        ${generateBoardSubtasksHTML(taskJSON)}
         <div class="task-assignments-prio-container">
@@ -325,6 +355,20 @@ function generateBoardTaskHTML(taskJSON) {
    `;
 }
 
+
+/**
+ * shorten any string
+ * 
+ * @param {string} string - text
+ * @param {number} length - maximum length the text should be
+ * @returns shortened string of maximum length
+ */
+function shortenString(string,length) {
+  if (string.length > length) {
+    string = string.slice(0,(length - 3)) + '...'
+  }
+  return string;
+}
 
 
 /**
@@ -384,7 +428,7 @@ function generateAssignedUserBadges(taskJSON) {
     `;
     } else if(i == 5) {
       assignedUserBadgesHTML += /*html*/`
-      <div class="profile-badge" style="left: -${(i * 8)}px; background-color: #E7E7E7;">...</div>
+      <div class="profile-badge" style="left: -${(i * 8)}px; background-color: #2A3647;">+${assignedUsersIDs.length - 5}</div>
     `;
     }
   };
@@ -576,7 +620,12 @@ function toggleSubtaskState(taskID, subtaskIndex) {
 }
 
 
-
+function deleteTask(taskID) {
+  let taskIndex = tasks.findIndex(task => task['id'] == taskID);
+  tasks.splice(taskIndex,1);
+  closePopup();
+  renderAllTasks();
+}
 
 
 
@@ -624,9 +673,9 @@ function editTask(taskID) {
                    <!-- Due Date -->
                    <div class="popup-task-edit-info-container">
                       <div class="popup-task-edit-info-headline">Due Date</div>
-                      <div class="input-field-container"  onclick="setFocusOnInput('input-due-date')">
+                      <div class="input-field-container pos-rel"  onclick="setFocusOnInput('input-due-date')" >
                           <input id="input-due-date" type="date" value="${task['due_date']}" min="${currentDate()}">
-                          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <svg class="input-date-img" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                               <mask id="mask0_81758_1232" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
                               <rect width="24" height="24" fill="#D9D9D9"/>
                               </mask>
@@ -680,7 +729,7 @@ function editTask(taskID) {
                    <!-- Assigned To -->
                    <div class="popup-task-edit-info-container">
                       <div class="popup-task-edit-info-headline">Assigned to</div>
-                      <div class="input-field-container assigned-to-container" onclick="setFocusOnInput('input-assigned-to');openContactsList(${taskID})">
+                      <div class="input-field-container assigned-to-container" onclick="setFocusOnInput('input-assigned-to');toggleContactList(${taskID})">
                         <input id="input-assigned-to" type="text" placeholder="Select contacts to assign">
                         <img id="contactsArrow" src="./assets/img/arrow_drop_down.svg" alt="">
                       </div>
@@ -693,9 +742,9 @@ function editTask(taskID) {
                         </button>
                       </div>
                       <div id="assigned-contact-badges-container" class="contact-icons-container">
-                          <div class="profile-badge bc-turquoise width-40px">EM</div>
+                          <!-- <div class="profile-badge bc-turquoise width-40px">EM</div>
                           <div class="profile-badge bc-dark-blue width-40px">MB</div>
-                          <div class="profile-badge bc-orange width-40px">AM</div>
+                          <div class="profile-badge bc-orange width-40px">AM</div> -->
                       </div>
                   </div>
                    <!-- Subtasks -->
@@ -703,43 +752,23 @@ function editTask(taskID) {
                       <div class="popup-task-edit-info-headline">Subtasks</div>
                       <div class="input-field-container"  onclick="setFocusOnInput('input-subtasks')">
                           <input id="input-subtasks" type="text" placeholder="Add new subtask">
-                          <button class="createNewSubtask-button" onclick="createNewSubtask()">
+                          <button class="createNewSubtask-button">
                               <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                   <path d="M9 1.5V16.5" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
                                   <path d="M16.5 9.1416L1.5 9.1416" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
                               </svg> 
                           </button>
-                      </div>
-                      <div class="subtasks-container">
-                          <div class="subtask-list-item">
-                              <!-- TODO:  Change -->
-                              <ul style="margin-left: 16px;">
-                                  <li>Implement Recipe Recommendation</li>
-                              </ul>
-                              <div class="subtask-buttons-container">
-                                  <button>
-                                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                          <mask id="mask0_81758_502" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
-                                          <rect width="24" height="24" fill="#D9D9D9"/>
-                                          </mask>
-                                          <g mask="url(#mask0_81758_502)">
-                                          <path d="M5 19H6.4L15.025 10.375L13.625 8.975L5 17.6V19ZM19.3 8.925L15.05 4.725L16.45 3.325C16.8333 2.94167 17.3042 2.75 17.8625 2.75C18.4208 2.75 18.8917 2.94167 19.275 3.325L20.675 4.725C21.0583 5.10833 21.2583 5.57083 21.275 6.1125C21.2917 6.65417 21.1083 7.11667 20.725 7.5L19.3 8.925ZM17.85 10.4L7.25 21H3V16.75L13.6 6.15L17.85 10.4Z" fill="#2A3647"/>
-                                          </g>
-                                      </svg>    
-                                  </button>
-                                  <div class="v-line-separator"></div>
-                                  <button>
-                                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                          <mask id="mask0_81758_217" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
-                                          <rect width="24" height="24" fill="#D9D9D9"/>
-                                          </mask>
-                                          <g mask="url(#mask0_81758_217)">
-                                          <path d="M7 21C6.45 21 5.97917 20.8042 5.5875 20.4125C5.19583 20.0208 5 19.55 5 19V6C4.71667 6 4.47917 5.90417 4.2875 5.7125C4.09583 5.52083 4 5.28333 4 5C4 4.71667 4.09583 4.47917 4.2875 4.2875C4.47917 4.09583 4.71667 4 5 4H9C9 3.71667 9.09583 3.47917 9.2875 3.2875C9.47917 3.09583 9.71667 3 10 3H14C14.2833 3 14.5208 3.09583 14.7125 3.2875C14.9042 3.47917 15 3.71667 15 4H19C19.2833 4 19.5208 4.09583 19.7125 4.2875C19.9042 4.47917 20 4.71667 20 5C20 5.28333 19.9042 5.52083 19.7125 5.7125C19.5208 5.90417 19.2833 6 19 6V19C19 19.55 18.8042 20.0208 18.4125 20.4125C18.0208 20.8042 17.55 21 17 21H7ZM7 6V19H17V6H7ZM9 16C9 16.2833 9.09583 16.5208 9.2875 16.7125C9.47917 16.9042 9.71667 17 10 17C10.2833 17 10.5208 16.9042 10.7125 16.7125C10.9042 16.5208 11 16.2833 11 16V9C11 8.71667 10.9042 8.47917 10.7125 8.2875C10.5208 8.09583 10.2833 8 10 8C9.71667 8 9.47917 8.09583 9.2875 8.2875C9.09583 8.47917 9 8.71667 9 9V16ZM13 16C13 16.2833 13.0958 16.5208 13.2875 16.7125C13.4792 16.9042 13.7167 17 14 17C14.2833 17 14.5208 16.9042 14.7125 16.7125C14.9042 16.5208 15 16.2833 15 16V9C15 8.71667 14.9042 8.47917 14.7125 8.2875C14.5208 8.09583 14.2833 8 14 8C13.7167 8 13.4792 8.09583 13.2875 8.2875C13.0958 8.47917 13 8.71667 13 9V16Z" fill="#2A3647"/>
-                                          </g>
-                                      </svg>
-                                  </button>
-                              </div>
+                          <div class="subtask-buttons-container add-new-task-buttons">
+                            <button class="btn-drop-new-subtask" onclick="dropNewSubtask()">
+                                <img src="./assets/img/delete_icon.svg" alt="delete-icon">    
+                            </button>
+                            <div class="v-line-separator"></div>
+                            <button class="btn-add-new-subtask width-24px" onclick="addNewSubtask(${taskID})">
+                                <img src="./assets/img/input_check.svg" alt="check-icon">
+                            </button>
                           </div>
+                      </div>
+                      <div id="popup-task-edit-subtasks-container" class="subtasks-container">
                       </div>
                   </div>
                 </div>
@@ -760,6 +789,8 @@ function editTask(taskID) {
             </div>
   `;
   selectPrio(task['priority']);
+  renderAssignedUserBadgesEditTask(taskID);
+  renderSubtasksInEditTask(taskID);
 }
 
 
@@ -798,11 +829,24 @@ function currentDate() {
 }
 
 // Assigned To
+let contactsOpen = false;
 
-function openContactsList(taskID) {
-  document.getElementById('assigned-contacts-list').classList.remove('d-none');
+function toggleContactList(taskID) {
+  document.getElementById('assigned-contacts-list').classList.toggle('d-none');
+  contactsOpen = contactsOpen ? false:true;
+  toggleDropdownArrow();
   loadContactsIntoDropdown(taskID);
 }
+
+function toggleDropdownArrow() {
+  let img = document.getElementById('contactsArrow');
+  if (contactsOpen) {
+    img.src = './assets/img/arrow_up.svg';
+  } else {
+    img.src = './assets/img/arrow_drop_down.svg'
+  }
+}
+
 
 function loadContactsIntoDropdown(taskID) {
   let container = document.getElementById('assigned-to-contacts');
@@ -821,6 +865,7 @@ function loadContactsIntoDropdown(taskID) {
   }
 }
 
+
 function checkIfAssignedTo(taskID,userID) {
   let task = tasks.find(task => task['id'] == taskID);
   let isAssigned = task['assigned_to'].includes(userID);
@@ -830,6 +875,7 @@ function checkIfAssignedTo(taskID,userID) {
     return '/assets/img/check_button_unchecked.svg';
   }
 }
+
 
 
 function toggleAssignment(taskID,userID,imgID) {
@@ -847,6 +893,8 @@ function toggleAssignment(taskID,userID,imgID) {
   // TODO: save tasks
 }
 
+
+
 function checkIfCurrentUser(contactID) {
   if (contactID == currentUser['id']) {
     return '(You)';
@@ -855,15 +903,127 @@ function checkIfCurrentUser(contactID) {
   }
 }
 
+/**
+ * 
+ * 
+ * @param {number} taskID id of the currentTask
+ */
+function renderAssignedUserBadgesEditTask(taskID) {
+  let task = tasks.find(task => task['id'] == taskID);
+  let assignedUsers = task['assigned_to'];
+  let container = document.getElementById('assigned-contact-badges-container');
+  container.innerHTML = '';
+  for (let i = 0; i < assignedUsers.length; i++) {
+    let user = users.find(u => u['id'] == assignedUsers[i]);
+    container.innerHTML += /*html*/`
+      <div class="profile-badge bc-${user['badge-color']} width-40px">${user['initials']}</div>
+    `;
+  };
+}
 
 
+function renderSubtasksInEditTask(taskID) {
+  let task = tasks.find(task => task['id'] == taskID);
+  let subtasks = task['subtasks'];
+  let container = document.getElementById('popup-task-edit-subtasks-container');
+  container.innerHTML = '';
+  for (let i = 0; i < subtasks.length; i++) {
+    const subtask = subtasks[i];
+    container.innerHTML += /*html*/`
+      <div id="popup-task-edit-subtask-${i}" class="subtask-list-item">
+          <ul style="margin-left: 16px;">
+              <li>${subtask['subtask']}</li>
+          </ul>
+          <div class="subtask-buttons-container">
+              <button class="btn-edit" onclick="editSubtask(${taskID},${i})">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <mask id="mask0_81758_502" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
+                      <rect width="24" height="24" fill="#D9D9D9"/>
+                      </mask>
+                      <g mask="url(#mask0_81758_502)">
+                      <path d="M5 19H6.4L15.025 10.375L13.625 8.975L5 17.6V19ZM19.3 8.925L15.05 4.725L16.45 3.325C16.8333 2.94167 17.3042 2.75 17.8625 2.75C18.4208 2.75 18.8917 2.94167 19.275 3.325L20.675 4.725C21.0583 5.10833 21.2583 5.57083 21.275 6.1125C21.2917 6.65417 21.1083 7.11667 20.725 7.5L19.3 8.925ZM17.85 10.4L7.25 21H3V16.75L13.6 6.15L17.85 10.4Z" fill="#2A3647"/>
+                      </g>
+                  </svg>    
+              </button>
+              <div class="v-line-separator"></div>
+              <button class="btn-delete" onclick="deleteSubtask(${taskID},${i})">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <mask id="mask0_81758_217" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
+                      <rect width="24" height="24" fill="#D9D9D9"/>
+                      </mask>
+                      <g mask="url(#mask0_81758_217)">
+                      <path d="M7 21C6.45 21 5.97917 20.8042 5.5875 20.4125C5.19583 20.0208 5 19.55 5 19V6C4.71667 6 4.47917 5.90417 4.2875 5.7125C4.09583 5.52083 4 5.28333 4 5C4 4.71667 4.09583 4.47917 4.2875 4.2875C4.47917 4.09583 4.71667 4 5 4H9C9 3.71667 9.09583 3.47917 9.2875 3.2875C9.47917 3.09583 9.71667 3 10 3H14C14.2833 3 14.5208 3.09583 14.7125 3.2875C14.9042 3.47917 15 3.71667 15 4H19C19.2833 4 19.5208 4.09583 19.7125 4.2875C19.9042 4.47917 20 4.71667 20 5C20 5.28333 19.9042 5.52083 19.7125 5.7125C19.5208 5.90417 19.2833 6 19 6V19C19 19.55 18.8042 20.0208 18.4125 20.4125C18.0208 20.8042 17.55 21 17 21H7ZM7 6V19H17V6H7ZM9 16C9 16.2833 9.09583 16.5208 9.2875 16.7125C9.47917 16.9042 9.71667 17 10 17C10.2833 17 10.5208 16.9042 10.7125 16.7125C10.9042 16.5208 11 16.2833 11 16V9C11 8.71667 10.9042 8.47917 10.7125 8.2875C10.5208 8.09583 10.2833 8 10 8C9.71667 8 9.47917 8.09583 9.2875 8.2875C9.09583 8.47917 9 8.71667 9 9V16ZM13 16C13 16.2833 13.0958 16.5208 13.2875 16.7125C13.4792 16.9042 13.7167 17 14 17C14.2833 17 14.5208 16.9042 14.7125 16.7125C14.9042 16.5208 15 16.2833 15 16V9C15 8.71667 14.9042 8.47917 14.7125 8.2875C14.5208 8.09583 14.2833 8 14 8C13.7167 8 13.4792 8.09583 13.2875 8.2875C13.0958 8.47917 13 8.71667 13 9V16Z" fill="#2A3647"/>
+                      </g>
+                  </svg>
+              </button>
+          </div>
+      </div>
+    `;
+  }
+}
 
 
+function editSubtask(taskID,subtaskIndex) {
+  let task = tasks.find(task => task['id'] == taskID);
+  let subtask = task['subtasks'][subtaskIndex];
+  let container = document.getElementById(`popup-task-edit-subtask-${subtaskIndex}`);
+  container.innerHTML = /*html*/`
+    <input id="subtask-edit-input" class="subtask-edit-input" type="text" value="${subtask['subtask']}">
+    <div class="subtask-buttons-container">
+      <button class="btn-delete" onclick="deleteSubtask(${taskID},${subtaskIndex})" >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <mask id="mask0_81758_217" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
+              <rect width="24" height="24" fill="#D9D9D9"/>
+              </mask>
+              <g mask="url(#mask0_81758_217)">
+              <path d="M7 21C6.45 21 5.97917 20.8042 5.5875 20.4125C5.19583 20.0208 5 19.55 5 19V6C4.71667 6 4.47917 5.90417 4.2875 5.7125C4.09583 5.52083 4 5.28333 4 5C4 4.71667 4.09583 4.47917 4.2875 4.2875C4.47917 4.09583 4.71667 4 5 4H9C9 3.71667 9.09583 3.47917 9.2875 3.2875C9.47917 3.09583 9.71667 3 10 3H14C14.2833 3 14.5208 3.09583 14.7125 3.2875C14.9042 3.47917 15 3.71667 15 4H19C19.2833 4 19.5208 4.09583 19.7125 4.2875C19.9042 4.47917 20 4.71667 20 5C20 5.28333 19.9042 5.52083 19.7125 5.7125C19.5208 5.90417 19.2833 6 19 6V19C19 19.55 18.8042 20.0208 18.4125 20.4125C18.0208 20.8042 17.55 21 17 21H7ZM7 6V19H17V6H7ZM9 16C9 16.2833 9.09583 16.5208 9.2875 16.7125C9.47917 16.9042 9.71667 17 10 17C10.2833 17 10.5208 16.9042 10.7125 16.7125C10.9042 16.5208 11 16.2833 11 16V9C11 8.71667 10.9042 8.47917 10.7125 8.2875C10.5208 8.09583 10.2833 8 10 8C9.71667 8 9.47917 8.09583 9.2875 8.2875C9.09583 8.47917 9 8.71667 9 9V16ZM13 16C13 16.2833 13.0958 16.5208 13.2875 16.7125C13.4792 16.9042 13.7167 17 14 17C14.2833 17 14.5208 16.9042 14.7125 16.7125C14.9042 16.5208 15 16.2833 15 16V9C15 8.71667 14.9042 8.47917 14.7125 8.2875C14.5208 8.09583 14.2833 8 14 8C13.7167 8 13.4792 8.09583 13.2875 8.2875C13.0958 8.47917 13 8.71667 13 9V16Z" fill="#2A3647"/>
+              </g>
+          </svg>
+      </button>
+      <div class="v-line-separator"></div>
+      <button class="btn-accept width-24px" onclick="saveSubtask(${taskID},${subtaskIndex})">
+        <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M5.55021 9.15L14.0252 0.675C14.2252 0.475 14.4627 0.375 14.7377 0.375C15.0127 0.375 15.2502 0.475 15.4502 0.675C15.6502 0.875 15.7502 1.1125 15.7502 1.3875C15.7502 1.6625 15.6502 1.9 15.4502 2.1L6.25021 11.3C6.05021 11.5 5.81687 11.6 5.55021 11.6C5.28354 11.6 5.05021 11.5 4.85021 11.3L0.550207 7C0.350207 6.8 0.254374 6.5625 0.262707 6.2875C0.27104 6.0125 0.375207 5.775 0.575207 5.575C0.775207 5.375 1.01271 5.275 1.28771 5.275C1.56271 5.275 1.80021 5.375 2.00021 5.575L5.55021 9.15Z" fill="#2A3647"/>
+        </svg>
+      </button>
+    </div>
+  `;
+}
 
 
+function saveSubtask(taskID,subtaskIndex) {
+  let task = tasks.find(task => task['id'] == taskID);
+  let subtask = task['subtasks'][subtaskIndex];
+  let input = document.getElementById(`subtask-edit-input`);
+  subtask['subtask'] = input.value;
+  renderSubtasksInEditTask(taskID);
+  // TODO: save Task
+}
 
+function deleteSubtask(taskID,subtaskIndex) {
+  let task = tasks.find(task => task['id'] == taskID);
+  task['subtasks'].splice(subtaskIndex,1);
+  renderSubtasksInEditTask(taskID);
+  // TODO: save task
+}
 
+function addNewSubtask(taskID) {
+  let task = tasks.find(task => task['id'] == taskID);
+  let input = document.getElementById(`input-subtasks`);
+  let newSubtask = {
+      done: false,
+      subtask: `${input.value}`,
+  };
+  task['subtasks'].push(newSubtask);
+  dropNewSubtask();
+  renderSubtasksInEditTask(taskID);
+}
 
+function dropNewSubtask() {
+  let input = document.getElementById(`input-subtasks`);
+  input.value = '';
+  document.activeElement.blur();
+}
 
 
 
@@ -886,6 +1046,7 @@ function checkIfCurrentUser(contactID) {
 /* ============================= */
 
 let currentDraggedElement;
+let taskWidth;
 
 
 /**
@@ -899,6 +1060,7 @@ let currentDraggedElement;
 function startDragging(id,ev) {
   currentDraggedElement = id;
   let task = document.getElementById(`task-${id}-container`);
+  taskWidth = task.offsetWidth;
   let visibleTaskClone = task.cloneNode(true);
   visibleTaskClone.id = 'visibleTaskClone';
   visibleTaskClone.style = `
@@ -939,6 +1101,7 @@ function allowDrop(event,id) {
 function moveTo(taskStateCategory) {
   let index = tasks.findIndex(task => task['id'] == currentDraggedElement);
   tasks[index]['status'] = taskStateCategory;
+  tasks.push(tasks.splice(index,1)[0]); //move task to the last position in the array
   renderAllTasks();
 }
 
@@ -975,7 +1138,6 @@ function dragEnd(ev) {
   visibleTaskClone.style.opacity = 0;
   visibleTaskClone.remove();
   dragScrollActive = false;
-  // removeTaskDropIndication(ev.target.id);
 }
 
 
@@ -995,7 +1157,7 @@ function createTaskDropIndication(id) {
   hideNoTaskContainer(id);
   if (!dropIndicationExists) {
     tasksContainer.innerHTML += /*html*/`
-      <div id="task-container-indication"></div> 
+      <div id="task-container-indication" style="min-width: ${taskWidth}px;"></div> 
     `;
     dropIndicationExists = true;
   }
@@ -1025,9 +1187,9 @@ function removeTaskDropIndication(id) {
  */
 function hideNoTaskContainer(id) {
   let tasksContainer = document.getElementById(id);
-  let notaskContainer = tasksContainer.getElementsByClassName('no-task-container')[0];
-  if (notaskContainer) {
-    notaskContainer.classList.add('d-none');
+  // let notaskContainer = tasksContainer.getElementsByClassName('no-task-container')[0];
+  if (tasksContainer.getElementsByClassName('no-task-container')[0] != null) {
+    tasksContainer.getElementsByClassName('no-task-container')[0].classList.add('d-none');
   }
 }
 
@@ -1053,6 +1215,7 @@ function showNoTaskContainer(id) {
 /* ============================= */
 
 let dragScrollActive = false;
+let startTaskSection;
 
 
 /**
@@ -1064,8 +1227,10 @@ let dragScrollActive = false;
  * @param {event} ev  - touchstart
  */
 function startTouchDragging(id,ev) {
+  startTaskSection = getDraggedOverZone(ev);
   currentDraggedElement = id;
   let task = document.getElementById(`task-${id}-container`);
+  taskWidth = task.offsetWidth;
   task.classList.toggle('grabbed-task'); // indicate grabbed element
   let offsetX = ev.touches[0].pageX - ev.target.getBoundingClientRect().left;
   let offsetY = ev.touches[0].pageY - ev.target.getBoundingClientRect().top;
@@ -1082,6 +1247,8 @@ function startTouchDragging(id,ev) {
   dragScrollActive = true;
 }
 
+let currentDraggedOverContainer= ''; 
+
 /**
  * function called ontouchmove of task-container
  * - let the visible clone follow the cursor
@@ -1089,25 +1256,35 @@ function startTouchDragging(id,ev) {
  * @param {event} event - touchmove
  */
 function touchDrag(event) {
-  visibleTaskClone = document.getElementById('visibleTaskClone');
-  event.preventDefault(); // prevent touch scrolling while holding the element
-  if (visibleTaskClone) {
-    visibleTaskClone.style.opacity = 1;
-    visibleTaskClone.style.left = event.changedTouches[0].pageX + 'px';
-    visibleTaskClone.style.top = event.changedTouches[0].pageY + 'px';
+  if (onlongtouch) {
+    visibleTaskClone = document.getElementById('visibleTaskClone');
+    if (event.cancelable) {
+      event.preventDefault(); // prevent touch scrolling while holding the element
+      event.stopPropagation();
+    }
+    if (visibleTaskClone) {
+      visibleTaskClone.style.opacity = 1;
+      visibleTaskClone.style.left = event.changedTouches[0].pageX + 'px';
+      visibleTaskClone.style.top = event.changedTouches[0].pageY + 'px';
+    }
+    // check if touch is in dragzone
+    let dragoverContainerID = getDraggedOverZone(event);
+    // console.log(dragoverContainerID);
+    dragoverContainerID += '-tasks-container';
+    // console.log(dropIndicationExists,currentDraggedOverContainer,dragoverContainerID);
+    // if there is no dashed container => create one and hide the empty box
+    if (!dropIndicationExists && currentDraggedOverContainer != dragoverContainerID && dragoverContainerID != '') {
+      createTaskDropIndication(dragoverContainerID);
+      currentDraggedOverContainer = dragoverContainerID;
+    } else if (dropIndicationExists && currentDraggedOverContainer != dragoverContainerID) {
+      removeTaskDropIndication(currentDraggedOverContainer);
+      // currentDraggedOverContainer = dragoverContainerID;
   }
-  // if touch in dropzone => create dashed container
+  }
+  
 }
 
-
-
-/**
- * 
- * @param {event} event - touchend
- */
-function touchDrop(event) {
-  dragEnd(); 
-  // define dropzones
+function getDraggedOverZone(event) {
   let toDo = document.getElementById('section-to-do').getBoundingClientRect();
   let inProgress = document.getElementById('section-in-progress').getBoundingClientRect();
   let awaitFeedback = document.getElementById('section-await-feedback').getBoundingClientRect();
@@ -1118,8 +1295,43 @@ function touchDrop(event) {
   let droppedIn_awaitFeedback = checkIfDropIsInZone(awaitFeedback,event);
   let droppedIn_done = checkIfDropIsInZone(done,event);
   let dropzones = [droppedIn_toDo,droppedIn_inProgress,droppedIn_awaitFeedback,droppedIn_done];
+  let containers = ['section-to-do','section-in-progress','section-await-feedback','section-done'];
+  let dropID = startTaskSection;
+  for (let i = 0; i < dropzones.length; i++) {
+    if(dropzones[i]) {
+       dropID = containers[i];
+    }; 
+  };
+  return dropID;
+}
+
+
+/**
+ * 
+ * @param {event} event - touchend
+ */
+function touchDrop(event) {
+  dragEnd();
+  let dragoverContainerID = getDraggedOverZone(event); 
+  // define dropzones
+  // let toDo = document.getElementById('section-to-do').getBoundingClientRect();
+  // let inProgress = document.getElementById('section-in-progress').getBoundingClientRect();
+  // let awaitFeedback = document.getElementById('section-await-feedback').getBoundingClientRect();
+  // let done = document.getElementById('section-done').getBoundingClientRect();
+  // // check if touch is in dropzone
+  // let droppedIn_toDo = checkIfDropIsInZone(toDo,event);
+  // let droppedIn_inProgress = checkIfDropIsInZone(inProgress,event);
+  // let droppedIn_awaitFeedback = checkIfDropIsInZone(awaitFeedback,event);
+  // let droppedIn_done = checkIfDropIsInZone(done,event);
+  // let dropzones = [droppedIn_toDo,droppedIn_inProgress,droppedIn_awaitFeedback,droppedIn_done];
   // move to Area
-  touchMovetoDropzone(dropzones);
+  // touchMovetoDropzone(dropzones);
+  touchMovetoDropzone(dragoverContainerID);
+  if (dragoverContainerID == '') {
+    removeTaskDropIndication(startTaskSection);
+  } else {
+    removeTaskDropIndication(dragoverContainerID);
+  };
   dragScrollActive = false;
 }
 
@@ -1148,17 +1360,27 @@ function checkIfDropIsInZone(dropContainer,event) {
  * 
  * @param {array} dropzones - array of all dropzone states
  */
-function touchMovetoDropzone(dropzones) {
-  let inAnyDropZone = false;
-  for (let i = 0; i < dropzones.length; i++) {
-      if (dropzones[i]) {
-        moveTo(taskStateCategories[i]);
-        inAnyDropZone = true;
-    }
-  }
-  if (!inAnyDropZone) {
+// function touchMovetoDropzone(dropzones) {
+//   let inAnyDropZone = false;
+//   for (let i = 0; i < dropzones.length; i++) {
+//       if (dropzones[i]) {
+//         moveTo(taskStateCategories[i]);
+//         inAnyDropZone = true;
+//     }
+//   }
+//   if (!inAnyDropZone) {
+//     document.getElementsByClassName('grabbed-task')[0].classList.remove('grabbed-task');
+//   } 
+// }
+
+function touchMovetoDropzone(id) {
+  if (id != '') {
+    let stateCatgory = id.replace('section-','');
+    // console.log(stateCatgory);
+    moveTo(stateCatgory)
+  } else {
     document.getElementsByClassName('grabbed-task')[0].classList.remove('grabbed-task');
-  } 
+  }
 }
 
 
@@ -1182,3 +1404,30 @@ function dragScroll() {
 }
 
 setInterval(dragScroll, 25);
+
+
+// LONG TOUCH
+let onlongtouch = false;
+let timer = false;
+let duration = 1000;
+
+function touchStart(id,event){
+  if (!timer) {
+    timer = setTimeout(function() {
+      onlongtouch = true;
+      startTouchDragging(id,event);
+    }, duration);
+  }
+}
+
+function touchEnd(event){
+  if (timer) {
+    clearTimeout(timer)
+    timer = false;
+    if (onlongtouch) {
+      touchDrop(event);
+    }
+    onlongtouch = false;
+  }
+}
+
