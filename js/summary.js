@@ -5,6 +5,7 @@ function updateDisplay() {
   rightContainer.style.opacity = "0";
   mainContainer.style.display = "flex";
   mainContainer.style.opacity = "1";
+  rightContainer.style.zIndex = "0";
 
   rightContainer.addEventListener("transitionend", function () {
     rightContainer.style.display = "none";
@@ -12,7 +13,6 @@ function updateDisplay() {
 }
 
 setTimeout(updateDisplay, 2000);
-
 document.addEventListener("DOMContentLoaded", function () {
   const currentTime = new Date();
   const hour = currentTime.getHours();

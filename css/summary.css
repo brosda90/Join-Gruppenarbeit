@@ -2,15 +2,17 @@
   display: flex;
   align-items: center;
   flex-direction: row;
-  margin-top: 20px;
+  margin-top: 100px;
   margin-bottom: 40px;
   margin-left: 20px;
+  background-color: #f6f7f8;
+  z-index: 200;
 }
 
 .main {
-  display: none; /* Am Anfang versteckt */
-  transition: opacity 1s; /* Übergang für die Sichtbarkeit */
-  opacity: 0; /* Unsichtbar am Anfang */
+  display: none;
+  transition: opacity 1s;
+  opacity: 0;
 }
 
 .blue-line {
@@ -66,6 +68,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.urgent-left:hover {
+  cursor: pointer;
 }
 
 .third-container {
@@ -188,6 +194,8 @@ h3 {
   width: 100vw;
   flex-direction: column;
   transition: opacity 1s;
+  z-index: 20;
+  pointer-events: none;
 }
 
 .right-container p:first-child {
@@ -239,4 +247,82 @@ h3 {
 .upcoming-deadline p:first-child {
   font-size: 16px;
   font-weight: 700;
+}
+
+@media (min-width: 1000px) {
+  .main-container {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    margin-top: 149px;
+    margin-bottom: 51px;
+    margin-left: 300px;
+    background-color: #f6f7f8;
+  }
+
+  .first-container {
+    width: 560px;
+    height: 170px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    margin-left: 337px;
+  }
+
+  .second-container {
+    width: 560px;
+    height: 170px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    margin-left: 337px;
+  }
+  .third-container {
+    width: 560px;
+    height: 170px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    margin-left: 337px;
+  }
+
+  #done {
+    width: 264px;
+    height: 168px;
+  }
+
+  #toDo {
+    width: 264px;
+    height: 168px;
+  }
+
+  #urgent img {
+    margin-right: 16px;
+    width: 60px;
+    height: 60px;
+    gap: 10px;
+  }
+
+  #toDo img {
+    width: 69px;
+    height: 69px;
+    margin-right: 13px;
+  }
+
+  #done img {
+    width: 69px;
+    height: 69px;
+    margin-right: 13px;
+  }
+
+  h3 {
+    font-size: 64px;
+  }
+
+  .summery-task-text {
+    font-size: 21px;
+    font-weight: 400;
+    line-height: 25.2px;
+    text-align: center;
+  }
 }
