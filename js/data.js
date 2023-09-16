@@ -45,7 +45,8 @@ let contacts = [
         'email' : 'tinameier@gmail.de',
         'phone' : '0839920239',
         'badge-color' : 3,
-    },{
+    },
+    {
         'id' : 4,
         'name' : 'Alex Schmidt',
         'initials' : 'AS',

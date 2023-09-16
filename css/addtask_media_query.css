@@ -18,6 +18,7 @@
 
     .taskInfo {
         width: 90% !important;
+        height: 600px !important;
         display: flex;
         gap: 24px;
     }
@@ -31,6 +32,14 @@
     .clear {
         display: flex !important;
     }
+
+    .rightSite {
+        display: flex !important;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    
 }
 
 @media (max-width: 600px) {

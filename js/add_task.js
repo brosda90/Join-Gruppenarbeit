@@ -2,6 +2,7 @@ let expanded = false;
 let selectTrigger = document.querySelector('.select-trigger');
 
 let contacts = [];
+let sortedContactList = [];
 let tasks = [];
 let addedContacts = [];
 let addedContactInitial = [];
@@ -20,18 +21,30 @@ async function initAddTask() {
 
 async function loadContactsFromStorage() {
     contacts = JSON.parse(await getItem('contacts'));
+    if(contacts.length > 1) {
+        sortContacts(contacts);
+    } else {
+        sortedContactList = contacts;
+    }
 }
 
 async function loadTasksFromRemoteStorage () {
     tasks = JSON.parse(await getItem('tasks'));
 }
 
+function sortContacts(arr) {
+    sortedContactList = arr;
+    sortedContactList.sort(
+        (c1, c2) => 
+        (c1.initials < c2.initials) ? -1 : (c1.initials > c2.initials) ? 1 : 0);
+}
+
 function renderContacts() {   //render Contacts
     let assignedToContact = document.getElementById('contactDropDown');
     assignedToContact.innerHTML = '';
 
-    for (let i = 0; i < contacts.length; i++) {
-        const contact = contacts[i];
+    for (let i = 0; i < sortedContactList.length; i++) {
+        const contact = sortedContactList[i];
 
         assignedToContact.innerHTML += renderContactHTML(i, contact);
     }
@@ -199,12 +212,22 @@ function isEmpty(inputField) {
     return inputField.value === '';
 }
 
-function emptyInputAlert(input) {   //add red border with timeout if required element is empty 
+function emptyInputAlert(input) {   //add red border if required element is empty 
     input.classList.add('brd-red');
+}
 
-    setTimeout(function () {
-        input.classList.remove('brd-red');
-    }, 2500);
+function resetInputAlert(input) {   //reset red border of empty input Field
+    let reset = document.getElementById(input);
+    reset.classList.remove('brd-red');
+}
+
+function resetPrioAlert(urgent, medium, low) {   //reset red border of Prio Buttons
+    let urgentBtn = document.getElementById(urgent);
+    let mediumBtn = document.getElementById(medium);
+    let lowBtn = document.getElementById(low);
+    urgentBtn.classList.remove('brd-red');
+    mediumBtn.classList.remove('brd-red');
+    lowBtn.classList.remove('brd-red');
 }
 
   //----------------------------------------------------//
