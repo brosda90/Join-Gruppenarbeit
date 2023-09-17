@@ -1652,3 +1652,12 @@ function touchEnd(event){
     onlongtouch = false;
   }
 }
+
+
+/* function openAddNewTaskPopUp() {
+  if (window.innerWidth > 980) {
+    document.getElementById().classList.remove('d-none');
+  } else {
+    window.location.href = 'addtask.html'
+  }
+} */
