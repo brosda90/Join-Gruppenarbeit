@@ -1,7 +1,7 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    /* box-sizing: border-box; */
     --color-blue: #2AABE2;
     --color-dark-blue: #2A3647;
     --color-darker-blue: #091931;
@@ -51,45 +51,6 @@ header {
 .user-name {
     font-weight: 700;
     color: var(--color-blue);
-}
-
-footer {
-    height: 80px;
-    padding: 2px 16px;
-    background-color: var(--color-dark-blue);
-}
-
-.nav-menu {
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.nav-menu-link  {
-    font-family: 'Open Sans';
-    text-decoration: none;
-    color: var(--color-light-grey);
-    font-size: 14px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 4px;
-    height: 100%;
-    width: 80px;
-    aspect-ratio: 1 / 1;
-}
-
-.link-selected {
-    background-color: var(--color-darker-blue);
-    border-radius: 8px;
-}
-
-.nav-menu-link:hover {
-    cursor: pointer;
-    background-color: var(--color-darker-blue);
-    border-radius: 8px;
 }
 
 /* -------------------- */

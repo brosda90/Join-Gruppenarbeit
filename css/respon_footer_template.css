@@ -97,6 +97,14 @@ span {
     border-radius: 8px;
 }
 
+.link-selected span {
+    color: var(--col-white);
+}
+
+.link-selected svg {
+    filter: brightness(10);
+}
+
 .nav-menu-link:hover {
     cursor: pointer;
     background-color: var(--col-main-active);
@@ -134,7 +142,7 @@ span {
 
     .desktop-join-logo {
         width: 100%;
-        padding: 0 0 64px 0px;
+        padding: 64px 0px;
         display: flex;
         justify-content: center;
     }
@@ -192,6 +200,10 @@ span {
         font-weight: 400;
         line-height: 120%;
         color: #a8a8a8;
+    }
+
+    .nav-bottom-link:hover {
+        color: var(--col-white);
     }
     
 }

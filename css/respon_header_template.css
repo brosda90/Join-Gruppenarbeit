@@ -32,13 +32,6 @@ div, nav, main, span, ::after {
     transition: all 75ms ease-in;
 }
 
-.nav-menu-link span {
-    font-family: Inter, sans-serif;
-    font-size: 20px;
-    line-height: 24px;
-    text-overflow: ellipsis;
-}
-
 /* ################################################################ */
 /* ### Ab hier CSS für den Header */
 /* ################################################################ */

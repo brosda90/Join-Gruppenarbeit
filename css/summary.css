@@ -189,9 +189,9 @@ h3 {
   position: absolute;
   justify-content: center;
   z-index: 20;
-  top: 85px;
-  height: 82%;
-  width: 100vw;
+  top: 80px;
+  height: calc(100% - 160px);
+  width: 100%;
   flex-direction: column;
   transition: opacity 1s;
   z-index: 20;
@@ -284,6 +284,13 @@ h3 {
     justify-content: space-between;
     flex-direction: row;
     margin-left: 337px;
+  }
+
+  .right-container {
+    top: 96px;
+    height: calc(100% - 96px);
+    width: calc(100% - 232px);
+    left: 232px;
   }
 
   #done {

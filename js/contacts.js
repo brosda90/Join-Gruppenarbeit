@@ -182,7 +182,7 @@ function clearAddPopup() {
 
 // ############################################################
 async function saveEditContact() {
-    let id = document.getElementById('editconid').value;
+    let id = +document.getElementById('editconid').value;
     let index = idToIndex(id, contactList);
     contactList[index].name = document.getElementById('editconname').value;
     contactList[index].initials = initialsFrom(document.getElementById('editconname').value);

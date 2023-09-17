@@ -2,7 +2,11 @@
 /* GENERAL STYLING */
 
 main {
-    overflow: scroll;
+    position: fixed;
+    top: 80px;
+    width: 100%;
+    height: calc(100% - 160px);
+    overflow-y: scroll;
     background-color: var(--color-darker-white);
 }
 
@@ -720,4 +724,16 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     right: 16px;
     pointer-events: none;
     background-color: var(--color-white);
+}
+
+
+/* Media-Queries */
+@media (min-width: 1000px) {
+    main {
+        min-width: 472px;
+        width: calc(100% - 232px);
+        height: calc(100% - 96px);
+        left: 232px;
+        top: 96px;
+    }
 }

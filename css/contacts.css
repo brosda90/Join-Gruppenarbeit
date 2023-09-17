@@ -206,6 +206,14 @@ div, nav, main, span, ::after {
     border-radius: 8px;
 }
 
+.link-selected span {
+    color: var(--col-white);
+}
+
+.link-selected svg {
+    filter: brightness(10);
+}
+
 .nav-menu-link:hover {
     cursor: pointer;
     background-color: var(--color-darker-blue);
@@ -1188,6 +1196,10 @@ input::placeholder {
         font-weight: 400;
         line-height: 120%;
         color: #a8a8a8;
+    }
+
+    .nav-bottom-link:hover {
+        color: var(--col-white);
     }
     
     /* ------------------------------------------------------------ */
