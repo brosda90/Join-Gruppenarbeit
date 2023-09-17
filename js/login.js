@@ -111,6 +111,7 @@ async function login() {
 
     // Wenn der Benutzer gefunden wird, leite zur board.html weiter
     localStorage.setItem("loggedInUser", user.name);
+    localStorage.setItem("loggedInUserID", user.id);
     window.location.href = "board.html";
   } else {
     // Zeigt Popup an, wenn keine Übereinstimmung gefunden wird
