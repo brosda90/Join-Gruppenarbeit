@@ -503,7 +503,8 @@ select option {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: -24px;
+    margin-top: -24
+    px;
 }
 
 .d-none {
