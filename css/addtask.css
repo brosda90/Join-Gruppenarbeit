@@ -430,7 +430,7 @@ select option {
 }
 
 .listedSubTasks {
-    max-height: 120px;
+    max-height: 98px;
     overflow: auto;
 }
 

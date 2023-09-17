@@ -31,7 +31,6 @@ function setVisibilityOff(fieldId, imgId) {
 function showPasswordRequirements() {
   document.getElementById("passwordInfo").style.display = "block";
 
-  //Zeig info bei klick für 3 sekunden an
   setTimeout(function () {
     document.getElementById("passwordInfo").style.display = "none";
   }, 3000);
@@ -42,6 +41,18 @@ async function loadUsers() {
   if (storedUsers) {
     users = JSON.parse(storedUsers);
   }
+}
+
+async function loadLastContactId() {
+  let storedLastContactId = await getItem("lastContactId");
+  if (storedLastContactId) {
+    return JSON.parse(storedLastContactId);
+  }
+  return 0;
+}
+
+function randomBadgeColor() {
+  return Math.floor(Math.random() * 15);
 }
 
 //################  USER REGISTER #############################//
@@ -89,13 +100,11 @@ async function registerUser() {
     return;
   }
 
-  // Überprüfung, ob die Datenschutzrichtlinie angeklickt wurde
   if (!privacyCheckBox.checked) {
     showPrivacyPopup();
     return;
   }
 
-  // Wenn das Passwort mit der Passwortbestätigung übereinstimmt
   if (password !== passwordConf) {
     showWrongPasswordPopup();
     return;
@@ -103,23 +112,44 @@ async function registerUser() {
 
   await loadUsers();
 
-  // Prüfen, ob die E-Mail bereits vorhanden exisitiert.
+  let lastContactId = await loadLastContactId();
+  lastContactId++;
+  await setItem("lastContactId", JSON.stringify(lastContactId));
+
   const emailExists = users.some((user) => user.email === email);
   if (emailExists) {
     return;
   }
 
+  const userId = getNextUserId();
   const newUser = {
-    id: getNextUserId(),
+    id: userId,
     name: name,
     initials: getInitials(name),
     email: email,
     password: password,
+    phone: "Bitte Telefonnummer eintragen",
+    contacts: [lastContactId],
   };
 
   users.push(newUser);
 
   await setItem("users", JSON.stringify(users));
+
+  //Wird in der contactList gespeichert
+  const newContact = {
+    id: lastContactId, // Änderung von "contacts" zu "id"
+    name: name,
+    initials: getInitials(name),
+    email: email,
+    phone: "Bitte Telefonnummer eintragen",
+    badgecolor: randomBadgeColor(),
+    userId: userId, // Änderung von "id" zu "userId"
+  };
+
+  await loadContactsFromStorage(); // aus contacts.js
+  contactList.push(newContact);
+  await setItem("contacts", JSON.stringify(contactList));
 
   showRegistrationSuccess();
 
@@ -168,7 +198,7 @@ function validatePasswordRequirements() {
   const passwordField = document.getElementById("password");
   const password = passwordField.value;
 
-  if (!password.trim()) return; // Überprüfen ob Passwortfeld leer ist.
+  if (!password.trim()) return;
 
   const regex =
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/;
