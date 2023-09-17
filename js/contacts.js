@@ -4,12 +4,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 let contactList = [];
+let userList = [];
 let sortedContactList = [];
 let lastContactId = 0;
 
 
 // ############################################################
-// ----- Vorläufige Funktionen zum Testen
+// ----- Funktionen zum öffnen/schließen der Views ------------
 // ############################################################
 
 function openAddCon() {
@@ -92,6 +93,7 @@ function initialsFrom(string) {
 // ############################################################
 async function initContacts() {
     await loadContactsFromStorage();
+    await loadUsersFromStorage();
     await loadLastContactId();
     renderContactList();
 }
@@ -102,10 +104,22 @@ async function loadContactsFromStorage() {
     tempData = await loadData('contacts', contactList);
     contactList = tempData;
     if(contactList.length > 1) {
-        sortContacts(contactList);
+        sortedContactList = sortContacts(contactList);
     } else {
         sortedContactList = contactList;
     }
+}
+
+
+async function loadUsersFromStorage() {
+    let tempData;
+    tempData = await loadData('users', userList);
+    userList = tempData;
+    // if(contactList.length > 1) {
+    //     sortedContactList = sortContacts(contactList);
+    // } else {
+    //     sortedContactList = contactList;
+    // }
 }
 
 
@@ -149,8 +163,8 @@ async function saveNewContact() {
     await saveData('lastContactId', ++lastContactId);
     clearAddPopup();
     contactList.push(newDataSet[0]);
-    await saveData('contacts',contactList);
-    sortContacts(contactList);
+    await saveData('contacts', contactList);
+    sortedContactList = sortContacts(contactList);
     renderContactList();
     document.getElementById('contactsuccess').classList.add('shortpopup');
     setTimeout(() => {
@@ -193,7 +207,7 @@ async function saveEditContact() {
     contactList[index].email = document.getElementById('editconemail').value;
     contactList[index].phone = document.getElementById('editconphone').value;
     await saveData('contacts', contactList);
-    sortContacts(contactList);
+    sortedContactList = sortContacts(contactList);
     renderContactList();
     renderSingleView(id);
     openEditCon();
@@ -205,7 +219,7 @@ async function deleteContact(id) {
     let index = idToIndex(id, contactList);
     contactList.splice(index,1);
     await saveData('contacts', contactList);
-    sortContacts(contactList);
+    sortedContactList = sortContacts(contactList);
     renderContactList();
     closeContact();
     document.getElementById('popup-editcon').classList.remove('inview');
@@ -214,10 +228,11 @@ async function deleteContact(id) {
 
 // ############################################################
 function sortContacts(arr) {
-    sortedContactList = arr;
-    sortedContactList.sort(
+    let targetArr = arr;
+    targetArr.sort(
         (c1, c2) => 
         (c1.initials < c2.initials) ? -1 : (c1.initials > c2.initials) ? 1 : 0);
+        return targetArr;
 }
 
 
