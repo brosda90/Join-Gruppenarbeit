@@ -381,6 +381,7 @@ async function addNewTask(title, description, priority, date, category, assigned
     tasks.push(newTask);
     await setItem('tasks', JSON.stringify(tasks));
     clearTaskInput();
+    window.location.href = 'board.html';
 }
 
 function clearTaskInput() {   //clear all Input Data form new created Task
