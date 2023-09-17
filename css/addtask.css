@@ -430,7 +430,7 @@ select option {
 }
 
 .listedSubTasks {
-    max-height: 120px;
+    max-height: 98px;
     overflow: auto;
 }
 
@@ -471,6 +471,39 @@ select option {
     padding: 4px 6px 4px 0px;
     width: 20%;
     border-bottom: 1px solid #29abe2;
+}
+
+.popUpField {
+    background-color: rgba(0, 0, 0, 0.2);
+    z-index: 999;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.addNewTaskPopUp {
+    height: 720px;
+    width: 900px;
+    background-color: white;
+    border-radius: 16px;
+    padding: 24px;
+}
+
+.popUpBtn {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.innerPopUpField {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -24px;
 }
 
 .d-none {

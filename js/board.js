@@ -1166,6 +1166,14 @@ function acceptEdit(taskID) {
   closePopup();
 }
 
+/* function openAddNewTaskPopUp() {
+  if (window.innerWidth > 980) {
+    document.getElementById().classList.remove('d-none');
+  } else {
+    window.location.href = 'add_task.html';
+  }
+} */
+
 
 
 /* =========================== */
@@ -1644,4 +1652,3 @@ function touchEnd(event){
     onlongtouch = false;
   }
 }
-

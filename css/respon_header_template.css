@@ -32,7 +32,7 @@ div, nav, main, span, ::after {
     transition: all 75ms ease-in;
 }
 
-span {
+.nav-menu-link span {
     font-family: Inter, sans-serif;
     font-size: 20px;
     line-height: 24px;

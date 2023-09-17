@@ -29,6 +29,7 @@ let contacts = [
         'email' : 'emanuelmüller@gmail.de',
         'phone' : '0123456789',
         'badge-color' : 1,
+        'userid': 1
     },
     {
         'id' : 2,
@@ -37,6 +38,7 @@ let contacts = [
         'email' : 'manuelbauer@gmail.de',
         'phone' : '0123456788',
         'badge-color' : 2,
+        'userid': 2
     },
     {
         'id' : 3,
@@ -45,13 +47,16 @@ let contacts = [
         'email' : 'tinameier@gmail.de',
         'phone' : '0839920239',
         'badge-color' : 3,
-    },{
+        'userid': -1
+    },
+    {
         'id' : 4,
         'name' : 'Alex Schmidt',
         'initials' : 'AS',
         'email' : 'alexschmidt@gmail.de',
         'phone' : '0173902384',
         'badge-color' : 4,
+        'userid': -1
     },
     {
         'id' : 5,
@@ -60,6 +65,7 @@ let contacts = [
         'email' : 'sindreuter@gmail.de',
         'phone' : '0190234312',
         'badge-color' : 5,
+        'userid': -1
     }
 ]
 
