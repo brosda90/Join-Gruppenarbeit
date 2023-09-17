@@ -86,6 +86,12 @@ button {
 
 .board-main-container {
     padding: 0 16px;
+    position: fixed;
+    top: 80px;
+    height: calc(100% - 160px);
+    width: 100%;
+    overflow-y: scroll;
+    background-color: var(--color-darker-white);
 }
 
 
@@ -100,6 +106,13 @@ button {
     gap: 40px;
     margin-top: 48px;
     margin-bottom: 24px;
+}
+
+.board-header-right {
+    display: flex;
+    gap: 32px;
+    justify-content: center;
+    align-items: center;
 }
 
 
@@ -140,14 +153,21 @@ button {
 
 /* BOARD BODY */
 
+.board-body {
+    display: flex;
+    flex-direction: column;
+}
+
 .task-section {
     margin-bottom: 26px;
+    
 }
 
 .task-section-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    min-height: 30px;
     margin-bottom: 16px;
 }
 
@@ -180,23 +200,74 @@ button {
 } */
 
 
-/* ADD Task Button Outlined */
-.add-task-button-outlined {
-    height: 30px;
+/* Add Task Button Outlined */
+.btn-add-task-outlined {
     width: 30px;
+    aspect-ratio: 1 /1;
     border: 2px solid var(--color-dark-blue);
     border-radius: 10px;
-    background-color: transparent;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
-.add-task-button-outlined img {
+.btn-add-task-outlined svg {
     width: 15px;
     height: 15px;
 }
 
+.btn-add-task-outlined:hover,
+.btn-add-task-outlined:hover svg path {
+    border-color: var(--color-blue);
+    stroke: var(--color-blue);
+}
+
+
+/* Add Task Button Filled */
+.btn-add-task-filled {
+    width: 30px;
+    aspect-ratio: 1 /1;
+    background-color: var(--color-dark-blue);
+    border-radius: 10px;
+}
+
+.btn-add-task-filled svg {
+    width: 20px;
+    height: 20px;
+}
+
+.btn-add-task-filled:hover {
+    background-color: var(--color-blue);
+}
+
+.btn-add-task-filled:active {
+    background-color: var(--color-darker-blue);
+}
+
+
+.btn-add-task-with-text {
+    background-color: var(--color-dark-blue);
+    color: var(--color-white);
+    border-radius: 10px;
+    gap: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 51px;
+    min-width: 137px;
+    font-size: 21px;
+    font-weight: 700;
+}
+
+.btn-add-task-with-text svg {
+    width: 20px;
+    height: 20px;
+}
+
+.btn-add-task-with-text:hover {
+    background-color: var(--color-blue);
+}
+
+.btn-add-task-with-text:active {
+    background-color: var(--color-darker-blue);
+}
 
 /* NO TASK CONTAINER */
 .no-task-container {
@@ -224,6 +295,7 @@ button {
     gap: 24px;
     background-color: var(--color-white);
     cursor: pointer;
+    transition: none;
 }
 
 #task-container-indication {
@@ -317,6 +389,7 @@ button {
 
 .popup-container {
     position: absolute;
+    z-index: 50;
     top: 0;
     left: 0;
     right: 0;
@@ -330,6 +403,7 @@ button {
 
 .popup-task-container {
     /* min-height:726px; */
+    max-width: 525px;
     width: 100%;
     padding: 32px 24px;
     background-color: var(--color-white);
@@ -342,6 +416,7 @@ button {
 }
 
 .popup-task-edit-container {
+    max-width: 525px;
     width: 100%;
     padding: 32px 0px;
     background-color: var(--color-white);
@@ -422,7 +497,7 @@ button {
 }
 
 .border-2px {
-    border-width: 2px;
+    border-width: 2px !important;
 }
 
 .contacts-list-item {
@@ -526,12 +601,15 @@ button {
 }
 
 
-/* Entfernt Icon von Input type="date" */
-/* input[type="date"]::-webkit-inner-spin-button,
-input[type="date"]::-webkit-calendar-picker-indicator {
-    display: none;
-    -webkit-appearance: none;
-} */
+input::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+  }
+
+
+/* input validation */
+.invalid {
+    border-color: #ff8190 !important;
+}
 
 
 /* Popup Edit Container */
@@ -540,6 +618,14 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     display: flex;
     flex-direction: column;
     gap: 8px;
+}
+
+
+.popup-task-edit-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    overflow: scroll;
 }
 
 /* Prio Buttons */
@@ -580,6 +666,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     display: flex;
     align-items: center;
     gap: 8px;
+    flex-wrap: wrap;
 }
 
 
@@ -588,7 +675,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    /* padding: 4px 16px; */
+    max-height: 112px;
+    overflow-y: auto;
 }
 
 .subtask-buttons-container {
@@ -612,6 +700,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 /* ok-button */
 .ok-button {
+
     font-size: 21px;
     font-weight: 700;
     color: var(--color-white);
@@ -624,9 +713,17 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     gap: 4px;
 }
 
+.ok-button:hover {
+    background-color: var(--color-blue);
+}
+
+.ok-button:active {
+    background-color: var(--color-darker-blue);
+}
+
 
 .d-none {
-    display: none;
+    display: none !important;
 }
 
 /* Custom Contact Select */
@@ -642,9 +739,29 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     justify-content: space-between;
     align-items: center;
     gap: 16px;
-    height: 56px;
-    padding: 0  16px;
+    min-height: 56px;
+    padding: 0 16px;
+    border-radius: 10px;
 }
+
+.assigned-to-contacts-list-item:hover {
+    background-color: var(--color-lightest-grey);
+    color: black; 
+}
+
+.assigned-to-contacts-list-item:hover img {
+    filter: brightness(0); 
+}
+
+.assigned {
+    background-color: var(--color-dark-blue);
+    color: var(--color-white);
+}
+
+.assigned img {
+    filter: brightness(0) invert(1);
+}
+
 
 .assigned-to-contact {
     display: flex;
@@ -656,8 +773,20 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     position: relative;
     top: -16px;
     box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
-    padding: 16px;
+    padding-top: 16px;
     border-radius: 10px;
+    max-height: 320px;
+    overflow-y: hidden;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.contact-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    overflow-y: scroll;
 }
 
 
@@ -670,8 +799,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     font-weight: 700;
     gap: 16px;
     padding: 12px 16px;
-    width: 100%;
-    height: 56px;
+    width: calc(100% - 32px);
+    min-height: 56px;
+    margin: 8px 16px;
 }
 
 .btn-add-new-contact img {
@@ -720,4 +850,85 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     right: 16px;
     pointer-events: none;
     background-color: var(--color-white);
+}
+
+
+/* no-active-user */
+.no-active-user {
+    opacity: 0.75;
+    filter: grayscale(0.625);
+}
+
+/* Icon Buttons */
+
+.icon-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    aspect-ratio: 1 / 1;
+    min-width: 24px;
+}
+
+.icon-button:hover {
+    background-color: var(--color-lightest-grey);
+    border-radius: 100%;
+}
+
+
+
+@media (min-width: 1000px) {
+
+   h1 {
+    font-size: 61px;
+   }
+
+   h3 {
+    font-size: 20px;
+   }
+
+
+    .board-main-container {
+        top: 96px;
+        left: 232px;
+        width: calc(100% - 232px);
+        height: calc(100% - 96px);
+        padding: 80px 64px 0 64px;
+        display: flex;
+        flex-direction: column; 
+    }
+
+    .board-header {
+        flex-wrap: nowrap;
+    }
+    
+
+    .board-header .add-task-button-blue {
+        order: 3;
+    }
+
+    .board-searchbar-container {
+        max-width: 312px;
+    }
+
+    .board-body {
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 24px;
+        flex-wrap: wrap;
+        flex: 1;
+    }
+
+    .task-section {
+        min-width: 252px;
+    }
+
+    .task-section-body {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 320px) {
+    .board-main-container {
+        padding: 0;
+    }
 }
