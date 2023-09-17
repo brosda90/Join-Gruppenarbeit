@@ -8,8 +8,9 @@
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/board.css">
     <link rel="stylesheet" href="./css/components_library.css">
-    <link rel="stylesheet" href="./css/respon_footer_template.css">
     <link rel="stylesheet" href="./css/respon_header_template.css">
+    <link rel="stylesheet" href="./css/respon_footer_template.css">
+    <script src="./js/storage.js"></script>
     <script src="./js/script.js"></script>
     <script src="./js/board.js"></script>
 </head>
@@ -34,37 +35,14 @@
     </div>
     <main>
         <div class="board-main-container">
-            <div class="board-header">
-                <h1>Board</h1>
-                <button class="add-task-button-blue" onclick="">
-                    <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M11 1V21" stroke="white" stroke-width="2" stroke-linecap="round"/>
-                        <path d="M21 11L1.00048 11.138" stroke="white" stroke-width="2" stroke-linecap="round"/>
-                    </svg>                        
-                </button>
-                <!-- SEARCHBAR -->
-                <div class="board-searchbar-container">
-                    <input type="text" name="" id="board-searchbar" class="board-searchbar" placeholder="Find Task" onkeyup="searchTasks()">
-                    <div class="board-searchbar-container-inner-right">
-                        <div class="v-line-separator"></div>
-                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <mask id="mask0_81525_6538" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="32" height="32">
-                            <rect width="32" height="32" fill="#D9D9D9"/>
-                            </mask>
-                            <g mask="url(#mask0_81525_6538)">
-                            <path d="M13.7118 20.2137C11.8946 20.2137 10.3567 19.5843 9.098 18.3256C7.83931 17.0669 7.20996 15.529 7.20996 13.7118C7.20996 11.8946 7.83931 10.3567 9.098 9.098C10.3567 7.83931 11.8946 7.20996 13.7118 7.20996C15.529 7.20996 17.0669 7.83931 18.3256 9.098C19.5843 10.3567 20.2137 11.8946 20.2137 13.7118C20.2137 14.4454 20.097 15.1372 19.8636 15.7874C19.6302 16.4376 19.3134 17.0127 18.9133 17.5129L24.5149 23.1145C24.6983 23.2979 24.79 23.5313 24.79 23.8147C24.79 24.0981 24.6983 24.3315 24.5149 24.5149C24.3315 24.6983 24.0981 24.79 23.8147 24.79C23.5313 24.79 23.2979 24.6983 23.1145 24.5149L17.5129 18.9133C17.0127 19.3134 16.4376 19.6302 15.7874 19.8636C15.1372 20.097 14.4454 20.2137 13.7118 20.2137ZM13.7118 18.2131C14.9622 18.2131 16.025 17.7755 16.9002 16.9002C17.7755 16.025 18.2131 14.9622 18.2131 13.7118C18.2131 12.4615 17.7755 11.3987 16.9002 10.5234C16.025 9.64815 14.9622 9.21053 13.7118 9.21053C12.4615 9.21053 11.3987 9.64815 10.5234 10.5234C9.64815 11.3987 9.21053 12.4615 9.21053 13.7118C9.21053 14.9622 9.64815 16.025 10.5234 16.9002C11.3987 17.7755 12.4615 18.2131 13.7118 18.2131Z" fill="#2A3647"/>
-                            </g>
-                        </svg> 
-                    </div>
-                </div>
-                <!-- END-SEARCHBAR -->
+            <div id="board-header" class="board-header">
             </div>
             <div class="board-body">
                 <!-- TO DO -->
                 <section id="section-to-do" class="task-section" ondrop="moveTo('to-do')" ondragover="allowDrop(event,'section-to-do-tasks-container')" ondragleave="removeTaskDropIndication('section-to-do-tasks-container')">
                     <div class="task-section-header">
                         <h3>To do</h3>
-                        <button class="add-task-button-outlined" onclick="addTask('to-do')">
+                        <button class="btn-add-task-outlined fl-jcc-aic">
                             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M9 1.5V16.5" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
                                 <path d="M16.5 9.1416L1.5 9.1416" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
@@ -72,16 +50,13 @@
                         </button>
                     </div>
                     <div id="section-to-do-tasks-container" class="task-section-body" >
-                        <!-- <div class="no-task-container">
-                            <span>No tasks To do</span>
-                        </div> -->
                     </div>
                 </section>
                 <!-- In Progress -->
                 <section id="section-in-progress" class="task-section" ondrop="moveTo('in-progress')" ondragover="allowDrop(event,'section-in-progress-tasks-container')" ondragleave="removeTaskDropIndication('section-in-progress-tasks-container')">
                     <div class="task-section-header">
                         <h3>In progress</h3>
-                        <button class="add-task-button-outlined" onclick="addTask('to-do')">
+                        <button class="btn-add-task-outlined fl-jcc-aic">
                             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M9 1.5V16.5" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
                                 <path d="M16.5 9.1416L1.5 9.1416" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
@@ -89,59 +64,13 @@
                         </button>
                     </div>
                     <div id="section-in-progress-tasks-container" class="task-section-body">
-                        <!-- <div class="task-container" onclick="openTaskPopup()">
-                            <div class="task-category">User Story</div>
-                            <div class="task-text">
-                                <div class="task-title">Kochwelt Page & Recipe Recommender</div>
-                                <div class="task-description">Build start page with recipe recommendation...</div>
-                            </div>
-                            <div class="task-subtask-progress-container">
-                                <div class="subtask-progress-bar">
-                                    <div class="subtask-progress-bar-fill"></div>
-                                </div>
-                                <div class="subtask-progress-text">1/2 Subtasks</div>
-                            </div>
-                            <div class="task-assignments-prio-container">
-                                <div class="task-assignments">
-                                    <div class="profile-badge bc-orange">AM</div>
-                                    <div class="profile-badge bc-turquoise ">EM</div>
-                                    <div class="profile-badge bc-dark-blue">MB</div>
-                                </div>
-                                <div class="task-prio">
-                                    <img src="./assets/img/prio-media.svg" alt="prio-media-symbol">
-                                </div>
-                            </div>
-                        </div> -->
-                        <!-- <div class="task-container" onclick="openTaskPopup()">
-                            <div class="task-category">User Story</div>
-                            <div class="task-text">
-                                <div class="task-title">Kochwelt Page & Recipe Recommender</div>
-                                <div class="task-description">Build start page with recipe recommendation...</div>
-                            </div>
-                            <div class="task-subtask-progress-container">
-                                <div class="subtask-progress-bar">
-                                    <div class="subtask-progress-bar-fill"></div>
-                                </div>
-                                <div class="subtask-progress-text">1/2 Subtasks</div>
-                            </div>
-                            <div class="task-assignments-prio-container">
-                                <div class="task-assignments">
-                                    <div class="profile-badge bc-orange">AM</div>
-                                    <div class="profile-badge bc-turquoise ">EM</div>
-                                    <div class="profile-badge bc-dark-blue">MB</div>
-                                </div>
-                                <div class="task-prio">
-                                    <img src="./assets/img/prio-media.svg" alt="prio-media-symbol">
-                                </div>
-                            </div>
-                        </div> -->
                     </div>
                 </section>
                 <!-- Await Feedback -->
                 <section id="section-await-feedback" class="task-section" ondrop="moveTo('await-feedback')" ondragover="allowDrop(event,'section-await-feedback-tasks-container')" ondragleave="removeTaskDropIndication('section-await-feedback-tasks-container')">
                     <div class="task-section-header">
                         <h3>Await feedback</h3>
-                        <button class="add-task-button-outlined" onclick="addTask('to-do')">
+                        <button class="btn-add-task-outlined fl-jcc-aic">
                             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M9 1.5V16.5" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
                                 <path d="M16.5 9.1416L1.5 9.1416" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
@@ -155,12 +84,6 @@
                 <section id="section-done" class="task-section" ondrop="moveTo('done')" ondragover="allowDrop(event,'section-done-tasks-container')" ondragleave="removeTaskDropIndication('section-done-tasks-container')">
                     <div class="task-section-header">
                         <h3>Done</h3>
-                        <button class="add-task-button-outlined" onclick="addTask('done')">
-                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M9 1.5V16.5" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
-                                <path d="M16.5 9.1416L1.5 9.1416" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
-                            </svg>    
-                        </button>
                     </div>
                     <div id="section-done-tasks-container" class="task-section-body">
                     </div>
