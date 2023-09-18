@@ -1,15 +1,17 @@
+document.addEventListener("DOMContentLoaded", function () {
+  loadTasksFromRemoteStorage();
+});
+
+function switchToBoard() {
+  window.location.href = "board.html";
+}
+
+//################  LOAD FUNCTION FOR NAME AND GREETINGS #############################//
+
 function updateDisplay() {
-  const mainContainer = document.querySelector(".main");
   const rightContainer = document.querySelector(".right-container");
 
-  rightContainer.style.opacity = "0";
-  mainContainer.style.display = "flex";
-  mainContainer.style.opacity = "1";
-  rightContainer.style.zIndex = "0";
-
-  rightContainer.addEventListener("transitionend", function () {
-    rightContainer.style.display = "none";
-  });
+  rightContainer.addEventListener("transitionend", function () {});
 }
 
 setTimeout(updateDisplay, 2000);
@@ -37,3 +39,61 @@ document.addEventListener("DOMContentLoaded", function () {
       loggedInUser;
   }
 });
+window.addEventListener("DOMContentLoaded", (event) => {
+  setTimeout(function () {
+    const viewportWidth = window.innerWidth;
+
+    // Wenn die Fensterbreite weniger als 1000px beträgt, setze die Opazität auf 0
+    if (viewportWidth <= 1000) {
+      document.querySelector(".right-container").style.opacity = "0";
+    }
+  }, 1000); // Warte 1 Sekunde, bevor die Fensterbreite überprüft und die Opazität geändert wird.
+});
+
+//################  LOAD TASKS #############################//
+
+async function loadTasksFromRemoteStorage() {
+  tasks = JSON.parse(await getItem("tasks"));
+  updateTaskFromServer();
+  nextDeadline();
+}
+
+//################ ARRAY FILTER  #############################//
+
+function updateTaskFromServer() {
+  const taskCount = tasks.length;
+  const toDoCount = tasks.filter((task) => task.status === "to-do").length;
+  const progessCount = tasks.filter(
+    (task) => task.status === "in-progress"
+  ).length;
+  const feedbackCount = tasks.filter(
+    (task) => task.status === "await-feedback"
+  ).length;
+  const urgentCount = tasks.filter((task) => task.priority === 1).length;
+  const doneCount = tasks.filter((task) => task.priority === true).length;
+
+  document.querySelector("#taskInBoard h3").textContent = taskCount;
+  document.querySelector("#toDo h3").textContent = toDoCount;
+  document.querySelector("#taskInProgress h3").textContent = progessCount;
+  document.querySelector("#awaitingfeedback h3").textContent = feedbackCount;
+  document.querySelector("#urgent h3").textContent = urgentCount;
+  document.querySelector("#done h3").textContent = doneCount;
+}
+
+//################  DEADLINE DATE FOR URGENT TASKS #############################//
+
+function nextDeadline() {
+  const urgentTasks = tasks.filter((task) => task.priority === 1);
+
+  urgentTasks.sort((a, b) => new Date(a.due_date) - new Date(b.due_date));
+
+  const nextDate = urgentTasks[0].due_date;
+
+  const formatDate = new Date(nextDate).toLocaleDateString("de-DE", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
+  document.querySelector("#deadLine p:nth-child(1) b").textContent = formatDate;
+}
