@@ -144,7 +144,7 @@ function closeWrongLogin() {
 //################ TEST FUNKTION ZEIGT REGESTRIERTE NUTZER IN CONSOLE  #############################//
 //################                                                     #############################//
 async function logRegisteredUsers() {
-  const users = await getItem("users");
+  const users = JSON.parse(await getItem("users"));
 
   if (users) {
     console.log("Registrierte Benutzer:", users);
