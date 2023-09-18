@@ -93,15 +93,28 @@ h1 {
     width: 100%;
 }
 
+.leftSite {
+    width: 378px;
+}
+
+.rightSite {
+    width: 378px;
+    margin-bottom: 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
 .titleInput {
     height: 40px;
-    width: 382px;
+    width: 365px;
     border: 1px solid #D1D1D1;
     padding-left: 10px;
 }
 
 .descriptionInput {
-    width: 382px;
+    width: 365px;
     height: 88px;
     border-color: #D1D1D1;
     padding-left: 10px;
@@ -130,8 +143,8 @@ input[type="date"] {
     padding-left: 10px;
     padding-right: 10px;
     font-family: 'Inter';
-    width: 374px;
     height: 40px;
+    width: 357px;
     border: 1px solid #D1D1D1;
 }
 
@@ -161,7 +174,7 @@ input:focus {
 .btnSection {
     display: flex;
     justify-content: space-between;
-    width: 100%;
+    width: 379px;
 }
 
 select {
@@ -223,7 +236,7 @@ select option {
     height: 40px;
     padding-left: 10px;
     padding-right: 10px;
-    width: 374px;
+    width: 379px;
     background-color: white;
     border: 1px solid #D1D1D1;
 }
@@ -242,7 +255,7 @@ select option {
     padding-left: 10px;
     padding-right: 10px;
     font-family: 'Inter';
-    height: 100%;
+    height: 95%;
     border: 1px solid #29abe2;
     border-right: transparent !important;
 }
@@ -281,7 +294,7 @@ select option {
 .createBtn {
     display: flex;
     justify-content: flex-end;
-    margin-top: 50px;
+    margin-top: 16px;
     gap: 10px;
 }
 
@@ -332,7 +345,7 @@ select option {
 }
 
 .categorySelector {
-    width: 368px;
+    width: 379px;
     background-color: white;
     height: 40px;
     border: 1px solid #D1D1D1;
@@ -344,7 +357,7 @@ select option {
 }
 
 #allOptions {
-    width: 374px;
+    width: 380px;
     background-color: white;
     border: 1px solid #D1D1D1;
     display: flex;
@@ -364,7 +377,7 @@ select option {
 .selector {
     max-height: 130px;
     overflow: auto;
-    width: 394px;
+    width: 380px;
     position: absolute;
     background-color: white;
     border: 1px solid #D1D1D1;
@@ -435,7 +448,7 @@ select option {
 }
 
 .listedSubTasks {
-    max-height: 98px;
+    max-height: 104px;
     overflow: auto;
 }
 

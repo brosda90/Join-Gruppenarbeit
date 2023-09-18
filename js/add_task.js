@@ -348,7 +348,7 @@ function createSubTask() {   //create and push Subtask
     }
 }
 
-function createTask() {   //get all Values for the new Task
+function createTask(status) {   //get all Values for the new Task
     const checked = checkInputData();
 
     if (checked === true) {
@@ -361,14 +361,15 @@ function createTask() {   //get all Values for the new Task
         let subtasks = addedSubTasks;
         document.getElementById('checkBoxes').classList.remove('d-block');
 
-        addNewTask(title, description, priority, date, category, assignedTo, subtasks);
+        addNewTask(title, status, description, priority, date, category, assignedTo, subtasks);
     };
 }
 
-async function addNewTask(title, description, priority, date, category, assignedTo, subtasks) {   //push new created Task
+async function addNewTask(title, status, description, priority, date, category, assignedTo, subtasks) {   //push new created Task
     await loadTasksFromRemoteStorage();
     let newTask = {
         'id': tasks.length + 1,
+        'status': status,
         'category': category,
         'title': title,
         'description': description,
