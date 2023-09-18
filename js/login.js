@@ -111,6 +111,7 @@ async function login() {
 
     // Wenn der Benutzer gefunden wird, leite zur board.html weiter
     localStorage.setItem("loggedInUser", user.name);
+    localStorage.setItem("loggedInUserID", user.id);
     window.location.href = "board.html";
   } else {
     // Zeigt Popup an, wenn keine Übereinstimmung gefunden wird
@@ -143,7 +144,7 @@ function closeWrongLogin() {
 //################ TEST FUNKTION ZEIGT REGESTRIERTE NUTZER IN CONSOLE  #############################//
 //################                                                     #############################//
 async function logRegisteredUsers() {
-  const users = await getItem("users");
+  const users = JSON.parse(await getItem("users"));
 
   if (users) {
     console.log("Registrierte Benutzer:", users);

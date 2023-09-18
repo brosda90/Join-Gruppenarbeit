@@ -10,9 +10,12 @@
     <link rel="stylesheet" href="./css/components_library.css">
     <link rel="stylesheet" href="./css/respon_header_template.css">
     <link rel="stylesheet" href="./css/respon_footer_template.css">
+    <link rel="shortcut icon" href="assets/img/join_favicon.png" type="image/x-icon">
     <script src="./js/storage.js"></script>
+    <script src="./js/loggedinuser.js"></script>
     <script src="./js/script.js"></script>
     <script src="./js/board.js"></script>
+    <script src="./js/add_task.js"></script>
 </head>
 <body onload="initBoard()">
     <div class="insert-top">
@@ -29,7 +32,7 @@
                 <span>Kanban Project Management Tool</span>
             </div>
             <button class="user-icon" onclick="">
-                <div class="user-name">SM</div>
+                <div id="user-name" class="user-name">SM</div>
             </button>            
         </div>
     </div>
@@ -42,7 +45,7 @@
                 <section id="section-to-do" class="task-section" ondrop="moveTo('to-do')" ondragover="allowDrop(event,'section-to-do-tasks-container')">
                     <div class="task-section-header">
                         <h3>To do</h3>
-                        <button class="btn-add-task-outlined fl-jcc-aic">
+                        <button class="btn-add-task-outlined fl-jcc-aic" onclick="openAddNewTaskPopUp('to-do')">
                             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M9 1.5V16.5" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
                                 <path d="M16.5 9.1416L1.5 9.1416" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
@@ -56,7 +59,7 @@
                 <section id="section-in-progress" class="task-section" ondrop="moveTo('in-progress')" ondragover="allowDrop(event,'section-in-progress-tasks-container')">
                     <div class="task-section-header">
                         <h3>In progress</h3>
-                        <button class="btn-add-task-outlined fl-jcc-aic">
+                        <button class="btn-add-task-outlined fl-jcc-aic" onclick="openAddNewTaskPopUp('in-progress')">
                             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M9 1.5V16.5" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
                                 <path d="M16.5 9.1416L1.5 9.1416" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
@@ -70,7 +73,7 @@
                 <section id="section-await-feedback" class="task-section" ondrop="moveTo('await-feedback')" ondragover="allowDrop(event,'section-await-feedback-tasks-container')">
                     <div class="task-section-header">
                         <h3>Await feedback</h3>
-                        <button class="btn-add-task-outlined fl-jcc-aic">
+                        <button class="btn-add-task-outlined fl-jcc-aic" onclick="openAddNewTaskPopUp('await-feedback')">
                             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M9 1.5V16.5" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
                                 <path d="M16.5 9.1416L1.5 9.1416" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
