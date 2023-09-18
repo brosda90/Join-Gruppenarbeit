@@ -279,8 +279,6 @@ let contacts = [
   }
 ]
 
-let sortedContactList;
-
 let currentUser = 
   {
     'id' : 1,

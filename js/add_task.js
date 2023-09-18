@@ -2,7 +2,6 @@ let expanded = false;
 let selectTrigger = document.querySelector('.select-trigger');
 
 let contacts = [];
-let sortedContactList = [];
 let tasks = [];
 let addedContacts = [];
 let addedContactInitial = [];

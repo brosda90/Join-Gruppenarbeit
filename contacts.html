@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./css/contacts.css">
     <link rel="shortcut icon" href="assets/img/join_favicon.png" type="image/x-icon">
     <script src="./js/storage.js"></script>
+    <script src="./js/loggedinuser.js"></script>
     <script src="./js/contacts.js"></script>
     <title>Join - Contacts</title>
 </head>
@@ -26,7 +27,7 @@
                 <span>Kanban Project Management Tool</span>
             </div>
             <button class="user-icon" onclick="">
-                <div class="user-name">SM</div>
+                <div id="user-name" class="user-name">SM</div>
             </button>            
         </div>
     </div>
@@ -216,7 +217,7 @@
                     <!--  -->
                     <div class="popup-addcon-input-box border">
                         <div class="popup-addcon-input-innerbox">
-                            <input type="email" id="addconemail" required pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" placeholder="Email">
+                            <input type="email" id="addconemail" required pattern="^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$" placeholder="Email">
                             <div class="popup-addcon-input-imgbox">
                                 <img src="./assets/img/mail_20x16.png">
                             </div>
@@ -282,7 +283,7 @@
                     <!--  -->
                     <div class="popup-editcon-input-box border">
                         <div class="popup-editcon-input-innerbox">
-                            <input type="email" id="editconemail" required pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" placeholder="Email">
+                            <input type="email" id="editconemail" required pattern="^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$" placeholder="Email">
                             <div class="popup-editcon-input-imgbox">
                                 <img src="./assets/img/mail_20x16.png">
                             </div>
