@@ -1,6 +1,10 @@
 
 /* GENERAL STYLING */
 
+html {
+    overflow: hidden !important; 
+}
+
 main {
     position: fixed;
     top: 80px;
@@ -277,6 +281,7 @@ button {
 .no-task-container {
     height: 48px;
     width: 100%;
+    min-width: 252px;
     background-color: var(--color-lightest-grey);
     color: var(--color-grey);
     display: flex;

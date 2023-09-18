@@ -1313,6 +1313,7 @@ let taskWidth;
  * @param {event} ev 
  */
 function startDragging(id,ev) {
+  startTaskSection = getDraggedOverZone(ev);
   currentDraggedElement = id;
   let task = document.getElementById(`task-${id}-container`);
   taskWidth = task.offsetWidth;
@@ -1341,7 +1342,7 @@ function startDragging(id,ev) {
  */
 function allowDrop(event,id) {
   event.preventDefault();
-  createTaskDropIndication(id);
+  // createTaskDropIndication(id);
 }
 
 
@@ -1379,6 +1380,23 @@ function drag(event) {
       visibleTaskClone.style.opacity = 0;
     }
   }
+  // INDICATION
+   // check if touch is in dragzone
+   let dragoverContainerID = getDraggedOverZone(event);
+
+   dragoverContainerID += '-tasks-container';
+    // console.log('dropIndicationExists:', dropIndicationExists);
+    // console.log('currentDraggedOver:', currentDraggedOverContainer);
+    // console.log('dragoverContainerId', dragoverContainerID);
+
+   // if there is no dashed container => create one and hide the empty box
+   if (!dropIndicationExists && currentDraggedOverContainer != dragoverContainerID && dragoverContainerID != '') {
+     createTaskDropIndication(dragoverContainerID);
+     currentDraggedOverContainer = dragoverContainerID;
+   } else if (dropIndicationExists && currentDraggedOverContainer != dragoverContainerID) {
+     removeTaskDropIndication(currentDraggedOverContainer);
+ }
+
 }
 
 
@@ -1388,6 +1406,7 @@ function drag(event) {
  * - removes the visible clone
  */
 function dragEnd(ev) {
+  console.log('DRAGEND');
   let visibleTaskClone = document.getElementById('visibleTaskClone');
   document.body.style.overflow = 'auto';
   visibleTaskClone.style.opacity = 0;
@@ -1464,7 +1483,6 @@ function showNoTaskContainer(id) {
 }
 
 
-
 /* ============================= */
 /* ===== DRAG & DROP TOUCH ===== */
 /* ============================= */
@@ -1524,11 +1542,12 @@ function touchDrag(event) {
     }
     // check if touch is in dragzone
     let dragoverContainerID = getDraggedOverZone(event);
-
     dragoverContainerID += '-tasks-container';
-
+    // console.log('dropIndicationExists:', dropIndicationExists);
+    // console.log('currentDraggedOver:', currentDraggedOverContainer);
+    // console.log('dragoverContainerId', dragoverContainerID);
     // if there is no dashed container => create one and hide the empty box
-    if (!dropIndicationExists && currentDraggedOverContainer != dragoverContainerID && dragoverContainerID != '') {
+    if (!dropIndicationExists) {
       createTaskDropIndication(dragoverContainerID);
       currentDraggedOverContainer = dragoverContainerID;
     } else if (dropIndicationExists && currentDraggedOverContainer != dragoverContainerID) {
@@ -1586,8 +1605,10 @@ function touchDrop(event) {
  * @returns 
  */
 function checkIfDropIsInZone(dropContainer,event) {
-  let touchX = event.changedTouches[0].pageX;
-  let touchY = event.changedTouches[0].pageY;
+  // console.log(event.type);
+  let touch = (event.type == 'touchstart' || event.type == 'touchmove' || event.type == 'touchend') ;
+  let touchX = touch ? event.changedTouches[0].pageX : event.pageX;
+  let touchY = touch ? event.changedTouches[0].pageY : event.pageY;
   return (dropContainer.right > touchX &&
           dropContainer.left < touchX &&
           dropContainer.bottom > touchY &&
