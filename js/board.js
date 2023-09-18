@@ -1651,11 +1651,13 @@ function touchEnd(event){
   }
 }
 
+function openAddNewTaskPopUp(status) {
+  localStorage.removeItem('taskStatus');
+  localStorage.setItem('taskStatus', status);
 
-/* function openAddNewTaskPopUp() {
   if (window.innerWidth > 980) {
-    document.getElementById().classList.remove('d-none');
+    document.getElementById('popup-container').style.display = 'block';
   } else {
-    window.location.href = 'addtask.html'
+    window.location.href = 'add_task.html'
   }
-} */
+} 

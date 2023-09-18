@@ -1,10 +1,12 @@
 let expanded = false;
 let selectTrigger = document.querySelector('.select-trigger');
 
-let contacts = [];
-let tasks = [];
+let taskStatus = localStorage.getItem('taskStatus') || 'to-do';
+let taskContacts = [];
+let loadedTasks = [];
 let addedContacts = [];
 let addedContactInitial = [];
+let badges = [];
 let addedSubTasks = [];
 
   //-------------------------------------------------//
@@ -19,16 +21,16 @@ async function initAddTask() {
 }
 
 async function loadContactsFromStorage() {
-    contacts = JSON.parse(await getItem('contacts'));
-    if(contacts.length > 1) {
-        sortContacts(contacts);
+    taskContacts = JSON.parse(await getItem('contacts'));
+    if(taskContacts.length > 1) {
+        sortContacts(taskContacts);
     } else {
-        sortedContactList = contacts;
+        sortedContactList = taskContacts;
     }
 }
 
 async function loadTasksFromRemoteStorage () {
-    tasks = JSON.parse(await getItem('tasks'));
+    loadedTasks = JSON.parse(await getItem('tasks'));
 }
 
 function sortContacts(arr) {
@@ -133,10 +135,9 @@ function checkInputData() {   //check required Input Data
     const dateInput = document.getElementById('dateToday');
     const categoryInput = document.getElementById('chosenCategory');
     const selectedPriority = getSelectedPrio();
-    const selectedContacts = addedContacts;
 
     const fieldsValid = checkInputDataFields(titleInput, descriptionInput, dateInput);
-    const selectsValid = checkSelectDataFields(categoryInput, selectedPriority, selectedContacts);
+    const selectsValid = checkSelectDataFields(categoryInput, selectedPriority);
 
     return fieldsValid && selectsValid;
 }
@@ -160,7 +161,7 @@ function checkInputDataFields(titleInput, descriptionInput, dateInput) {   //che
     return fieldsValid;
 }
 
-function checkSelectDataFields(categoryInput, selectedPriority, selectedContacts) {   //check required Select Elements
+function checkSelectDataFields(categoryInput, selectedPriority) {   //check required Select Elements
     let selectsValid = true;
 
     if (categoryInput.innerHTML === 'Select task Category') {
@@ -173,25 +174,23 @@ function checkSelectDataFields(categoryInput, selectedPriority, selectedContacts
         emptyInputAlert(document.getElementById('lowBtn'));
         selectsValid = false;
     }
-    if (selectedContacts.length === 0) {
-        emptyInputAlert(document.getElementById('searchContact'));
-        selectsValid = false;
-    }
 
     return selectsValid;
 }
 
-function addedContactsCheckBox(checked, src, id, index) {   //toggle Checkbox icon of each Contact
+function addedContactsCheckBox(checked, src, id, badge, index) {   //toggle Checkbox icon of each Contact
     if (src === './assets/img/check_button_unchecked.svg') {
         checked.src = './assets/img/check_button_checked.svg';
         addedContacts.push(id);
-        addedContactInitial.push(contacts[index]['initials']);
+        badges.push(badge);
+        addedContactInitial.push(taskContacts[index]['initials']);
         document.getElementById('searchContactInput').value = "";
     } else if (src === './assets/img/check_button_checked.svg') {
         checked.src = './assets/img/check_button_unchecked.svg';
         const indexOfId = addedContacts.indexOf(id);
         if (indexOfId !== -1) {
             addedContacts.splice(indexOfId, 1);
+            badges.splice(indexOfId, 1);
             addedContactInitial.splice(indexOfId, 1);
         }
     };
@@ -295,10 +294,10 @@ function showContacts() {   //show all Contacts in dropdown Menu
 function searchContacts() {   //search contact in contact drop down menu
     const searchInput = document.getElementById('searchContactInput').value.toLowerCase();
     const dropDown = document.getElementById('contactDropDown');
-    const contacts = dropDown.getElementsByClassName('singleContact');
+    const taskContacts = dropDown.getElementsByClassName('singleContact');
 
-    for (let l = 0; l < contacts.length; l++) {
-        const contact = contacts[l];
+    for (let l = 0; l < taskContacts.length; l++) {
+        const contact = taskContacts[l];
         const contactName = contact.getElementsByTagName('span')[0].textContent.toLowerCase();
 
         if (searchInput === '') {
@@ -314,9 +313,10 @@ function searchContacts() {   //search contact in contact drop down menu
 function addedContact(index) {  //set each Contact ID compaired to the contact JSON from data.js
     let checked = document.getElementById(`check${index}`);
     let src = checked.getAttribute("src");
-    let id = index + 1;   //set index from Contacts to ID
+    let id = taskContacts[index]['id'];   //set index from Contacts to ID
+    let badge = taskContacts[index]['badge-color'];
 
-    addedContactsCheckBox(checked, src, id, index);
+    addedContactsCheckBox(checked, src, id, badge, index);
 
     checkContactLength();
     renderContactInitials();
@@ -347,7 +347,7 @@ function createSubTask() {   //create and push Subtask
     }
 }
 
-function createTask(status) {   //get all Values for the new Task
+function createTask() {   //get all Values for the new Task
     const checked = checkInputData();
 
     if (checked === true) {
@@ -360,15 +360,15 @@ function createTask(status) {   //get all Values for the new Task
         let subtasks = addedSubTasks;
         document.getElementById('checkBoxes').classList.remove('d-block');
 
-        addNewTask(title, status, description, priority, date, category, assignedTo, subtasks);
+        addNewTask(title, description, priority, date, category, assignedTo, subtasks);
     };
 }
 
-async function addNewTask(title, status, description, priority, date, category, assignedTo, subtasks) {   //push new created Task
+async function addNewTask(title, description, priority, date, category, assignedTo, subtasks) {   //push new created Task
     await loadTasksFromRemoteStorage();
     let newTask = {
         'id': tasks.length + 1,
-        'status': status,
+        'status': taskStatus,
         'category': category,
         'title': title,
         'description': description,
@@ -381,8 +381,8 @@ async function addNewTask(title, status, description, priority, date, category, 
         },
     };
 
-    tasks.push(newTask);
-    await setItem('tasks', JSON.stringify(tasks));
+    loadedTasks.push(newTask);
+    await setItem('tasks', JSON.stringify(loadedTasks));
     clearTaskInput();
     window.location.href = 'board.html';
 }
@@ -449,6 +449,7 @@ function resetTaskData() {   //clear all arrays form new created Task
     addedSubTasks = [];
     addedContactInitial = [];
 
+    localStorage.removeItem('taskStatus');
     resetCheckBoxArrow();
 }
 
@@ -481,13 +482,16 @@ function toggleEditSubInput(index) {   //toggle Sub Task edit input
 //-------------------------------------//
 
 function contactInitialsHTML(index, inital) {
-    return `<div class="profile-badge bc-${index + 1} brd-white">${inital}</div>`;
+    return `<div class="profile-badge bc-${badges[index]} brd-white">${inital}</div>`;
 }
 
 function renderContactHTML(index, contact) {
     return `
         <div id="contact${index}" class="singleContact option item" onclick="addedContact(${index})">
-            <span>${contact['name']}</span>
+            <div class="singleContactInitialName">
+                <div class="profile-badge bc-${contact['badge-color']} brd-white">${contact['initials']}</div>
+                <span>${contact['name']}</span>
+            </div>
             <img id="check${index}" src="./assets/img/check_button_unchecked.svg">
         </div>`;
 }
