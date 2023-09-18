@@ -619,6 +619,12 @@ function closePopup() {
   renderAllTasks();
 }
 
+function closeAddTaskPopup() {
+  let popupContainer = document.getElementById('popup-container-add-task');
+  popupContainer.style.display = 'none';
+  renderAllTasks();
+}
+
 function prioToText(prio) {
   let prioAsText = ['High', 'Medium', 'Low'];
   return prioAsText[prio-1]; // started counting at 1 not 0
@@ -1677,7 +1683,7 @@ function openAddNewTaskPopUp(status) {
   localStorage.setItem('taskStatus', status);
 
   if (window.innerWidth > 980) {
-    document.getElementById('popup-container').style.display = 'block';
+    document.getElementById('popup-container-add-task').style.display = 'flex';
   } else {
     window.location.href = 'add_task.html'
   }
