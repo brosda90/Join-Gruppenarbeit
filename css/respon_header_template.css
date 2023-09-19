@@ -74,6 +74,7 @@ div, nav, main, span, ::after {
     justify-content: center;
     border-radius: 100%;
     border: 2px solid var(--col-black);
+    cursor: pointer;
 }
 
 .user-name {
@@ -81,6 +82,30 @@ div, nav, main, span, ::after {
     color: var(--col-btn-activ);
 }
 
+.useroptions {
+    z-index: 9;
+    position: fixed;
+    top: 80px;
+    right: 16px;
+    padding: 10px;
+    border-radius: 20px;
+    border-top-right-radius: 0;
+    background-color: var(--col-main);
+    box-shadow: var(--col-shadow10);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.useroptions-link {
+    text-decoration: none;
+    color: var(--color-light-grey);
+    padding: 8px 16px;
+    border-radius: 8px;
+    background-color: var(--col-main);
+}
+
+/* ------------------------------------------------------------ */
 
 
 @media (min-width: 1000px) {
