@@ -1410,7 +1410,7 @@ function drag(event) {
  * - removes the visible clone
  */
 function dragEnd(ev) {
-  console.log('DRAGEND');
+  // console.log('DRAGEND');
   let visibleTaskClone = document.getElementById('visibleTaskClone');
   document.body.style.overflow = 'auto';
   visibleTaskClone.style.opacity = 0;
@@ -1504,6 +1504,7 @@ let startTaskSection;
  * @param {event} ev  - touchstart
  */
 function startTouchDragging(id,ev) {
+  console.log(ev.type);
   startTaskSection = getDraggedOverZone(ev);
   currentDraggedElement = id;
   let task = document.getElementById(`task-${id}-container`);
@@ -1524,7 +1525,8 @@ function startTouchDragging(id,ev) {
   dragScrollActive = true;
 }
 
-let currentDraggedOverContainer= ''; 
+let currentDraggedOverContainer= '';
+let dragActive = false; 
 
 /**
  * function called ontouchmove of task-container
@@ -1533,7 +1535,9 @@ let currentDraggedOverContainer= '';
  * @param {event} event - touchmove
  */
 function touchDrag(event) {
-  if (onlongtouch) {
+  console.log(event.type);
+  if (onlongtouch && !isScrolling) {
+    dragActive = true;
     visibleTaskClone = document.getElementById('visibleTaskClone');
     if (event.cancelable) {
       event.preventDefault(); // prevent touch scrolling while holding the element
@@ -1588,7 +1592,8 @@ function getDraggedOverZone(event) {
  * @param {event} event - touchend
  */
 function touchDrop(event) {
-  dragEnd();
+  if (dragActive) {
+    dragEnd();
   let dragoverContainerID = getDraggedOverZone(event); 
   touchMovetoDropzone(dragoverContainerID);
   if (dragoverContainerID == '') {
@@ -1597,6 +1602,9 @@ function touchDrop(event) {
     removeTaskDropIndication(dragoverContainerID);
   };
   dragScrollActive = false;
+  dragActive = false;
+  }
+  
 }
 
 
@@ -1659,13 +1667,17 @@ let timer = false;
 let duration = 1000;
 
 function touchStart(id,event){
+  // console.log(event.type);
   if (!timer) {
     timer = setTimeout(function() {
       onlongtouch = true;
-      startTouchDragging(id,event);
+      if (!isScrolling) {
+        startTouchDragging(id,event);
+      }
     }, duration);
   }
 }
+
 
 function touchEnd(event){
   if (timer) {
@@ -1678,13 +1690,52 @@ function touchEnd(event){
   }
 }
 
+
+// ADD TASK POPUP
+
 function openAddNewTaskPopUp(status) {
   localStorage.removeItem('taskStatus');
   localStorage.setItem('taskStatus', status);
 
   if (window.innerWidth > 980) {
     document.getElementById('popup-container-add-task').style.display = 'flex';
+    document.getElementsByClassName('headAddTask')[0].innerHTML += addTaskClosingButtonHTML(); // Close Button for Popup
   } else {
     window.location.href = 'add_task.html'
   }
 } 
+
+
+function addTaskClosingButtonHTML() {
+  return /*html*/`
+        <button class="icon-button" onclick="closeAddTaskPopup()" type="button">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <mask id="mask0_81722_982" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="4" y="4" width="24" height="24">
+            <rect x="4" y="4" width="24" height="24" fill="#D9D9D9"/>
+            </mask>
+            <g mask="url(#mask0_81722_982)">
+            <path d="M15.9998 17.3998L11.0998 22.2998C10.9165 22.4831 10.6831 22.5748 10.3998 22.5748C10.1165 22.5748 9.88314 22.4831 9.6998 22.2998C9.51647 22.1165 9.4248 21.8831 9.4248 21.5998C9.4248 21.3165 9.51647 21.0831 9.6998 20.8998L14.5998 15.9998L9.6998 11.0998C9.51647 10.9165 9.4248 10.6831 9.4248 10.3998C9.4248 10.1165 9.51647 9.88314 9.6998 9.6998C9.88314 9.51647 10.1165 9.4248 10.3998 9.4248C10.6831 9.4248 10.9165 9.51647 11.0998 9.6998L15.9998 14.5998L20.8998 9.6998C21.0831 9.51647 21.3165 9.4248 21.5998 9.4248C21.8831 9.4248 22.1165 9.51647 22.2998 9.6998C22.4831 9.88314 22.5748 10.1165 22.5748 10.3998C22.5748 10.6831 22.4831 10.9165 22.2998 11.0998L17.3998 15.9998L22.2998 20.8998C22.4831 21.0831 22.5748 21.3165 22.5748 21.5998C22.5748 21.8831 22.4831 22.1165 22.2998 22.2998C22.1165 22.4831 21.8831 22.5748 21.5998 22.5748C21.3165 22.5748 21.0831 22.4831 20.8998 22.2998L15.9998 17.3998Z" fill="#2A3647"/>
+            </g>
+        </svg>                            
+    </button>
+  `
+}
+
+
+
+
+
+
+let isScrolling = false;
+
+document.addEventListener('touchstart', function(){
+    isScrolling = false;
+}, { passive: true });
+
+document.addEventListener('touchmove', function(){
+    isScrolling = true;
+}, { passive: true });
+
+document.addEventListener('touchend', function(){
+    isScrolling = false;
+}, { passive: true });
