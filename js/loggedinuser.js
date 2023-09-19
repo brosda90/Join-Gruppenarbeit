@@ -37,3 +37,20 @@ async function renderHeaderUserName() {
     initials = userList[index];
     document.getElementById('user-name').innerHTML = initials.initials;
 }
+
+
+function userLogout() {
+    // localStorage.clear();
+    localStorage.removeItem('loggedInUserID');
+    localStorage.removeItem('loggedInUser');
+    window.location.href = "index.html";
+}
+
+
+function useroptions(close = false) {
+    if(close) {
+        document.getElementById('useroptions').classList.add('d-none');
+    } else {
+        document.getElementById('useroptions').classList.toggle('d-none');
+    }
+}

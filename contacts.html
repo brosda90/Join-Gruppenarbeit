@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/fonts.css">
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/respon_header_template.css">
+    <link rel="stylesheet" href="./css/respon_footer_template.css">
     <link rel="stylesheet" href="./css/contacts.css">
     <link rel="shortcut icon" href="assets/img/join_favicon.png" type="image/x-icon">
     <script src="./js/storage.js"></script>
@@ -26,9 +28,14 @@
             <div class="header-title" id="header-title">
                 <span>Kanban Project Management Tool</span>
             </div>
-            <button class="user-icon" onclick="">
-                <div id="user-name" class="user-name">SM</div>
+            <button class="user-icon" onclick="useroptions()">
+                <div id="user-name" class="user-name">&nbsp;&nbsp;</div>
             </button>            
+        </div>
+        <div class="useroptions d-none" id="useroptions">
+            <a class="useroptions-link" href="./legal_notice.html" onclick="useroptions(true)" target="_blank">Legal Notice</a>
+            <a class="useroptions-link" href="./privacy_policy.html" onclick="useroptions(true)" target="_blank">Privacy Policy</a>
+            <a class="useroptions-link" href="#" onclick="userLogout()">Log out</a>
         </div>
     </div>
     <div class="insert-bottom">
@@ -96,7 +103,7 @@
             </div>
             <div class="contact-hr"></div>
             <!-- One or more entries of names -->
-            <div id="contact-listbox-1" class="contact-listbox" onclick="openContact(1)">
+            <!-- <div id="contact-listbox-1" class="contact-listbox" onclick="openContact(1)">
                 <div class="contact-listbox-badgebox">
                     <div class="contact-listbox-badge">
                         <div class="contact-listbox-badge-circle bg_contact_1">
@@ -108,7 +115,7 @@
                     <span class="contact-listbox-name">Anton Mayer</span>
                     <span class="contact-listbox-mail">antom@gmail.com</span>
                 </div>
-            </div>
+            </div> -->
             <!--  -->
             <div class="contact-list-endbox"></div>
         </div>
