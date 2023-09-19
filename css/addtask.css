@@ -60,6 +60,22 @@ h4 {
     border: transparent;
 }
 
+.bg-blue {
+    background-color: #2a3647;
+}
+
+.font-white {
+    color: white;
+}
+
+.font-white:hover {
+    color: black !important;
+}
+
+.font-white:hover img {
+    filter: brightness(100%) invert(0%) !important;
+}
+
 .width-100 {
     width: 340px;
 }
@@ -425,6 +441,10 @@ select option {
     padding: 10px;
 }
 
+.singleContact:hover {
+    background-color:#F6F7F8;
+}
+ 
 .singleContactInitialName {
     display: flex;
     align-items: center;

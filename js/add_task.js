@@ -178,15 +178,19 @@ function checkSelectDataFields(categoryInput, selectedPriority) {   //check requ
     return selectsValid;
 }
 
-function addedContactsCheckBox(checked, src, id, badge, index) {   //toggle Checkbox icon of each Contact
+function addedContactsCheckBox(selectedContact, checked, src, id, badge, index) {   //toggle Checkbox icon of each Contact
     if (src === './assets/img/check_button_unchecked.svg') {
+        selectedContact.classList.add('bg-blue', 'font-white');
         checked.src = './assets/img/check_button_checked.svg';
+        checked.classList.add('selectedSvg');
         addedContacts.push(id);
         badges.push(badge);
         addedContactInitial.push(taskContacts[index]['initials']);
         document.getElementById('searchContactInput').value = "";
     } else if (src === './assets/img/check_button_checked.svg') {
+        selectedContact.classList.remove('bg-blue', 'font-white');
         checked.src = './assets/img/check_button_unchecked.svg';
+        checked.classList.remove('selectedSvg');
         const indexOfId = addedContacts.indexOf(id);
         if (indexOfId !== -1) {
             addedContacts.splice(indexOfId, 1);
@@ -311,12 +315,13 @@ function searchContacts() {   //search contact in contact drop down menu
 }
 
 function addedContact(index) {  //set each Contact ID compaired to the contact JSON from data.js
+    let selectedContact = document.getElementById(`contact${index}`);
     let checked = document.getElementById(`check${index}`);
     let src = checked.getAttribute("src");
     let id = taskContacts[index]['id'];   //set index from Contacts to ID
     let badge = taskContacts[index]['badge-color'];
 
-    addedContactsCheckBox(checked, src, id, badge, index);
+    addedContactsCheckBox(selectedContact, checked, src, id, badge, index);
 
     checkContactLength();
     renderContactInitials();
@@ -489,7 +494,7 @@ function contactInitialsHTML(index, inital) {
 
 function renderContactHTML(index, contact) {
     return `
-        <div id="contact${index}" class="singleContact option item" onclick="addedContact(${index})">
+        <div id="contact${index}" class="singleContact option item brd-r10" onclick="addedContact(${index})">
             <div class="singleContactInitialName">
                 <div class="profile-badge bc-${contact['badge-color']} brd-white">${contact['initials']}</div>
                 <span>${contact['name']}</span>
