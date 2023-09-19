@@ -318,8 +318,8 @@ button {
 
 .task-container:active {
     cursor: grabbing;
-    transform: rotate(5deg);
-    opacity: 0.5;
+    /* transform: rotate(5deg);
+    opacity: 0.5; */
 }
 
 .grabbed-task {

@@ -138,7 +138,7 @@ input::placeholder {
     color: #D1D1D1;
 }
 
-input[type="date"] {
+#dateToday {
     padding-left: 10px;
     padding-right: 10px;
     font-family: 'Inter';
@@ -147,12 +147,19 @@ input[type="date"] {
     border: 1px solid #D1D1D1;
 }
 
-.input-date-img {
+.input-add-task-due-date {
+    display: flex;
+    position: relative;
+    align-items: center;
+}
+
+.input-add-task-due-date .input-date-img {
     position: absolute;
-    margin-top: -33px;
-    margin-left: 346px;
+    /* margin-top: -33px; */
+    /* margin-left: 346px; */
     pointer-events: none;
     background-color: white;
+    right: 8px;
 }
 
 input:focus {

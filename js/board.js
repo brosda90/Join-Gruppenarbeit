@@ -303,11 +303,11 @@ let taskStateCategories = ["to-do", "in-progress", "await-feedback", "done"];
  */
 async function initBoard() {
   renderMobileOrDesktopTemplates(window.innerWidth >= 1000);
-  renderAllTasks();
-  // await loadUsersFromStorage();
+  await loadUsersFromStorage();
   // await loadCurrentUserFromStorage();
-  // await loadContactsFromStorage();
-  // await loadTasksFromStorage();
+  await loadContactsFromStorage();
+  await loadTasksFromStorage();
+  renderAllTasks();
   sortContacts(contacts);
 }
 
@@ -655,12 +655,14 @@ function generatePopupContactsHTML(task) {
   let contactList = '';
   for (let i = 0; i < task['assigned_to'].length; i++) {
     let contact = contacts.find( contact => contact['id'] == task['assigned_to'][i]);
-    contactList += /*html*/`
+    if (contact != undefined) {
+      contactList += /*html*/`
       <li class="contacts-list-item ${checkIfContactIsJoinUser(contact['userid'])}">
         <div class="profile-badge bc-${contact['badge-color']} width-40 border-2px">${contact['initials']}</div>
         <div class="contact-name">${contact['name']}</div>
       </li>  
     `;
+    }
   }
   return contactList;
 }
@@ -1374,7 +1376,7 @@ function moveTo(taskStateCategory) {
  * @param {event} event 
  */
 function drag(event) {
-  visibleTaskClone = document.getElementById('visibleTaskClone');
+  let visibleTaskClone = document.getElementById('visibleTaskClone');
   if (visibleTaskClone) {
     document.body.style.overflow = 'hidden'; // to stop the element from interacting with the body
     visibleTaskClone.style.opacity = 1;
@@ -1416,6 +1418,13 @@ function dragEnd(ev) {
   visibleTaskClone.style.opacity = 0;
   visibleTaskClone.remove();
   dragScrollActive = false;
+  // document.getElementsByClassName('grabbed-task')[0].classList.toggle('grabbed-task'); // indicate grabbed element
+
+
+  if (document.getElementById('task-container-indication')) {
+    document.getElementById('task-container-indication').remove();
+  }
+
 }
 
 
@@ -1504,7 +1513,7 @@ let startTaskSection;
  * @param {event} ev  - touchstart
  */
 function startTouchDragging(id,ev) {
-  console.log(ev.type);
+  // console.log(ev.type);
   startTaskSection = getDraggedOverZone(ev);
   currentDraggedElement = id;
   let task = document.getElementById(`task-${id}-container`);
@@ -1535,10 +1544,10 @@ let dragActive = false;
  * @param {event} event - touchmove
  */
 function touchDrag(event) {
-  console.log(event.type);
+  // console.log(event.type);
   if (onlongtouch && !isScrolling) {
     dragActive = true;
-    visibleTaskClone = document.getElementById('visibleTaskClone');
+    let visibleTaskClone = document.getElementById('visibleTaskClone');
     if (event.cancelable) {
       event.preventDefault(); // prevent touch scrolling while holding the element
       event.stopPropagation();
