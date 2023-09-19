@@ -102,7 +102,6 @@ h1 {
     margin-bottom: 32px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
 }
 
 .titleInput {
@@ -358,6 +357,10 @@ select option {
     background-color: #D1D1D1;
 }
 
+.categorySelect {
+    position: relative;
+}
+
 .categorySelector {
     width: 379px;
     background-color: white;
@@ -382,6 +385,7 @@ select option {
 
 .assignedTo {
     width: 100%;
+    position: relative;
 }
 
 .assignedTo h4 {

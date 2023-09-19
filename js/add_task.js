@@ -15,12 +15,12 @@ let addedSubTasks = [];
 
 async function initAddTask() {
     await includeHTML()
-    await loadContactsFromStorage();
+    await loadTaskContactsFromStorage();
     await loadTasksFromRemoteStorage();
     renderContacts();
 }
 
-async function loadContactsFromStorage() {
+async function loadTaskContactsFromStorage() {
     taskContacts = JSON.parse(await getItem('contacts'));
     if(taskContacts.length > 1) {
         sortContacts(taskContacts);
