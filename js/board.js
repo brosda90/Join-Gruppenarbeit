@@ -327,6 +327,10 @@ async function loadTasksFromStorage() {
   tasks = JSON.parse(await getItem('tasks'));
 }
 
+async function saveTasksToStorage() {
+  await setItem('tasks', JSON.stringify(tasks));
+}
+
 
 
 /* ================================ */
@@ -701,7 +705,7 @@ function generatePopupSubtasksHTML(task) {
 }
 
 
-function toggleSubtaskState(taskID, subtaskIndex) {
+async function toggleSubtaskState(taskID, subtaskIndex) {
   let task = tasks.find(task => task['id'] == taskID);
   let subtask = task['subtasks'][subtaskIndex];
   subtask['done'] = subtask['done']? false:true;
@@ -709,12 +713,14 @@ function toggleSubtaskState(taskID, subtaskIndex) {
   let img = document.getElementById(`subtask-${subtaskIndex}-checkbutton`);
   img.src = checkButtonsSRC[+subtask['done']];
   // TODO: UPLOAD Tasks to Server
+  await saveTasksToStorage();
 }
 
 
-function deleteTask(taskID) {
+async function deleteTask(taskID) {
   let taskIndex = tasks.findIndex(task => task['id'] == taskID);
   tasks.splice(taskIndex,1);
+  await saveTasksToStorage();
   closePopup();
   renderAllTasks();
 }
@@ -1152,7 +1158,7 @@ function dropNewSubtask() {
 }
 
 
-function acceptEdit(taskID) {
+async function acceptEdit(taskID) {
   let task = tasks.find(task => task['id'] == taskID);
   // create edited task
   currentTask['title'] = document.getElementById('input-title').value;
@@ -1167,6 +1173,7 @@ function acceptEdit(taskID) {
   task['subtasks'] = currentTask['subtasks'];
   // save tasks
   // TODO: UPLOAD TO SERVER
+  await setItem('tasks', JSON.stringify(loadedTasks));
   // clear current task
   currentTask = {};
   closePopup();
