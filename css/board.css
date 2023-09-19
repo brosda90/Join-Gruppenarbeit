@@ -742,7 +742,7 @@ input::-webkit-calendar-picker-indicator {
 }
 
 .assigned-to-contacts-list-item {
-    width: 100%;
+    /* width: 100%; */
     list-style: none;
     display: flex;
     justify-content: space-between;
