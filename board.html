@@ -17,6 +17,7 @@
     <script src="./js/loggedinuser.js"></script>
     <script src="./js/script.js"></script>
     <script src="./js/board.js"></script>
+    <script src="./js/drag_and_drop.js"></script>
     <script src="./js/add_task.js"></script>
 </head>
 <body onload="initBoard()">
@@ -44,7 +45,7 @@
             </div>
             <div class="board-body">
                 <!-- TO DO -->
-                <section id="section-to-do" class="task-section" ondrop="moveTo('to-do')" ondragover="allowDrop(event,'section-to-do-tasks-container')">
+                <section id="section-to-do" class="task-section" ondrop="moveTo('to-do')" ondragover="allowDrop(event)">
                     <div class="task-section-header">
                         <h3>To do</h3>
                         <button class="btn-add-task-outlined fl-jcc-aic" onclick="openAddNewTaskPopUp('to-do')">
@@ -58,7 +59,7 @@
                     </div>
                 </section>
                 <!-- In Progress -->
-                <section id="section-in-progress" class="task-section" ondrop="moveTo('in-progress')" ondragover="allowDrop(event,'section-in-progress-tasks-container')">
+                <section id="section-in-progress" class="task-section" ondrop="moveTo('in-progress')" ondragover="allowDrop(event)">
                     <div class="task-section-header">
                         <h3>In progress</h3>
                         <button class="btn-add-task-outlined fl-jcc-aic" onclick="openAddNewTaskPopUp('in-progress')">
@@ -72,7 +73,7 @@
                     </div>
                 </section>
                 <!-- Await Feedback -->
-                <section id="section-await-feedback" class="task-section" ondrop="moveTo('await-feedback')" ondragover="allowDrop(event,'section-await-feedback-tasks-container')">
+                <section id="section-await-feedback" class="task-section" ondrop="moveTo('await-feedback')" ondragover="allowDrop(event)">
                     <div class="task-section-header">
                         <h3>Await feedback</h3>
                         <button class="btn-add-task-outlined fl-jcc-aic" onclick="openAddNewTaskPopUp('await-feedback')">
@@ -86,7 +87,7 @@
                     </div>
                 </section>
                 <!-- Done -->
-                <section id="section-done" class="task-section" ondrop="moveTo('done')" ondragover="allowDrop(event,'section-done-tasks-container')">
+                <section id="section-done" class="task-section" ondrop="moveTo('done')" ondragover="allowDrop(event)">
                     <div class="task-section-header">
                         <h3>Done</h3>
                     </div>
