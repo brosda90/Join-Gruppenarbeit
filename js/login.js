@@ -64,7 +64,6 @@ async function login() {
   const email = emailField.value;
   const password = passwordField.value;
 
-  // Entfernen der Fehlerklasse von den Eingabeboxen
   emailBox.classList.remove("elementbox-error");
   passwordBox.classList.remove("elementbox-error");
 
@@ -85,7 +84,6 @@ async function login() {
     return;
   }
 
-  // Holt die registrierten Benutzer vom Server
   let usersData = await getItem("users");
 
   let users;
@@ -96,25 +94,23 @@ async function login() {
     return;
   }
 
-  // Sucht den Benutzer in der Liste
   const user = users.find(
     (user) => user.email === email && user.password === password
   );
 
   if (user) {
-    // Wenn Checkbox aktiviert dann Daten Speichern
     if (rememberMeCheckbox.checked) {
       localStorage.setItem("rememberEmail", email);
+      localStorage.setItem("rememberPassword", password);
     } else {
       localStorage.removeItem("rememberEmail");
+      localStorage.removeItem("rememberPassword");
     }
 
-    // Wenn der Benutzer gefunden wird, leite zur board.html weiter
     localStorage.setItem("loggedInUser", user.name);
     localStorage.setItem("loggedInUserID", user.id);
     window.location.href = "board.html";
   } else {
-    // Zeigt Popup an, wenn keine Übereinstimmung gefunden wird
     document.getElementById("errorReport").style.display = "flex";
   }
 }
@@ -126,13 +122,19 @@ function clearLoginDetailsFromStorage() {
 
 function autofillLoginDetails() {
   const emailField = document.getElementById("emailLogin");
-  const rememberMeCheckbox = document.getElementById("form2Example31");
+  const passwordField = document.getElementById("passwordLogin");
+  const rememberMeCheckbox = document.getElementById("rememberBox");
 
   const storedEmail = localStorage.getItem("rememberEmail");
+  const storedPassword = localStorage.getItem("rememberPassword");
 
   if (storedEmail) {
     emailField.value = storedEmail;
     rememberMeCheckbox.checked = true;
+  }
+
+  if (storedPassword) {
+    passwordField.value = storedPassword;
   }
 }
 
@@ -152,5 +154,9 @@ async function logRegisteredUsers() {
     console.log("Keine Benutzer gefunden.");
   }
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+  autofillLoginDetails();
+});
 
 logRegisteredUsers();

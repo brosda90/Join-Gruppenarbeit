@@ -22,9 +22,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (hour >= 6 && hour < 12) {
     greeting = "Guten Morgen";
-  } else if (hour >= 12 && hour < 16) {
-    greeting = "Guten Mittag";
-  } else if (hour >= 16 && hour < 20) {
+  } else if (hour >= 12 && hour < 18) {
+    greeting = "Guten Tag";
+  } else if (hour >= 18 && hour < 23) {
     greeting = "Guten Abend";
   } else {
     greeting = "Hallo";
@@ -84,6 +84,10 @@ function updateTaskFromServer() {
 
 function nextDeadline() {
   const urgentTasks = tasks.filter((task) => task.priority === 1);
+
+  if (urgentTasks.length === 0) {
+    return;
+  }
 
   urgentTasks.sort((a, b) => new Date(a.due_date) - new Date(b.due_date));
 
