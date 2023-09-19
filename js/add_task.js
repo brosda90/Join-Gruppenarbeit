@@ -67,7 +67,7 @@ function renderSubTaskUpdate() {   //reload edited Sub Task
     showSubs.innerHTML = '';
 
     for (let j = 0; j < addedSubTasks.length; j++) {
-        const sub = addedSubTasks[j];
+        const sub = addedSubTasks[j]['subtask'];
         showSubs.innerHTML += renderSubHTML(sub, j);
     };
 }
@@ -334,12 +334,17 @@ function createSubTask() {   //create and push Subtask
         }, 2000);
         toggleSubTaskInput();
     } else {
-        addedSubTasks.push(newSubTask.value);
+        addedSubTasks.push(
+            {
+                done: false,
+                subtask: newSubTask.value
+            }
+        );
         newSubTask.value = '';
         showSubs.innerHTML = '';
 
         for (let j = 0; j < addedSubTasks.length; j++) {
-            const sub = addedSubTasks[j];
+            const sub = addedSubTasks[j]['subtask'];
             showSubs.innerHTML += renderSubHTML(sub, j);
         };
 
@@ -367,7 +372,7 @@ function createTask() {   //get all Values for the new Task
 async function addNewTask(title, description, priority, date, category, assignedTo, subtasks) {   //push new created Task
     await loadTasksFromRemoteStorage();
     let newTask = {
-        'id': tasks.length + 1,
+        'id': loadedTasks.length + 1,
         'status': taskStatus,
         'category': category,
         'title': title,
@@ -375,10 +380,7 @@ async function addNewTask(title, description, priority, date, category, assigned
         'due_date': date,
         'priority': priority,
         'assigned_to': assignedTo,
-        'subtasks': {
-            'done': false,
-            'subtask': subtasks
-        },
+        'subtasks': subtasks,
     };
 
     loadedTasks.push(newTask);
