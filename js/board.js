@@ -309,6 +309,7 @@ async function initBoard() {
   await loadTasksFromStorage();
   renderAllTasks();
   sortContacts(contacts);
+  initAddTask()
 }
 
 async function loadUsersFromStorage() {

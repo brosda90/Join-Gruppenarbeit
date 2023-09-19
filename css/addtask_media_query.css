@@ -88,6 +88,10 @@
         width: 315px !important;
     }
 
+    .rightSite {
+        width: auto;
+    }
+
     .titleInput {
         width: 280px;
     }
@@ -107,7 +111,7 @@
     }
 
     input[type="date"] {
-        width: 274px;
+        width: 275px !important;
     }
 
     .categorySelector {
@@ -115,7 +119,7 @@
     }
 
     .selector {
-        width: 312px;
+        width: 296px;
     }
 
     #allOptions {
@@ -133,5 +137,9 @@
 
     .input-date-img {
         margin-left: 262px;
+    }
+
+    .subInputButton {
+        width: 20%;
     }
 }

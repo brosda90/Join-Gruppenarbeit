@@ -60,6 +60,22 @@ h4 {
     border: transparent;
 }
 
+.bg-blue {
+    background-color: #2a3647;
+}
+
+.font-white {
+    color: white;
+}
+
+.font-white:hover {
+    color: black !important;
+}
+
+.font-white:hover img {
+    filter: brightness(100%) invert(0%) !important;
+}
+
 .width-100 {
     width: 340px;
 }
@@ -102,7 +118,6 @@ h1 {
     margin-bottom: 32px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
 }
 
 .titleInput {
@@ -358,6 +373,10 @@ select option {
     background-color: #D1D1D1;
 }
 
+.categorySelect {
+    position: relative;
+}
+
 .categorySelector {
     width: 379px;
     background-color: white;
@@ -382,6 +401,7 @@ select option {
 
 .assignedTo {
     width: 100%;
+    position: relative;
 }
 
 .assignedTo h4 {
@@ -421,6 +441,10 @@ select option {
     padding: 10px;
 }
 
+.singleContact:hover {
+    background-color:#F6F7F8;
+}
+ 
 .singleContactInitialName {
     display: flex;
     align-items: center;
