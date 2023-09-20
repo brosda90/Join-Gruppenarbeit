@@ -65,6 +65,10 @@ div, nav, main, span, ::after {
     display: none;
 }
 
+.user-header a {
+    display: none;
+}
+
 .user-icon {
     background-color: var(--col-white);
     width: 40px;
@@ -78,6 +82,7 @@ div, nav, main, span, ::after {
 }
 
 .user-name {
+    font-size: 14px;
     font-weight: 700;
     color: var(--col-btn-activ);
 }
@@ -86,7 +91,7 @@ div, nav, main, span, ::after {
     z-index: 9;
     position: fixed;
     top: 80px;
-    right: 16px;
+    right: -200px;
     padding: 10px;
     border-radius: 20px;
     border-top-right-radius: 0;
@@ -95,6 +100,16 @@ div, nav, main, span, ::after {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+}
+
+.useroptions:not(.inview) {
+    right: -200px;
+    transition: right 100ms ease-in-out;
+}
+
+.useroptions.inview {
+    right: 16px;
+    transition: right 100ms ease-in-out;
 }
 
 .useroptions-link {
@@ -133,6 +148,34 @@ div, nav, main, span, ::after {
 
     .header-title {
         display: block;
+    }
+
+    .user-header {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+    }
+
+    .user-header a {
+        width: 32px;
+        height: 32px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .user-header a img {
+        width: 20px;
+        height: 20px;
+    }
+
+    .user-name {
+        font-size: 20px;
+    }
+
+    .user-icon {
+        width: 56px;
+        border: 3px solid var(--col-black);
     }
 }
 

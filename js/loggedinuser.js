@@ -7,8 +7,9 @@ if(!loggedInUserID || !loggedInUser) {
     localStorage.removeItem("loggedInUserID");
     window.location.href = 'index.html';
 } else {
-    initLoggedInUser()
+    initLoggedInUser();
 }
+
 
 async function initLoggedInUser() {
     await loadHeaderUsersFromStorage();
@@ -40,7 +41,6 @@ async function renderHeaderUserName() {
 
 
 function userLogout() {
-    // localStorage.clear();
     localStorage.removeItem('loggedInUserID');
     localStorage.removeItem('loggedInUser');
     window.location.href = "index.html";
@@ -49,8 +49,14 @@ function userLogout() {
 
 function useroptions(close = false) {
     if(close) {
-        document.getElementById('useroptions').classList.add('d-none');
+        document.getElementById('useroptions').classList.remove('inview');
     } else {
-        document.getElementById('useroptions').classList.toggle('d-none');
+        document.getElementById('useroptions').classList.toggle('inview');
     }
+}
+
+
+function browserBack() {
+    useroptions(true);
+    history.back();
 }
