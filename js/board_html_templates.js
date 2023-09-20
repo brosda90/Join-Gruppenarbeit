@@ -360,8 +360,8 @@ function generatePopupEditTaskContainerHTML(task,taskID) {
                 <!-- Assigned To -->
                 <div class="popup-task-edit-info-container">
                     <div class="popup-task-edit-info-headline">Assigned to</div>
-                    <div class="input-field-container assigned-to-container" onclick="setFocusOnInput('input-assigned-to');toggleContactList(${taskID})">
-                      <input id="input-assigned-to" type="text" placeholder="Select contacts to assign" onkeyup="searchContacts()">
+                    <div class="input-field-container assigned-to-container" onclick="setFocusOnInput('input-assigned-to')">
+                      <input id="input-assigned-to" type="text" placeholder="Select contacts to assign" onkeyup="searchContacts()" onfocus="toggleContactList(${taskID})" onblur="toggleContactList(${taskID})">
                       <img id="contactsArrow" src="./assets/img/arrow_drop_down.svg" alt="">
                     </div>
                     <div id="assigned-contacts-list" class="contact-list-container d-none">
