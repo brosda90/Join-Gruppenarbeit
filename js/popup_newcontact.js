@@ -41,7 +41,7 @@ async function saveNewContact() {
     contactList.push(newDataSet[0]);
     await saveData('contacts',contactList);
     sortContacts(contactList);
-    renderContactList();
+    // renderContactList();
     document.getElementById('contactsuccess').classList.add('shortpopup');
     setTimeout(() => {
         document.getElementById('contactsuccess').classList.remove('shortpopup');

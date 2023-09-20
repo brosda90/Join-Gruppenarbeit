@@ -367,7 +367,7 @@ function generatePopupEditTaskContainerHTML(task,taskID) {
                     <div id="assigned-contacts-list" class="contact-list-container d-none">
                         <div id="assigned-to-contacts" class="contact-list">
                         </div>
-                        <button class="btn-filled btn-add-new-contact" onclick="addNewContact()" type="button">
+                        <button class="btn-filled btn-add-new-contact" onclick="openAddCon()" type="button">
                           <div>Add new contact</div>
                           <img src="./assets/img/person_add.svg" alt="add_contact">
                         </button>
