@@ -7,6 +7,7 @@ body {
 
 .policy {
     padding: 16px;
+    margin: 32px 0px 16px 250px;
 }
 
 header {
@@ -23,3 +24,8 @@ header img:hover {
     cursor: pointer;
 }
 
+@media (max-width: 1000px) {
+    .policy {
+        margin: 16px 0px 100px 0px;
+    }
+}

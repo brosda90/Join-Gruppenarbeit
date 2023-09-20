@@ -10,10 +10,12 @@
     <link rel="stylesheet" href="./css/addtask_media_query.css">
     <link rel="stylesheet" href="./css/fonts.css">
     <link rel="stylesheet" href="./css/components_library.css">
+    <link rel="stylesheet" href="./css/popup_newcontact.css">
     <link rel="shortcut icon" href="assets/img/join_favicon.png" type="image/x-icon">
     <script src="./js/storage.js"></script>
     <script src="./js/loggedinuser.js"></script>
     <script src="./js/add_task.js"></script>
+    <script src="./js/popup_newcontact.js"></script>
     <script src="./js/script.js"></script>
     <title>Join-Add-Task</title>
 </head>
@@ -32,13 +34,25 @@
             <div class="header-title" id="header-title">
                 <span>Kanban Project Management Tool</span>
             </div>
-            <button class="user-icon" onclick="">
-                <div id="user-name" class="user-name">SM</div>
-            </button>            
+            <div class="user-header">
+                <a href="./help.html">
+                    <img src="./assets/img/help.png">
+                </a>
+                <button class="user-icon" onclick="useroptions()">
+                    <div id="user-name" class="user-name">&nbsp;&nbsp;</div>
+                </button>
+            </div>
+        </div>
+        <div class="useroptions" id="useroptions">
+            <a class="useroptions-link" href="./legal_notice.html" onclick="useroptions(true)" target="_blank">Legal Notice</a>
+            <a class="useroptions-link" href="./privacy_policy.html" onclick="useroptions(true)" target="_blank">Privacy Policy</a>
+            <a class="useroptions-link" href="#" onclick="userLogout()">Log out</a>
         </div>
     </div>
     <section class="mainAddTask" w3-include-html="./assets/template/add_task_template.html">
     </section>
+    <!-- CONTACT POPUP -->
+    <div w3-include-html="./popup_newcontact.html"></div>
     <div class="insert-bottom">
         <div class="footer">
             <div class="desktop-join-logo">

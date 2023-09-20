@@ -3,21 +3,22 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/summary.css" />
+    <link rel="stylesheet" href="css/respon_header_template.css" />
+    <link rel="stylesheet" href="css/respon_footer_template.css" />
+    <link
+      rel="shortcut icon"
+      href="assets/img/join_favicon.png"
+      type="image/x-icon"
+    />
+    <script src="./js/storage.js"></script>
+    <script src="./js/loggedinuser.js"></script>
+    <script src="./js/login.js"></script>
+    <script src="./js/summary.js"></script>
     <title>summary</title>
   </head>
-  <link rel="stylesheet" href="css/style.css" />
-  <link rel="stylesheet" href="css/summary.css" />
-  <link rel="stylesheet" href="css/respon_header_template.css" />
-  <link rel="stylesheet" href="css/respon_footer_template.css" />
-  <link
-    rel="shortcut icon"
-    href="assets/img/join_favicon.png"
-    type="image/x-icon"
-  />
-  <script src="./js/storage.js"></script>
-  <script src="./js/loggedinuser.js"></script>
-  <script src="./js/login.js"></script>
-  <script src="./js/summary.js"></script>
 
   <body>
     <div class="insert-top">
@@ -57,52 +58,40 @@
         <div class="header-title" id="header-title">
           <span>Kanban Project Management Tool</span>
         </div>
-        <button class="user-icon" onclick="">
-          <div id="user-name" class="user-name">SM</div>
-        </button>
+        <div class="user-header">
+          <a href="./help.html">
+            <img src="./assets/img/help.png" />
+          </a>
+          <button class="user-icon" onclick="useroptions()">
+            <div id="user-name" class="user-name">&nbsp;&nbsp;</div>
+          </button>
+        </div>
+      </div>
+      <div class="useroptions" id="useroptions">
+        <a
+          class="useroptions-link"
+          href="./legal_notice.html"
+          onclick="useroptions(true)"
+          target="_blank"
+          >Legal Notice</a
+        >
+        <a
+          class="useroptions-link"
+          href="./privacy_policy.html"
+          onclick="useroptions(true)"
+          target="_blank"
+          >Privacy Policy</a
+        >
+        <a class="useroptions-link" href="#" onclick="userLogout()">Log out</a>
       </div>
     </div>
     <main>
       <div class="main-container">
         <div class="context-line">
-          <h2 class="h2-47 h2-61px">Summery</h2>
+          <h2 class="h2-47">Summery</h2>
 
           <p>Everything in a nutshell!</p>
           <div class="blue-line"></div>
-        </div>
-      </div>
-
-      <div class="third-container">
-        <div id="toDo" onclick="switchToBoard()">
-          <img src="assets/img/pencil.png" alt="" />
-          <div>
-            <h3 class="h3-47px">1</h3>
-            <span class="summery-task-text">To-do</span>
-          </div>
-        </div>
-        <div id="done" onclick="switchToBoard()">
-          <img src="assets/img/done.png" alt="" />
-          <div>
-            <h3 class="h3-47px">1</h3>
-            <span class="summery-task-text">Done</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="second-container">
-        <div id="urgent" class="d-flex" onclick="switchToBoard()">
-          <div class="d-flex urgent-left">
-            <img src="assets/img/urgent.png" alt="urgent" />
-            <div class="urgent-area-left mt-3 mb-3">
-              <h3 class="h3-47px">1</h3>
-              <span class="summery-task-text">Urgent</span>
-            </div>
-          </div>
-          <div class="grey-line"></div>
-          <div class="upcoming-deadline" id="deadLine">
-            <p><b>October 16, 2022</b></p>
-            <p>upcoming deadline</p>
-          </div>
         </div>
       </div>
 
@@ -126,7 +115,39 @@
           </span>
         </div>
       </div>
+      <div class="second-container">
+        <div id="urgent" class="d-flex" onclick="switchToBoard()">
+          <div class="d-flex urgent-left">
+            <img src="assets/img/urgent.png" alt="urgent" />
+            <div class="urgent-area-left mt-3 mb-3">
+              <h3 class="h3-47px">1</h3>
+              <span class="summery-task-text">Urgent</span>
+            </div>
+          </div>
+          <div class="grey-line"></div>
+          <div class="upcoming-deadline" id="deadLine">
+            <p><b>October 16, 2022</b></p>
+            <p>upcoming deadline</p>
+          </div>
+        </div>
+      </div>
 
+      <div class="third-container">
+        <div id="toDo" onclick="switchToBoard()">
+          <img src="assets/img/pencil.png" alt="" />
+          <div>
+            <h3 class="h3-47px">1</h3>
+            <span class="summery-task-text">To-do</span>
+          </div>
+        </div>
+        <div id="done" onclick="switchToBoard()">
+          <img src="assets/img/done.png" alt="" />
+          <div>
+            <h3 class="h3-47px">1</h3>
+            <span class="summery-task-text">Done</span>
+          </div>
+        </div>
+      </div>
       <div class="right-container">
         <p>Good morning,</p>
         <p>Sofia Müller</p>

@@ -50,7 +50,7 @@
         padding-left: 0;
     }
 
-    .border {
+    .separator-border {
         display: block !important;
         width: 1px;
         /* z-index: 999; */

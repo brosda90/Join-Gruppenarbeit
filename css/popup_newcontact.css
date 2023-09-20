@@ -141,7 +141,7 @@
 }
 
 /* ------------------------------------------------------------ */
-input {
+.popup-addcon-main input {
     width: calc(100% - 24px);
     height: 24px;
     outline: none;
@@ -152,7 +152,7 @@ input {
     line-height: 24px;
 }
 
-input::placeholder {
+.popup-addcon-main input::placeholder {
     color: var(--col-hr);
 }
 

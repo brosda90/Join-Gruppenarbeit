@@ -158,7 +158,8 @@ input::placeholder {
     padding-right: 10px;
     font-family: 'Inter';
     height: 40px;
-    width: 357px;
+    /* width: 357px; */
+    width: 100%;
     border: 1px solid #D1D1D1;
 }
 
@@ -366,7 +367,7 @@ select option {
     box-shadow: 1px 8px 11px -3px rgba(0, 0, 0, 0.43) !important;
 }
 
-.border {
+.separator-border {
     width: 1px;
     height: 350px;
     margin-top: 25px;

@@ -2,7 +2,8 @@
 /* GENERAL STYLING */
 
 html {
-    overflow: hidden !important; 
+    overflow: hidden !important;
+    word-wrap: break-word; 
 }
 
 main {
@@ -296,6 +297,7 @@ button {
 .task-container {
     min-width: 252px;
     width: 252px;
+    aspect-ratio: 1 / 1;
     padding: 16px;
     border-radius: 24px;
     box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.08);
@@ -308,7 +310,8 @@ button {
 }
 
 #task-container-indication {
-    /* min-width: 252px; */
+    min-width: 252px;
+    width: 252px;
     aspect-ratio:  1 / 1;
     padding: 16px;
     border-radius: 24px;
@@ -325,6 +328,7 @@ button {
 .grabbed-task {
     transform: rotate(5deg);
     opacity: 0.5;
+    box-shadow: none;
 }
 
 .task-category {
@@ -450,6 +454,13 @@ button {
     align-items: center;
 }
 
+.popup-task-main {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    overflow-y: scroll;
+}
+
 .popup-task-edit-main {
     overflow-y: scroll;
     margin: 0 12px;
@@ -467,6 +478,7 @@ button {
 .popup-task-info-container {
     display: flex;
     gap: 25px;
+    flex-shrink: 0;
 }
 
 .popup-task-info-title {
@@ -579,7 +591,7 @@ button {
 }
 
 .textarea-field-container {
-    height: 88px;
+    min-height: 88px;
     border: 1px solid var(--color-lighter-grey);
     border-radius: 10px;
     display: flex;
@@ -605,7 +617,9 @@ button {
 .textarea-field-container textarea {
     border: none;
     outline: none;
-    width: 100%;
+    min-width: 100%;
+    min-height: 56px;
+    resize: vertical;
     font-size: 16px;
 }
 
@@ -741,8 +755,12 @@ input::-webkit-calendar-picker-indicator {
     z-index: 2;
 }
 
+.contacts-list {
+    max-height: 224px;
+}
+
 .assigned-to-contacts-list-item {
-    width: 100%;
+    /* width: 100%; */
     list-style: none;
     display: flex;
     justify-content: space-between;
@@ -819,6 +837,11 @@ input::-webkit-calendar-picker-indicator {
 
 
 /* subtask edit */
+
+.subtasks-list {
+    max-height: 96px;
+    min-height: 96px;
+}
 
 .subtask-edit-input {
     border: none;
