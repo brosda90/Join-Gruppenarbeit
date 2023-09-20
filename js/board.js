@@ -272,7 +272,6 @@ function setFocusOnInput(id) {
 }
 
 
-
 // Date
 
 function currentDate() {
@@ -305,13 +304,19 @@ function removePrioSelection() {
 
 // Assigned To
 
-function toggleContactList(taskID) {
-  document.getElementById('assigned-contacts-list').classList.toggle('d-none');
-  contactsOpen = contactsOpen ? false:true;
+function toggleContactList(taskID,state) {
+  let contactList = document.getElementById('assigned-contacts-list');
+  contactsOpen = state;
+  contactsOpen ? contactList.classList.add('d-none') : contactList.classList.remove('d-none');
+  // contactsOpen = contactsOpen ? false:true;
   toggleDropdownArrow();
   loadContactsIntoDropdown(taskID);
 }
 
+function stopPropagation(event) {
+  event.stopPropagation();
+  console.log('triggered');
+}
 
 
 function toggleDropdownArrow() {
@@ -429,9 +434,7 @@ function sortContacts(arr) {
 
 // Assigned To Search
 
-
-
-function searchContacts() {
+function searchContactsEditTask() {
   let searchbar = document.getElementById('input-assigned-to');
   contactSearch = searchbar.value.toLowerCase();
   loadContactsIntoDropdown();

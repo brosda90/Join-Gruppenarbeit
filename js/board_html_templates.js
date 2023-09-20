@@ -11,7 +11,7 @@ function boardHeaderDesktopHTML() {
             <input type="text" name="" id="board-searchbar" class="board-searchbar" placeholder="Find Task" onkeyup="searchTasks()">
             <div class="board-searchbar-container-inner-right">
                 <div class="v-line-separator"></div>
-                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg class="icon-button" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <mask id="mask0_81525_6538" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="32" height="32">
                     <rect width="32" height="32" fill="#D9D9D9"/>
                     </mask>
@@ -46,7 +46,7 @@ function boardHeaderMobileHTML() {
       <input type="text" name="" id="board-searchbar" class="board-searchbar" placeholder="Find Task" onkeyup="searchTasks()">
       <div class="board-searchbar-container-inner-right">
           <div class="v-line-separator"></div>
-          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg class="icon-button" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
               <mask id="mask0_81525_6538" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="32" height="32">
               <rect width="32" height="32" fill="#D9D9D9"/>
               </mask>
@@ -136,7 +136,7 @@ function generatePopupTaskContainerHTML(task,taskID) {
         <div class="popup-task-container">
             <div class="popup-task-header">
                 <div class="task-category bc-${task['category_color']}">${task['category']}</div>
-                <button class="close-button" onclick="closePopup()">
+                <button class="close-button icon-button" onclick="closePopup()">
                     <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <mask id="mask0_81722_982" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="4" y="4" width="24" height="24">
                         <rect x="4" y="4" width="24" height="24" fill="#D9D9D9"/>
@@ -271,7 +271,7 @@ function generatePopupSubtasksHTML(task) {
 
 function generatePopupEditTaskContainerHTML(task,taskID) {
     return /*html*/`
-        <div class="popup-task-edit-container">
+        <div class="popup-task-edit-container" onclick="toggleContactList(${taskID},true)">
             <div class="popup-task-edit-header">
                 <div class="empty"></div>
                 <button class="icon-button" onclick="closePopup()" type="button">
@@ -358,10 +358,10 @@ function generatePopupEditTaskContainerHTML(task,taskID) {
                     </div>
                 </div>
                 <!-- Assigned To -->
-                <div class="popup-task-edit-info-container">
+                <div class="popup-task-edit-info-container" onclick="stopPropagation(event)">
                     <div class="popup-task-edit-info-headline">Assigned to</div>
                     <div class="input-field-container assigned-to-container" onclick="setFocusOnInput('input-assigned-to')">
-                      <input id="input-assigned-to" type="text" placeholder="Select contacts to assign" onkeyup="searchContacts()" onfocus="toggleContactList(${taskID})" onblur="toggleContactList(${taskID})">
+                      <input id="input-assigned-to" type="text" placeholder="Select contacts to assign" onkeyup="searchContactsEditTask()" onfocus="toggleContactList(${taskID},false)">
                       <img id="contactsArrow" src="./assets/img/arrow_drop_down.svg" alt="">
                     </div>
                     <div id="assigned-contacts-list" class="contact-list-container d-none">

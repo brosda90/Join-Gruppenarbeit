@@ -328,6 +328,7 @@ button {
 .grabbed-task {
     transform: rotate(5deg);
     opacity: 0.5;
+    box-shadow: none;
 }
 
 .task-category {
