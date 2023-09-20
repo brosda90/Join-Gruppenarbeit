@@ -147,7 +147,7 @@ async function registerUser() {
     userId: userId, // Änderung von "id" zu "userId"
   };
 
-  await loadContactsFromStorage(); // aus contacts.js
+  await loadFromStorage(); // aus contacts.js
   contactList.push(newContact);
   await setItem("contacts", JSON.stringify(contactList));
 
