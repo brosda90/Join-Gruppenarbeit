@@ -54,11 +54,9 @@ async function updatePassword() {
     await changePassword(email, newPassword);
     passwordPopup.style.display = "none";
 
-    // Zeigen Sie das Erfolgspopup an
     const successPopup = document.getElementById("successPopup");
     successPopup.style.display = "block";
 
-    // Nach 2 Sekunden, verstecken Sie das Popup und leiten Sie zum Index um
     setTimeout(() => {
       successPopup.style.display = "none";
       window.location.href = "Index.html";
@@ -66,19 +64,24 @@ async function updatePassword() {
   }
 }
 
-async function checkUserEmailAndShowPopup() {
+async function checkIfEmailFieldIsEmpty() {
   const emailInput = document.getElementById("passwordReset");
   const emailErrorRed = document.querySelector(".input-border");
   const email = emailInput.value;
-  users = JSON.parse(await getItem("users"));
 
-  emailErrorRed.classList.remove("input-error"); // Diese Zeile hinzufügen
+  emailErrorRed.classList.remove("input-error");
 
   if (!email) {
-    // Diese Bedingung hinzufügen
     emailErrorRed.classList.add("input-error");
-    return;
+    return true;
   }
+  return false;
+}
+
+async function validateEmailAndShowPopup() {
+  const emailInput = document.getElementById("passwordReset");
+  const email = emailInput.value;
+  users = JSON.parse(await getItem("users"));
 
   let user = users.find((u) => u.email === email);
   if (user) {
@@ -87,6 +90,14 @@ async function checkUserEmailAndShowPopup() {
     showEmailNotFoundPopup();
   }
 }
+
+async function checkUserEmailAndShowPopup() {
+  const isEmailFieldEmpty = await checkIfEmailFieldIsEmpty();
+  if (!isEmailFieldEmpty) {
+    await validateEmailAndShowPopup();
+  }
+}
+
 function showEmailNotFoundPopup() {
   document.getElementById("emailNotFoundPopup").style.display = "flex";
 }
@@ -95,7 +106,6 @@ function closeEmailNotFoundPopup() {
   document.getElementById("emailNotFoundPopup").style.display = "none";
 }
 
-// Passwort sichtbar machen
 function togglePasswordVisibility(fieldId, imgId) {
   const passwordField = document.getElementById(fieldId);
   const imageElement = document.getElementById(imgId);
