@@ -58,6 +58,7 @@
   justify-content: space-between;
   margin-bottom: 20px;
   margin-left: 13px;
+  padding-right: 5px;
 }
 
 .second-container {
@@ -67,6 +68,7 @@
   justify-content: space-between;
   margin-bottom: 20px;
   margin-left: 13px;
+  padding-right: 5px;
 }
 
 .urgent-left {
@@ -86,6 +88,8 @@
   justify-content: space-between;
   flex-direction: row;
   margin-left: 13px;
+  margin-bottom: 15px;
+  padding-right: 5px;
 }
 
 h3 {
@@ -292,7 +296,7 @@ h3 {
     height: 170px;
     display: flex;
     justify-content: space-between;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     margin-left: 337px;
   }
   .third-container {
@@ -302,6 +306,7 @@ h3 {
     justify-content: space-between;
     flex-direction: row;
     margin-left: 337px;
+    margin-bottom: 20px;
   }
 
   #done {
@@ -346,7 +351,7 @@ h3 {
 
   .right-container {
     opacity: 1 !important;
-    top: -338px;
+    top: -363px;
     left: 996px;
     width: 385px;
     height: 136px;
@@ -368,10 +373,40 @@ h3 {
 
   .main-container {
     flex-wrap: wrap;
-    width: 24%;
+    width: 60%;
+    margin-left: 333px;
   }
 
   main {
     width: 100vw;
+  }
+
+  .context-line {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .h2-61px {
+    font-size: 61px;
+    font-weight: 700;
+  }
+
+  .blue-line {
+    border: 2px solid #29abe2;
+    height: 63px;
+    width: 0px;
+    margin-top: 0px;
+    border-radius: 10px;
+    position: relative;
+    left: -255px;
+  }
+
+  .context-line p {
+    font-size: 27px;
+    font-weight: 400;
+    line-height: 31.4px;
+    padding-top: 20px;
+    position: relative;
+    left: 71px;
   }
 }
