@@ -454,6 +454,13 @@ button {
     align-items: center;
 }
 
+.popup-task-main {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    overflow-y: scroll;
+}
+
 .popup-task-edit-main {
     overflow-y: scroll;
     margin: 0 12px;
@@ -471,6 +478,7 @@ button {
 .popup-task-info-container {
     display: flex;
     gap: 25px;
+    flex-shrink: 0;
 }
 
 .popup-task-info-title {
@@ -583,7 +591,7 @@ button {
 }
 
 .textarea-field-container {
-    height: 88px;
+    min-height: 88px;
     border: 1px solid var(--color-lighter-grey);
     border-radius: 10px;
     display: flex;
@@ -609,7 +617,9 @@ button {
 .textarea-field-container textarea {
     border: none;
     outline: none;
-    width: 100%;
+    min-width: 100%;
+    min-height: 56px;
+    resize: vertical;
     font-size: 16px;
 }
 
@@ -745,6 +755,10 @@ input::-webkit-calendar-picker-indicator {
     z-index: 2;
 }
 
+.contacts-list {
+    max-height: 224px;
+}
+
 .assigned-to-contacts-list-item {
     /* width: 100%; */
     list-style: none;
@@ -823,6 +837,11 @@ input::-webkit-calendar-picker-indicator {
 
 
 /* subtask edit */
+
+.subtasks-list {
+    max-height: 96px;
+    min-height: 96px;
+}
 
 .subtask-edit-input {
     border: none;

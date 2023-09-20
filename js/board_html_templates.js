@@ -147,21 +147,23 @@ function generatePopupTaskContainerHTML(task,taskID) {
                     </svg>                            
                 </button>
             </div>
-            <h2 id="popup-task-title" class="popup-task-title">${task['title']}</h2>
-            <p id="popup-task-description" class="popup-task-description">${task['description']}</p>
-            <div class="popup-task-info-container">
-                <div class="popup-task-info-title">Due Date:</div>
-                <div class="popup-task-info">${task['due_date']}</div>
-            </div>
-            <div id="popup-task-priority-container" class="popup-task-info-container">
-                <div class="popup-task-info-title">Priority:</div>
-                <div class="popup-task-info">
-                    <div>${prioToText(`${task['priority']}`)}</div>
-                    <img src="./assets/img/prio-${task['priority']}.svg" alt="prio-${task['priority']}">  
+            <div class="popup-task-main">
+                <h2 id="popup-task-title" class="popup-task-title">${task['title']}</h2>
+                <p id="popup-task-description" class="popup-task-description">${task['description']}</p>
+                <div class="popup-task-info-container">
+                    <div class="popup-task-info-title">Due Date:</div>
+                    <div class="popup-task-info">${task['due_date']}</div>
                 </div>
+                <div id="popup-task-priority-container" class="popup-task-info-container">
+                    <div class="popup-task-info-title">Priority:</div>
+                    <div class="popup-task-info">
+                        <div>${prioToText(`${task['priority']}`)}</div>
+                        <img src="./assets/img/prio-${task['priority']}.svg" alt="prio-${task['priority']}">  
+                    </div>
+                </div>
+                ${generatePopupAssignedToContainerHTML(task)}
+                ${generatePopupSubtasksContainerHTML(task)}
             </div>
-            ${generatePopupAssignedToContainerHTML(task)}
-            ${generatePopupSubtasksContainerHTML(task)}
             <div class="popup-task-footer">
                 <button id="popup-task-delete-button" class="btn-task-edit" onclick="deleteTask(${taskID})">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -271,7 +273,7 @@ function generatePopupSubtasksHTML(task) {
 
 function generatePopupEditTaskContainerHTML(task,taskID) {
     return /*html*/`
-        <div class="popup-task-edit-container" onclick="toggleContactList(${taskID},true)">
+        <div class="popup-task-edit-container" onclick="closeContactList(${taskID})">
             <div class="popup-task-edit-header">
                 <div class="empty"></div>
                 <button class="icon-button" onclick="closePopup()" type="button">
@@ -361,8 +363,10 @@ function generatePopupEditTaskContainerHTML(task,taskID) {
                 <div class="popup-task-edit-info-container" onclick="stopPropagation(event)">
                     <div class="popup-task-edit-info-headline">Assigned to</div>
                     <div class="input-field-container assigned-to-container" onclick="setFocusOnInput('input-assigned-to')">
-                      <input id="input-assigned-to" type="text" placeholder="Select contacts to assign" onkeyup="searchContactsEditTask()" onfocus="toggleContactList(${taskID},false)">
-                      <img id="contactsArrow" src="./assets/img/arrow_drop_down.svg" alt="">
+                      <input id="input-assigned-to" type="text" placeholder="Select contacts to assign" onkeyup="searchContactsEditTask()" onfocus="openContactList(${taskID})">
+                      <button class="icon-button" onclick="toggleContactList(${taskID}),stopPropagation(event)" type="button">
+                        <img id="contactsArrow" src="./assets/img/arrow_drop_down.svg" alt="" >
+                      </button>
                     </div>
                     <div id="assigned-contacts-list" class="contact-list-container d-none">
                         <div id="assigned-to-contacts" class="contact-list">

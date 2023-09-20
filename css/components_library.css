@@ -188,7 +188,7 @@ button {
 }
 
 .textarea-field-container {
-    height: 88px;
+    min-height: 88px;
     width: 100%;
     border: 1px solid var(--color-lighter-grey);
     border-radius: 10px;
@@ -216,7 +216,8 @@ button {
     border: none;
     outline: none;
     min-width: 100%;
-    min-height: 100%;
+    min-height: 56px;
+    resize: vertical;
     font-size: 16px;
 }
 

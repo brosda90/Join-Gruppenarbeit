@@ -304,18 +304,27 @@ function removePrioSelection() {
 
 // Assigned To
 
-function toggleContactList(taskID,state) {
+function openContactList(taskID) {
+  contactsOpen = false;
+  toggleContactList(taskID)
+}
+
+function closeContactList(taskID) {
+  contactsOpen = true;
+  toggleContactList(taskID);
+}
+
+
+function toggleContactList(taskID) {
   let contactList = document.getElementById('assigned-contacts-list');
-  contactsOpen = state;
   contactsOpen ? contactList.classList.add('d-none') : contactList.classList.remove('d-none');
-  // contactsOpen = contactsOpen ? false:true;
+  contactsOpen = contactsOpen ? false : true;
   toggleDropdownArrow();
   loadContactsIntoDropdown(taskID);
 }
 
 function stopPropagation(event) {
   event.stopPropagation();
-  console.log('triggered');
 }
 
 
@@ -504,7 +513,7 @@ async function acceptEdit(taskID) {
   task['priority'] = currentTask['priority'];
   task['assigned_to'] = currentTask['assigned_to'];
   task['subtasks'] = currentTask['subtasks'];
-  await setItem('tasks', JSON.stringify(loadedTasks));
+  await setItem('tasks', JSON.stringify(tasks));
   currentTask = {};
   closePopup();
 }
