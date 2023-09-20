@@ -93,7 +93,6 @@ async function initContacts() {
 
 async function loadFromStorage(key = "contacts", defaultList = []) {
     let tempData;
-    let tempList = [];
     tempData = await loadData(key, defaultList);
     return tempData;
 }
@@ -175,6 +174,7 @@ function readNewInputs() {
             email: document.getElementById("addconemail").value,
             phone: document.getElementById("addconphone").value,
             "badge-color": randomBadgeColor(),
+            "userId": -1
         },
     ];
 }

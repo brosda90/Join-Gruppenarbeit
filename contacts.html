@@ -88,7 +88,7 @@
                 </a>
             </nav>
             <div class="nav-bottom-linkbox">
-                <a class="nav-bottom-link" href="./privacy_policy.html" target="_blank">Pravacy Policy</a>
+                <a class="nav-bottom-link" href="./privacy_policy.html" target="_blank">Privacy Policy</a>
                 <a class="nav-bottom-link" href="./legal_notice.html" target="_blank">Legal notice</a>
             </div>
         </div>
@@ -220,7 +220,7 @@
                 <form class="popup-addcon-inputbox-form" onsubmit="saveNewContact(); return false;" autocomplete="off">
                     <div class="popup-addcon-input-box border">
                         <div class="popup-addcon-input-innerbox">
-                            <input type="text" id="addconname" required pattern="^[A-Za-z]+(?: [A-Za-z\-]+)+$" title="Please first and second name." placeholder="Name">
+                            <input type="text" id="addconname" required pattern="[A-Za-zäöüÄÖÜ]+(?: [A-Za-zäöüÄÖÜ\-]+)+" title="Please first and second name." placeholder="Name">
                             <div class="popup-addcon-input-imgbox">
                                 <img src="./assets/img/person16.png">
                             </div>
@@ -229,7 +229,7 @@
                     <!--  -->
                     <div class="popup-addcon-input-box border">
                         <div class="popup-addcon-input-innerbox">
-                            <input type="email" id="addconemail" required pattern="^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$" placeholder="Email">
+                            <input type="email" id="addconemail" required pattern="[a-zA-Z0-9\.!%_\+\-]{1,64}[@][a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,4}" placeholder="Email">
                             <div class="popup-addcon-input-imgbox">
                                 <img src="./assets/img/mail_20x16.png">
                             </div>
@@ -286,7 +286,7 @@
                     <div class="popup-editcon-input-box border">
                         <div class="popup-editcon-input-innerbox">
                             <input type="hidden" id="editconid" value="">
-                            <input type="text" id="editconname" required pattern="^[A-Za-z]+(?: [A-Za-z\-]+)+$" title="Please first and second name." placeholder="Name">
+                            <input type="text" id="editconname" required pattern="[A-Za-z]+(?: [A-Za-z\-]+)+" title="Please first and second name." placeholder="Name">
                             <div class="popup-editcon-input-imgbox">
                                 <img src="./assets/img/person16.png">
                             </div>
@@ -295,7 +295,7 @@
                     <!--  -->
                     <div class="popup-editcon-input-box border">
                         <div class="popup-editcon-input-innerbox">
-                            <input type="email" id="editconemail" required pattern="^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$" placeholder="Email">
+                            <input type="email" id="editconemail" required pattern="[a-zA-Z0-9\.!%_\+\-]{1,64}[@][a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,4}" placeholder="Email">
                             <div class="popup-editcon-input-imgbox">
                                 <img src="./assets/img/mail_20x16.png">
                             </div>

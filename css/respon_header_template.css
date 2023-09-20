@@ -27,7 +27,20 @@ button {
     font-family: Inter, sans-serif;
 }
 
-div, nav, main, span, ::after {
+.insert-top div,
+.insert-top nav,
+.insert-top main,
+.insert-top span,
+.insert-top ::after {
+    box-sizing: border-box;
+    transition: all 75ms ease-in;
+}
+
+.insert-bottom div,
+.insert-bottom nav,
+.insert-bottom main,
+.insert-bottom span,
+.insert-bottom ::after {
     box-sizing: border-box;
     transition: all 75ms ease-in;
 }
