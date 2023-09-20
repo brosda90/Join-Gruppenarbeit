@@ -67,15 +67,32 @@ async function updatePassword() {
 }
 
 async function checkUserEmailAndShowPopup() {
-  const email = document.getElementById("passwordReset").value;
+  const emailInput = document.getElementById("passwordReset");
+  const emailErrorRed = document.querySelector(".input-border");
+  const email = emailInput.value;
   users = JSON.parse(await getItem("users"));
+
+  emailErrorRed.classList.remove("input-error"); // Diese Zeile hinzufügen
+
+  if (!email) {
+    // Diese Bedingung hinzufügen
+    emailErrorRed.classList.add("input-error");
+    return;
+  }
 
   let user = users.find((u) => u.email === email);
   if (user) {
     document.getElementById("passwordPopup").style.display = "flex";
   } else {
-    alert("E-Mail nicht gefunden.");
+    showEmailNotFoundPopup();
   }
+}
+function showEmailNotFoundPopup() {
+  document.getElementById("emailNotFoundPopup").style.display = "flex";
+}
+
+function closeEmailNotFoundPopup() {
+  document.getElementById("emailNotFoundPopup").style.display = "none";
 }
 
 // Passwort sichtbar machen
