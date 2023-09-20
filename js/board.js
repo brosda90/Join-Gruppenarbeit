@@ -19,7 +19,8 @@ async function loadUsersFromStorage() {
 }
 
 async function loadCurrentUserFromStorage() {
-  currentUser = JSON.parse(await getItem('currentUser'));
+  let currentUserID = localStorage.getItem('loggedInUserID');
+  currentUser = users.find( user => user['id'] == currentUserID)
 }
 
 async function loadContactsFromStorage() {
@@ -41,7 +42,7 @@ async function saveTasksToStorage() {
 async function initBoard() {
   renderMobileOrDesktopTemplates(window.innerWidth >= 1000);
   await loadUsersFromStorage();
-  // await loadCurrentUserFromStorage();
+  await loadCurrentUserFromStorage();
   await loadContactsFromStorage();
   await loadTasksFromStorage();
   renderAllTasks();
@@ -462,7 +463,6 @@ function renderSubtasksInEditTask() {
   }
 }
 
-
 function editSubtask(subtaskIndex) {
   let subtask = currentTask['subtasks'][subtaskIndex];
   let container = document.getElementById(`popup-task-edit-subtask-${subtaskIndex}`);
@@ -498,6 +498,21 @@ function dropNewSubtask() {
   input.value = '';
   document.activeElement.blur();
 }
+
+// let editTaskOpen = false;
+
+// if (editTaskOpen) {
+//   document.getElementById('input-subtasks').addEventListener('keydown', (e) => {
+//     if(e.key === 'Enter') {
+//       e.preventDefault();
+//       addNewSubtask();
+//     }
+//   })
+// }
+
+
+
+
 
 
 async function acceptEdit(taskID) {
