@@ -89,10 +89,11 @@ function allowDrop(event) {
  * 
  * @param {string} taskStateCategory e.g. 'to-do', 'done' ...
  */
-function moveTo(taskStateCategory) {
+async function moveTo(taskStateCategory) {
   let index = tasks.findIndex(task => task['id'] == currentDraggedElement);
   tasks[index]['status'] = taskStateCategory;
   tasks.push(tasks.splice(index,1)[0]); //move task to the last position in the array
+  await saveTasksToStorage();
   renderAllTasks();
 }
 

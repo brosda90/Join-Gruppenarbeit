@@ -503,10 +503,7 @@ function dropNewSubtask() {
 
 // if (editTaskOpen) {
 //   document.getElementById('input-subtasks').addEventListener('keydown', (e) => {
-//     if(e.key === 'Enter') {
 //       e.preventDefault();
-//       addNewSubtask();
-//     }
 //   })
 // }
 
