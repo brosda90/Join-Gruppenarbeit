@@ -572,7 +572,7 @@ function openAddNewTaskPopUp(status) {
 
   if (window.innerWidth > 980) {
     document.getElementById('popup-container-add-task').style.display = 'flex';
-    document.getElementsByClassName('headAddTask')[0].innerHTML += addTaskClosingButtonHTML(); // Close Button for Popup
+    document.getElementById('add-task-closing-button').classList.remove('d-none');
   } else {
     window.location.href = 'add_task.html'
   }
