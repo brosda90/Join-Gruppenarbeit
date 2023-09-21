@@ -27,8 +27,8 @@ function openContact(id) {
 
 
 function unselectContactList() {
-  useroptions(true);
-  let obj = document.getElementsByClassName("contact-listbox");
+    useroptions(true);
+    let obj = document.getElementsByClassName("contact-listbox");
     for (let i = 0; i < obj.length; i++) {
         obj[i].classList.remove("select");
     }
@@ -36,8 +36,8 @@ function unselectContactList() {
 
 
 function selectContactList(id) {
-  useroptions(true);
-  document.getElementById(`contact-listbox-${id}`).classList.add("select");
+    useroptions(true);
+    document.getElementById(`contact-listbox-${id}`).classList.add("select");
 }
 
 
@@ -80,10 +80,17 @@ function initialsFrom(string) {
 // ----- Wichtige Funktionen für Contacts im Allgemeinen ------
 // ############################################################
 async function initContacts() {
+cLog('start sCL - initContacts:', sortedContactList)
+cLog('start cL - initContacts:', contactList)
+if(isLoaded == false) {
+    await userAndContacts();
+}
     // contactList = await loadFromStorage('contacts', contactList);
     // userList = await loadFromStorage('users', userList);
     await loadLastContactId();
     sortedContactList = sortMyList(contactList);
+cLog('after sCL - initContacts:', sortedContactList)
+cLog('after cL - initContacts:', contactList)
     let comeFrom = document.location.pathname;
     if (comeFrom.includes("contacts.html")) {
         renderContactList();
@@ -91,54 +98,11 @@ async function initContacts() {
 }
 
 
-async function loadFromStorage(key = "contacts", defaultList = []) {
-    let tempData;
-    tempData = await loadData(key, defaultList);
-    return tempData;
-}
-
-
-function sortMyList(myArray) {
-    if (contactList.length > 1) {
-        return sortContacts(myArray);
-    } else {
-        return myArray;
-    }
-}
-
-
-async function loadUsersFromStorage() {
-    let tempData;
-    tempData = await loadData("users", userList);
-    userList = tempData;
-}
-
-
-async function loadLastContactId() {
-    let tempData;
-    tempData = await loadData("lastContactId", 0);
-    lastContactId = +JSON.parse(tempData);
-}
-
-
-async function loadData(key, defaultValue) {
-    let loadedData = await getItem(key);
-    if (loadData == null) {
-        await saveData(key, defaultValue);
-    } else {
-        return JSON.parse(loadedData);
-    }
-}
-
-
-async function saveData(key, value) {
-    let saveData = await setItem(key, JSON.stringify(value));
-    if (saveData.status == "success") {
-        return true;
-    } else {
-        return false;
-    }
-}
+// async function loadUsersFromStorage() {
+//     let tempData;
+//     tempData = await loadData("users", userList);
+//     userList = tempData;
+// }
 
 
 function cLog(text, value) {
@@ -158,9 +122,7 @@ async function saveNewContact() {
     renderContactList();
     document.getElementById("contactsuccess").classList.add("shortpopup");
     setTimeout(() => {
-        document
-            .getElementById("contactsuccess")
-            .classList.remove("shortpopup");
+        document.getElementById("contactsuccess").classList.remove("shortpopup");
     }, "800");
 }
 
@@ -168,11 +130,11 @@ async function saveNewContact() {
 function readNewInputs() {
     return [
         {
-            id: lastContactId,
-            name: document.getElementById("addconname").value,
-            initials: initialsFrom(document.getElementById("addconname").value),
-            email: document.getElementById("addconemail").value,
-            phone: document.getElementById("addconphone").value,
+            "id": lastContactId,
+            "name": document.getElementById("addconname").value,
+            "initials": initialsFrom(document.getElementById("addconname").value),
+            "email": document.getElementById("addconemail").value,
+            "phone": document.getElementById("addconphone").value,
             "badge-color": randomBadgeColor(),
             "userId": -1
         },
@@ -197,17 +159,30 @@ function clearAddPopup() {
 async function saveEditContact() {
     let id = +document.getElementById("editconid").value;
     let index = idToIndex(id, contactList);
-    contactList[index].name = document.getElementById("editconname").value;
-    contactList[index].initials = initialsFrom(
-        document.getElementById("editconname").value
-    );
-    contactList[index].email = document.getElementById("editconemail").value;
-    contactList[index].phone = document.getElementById("editconphone").value;
+    updateContactFields(index);
     await saveData("contacts", contactList);
+    if(isCurrentUser(contactList[index].userId)) {
+        await saveData("users", userList);
+    }
     sortedContactList = sortContacts(contactList);
     renderContactList();
     renderSingleView(id);
     openEditCon();
+}
+
+
+function updateContactFields(index) {
+    contactList[index].name = document.getElementById("editconname").value;
+    contactList[index].initials = initialsFrom(document.getElementById("editconname").value);
+    contactList[index].email = document.getElementById("editconemail").value;
+    contactList[index].phone = document.getElementById("editconphone").value;
+    if(isCurrentUser(contactList[index].userId)) {
+        let userIndex = idToIndex(contactList[index].userId, userList);
+        userList[userIndex].name = contactList[index].name;
+        userList[userIndex].initials = contactList[index].initials;
+        userList[userIndex].email = contactList[index].email;
+        userList[userIndex].phone = contactList[index].phone;
+    }
 }
 
 
@@ -225,9 +200,18 @@ async function deleteContact(id) {
 
 // ############################################################
 function sortContacts(arr) {
-    let targetArr = arr;
+    let targetArr = [...arr];
     targetArr.sort((c1, c2) =>
         c1.initials < c2.initials ? -1 : c1.initials > c2.initials ? 1 : 0
+    );
+    return targetArr;
+}
+
+
+function sortIds(arr) {
+    let targetArr = [...arr];
+    targetArr.sort((c1, c2) =>
+        c1.id < c2.id ? -1 : c1.id > c2.id ? 1 : 0
     );
     return targetArr;
 }
@@ -237,19 +221,46 @@ function sortContacts(arr) {
 // ----- Render-Funktionen für Contacts im Allgemeinen --------
 // ############################################################
 function renderContactList() {
-    let newContent = "";
-    let firstLetter = "";
+cLog('sCL - renderContactList:', sortedContactList)
+cLog('cL - renderContactList:', sortedContactList)
+    let newContent = "", firstLetter = "";
     for (let i = 0; i < sortedContactList.length; i++) {
-        if (sortedContactList[i].initials[0] != firstLetter) {
-            firstLetter = sortedContactList[i].initials[0];
-            newContent += renderLetterbox(sortedContactList[i].initials[0]);
-        }
-        newContent += renderListEntry(i);
+        let isUser = isCurrentUserInfo(sortedContactList[i].userId);
+        let answer = nextLetter(sortedContactList[i].initials[0], firstLetter);
+        firstLetter = answer[1];
+        newContent += answer[0];
+        newContent += renderListEntry(i, isUser);
     }
     if (newContent == "") {
         newContent += renderLetterbox();
     }
     document.getElementById("contact-list").innerHTML = newContent;
+}
+
+
+function nextLetter(currentLetter, firstLetter) {
+    let newContent = "";
+    if (currentLetter != firstLetter) {
+        firstLetter = currentLetter;
+        newContent += renderLetterbox(currentLetter);
+    }
+    return [newContent, firstLetter];
+}
+
+
+function isCurrentUserInfo(userId) {
+    if(userId === loggedInUserID) {
+        return " (Me)";
+    } else if(userId > -1) {
+        return " (User)";
+    } else {
+        return "";
+    }
+}
+
+
+function isCurrentUser(userId) {
+    return (userId === loggedInUserID);
 }
 
 
@@ -263,7 +274,7 @@ function renderLetterbox(letter = "No Contacts") {
 }
 
 
-function renderListEntry(i) {
+function renderListEntry(i, isUser = "") {
     return `
         <div id="contact-listbox-${sortedContactList[i].id}" class="contact-listbox" onclick="openContact(${sortedContactList[i].id})">
             <div class="contact-listbox-badgebox">
@@ -274,7 +285,7 @@ function renderListEntry(i) {
                 </div>
             </div>
             <div class="contact-listbox-namebox">
-                <span class="contact-listbox-name">${sortedContactList[i].name}</span>
+                <span class="contact-listbox-name">${sortedContactList[i].name}${isUser}</span>
                 <span class="contact-listbox-mail">${sortedContactList[i].email}</span>
             </div>
         </div>
@@ -285,28 +296,24 @@ function renderListEntry(i) {
 // ############################################################
 function renderSingleView(id) {
     let index = idToIndex(id, sortedContactList);
-    document.getElementById("contact-single-info-badge-text").innerHTML =
-        sortedContactList[index].initials;
-    document.getElementById("contact-single-info-name-text").innerHTML =
-        sortedContactList[index].name;
-    document.getElementById("contact-single-info-email-text").innerHTML =
-        sortedContactList[index].email;
-    document.getElementById("contact-single-info-phone-text").innerHTML =
-        sortedContactList[index].phone;
-    document.getElementById(
-        "contact-single-info-badge-circle"
-    ).className = `contact-single-info-badge-circle bg-contact-${sortedContactList[index]["badge-color"]}`;
+    let isUser = isCurrentUserInfo(sortedContactList[index].userId);
+    document.getElementById("contact-single-info-badge-text").innerHTML = sortedContactList[index].initials;
+    document.getElementById("contact-single-info-name-text").innerHTML = sortedContactList[index].name + isUser;
+    document.getElementById("contact-single-info-email-text").innerHTML = sortedContactList[index].email;
+    document.getElementById("contact-single-info-phone-text").innerHTML = sortedContactList[index].phone;
+    document.getElementById("contact-single-info-badge-circle").className = `contact-single-info-badge-circle bg-contact-${sortedContactList[index]["badge-color"]}`;
     document.getElementById("options").innerHTML = renderOptions(id);
-    document.getElementById("contact-single-info-options").innerHTML =
-        renderOptions(id);
+    document.getElementById("contact-single-info-options").innerHTML = renderOptions(id);
     renderPopupEdit(id);
 }
 
 
 function renderOptions(id) {
     let content = "";
-    content += renderOptionEdit(id);
-    content += renderOptionDelete(id);
+    if(isCurrentUserInfo(sortedContactList[idToIndex(id, sortedContactList)].userId) != " (User)") {
+        content += renderOptionEdit(id);
+        content += renderOptionDelete(id);
+    }
     return content;
 }
 
@@ -338,19 +345,50 @@ function renderOptionDelete(id) {
 // ############################################################
 function renderPopupEdit(id) {
     let index = idToIndex(id, sortedContactList);
-    document.getElementById(
-        "popup-person-imgbox"
-    ).className = `popup-person-imgbox bg-contact-${sortedContactList[index]["badge-color"]}`;
-    document.getElementById("popup-person-imgbox-text").innerHTML =
-        sortedContactList[index].initials;
+    document.getElementById("popup-person-imgbox").className = `popup-person-imgbox bg-contact-${sortedContactList[index]["badge-color"]}`;
+    document.getElementById("popup-person-imgbox-text").innerHTML = sortedContactList[index].initials;
     document.getElementById("editconid").value = sortedContactList[index].id;
-    document.getElementById("editconname").value =
-        sortedContactList[index].name;
-    document.getElementById("editconemail").value =
-        sortedContactList[index].email;
-    document.getElementById("editconphone").value =
-        sortedContactList[index].phone;
+    document.getElementById("editconname").value = sortedContactList[index].name;
+    document.getElementById("editconemail").value = sortedContactList[index].email;
+    document.getElementById("editconphone").value = sortedContactList[index].phone;
     document.getElementById("popup-editcon-btn-delete").innerHTML = `
         <button onclick='deleteContact(${id})' type="button" class="btn light">Delete</button>
     `;
+}
+
+
+
+// ############################################################
+// ----- nur temporär enthalten                           -----
+// ############################################################
+async function admin_connectUserContacts() {
+    for(i = 0; i < contactList.length; i++) {
+        if(contactList[i].userId == -1) {
+            // User suchen
+            let conEmail = contactList[i].email;
+            for(j = 0; j < userList.length; j++) {
+                let userEmail = userList[j].email;
+                if(conEmail == userEmail) {
+                    // beide verbinden
+                    userList[j].contacts[0] = contactList[i].id;
+                    contactList[i].userId = userList[j].id;
+                    j = userList.length;
+                }
+            }
+        }
+    }
+    await saveData('contacts', contactList);
+    await saveData('users', userList);
+    await saveData("contacts", contactList);
+}
+
+
+async function admin_createUserToContacts() {
+
+}
+
+
+async function admin_repairBadgeColor(index, arr) {
+    arr[index]['badge-color'] = arr[index].badgecolor;
+    delete arr[index]['badgecolor'];
 }
