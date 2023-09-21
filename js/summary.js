@@ -93,7 +93,7 @@ function nextDeadline() {
 
   const nextDate = urgentTasks[0].due_date;
 
-  const formatDate = new Date(nextDate).toLocaleDateString("de-DE", {
+  const formatDate = new Date(nextDate).toLocaleDateString("en-EN", {
     year: "numeric",
     month: "long",
     day: "numeric",
@@ -101,3 +101,26 @@ function nextDeadline() {
 
   document.querySelector("#deadLine p:nth-child(1) b").textContent = formatDate;
 }
+
+//################  HOVER FOR IMAGES #############################//
+
+document.addEventListener("DOMContentLoaded", function () {
+  const toDoElement = document.getElementById("toDo");
+  const doneElement = document.getElementById("done");
+
+  toDoElement.addEventListener("mouseover", function () {
+    this.querySelector("img").setAttribute("src", "assets/img/edit_hover.svg");
+  });
+
+  toDoElement.addEventListener("mouseout", function () {
+    this.querySelector("img").setAttribute("src", "assets/img/pencil.png");
+  });
+
+  doneElement.addEventListener("mouseover", function () {
+    this.querySelector("img").setAttribute("src", "assets/img/done_hover.svg");
+  });
+
+  doneElement.addEventListener("mouseout", function () {
+    this.querySelector("img").setAttribute("src", "assets/img/done.png");
+  });
+});
