@@ -83,7 +83,6 @@ async function registerUser() {
       checkAndRemoveErrorClass(this);
     });
 
-  // Überprüfung, ob die Felder leer sind
   if (
     !name.trim() ||
     !email.trim() ||
@@ -143,7 +142,7 @@ async function registerUser() {
     initials: getInitials(name),
     email: email,
     phone: "Bitte Telefonnummer eintragen",
-    badgecolor: randomBadgeColor(),
+    "badge-color": randomBadgeColor(),
     userId: userId, // Änderung von "id" zu "userId"
   };
 
@@ -178,11 +177,21 @@ function getInitials(name) {
   return initials.toUpperCase();
 }
 
+function isValidEmail(email) {
+  const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  return regex.test(email);
+}
+
 //################ CHECKS IF EMAIL EXISTS #############################//
 async function checkEmailExists() {
   const email = document.getElementById("emailField").value.toLowerCase();
 
-  if (!email.trim()) return; // Überprüfung ob Emailfeld leer ist.
+  if (!email.trim()) return;
+
+  if (!isValidEmail(email)) {
+    console.log("Ungültige E-Mail-Adresse");
+    return;
+  }
 
   await loadUsers();
 
@@ -267,4 +276,9 @@ function closePasswordNotSecurePopup() {
 async function deleteAllUsers() {
   users = [];
   await setItem("users", JSON.stringify(users));
+}
+
+function handleFormSubmit(event) {
+  event.preventDefault(); // Verhindert das standardmäßige Absenden des Formulars
+  registerUser();
 }
