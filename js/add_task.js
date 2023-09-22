@@ -65,7 +65,7 @@ function renderContacts() {   //render Contacts
     }
 }
 
-function checkIfContactIsJoinUser(userid) {
+function checkIfContactIsJoinUser(userid) {   //check if Contact is registered Join User
     if (userid < 0) {
       return 'noActiveUser';
     } else {
