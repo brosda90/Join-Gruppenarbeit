@@ -288,7 +288,7 @@ function generatePopupEditTaskContainerHTML(task,taskID) {
                     </svg>                            
                 </button>
             </div>
-            <form class="popup-task-edit-form" onsubmit="acceptEdit(${taskID}); return false;">
+            <form  id="popup-task-edit-form" class="popup-task-edit-form" onsubmit="acceptEdit(${taskID}); return false;">
                 <div class="popup-task-edit-main">
                 <!-- Title -->
                 <div class="popup-task-edit-info-container">
@@ -384,7 +384,7 @@ function generatePopupEditTaskContainerHTML(task,taskID) {
                 <div class="popup-task-edit-info-container">
                     <div class="popup-task-edit-info-headline">Subtasks</div>
                     <div class="input-field-container"  onclick="setFocusOnInput('input-subtasks')">
-                        <input id="input-subtasks" type="text" placeholder="Add new subtask">
+                        <input id="input-subtasks" type="text" placeholder="Add new subtask" onkeydown="addNewSubtaskWithEnter(event)">
                         <button class="createNewSubtask-button icon-button" type="button">
                             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M9 1.5V16.5" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
@@ -392,11 +392,11 @@ function generatePopupEditTaskContainerHTML(task,taskID) {
                             </svg> 
                         </button>
                         <div class="subtask-buttons-container add-new-task-buttons">
-                            <button class="btn-drop-new-subtask icon-button" onclick="dropNewSubtask()" type="button">
+                            <button class="btn-drop-new-subtask icon-button" onclick="stopPropagation(event);addNewSubtask(event);" type="button">
                                 <img src="./assets/img/close.svg" alt="delete-icon">    
                             </button>
                             <div class="v-line-separator"></div>
-                            <button class="btn-add-new-subtask icon-button" onclick="addNewSubtask(${taskID})" type="button">
+                            <button class="btn-add-new-subtask icon-button" onclick="stopPropagation(event);addNewSubtask(event);" type="button">
                                 <img src="./assets/img/input_check.svg" alt="check-icon">
                             </button>
                         </div>

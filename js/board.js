@@ -495,29 +495,25 @@ function deleteSubtask(subtaskIndex) {
 
 function addNewSubtask() {
   let input = document.getElementById(`input-subtasks`);
-  let newSubtask = {
+  if (input.value != '') {
+    let newSubtask = {
       done: false,
       subtask: `${input.value}`,
-  };
-  currentTask['subtasks'].push(newSubtask);
-  dropNewSubtask();
+    };
+    currentTask['subtasks'].push(newSubtask);
+  }
+  input.value = '';
+  input.blur();
   renderSubtasksInEditTask();
 }
+ 
 
-function dropNewSubtask() {
-  let input = document.getElementById(`input-subtasks`);
-  input.value = '';
-  document.activeElement.blur();
+function addNewSubtaskWithEnter(event) {
+  if (event.key === 'Enter') {
+    event.preventDefault();
+    addNewSubtask();
+  }
 }
-
-// let editTaskOpen = false;
-
-// if (editTaskOpen) {
-//   document.getElementById('input-subtasks').addEventListener('keydown', (e) => {
-//       e.preventDefault();
-//   })
-// }
-
 
 
 
