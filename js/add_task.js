@@ -3,14 +3,17 @@ let selectTrigger = document.querySelector('.select-trigger');
 
 let taskStatus = localStorage.getItem('taskStatus') || 'to-do';
 let taskContacts = [];
+let currentUser = {};
+let users = [];
 let loadedTasks = [];
 let addedContacts = [];
 let addedContactInitial = [];
 let badges = [];
+let categoryColor;
 let addedSubTasks = [];
 
-  //-------------------------------------------------//
- //------- Storage load and Render Functions -------//
+//-------------------------------------------------//
+//------- Storage load and Render Functions -------//
 //-------------------------------------------------//
 
 async function initAddTask() {
@@ -22,22 +25,22 @@ async function initAddTask() {
 
 async function loadTaskContactsFromStorage() {
     taskContacts = JSON.parse(await getItem('contacts'));
-    if(taskContacts.length > 1) {
+    if (taskContacts.length > 1) {
         sortContacts(taskContacts);
     } else {
         sortedContactList = taskContacts;
     }
 }
 
-async function loadTasksFromRemoteStorage () {
+async function loadTasksFromRemoteStorage() {
     loadedTasks = JSON.parse(await getItem('tasks'));
 }
 
 function sortContacts(arr) {
     sortedContactList = arr;
     sortedContactList.sort(
-        (c1, c2) => 
-        (c1.initials < c2.initials) ? -1 : (c1.initials > c2.initials) ? 1 : 0);
+        (c1, c2) =>
+            (c1.initials < c2.initials) ? -1 : (c1.initials > c2.initials) ? 1 : 0);
 }
 
 function renderContacts() {   //render Contacts
@@ -72,8 +75,8 @@ function renderSubTaskUpdate() {   //reload edited Sub Task
     };
 }
 
-  //---------------------------------------------------------------//
- //------- Check Buttons, Input Fields and Select Elements -------//
+//---------------------------------------------------------------//
+//------- Check Buttons, Input Fields and Select Elements -------//
 //---------------------------------------------------------------//
 
 function selectPrio(button) {   //set prio button icon variable
@@ -232,8 +235,8 @@ function resetPrioAlert(urgent, medium, low) {   //reset red border of Prio Butt
     lowBtn.classList.remove('brd-red');
 }
 
-  //----------------------------------------------------//
- //------- Get Values and Create Task Functions -------//
+//----------------------------------------------------//
+//------- Get Values and Create Task Functions -------//
 //----------------------------------------------------//
 
 function getSelectedPrio() {  //get selected Prio Button Value for new Task
@@ -276,7 +279,16 @@ function selectOption(option) {  //show selected Category in Category selector
     const selectedValue = option.textContent;
     const categorySelector = document.getElementById('chosenCategory');
     categorySelector.innerHTML = selectedValue;
+    checkCategoryColor(selectedValue);
     selectCategory();
+}
+
+function checkCategoryColor(selectedValue) {
+    if (selectedValue == 'Technical Task') {
+        categoryColor = 6;
+    } else {
+        categoryColor = 11;
+    }
 }
 
 function showContacts() {   //show all Contacts in dropdown Menu
@@ -302,7 +314,7 @@ function searchContacts() {   //search contact in contact drop down menu
 
     for (let l = 0; l < taskContacts.length; l++) {
         const contact = taskContacts[l];
-        const contactName = contact.getElementsByTagName('span')[0].textContent.toLowerCase();
+        const contactName = contact.getElementsByTagName('p')[0].textContent.toLowerCase();
 
         if (searchInput === '') {
             contact.classList.remove('d-none');
@@ -380,6 +392,7 @@ async function addNewTask(title, description, priority, date, category, assigned
         'id': loadedTasks.length + 1,
         'status': taskStatus,
         'category': category,
+        'category_color': categoryColor,
         'title': title,
         'description': description,
         'due_date': date,
@@ -408,8 +421,8 @@ function clearTaskInput() {   //clear all Input Data form new created Task
     resetTaskData();
 }
 
-  //------------------------------//
- //------- Edit Functions -------//
+//------------------------------//
+//------- Edit Functions -------//
 //------------------------------//
 
 function editSubElement(index) {   //edit Sub Task
@@ -417,12 +430,12 @@ function editSubElement(index) {   //edit Sub Task
 
     toggleEditSubInput(index);
 
-    subValue.value = addedSubTasks[index];
+    subValue.value = addedSubTasks[index]['subtask'];
 }
 
 function setNewSubValue(index) {   //set new Sub Task Value
     let newSubValue = document.getElementById(`editSubTask${index}`).value;
-    addedSubTasks[index] = newSubValue;
+    addedSubTasks[index]['subtask'] = newSubValue;
 
     renderSubTaskUpdate();
 }
@@ -434,8 +447,8 @@ function deleteSub(index) {   //delete Sub Task
     }
 }
 
-  //------------------------------------------//
- //------- Toggle and Reset Functions -------//
+//------------------------------------------//
+//------- Toggle and Reset Functions -------//
 //------------------------------------------//
 
 function toggleSubTaskInput() {   //displays Sub Task Input
@@ -484,8 +497,8 @@ function toggleEditSubInput(index) {   //toggle Sub Task edit input
     editSubInput.classList.toggle('d-none');
 }
 
-  //-------------------------------------//
- //------- HTML Render Templates -------//
+//-------------------------------------//
+//------- HTML Render Templates -------//
 //-------------------------------------//
 
 function contactInitialsHTML(index, inital) {
@@ -497,7 +510,7 @@ function renderContactHTML(index, contact) {
         <div id="contact${index}" class="singleContact option item brd-r10" onclick="addedContact(${index})">
             <div class="singleContactInitialName">
                 <div class="profile-badge bc-${contact['badge-color']} brd-white">${contact['initials']}</div>
-                <span>${contact['name']}</span>
+                <p>${contact['name']}</p>
             </div>
             <img id="check${index}" src="./assets/img/check_button_unchecked.svg">
         </div>`;
