@@ -165,7 +165,7 @@ function generateAssignedUserBadges(taskJSON) {
     let contact = contacts.filter((contact) => contact['id'] == assignedContacts[i])[0];
     if (contact && i < 5) {
       assignedUserBadgesHTML += /*html*/`
-      <div class="profile-badge bc-${contact['badge-color']} ${checkIfContactIsJoinUser(contact['userid'])}" style="left: -${(i * 8)}px">${contact['initials']}</div>
+      <div class="profile-badge bc-${contact['badge-color']} ${checkIfContactIsNoJoinUser(contact['userid'])}" style="left: -${(i * 8)}px">${contact['initials']}</div>
     `;
     } else if(i == 5) {
       assignedUserBadgesHTML += /*html*/`
@@ -374,11 +374,22 @@ function addCSSClass_assigned(contactID) {
 
 
 
-function checkIfContactIsJoinUser(userid) {
+function checkIfContactIsNoJoinUser(userid) {
   if (userid < 0) {
     return 'no-active-user';
   } else {
     return '';
+  }
+}
+
+
+function checkContactUserState(userid) {
+  if (userid == currentUser['id']) {
+    return '(You)'
+  } else if (userid < 0) {
+    return '';
+  } else {
+    return '(User)';
   }
 }
 
@@ -421,7 +432,7 @@ function renderAssignedUserBadgesEditTask() {
     let contact = contacts.find(u => u['id'] == assignedContacts[i]);
     if (contact != undefined) {
       container.innerHTML += /*html*/`
-      <div class="profile-badge bc-${contact['badge-color']} width-40px ${checkIfContactIsJoinUser(contact['userid'])}">${contact['initials']}</div>
+      <div class="profile-badge bc-${contact['badge-color']} width-40px ${checkIfContactIsNoJoinUser(contact['userid'])}">${contact['initials']}</div>
     `;
     }
   };

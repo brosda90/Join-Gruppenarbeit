@@ -220,9 +220,10 @@ function generatePopupContactsHTML(task) {
     let contact = contacts.find( contact => contact['id'] == task['assigned_to'][i]);
     if (contact != undefined) {
       contactList += /*html*/`
-      <li class="contacts-list-item ${checkIfContactIsJoinUser(contact['userid'])}">
+      <li class="contacts-list-item ${checkIfContactIsNoJoinUser(contact['userid'])}">
         <div class="profile-badge bc-${contact['badge-color']} width-40 border-2px">${contact['initials']}</div>
         <div class="contact-name">${contact['name']}</div>
+        <div class="contact-user-state">${checkContactUserState(contact['userid'])}</div>
       </li>  
     `;
     }
@@ -427,10 +428,11 @@ function generatePopupEditTaskContainerHTML(task,taskID) {
 
 function generateContactListItemHTML(contact,i) {
     return /*html*/`
-    <li id="contact-${contact['id']}" class="assigned-to-contacts-list-item ${checkIfContactIsJoinUser(contact['userid'])} ${addCSSClass_assigned(contact['id'])}" onclick="toggleAssignment(${contact['id']},'contact-${i}-checkbox')">
+    <li id="contact-${contact['id']}" class="assigned-to-contacts-list-item ${checkIfContactIsNoJoinUser(contact['userid'])} ${addCSSClass_assigned(contact['id'])}" onclick="toggleAssignment(${contact['id']},'contact-${i}-checkbox')">
       <div class="assigned-to-contact">
         <div class="profile-badge bc-${contact['badge-color']} width-40px border-2px">${contact['initials']}</div>
-        <div class="contact-name">${contact['name']} ${checkIfContactIsCurrentUser(contact['userid'])}</div>
+        <div class="contact-name">${contact['name']}</div>
+        <div class="contact-user-state">${checkContactUserState(contact['userid'])}</div>
       </div>
       <img id="contact-${i}-checkbox" src="${loadCheckButtonImg(contact['id'])}" alt="">
     </li>
