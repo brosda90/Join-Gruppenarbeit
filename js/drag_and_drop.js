@@ -61,6 +61,7 @@ function createVisibleTaskClone(event,task) {
       left:  ${pageX - offsetX};
       top:  ${pageY - offsetY};
       transform: translate(-${offsetX}px,-${offsetY}px);
+      box-sizing: border-box;
     `;
     document.body.appendChild(visibleTaskClone);
     if (!touchEvent) {
@@ -167,10 +168,11 @@ function toggleDropIndication(event) {
  */
 function createTaskDropIndication(id) {
   let tasksContainer = document.getElementById(id);
+  let height = document.getElementById('visibleTaskClone').offsetHeight;
   hideNoTaskContainer(id);
   if (!dropIndicationExists) {
     tasksContainer.innerHTML += /*html*/`
-      <div id="task-container-indication"></div> 
+      <div id="task-container-indication" style="min-height: ${height}px;"></div> 
     `;
     dropIndicationExists = true;
   }
