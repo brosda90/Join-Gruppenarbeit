@@ -293,7 +293,7 @@ function generatePopupEditTaskContainerHTML(task,taskID) {
                 <div class="popup-task-edit-info-container">
                     <div class="popup-task-edit-info-headline">Title</div>
                     <div class="input-field-container"  onclick="setFocusOnInput('input-title')">
-                        <input id="input-title" type="text" value="${task['title']}" required>
+                        <input id="input-title" type="text" value="${task['title']}" maxlength="50" required>
                     </div>
                 </div>
                 <!-- Description -->
@@ -392,7 +392,7 @@ function generatePopupEditTaskContainerHTML(task,taskID) {
                         </button>
                         <div class="subtask-buttons-container add-new-task-buttons">
                             <button class="btn-drop-new-subtask icon-button" onclick="dropNewSubtask()" type="button">
-                                <img src="./assets/img/delete_icon.svg" alt="delete-icon">    
+                                <img src="./assets/img/close.svg" alt="delete-icon">    
                             </button>
                             <div class="v-line-separator"></div>
                             <button class="btn-add-new-subtask icon-button" onclick="addNewSubtask(${taskID})" type="button">

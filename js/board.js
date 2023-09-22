@@ -499,13 +499,13 @@ function dropNewSubtask() {
   document.activeElement.blur();
 }
 
-// let editTaskOpen = false;
+let editTaskOpen = false;
 
-// if (editTaskOpen) {
-//   document.getElementById('input-subtasks').addEventListener('keydown', (e) => {
-//       e.preventDefault();
-//   })
-// }
+if (editTaskOpen) {
+  document.getElementById('input-subtasks').addEventListener('keydown', (e) => {
+      e.preventDefault();
+  })
+}
 
 
 

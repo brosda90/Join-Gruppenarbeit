@@ -92,7 +92,7 @@ h4 {
     cursor: pointer;
 }
 
-h1 {
+.headAddTask h1 {
     font-size: 47px;
     padding-left: 16px;
     gap: 20px;
