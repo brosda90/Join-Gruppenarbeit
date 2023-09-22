@@ -1,10 +1,21 @@
 let users = [];
 
+//###################################################################################//
+//###################################################################################//
+/**
+ * Navigiert zurück zur Login-Seite.
+ */
 function backToLogin() {
   window.location.href = "index.html";
 }
 
-// Passwort sichtbar machen
+//################## SETS VISIBILITY FROM INPUT ON ##################################//
+//###################################################################################//
+/**
+ * Schaltet die Sichtbarkeit des Passworts im gegebenen Feld.
+ * @param {string} fieldId - Die ID des Passwortfeldes.
+ * @param {string} [imgId] - Die ID des Bildes zur Anzeige des Sichtbarkeitsstatus.
+ */
 function togglePasswordVisibility(fieldId, imgId) {
   const passwordField = document.getElementById(fieldId);
 
@@ -23,11 +34,23 @@ function togglePasswordVisibility(fieldId, imgId) {
   }
 }
 
+//#################### SETS VISIBILITY FROM INPUT OFF ###############################//
+//###################################################################################//
+/**
+ * Setzt die Sichtbarkeit des Passworts auf "aus".
+ * @param {string} fieldId - Die ID des Passwortfeldes.
+ * @param {string} imgId - Die ID des Bildes.
+ */
 function setVisibilityOff(fieldId, imgId) {
   const imageElement = document.getElementById(imgId);
   imageElement.src = "./assets/img/visibility_off.svg";
 }
 
+//################### SHOWS PASSWORD REGULATIONS ####################################//
+//###################################################################################//
+/**
+ * Zeigt die Passwortanforderungen für eine kurze Zeit.
+ */
 function showPasswordRequirements() {
   document.getElementById("passwordInfo").style.display = "block";
 
@@ -36,6 +59,11 @@ function showPasswordRequirements() {
   }, 3000);
 }
 
+//#################### LOADS USER FORM USERS ARRAY ##################################//
+//###################################################################################//
+/**
+ * Lädt Benutzer aus dem Speicher.
+ */
 async function loadUsers() {
   let storedUsers = await getItem("users");
   if (storedUsers) {
@@ -43,6 +71,12 @@ async function loadUsers() {
   }
 }
 
+//###################### LOADS LAST CONTACT ID ######################################//
+//###################################################################################//
+/**
+ * Lädt die letzte Kontakt-ID aus dem Speicher.
+ * @returns {number} Die letzte Kontakt-ID.
+ */
 async function loadLastContactId() {
   let storedLastContactId = await getItem("lastContactId");
   if (storedLastContactId) {
@@ -51,11 +85,22 @@ async function loadLastContactId() {
   return 0;
 }
 
+//################ RETURNS RANDOM NUMBER FOR COLORBADGE #############################//
+//###################################################################################//
+/**
+ * Gibt eine zufällige Farbe für ein Badge zurück.
+ * @returns {number} Eine zufällige Zahl zwischen 0 und 14.
+ */
 function randomBadgeColor() {
   return Math.floor(Math.random() * 15);
 }
 
-//################  USER REGISTER #############################//
+//################### REGISTER USER #################################################//
+//###################################################################################//
+/**
+ * Registriert einen neuen Benutzer.
+ * @returns {boolean} false, wenn die Registrierung nicht erfolgreich war.
+ */
 async function registerUser() {
   const nameField = document.getElementById("nameField");
   const emailField = document.getElementById("emailField");
@@ -155,19 +200,36 @@ async function registerUser() {
   return false;
 }
 
+//################## CHECKS AND REMOVES ERROR CLASS #################################//
+//###################################################################################//
+/**
+ * Überprüft und entfernt die Fehlerklasse, wenn das Feld Daten enthält.
+ * @param {HTMLElement} field - Das zu überprüfende Feld.
+ */
 function checkAndRemoveErrorClass(field) {
   if (field.value.trim()) {
     field.closest(".elementbox").classList.remove("elementbox-error");
   }
 }
 
-//################ USER ID + 1 #############################//
+//################## CHECKS NEXT AVAILABLE USER ID ##################################//
+//###################################################################################//
+/**
+ * Ermittelt die nächste verfügbare Benutzer-ID.
+ * @returns {number} Die nächste Benutzer-ID.
+ */
 function getNextUserId() {
   if (users.length === 0) return 1;
   return users[users.length - 1].id + 1;
 }
 
-//################ Get the first two letters and the name and capitalize them #############################//
+//################### EXTRACTS AND RETURNS INITIALS #################################//
+//###################################################################################//
+/**
+ * Extrahiert und gibt die Initialen eines gegebenen Namens zurück.
+ * @param {string} name - Der Name, aus dem die Initialen extrahiert werden sollen.
+ * @returns {string} Die Initialen des Namens.
+ */
 function getInitials(name) {
   const parts = name.split(" ");
   let initials = "";
@@ -176,13 +238,23 @@ function getInitials(name) {
   }
   return initials.toUpperCase();
 }
-
+//################## CHECKS IF EMAIL MEETS REGULATIONS ##############################//
+//###################################################################################//
+/**
+ * Überprüft, ob die gegebene E-Mail gültig ist.
+ * @param {string} email - Die zu überprüfende E-Mail.
+ * @returns {boolean} true, wenn die E-Mail gültig ist, sonst false.
+ */
 function isValidEmail(email) {
   const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   return regex.test(email);
 }
 
-//################ CHECKS IF EMAIL EXISTS #############################//
+//##################### CHECKS IF EMAIL EXISTS ######################################//
+//###################################################################################//
+/**
+ * Überprüft, ob eine E-Mail bereits existiert.
+ */
 async function checkEmailExists() {
   const email = document.getElementById("emailField").value.toLowerCase();
 
@@ -202,7 +274,12 @@ async function checkEmailExists() {
   }
 }
 
-//################ TEST IF PASSWORD MEETS REGULATIONS  #############################//
+///################ CHECKS IF PASSWORD MEETS REGULATIONS ############################//
+//###################################################################################//
+/**
+ * Überprüft, ob das Passwort den Anforderungen entspricht.
+ * @returns {boolean} true, wenn das Passwort den Anforderungen entspricht, sonst false.
+ */
 function validatePasswordRequirements() {
   const passwordField = document.getElementById("password");
   const password = passwordField.value;
@@ -219,8 +296,11 @@ function validatePasswordRequirements() {
   return true;
 }
 
-//################ PASSWORD MATCH CHECK #############################//
-
+//################# CHECKS IF PASSWORD MATCH ########################################//
+//###################################################################################//
+/**
+ * Überprüft, ob zwei Passwörter übereinstimmen.
+ */
 function checkPasswordsMatch() {
   const passwordField = document.getElementById("password");
   const passwordConfField = document.getElementById("passwordConf");
@@ -233,7 +313,8 @@ function checkPasswordsMatch() {
   }
 }
 
-//################ SHOW AND CLOSE POPUP FUNCTIONS #############################//
+//#################### POPUP WINDOWS ################################################//
+//###################################################################################//
 function closeWrongPassword() {
   document.getElementById("errorPassword").style.display = "none";
 }
@@ -277,7 +358,11 @@ function showRegistrationSuccess() {
 
   startCountdown(3);
 }
-
+//#####################STARTS COUNDOWN AFTER REG. ###################################//
+//###################################################################################//
+/**
+ * Startet Countdown nach Regestrierung.
+ */
 function startCountdown(seconds) {
   let counter = seconds;
   const countdownElement = document.getElementById("countdown");
@@ -294,8 +379,11 @@ function startCountdown(seconds) {
     }
   }, 1000);
 }
-
-//################ DELETE ALL USERS FROM SERVER #############################//
+//################ DELETE ALL USERS FROM ARRAY ######################################//
+//###################################################################################//
+/**
+ * Löscht alle Benutzer aus dem Server.
+ */
 async function deleteAllUsers() {
   users = [];
   await setItem("users", JSON.stringify(users));

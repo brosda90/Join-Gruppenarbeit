@@ -1,8 +1,19 @@
+//###################################################################################//
+//###################################################################################//
+/**
+ * Öffnet die Registrierungsseite in einem neuen Fenster.
+ */
 function openSignUpInNewWindow() {
   window.location.href = "sign_up.html";
 }
 
-//################ PASSWORT SICHTBAR MACHEN #############################//
+//###################################################################################//
+//###################################################################################//
+/**
+ * Schaltet die Sichtbarkeit des Passworts um.
+ * @param {string} fieldId - Die ID des Passwort-Eingabefelds.
+ * @param {string} imgId - Die ID des Bild-Elements.
+ */
 function togglePasswordVisibility(fieldId, imgId) {
   const passwordField = document.getElementById(fieldId);
 
@@ -21,12 +32,23 @@ function togglePasswordVisibility(fieldId, imgId) {
   }
 }
 
+//###################################################################################//
+//###################################################################################//
+/**
+ * Setzt die Sichtbarkeit des Passworts auf unsichtbar.
+ * @param {string} fieldId - Die ID des Passwort-Eingabefelds.
+ * @param {string} imgId - Die ID des Bild-Elements.
+ */
 function setVisibilityOff(fieldId, imgId) {
   const imageElement = document.getElementById(imgId);
   imageElement.src = "./assets/img/visibility_off.svg";
 }
 
-//################ PASSWORD REQUIRMENTS POPUP #############################//
+//###################################################################################//
+//###################################################################################//
+/**
+ * Zeigt die Passwortanforderungen in einem Popup an.
+ */
 function showPasswordRequirements() {
   document.getElementById("passwordInfo").style.display = "block";
 
@@ -35,7 +57,12 @@ function showPasswordRequirements() {
   }, 3000);
 }
 
-//################ LOAD USERS FROM SERVER #############################//
+//###################################################################################//
+//###################################################################################//
+/**
+ * Lädt Benutzer vom Server.
+ * @returns {void}
+ */
 async function loadUsers() {
   let storedUsers = await getItem("users");
   if (storedUsers) {
@@ -43,12 +70,22 @@ async function loadUsers() {
   }
 }
 
-//################ SAVE LOGIN DETAILS BY ACTIVATING CHECKBOX #############################//
+//###################################################################################//
+//###################################################################################//
+/**
+ * Speichert Anmeldedaten, wenn das Kontrollkästchen aktiviert ist.
+ * @param {string} email - Die E-Mail des Benutzers.
+ */
 function saveLoginDetails(email) {
   localStorage.setItem("rememberEmail", email);
 }
 
-//################ LOGIN FUNCTION #############################//
+//###################################################################################//
+//###################################################################################//
+/**
+ * Funktion zum Anmelden des Benutzers.
+ * @returns {void}
+ */
 async function login() {
   const emailField = document.getElementById("emailLogin");
   const passwordField = document.getElementById("passwordLogin");
@@ -110,11 +147,20 @@ async function login() {
   }
 }
 
-//################ DELETE LOGIN DETAILS BY DEACTIVATING CHECKBOX #############################//
+//###################################################################################//
+//###################################################################################//
+/**
+ * Löscht Anmeldedaten aus dem Speicher, wenn das Kontrollkästchen deaktiviert ist.
+ */
 function clearLoginDetailsFromStorage() {
   localStorage.removeItem("rememberEmail");
 }
 
+//###################################################################################//
+//###################################################################################//
+/**
+ * Füllt die Anmeldedaten automatisch aus, falls gespeichert.
+ */
 function autofillLoginDetails() {
   const emailField = document.getElementById("emailLogin");
   const passwordField = document.getElementById("passwordLogin");
@@ -133,13 +179,21 @@ function autofillLoginDetails() {
   }
 }
 
-//################ CLOSE POPUP #############################//
+//###################################################################################//
+//###################################################################################//
+/**
+ * Schließt das Popup für fehlerhafte Anmeldungen.
+ */
 function closeWrongLogin() {
   document.getElementById("errorReport").style.display = "none";
 }
 
-//################ TEST FUNKTION ZEIGT REGESTRIERTE NUTZER IN CONSOLE  #############################//
-//################                                                     #############################//
+//###################################################################################//
+//###################################################################################//
+/**
+ * Zeigt registrierte Benutzer in der Konsole an.
+ * @returns {void}
+ */
 async function logRegisteredUsers() {
   const users = JSON.parse(await getItem("users"));
 

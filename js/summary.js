@@ -1,13 +1,22 @@
+// Event, der beim Laden des Dokuments ausgeführt wird, um Aufgaben aus dem Remote-Speicher zu laden.
 document.addEventListener("DOMContentLoaded", function () {
   loadTasksFromRemoteStorage();
 });
 
+//###################################################################################//
+//###################################################################################//
+/**
+ * Wechselt zur "board.html"-Seite.
+ */
 function switchToBoard() {
   window.location.href = "board.html";
 }
 
-//################  LOAD FUNCTION FOR NAME AND GREETINGS #############################//
-
+//################  LOAD FUNCTION FOR NAME AND GREETINGS ############################//
+//###################################################################################//
+/**
+ * Aktualisiert die Anzeige.
+ */
 function updateDisplay() {
   const rightContainer = document.querySelector(".right-container");
 
@@ -15,6 +24,8 @@ function updateDisplay() {
 }
 
 setTimeout(updateDisplay, 2000);
+
+// Event, der beim Laden des Dokuments ausgeführt wird, um den aktuellen Zeitgruß und den eingeloggten Benutzer anzuzeigen.
 document.addEventListener("DOMContentLoaded", function () {
   const currentTime = new Date();
   const hour = currentTime.getHours();
@@ -39,27 +50,37 @@ document.addEventListener("DOMContentLoaded", function () {
       loggedInUser;
   }
 });
+
+//###################################################################################//
+//###################################################################################//
+// Event, der beim Laden des Fensters ausgeführt.nach einer 1 Sekunde ändert Opazität eines Elements.
 window.addEventListener("DOMContentLoaded", (event) => {
   setTimeout(function () {
     const viewportWidth = window.innerWidth;
 
-    // Wenn die Fensterbreite weniger als 1000px beträgt, setze die Opazität auf 0
     if (viewportWidth <= 1000) {
       document.querySelector(".right-container").style.opacity = "0";
     }
-  }, 1000); // Warte 1 Sekunde, bevor die Fensterbreite überprüft und die Opazität geändert wird.
+  }, 1000);
 });
 
-//################  LOAD TASKS #############################//
-
+//################  LOAD TASKS ######################################################//
+//###################################################################################//
+/**
+ * Lädt Aufgaben aus dem Remote-Speicher.
+ * @returns {void}
+ */
 async function loadTasksFromRemoteStorage() {
   tasks = JSON.parse(await getItem("tasks"));
   updateTaskFromServer();
   nextDeadline();
 }
 
-//################ ARRAY FILTER  #############################//
-
+//################ ARRAY FILTER  ####################################################//
+//###################################################################################//
+/**
+ * Aktualisiert die Aufgabenzahlen basierend auf den Daten vom Server.
+ */
 function updateTaskFromServer() {
   const taskCount = tasks.length;
   const toDoCount = tasks.filter((task) => task.status === "to-do").length;
@@ -80,8 +101,11 @@ function updateTaskFromServer() {
   document.querySelector("#done h3").textContent = doneCount;
 }
 
-//################  DEADLINE DATE FOR URGENT TASKS #############################//
-
+//################  DEADLINE DATE FOR URGENT TASKS ##################################//
+//###################################################################################//
+/**
+ * Zeigt das nächste Fälligkeitsdatum für dringende Aufgaben an.
+ */
 function nextDeadline() {
   const urgentTasks = tasks.filter((task) => task.priority === 1);
 
@@ -102,8 +126,10 @@ function nextDeadline() {
   document.querySelector("#deadLine p:nth-child(1) b").textContent = formatDate;
 }
 
-//################  HOVER FOR IMAGES #############################//
+//################  HOVER FOR IMAGES ################################################//
+//###################################################################################//
 
+// Event, der beim Laden des Dokuments ausgeführt wird, um Hover-Effekte für bestimmte Bilder zu erstellen.
 document.addEventListener("DOMContentLoaded", function () {
   const toDoElement = document.getElementById("toDo");
   const doneElement = document.getElementById("done");
