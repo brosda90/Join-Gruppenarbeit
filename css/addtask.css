@@ -292,7 +292,7 @@ select option {
     height: 40px;
     padding-left: 10px;
     padding-right: 10px;
-    width: 356px;
+    /* width: 356px; */
     background-color: white;
     border: 1px solid #D1D1D1;
 }
@@ -405,7 +405,7 @@ select option {
 }
 
 .categorySelector {
-    width: 350px;
+    /* width: 350px; */
     background-color: white;
     height: 40px;
     border: 1px solid #D1D1D1;
