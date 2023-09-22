@@ -41,11 +41,7 @@
       <img src="./assets/img/arrow_left.png" />
     </div>
 
-    <form
-      class="signUp-container"
-      id="signUpContainer"
-      onsubmit="return registerUser();"
-    >
+    <form class="signUp-container" id="signUpContainer">
       <h2 class="mb-5 size-61px">Sign Up</h2>
       <!-- Name input -->
       <div class="elementbox border-none">
@@ -185,10 +181,19 @@
         </button>
       </div>
     </div>
+    <div id="invalidEmailPopup" class="custom-report">
+      <div class="report-content">
+        Es befindet sich ein schreibfehler in ihrer E-mail.
+        <button class="close-button" onclick="closeInvalidEmailPopup()">
+          Schließen
+        </button>
+      </div>
+    </div>
     <div id="successRegistration" class="custom-report">
       <div class="report-content">
         Erfolgreich registriert!<br />
-        wir leiten Sie zurück zum Log in Bereich
+        wir leiten Sie in <span id="countdown">3</span> Sekunden zurück zum Log
+        in Bereich
       </div>
     </div>
     <div id="errorPrivacy" class="custom-report">

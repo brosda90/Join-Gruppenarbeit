@@ -1,22 +1,12 @@
 
 /* GENERAL STYLING */
-
 html {
     overflow: hidden !important;
     word-wrap: break-word; 
 }
 
-main {
-    /* position: fixed; */
-    top: 80px;
-    width: 100%;
-    height: calc(100% - 160px);
-    overflow-y: scroll;
-    background-color: var(--color-darker-white);
-}
-
-main::-webkit-scrollbar {
-    display: none;
+.board-content div {
+    box-sizing: border-box;
 }
 
 h1 {
@@ -101,6 +91,11 @@ button {
     width: 100%;
     overflow-y: scroll;
     background-color: var(--color-darker-white);
+    box-sizing: border-box;
+}
+
+.board-main-container div {
+    box-sizing: border-box;
 }
 
 
@@ -297,7 +292,6 @@ button {
 .task-container {
     min-width: 252px;
     width: 252px;
-    aspect-ratio: 1 / 1;
     padding: 16px;
     border-radius: 24px;
     box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.08);
