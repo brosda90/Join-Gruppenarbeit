@@ -207,6 +207,10 @@ function openPopup(taskID) {
   let popupContainer = document.getElementById('popup-container');
   popupContainer.style.display = 'flex';
   popupContainer.innerHTML = generatePopupTaskContainerHTML(task,taskID);
+  setTimeout(() => {
+    document.getElementsByClassName('popup-task-container')[0].style.right = 0;
+  }, 150);
+ 
 }
 
 function closePopup() {
@@ -215,11 +219,7 @@ function closePopup() {
   renderAllTasks();
 }
 
-function closeAddTaskPopup() {
-  let popupContainer = document.getElementById('popup-container-add-task');
-  popupContainer.style.display = 'none';
-  renderAllTasks();
-}
+
 
 function prioToText(prio) {
   let prioAsText = ['High', 'Medium', 'Low'];
@@ -499,13 +499,13 @@ function dropNewSubtask() {
   document.activeElement.blur();
 }
 
-let editTaskOpen = false;
+// let editTaskOpen = false;
 
-if (editTaskOpen) {
-  document.getElementById('input-subtasks').addEventListener('keydown', (e) => {
-      e.preventDefault();
-  })
-}
+// if (editTaskOpen) {
+//   document.getElementById('input-subtasks').addEventListener('keydown', (e) => {
+//       e.preventDefault();
+//   })
+// }
 
 
 
@@ -597,7 +597,18 @@ function openAddNewTaskPopUp(status) {
   if (window.innerWidth > 980) {
     document.getElementById('popup-container-add-task').style.display = 'flex';
     document.getElementById('add-task-closing-button').classList.remove('d-none');
+    setTimeout(() => {
+      document.getElementsByClassName('popup-add-task-container')[0].style.right = 0;
+    }, 150)
   } else {
     window.location.href = 'add_task.html'
   }
 } 
+
+
+function closeAddTaskPopup() {
+  let popupContainer = document.getElementById('popup-container-add-task');
+  popupContainer.style.display = 'none';
+  document.getElementsByClassName('popup-add-task-container')[0].style.right = '-100%';
+  renderAllTasks();
+}

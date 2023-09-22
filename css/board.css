@@ -420,6 +420,9 @@ button {
     flex-direction: column;
     gap: 16px;
     max-height: calc(100% - 32px);
+    position: relative;
+    right: -100%;
+    transition: right 225ms ease-in-out;
 }
 
 .popup-task-edit-container {
@@ -911,6 +914,9 @@ input::-webkit-calendar-picker-indicator {
     padding: 64px 64px 64px 74px;
     background-color: var(--color-white);
     border-radius: 30px;
+    position: relative;
+    right: -100%;
+    transition: right 225ms ease-in-out;
 }
 
 .popup-add-task-container .taskInfo {
