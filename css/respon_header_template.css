@@ -1,27 +1,12 @@
 :root {
     --col-main: #2a3647;
-    --col-main-active: #091931;
-    --col-main-bg: #f6f7f8;
     --col-white: #ffffff;
     --col-black: #000000;
-    --col-hr: #d1d1d1;
-    --col-btn-hover: #eeeeee;
-    --col-link: #007cee;
-    --col-btn: var(--col-main);
+    --col-usr-hover: #e1e6ec;
     --col-btn-activ: #29abe2;
-
     --col-shadow10: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
-    --col-shadow25: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
-
+    --col-light-grey: #cdcdcd;
 }
-
-body {
-    margin: 0;
-    padding: 0;
-    font-family: Inter, sans-serif;
-    font-size: 16px;
-    position: relative;
-  }
 
 button {
     font-family: Inter, sans-serif;
@@ -33,16 +18,7 @@ button {
 .insert-top span,
 .insert-top ::after {
     box-sizing: border-box;
-    transition: all 75ms ease-in;
-}
-
-.insert-bottom div,
-.insert-bottom nav,
-.insert-bottom main,
-.insert-bottom span,
-.insert-bottom ::after {
-    box-sizing: border-box;
-    transition: all 75ms ease-in;
+    transition: all 100ms ease-in;
 }
 
 /* ################################################################ */
@@ -78,8 +54,18 @@ button {
     display: none;
 }
 
+.user-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
 .user-header a {
-    display: none;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .user-icon {
@@ -92,6 +78,10 @@ button {
     border-radius: 100%;
     border: 2px solid var(--col-black);
     cursor: pointer;
+}
+
+.user-icon:hover {
+    background-color: var(--col-usr-hover);
 }
 
 .user-name {
@@ -127,10 +117,14 @@ button {
 
 .useroptions-link {
     text-decoration: none;
-    color: var(--color-light-grey);
+    color: var(--col-light-grey);
     padding: 8px 16px;
     border-radius: 8px;
     background-color: var(--col-main);
+}
+
+.useroptions-link:hover {
+    color: var(--col-white);
 }
 
 /* ------------------------------------------------------------ */
@@ -164,9 +158,7 @@ button {
     }
 
     .user-header {
-        display: flex;
-        align-items: center;
-        gap: 16px;
+        gap: 24px;
     }
 
     .user-header a {

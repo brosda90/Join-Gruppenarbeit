@@ -1,40 +1,15 @@
 :root {
     --col-main: #2a3647;
     --col-main-active: #091931;
-    --col-main-bg: #f6f7f8;
-    --col-white: #ffffff;
-    --col-black: #000000;
-    --col-hr: #d1d1d1;
-    --col-btn-hover: #eeeeee;
-    --col-link: #007cee;
-    --col-btn: var(--col-main);
+    --col-main-hover: #2a3d59;
     --col-btn-activ: #29abe2;
-
-    --col-shadow10: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
-    --col-shadow25: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
-
-    --color-light-grey: #cdcdcd;
+    --col-light-grey: #cdcdcd;
+    --col-white: #ffffff;
+    --col-grey: #a8a8a8;
 }
-
-body {
-    margin: 0;
-    padding: 0;
-    font-family: Inter, sans-serif;
-    font-size: 16px;
-    position: relative;
-  }
 
 button {
     font-family: Inter, sans-serif;
-}
-
-.insert-top div,
-.insert-top nav,
-.insert-top main,
-.insert-top span,
-.insert-top ::after {
-    box-sizing: border-box;
-    transition: all 75ms ease-in;
 }
 
 .insert-bottom div,
@@ -65,10 +40,11 @@ button {
     z-index: 1;
     height: 80px;
     width: 100%;
+    overflow: hidden;
     background-color: var(--col-main);
     transition-property: width, height;
-    transition-delay: 75ms, 0ms;
-    transition-duration: 75ms, 75ms;
+    transition-delay: 125ms, 0ms;
+    transition-duration: 100ms, 100ms;
 }
 
 .footer {
@@ -85,23 +61,23 @@ button {
 }
 
 .nav-menu-link {
-    font-family: "Open Sans";
-    text-decoration: none;
-    color: var(--color-light-grey);
+    height: 100%;
+    width: 80px;
+    aspect-ratio: 1 / 1;
+    color: var(--col-light-grey);
+    font-family: Inter, sans-serif;
     font-size: 14px;
+    text-decoration: none;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 4px;
-    height: 100%;
-    width: 80px;
-    aspect-ratio: 1 / 1;
 }
 
 .nav-menu-link span {
     font-size: 14px;
-    color: var(--color-light-grey);
+    color: var(--col-light-grey);
     white-space: nowrap;
 }
 
@@ -120,7 +96,7 @@ button {
 
 .nav-menu-link:hover {
     cursor: pointer;
-    background-color: var(--col-main-active);
+    background-color: var(--col-main-hover);
     border-radius: 8px;
 }
 
@@ -140,8 +116,8 @@ button {
         height: 100%;
         flex-direction: column;
         transition-property: width, height, top;
-        transition-delay: 0ms, 75ms, 75ms;
-        transition-duration: 75ms, 75ms, 75ms;
+        transition-delay: 0ms, 125ms, 125ms;
+        transition-duration: 100ms, 100ms, 100ms;
     }
 
     .footer {
@@ -212,7 +188,7 @@ button {
         font-size: 16px;
         font-weight: 400;
         line-height: 120%;
-        color: #a8a8a8;
+        color: var(--col-grey);
     }
 
     .nav-bottom-link:hover {

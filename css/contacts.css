@@ -16,31 +16,31 @@
     --col-shadow10: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
     --col-shadow25: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
 
-    --col-badge-1: #ff7a00;
-    --col-badge-2: #9327ff;
-    --col-badge-3: #6e52ff;
-    --col-badge-4: #fc71ff;
-    --col-badge-5: #ffbb2b;
-    --col-badge-6: #1fd7c1;
-    --col-badge-7: #462f8a;
-    --col-badge-8: #ff4646;
-    --col-badge-9: #ffc700;
+    --col-badge-1: #ff7a00; /*  0  */
+    --col-badge-2: #9327ff; /*  3  */
+    --col-badge-3: #6e52ff; /*  2  */
+    --col-badge-4: #fc71ff; /*  8  */
+    --col-badge-5: #ffbb2b; /*  14  */
+    --col-badge-6: #1fd7c1; /*  5  */
+    --col-badge-7: #462f8a; /*  -  */
+    --col-badge-8: #ff4646; /*  13  */
+    --col-badge-9: #ffc700; /*  9  */
 
-    --col-set-0: #ff7a00;
-    --col-set-1: #ff5eb3;
-    --col-set-2: #6e52ff;
-    --col-set-3: #9327ff;
-    --col-set-4: #00bee8;
-    --col-set-5: #1fd7c1;
-    --col-set-6: #ff745e;
-    --col-set-7: #ffa35e;
-    --col-set-8: #fc71ff;
-    --col-set-9: #ffc700;
-    --col-set-10: #0038ff;
-    --col-set-11: #c3ff2b;
-    --col-set-12: #ffe62b;
-    --col-set-13: #ff4646;
-    --col-set-14: #ffbb2b;
+    --col-set-0: #ff7a00; /*  1  */
+    --col-set-1: #ff5eb3; /*  -  */
+    --col-set-2: #6e52ff; /*  3  */
+    --col-set-3: #9327ff; /*  2  */
+    --col-set-4: #00bee8; /*  -  */
+    --col-set-5: #1fd7c1; /*  6  */
+    --col-set-6: #ff745e; /*  -  */
+    --col-set-7: #ffa35e; /*  -  */
+    --col-set-8: #fc71ff; /*  4  */
+    --col-set-9: #ffc700; /*  9  */
+    --col-set-10: #0038ff; /*  -  */
+    --col-set-11: #c3ff2b; /*  -  */
+    --col-set-12: #ffe62b; /*  -  */
+    --col-set-13: #ff4646; /*  8  */
+    --col-set-14: #ffbb2b; /*  5  */
 
     --grad-contact-hover: linear-gradient(
         180deg,
@@ -80,7 +80,7 @@ button {
 
 div, nav, main, span, ::after {
     box-sizing: border-box;
-    transition: all 75ms ease-in;
+    /* transition: all 75ms ease-in; */
 }
 
 .insert-top, .insert-bottom {
@@ -137,10 +137,12 @@ div, nav, main, span, ::after {
 .contact-list-main {
     position: fixed;
     top: 80px;
+    left: 0;
     width: 100%;
     height: calc(100% - 160px);
     overflow-y: auto;
     background-color: #fff;
+    transition: all 100ms ease-in-out;
 }
 
 .contact-list {
@@ -880,6 +882,28 @@ div, nav, main, span, ::after {
     margin-top: 8px;
 }
 
+#raute {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background: transparent;
+}
+
+#raute button {
+    margin: 0;
+    padding: 0;
+    outline: unset;
+    border: none;
+    background: transparent;
+    color: rgba(0, 0, 0, 0.0);
+    font-size: 8px;
+    cursor: pointer;
+}
+
+#raute button:hover {
+    color: var(--col-white);
+}
+
 /* ------------------------------------------------------------ */
 /* ----- Color-Classes ---------------------------------------- */
 /* ------------------------------------------------------------ */
@@ -966,6 +990,7 @@ div, nav, main, span, ::after {
         left: 232px;
         padding-left: 28px;
         box-shadow: 4px 0 6px 0 rgba(0, 0, 0, 0.08);
+        transition: all 100ms ease-in-out;
     }
 
     .contact-add-main {
@@ -1202,6 +1227,7 @@ div, nav, main, span, ::after {
     .contact-list-main {
         padding-left: 0;
         width: 334px;
+        transition: all 100ms ease-in-out;
     }
 
     .contact-add-main {

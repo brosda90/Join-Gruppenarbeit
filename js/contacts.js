@@ -1,5 +1,5 @@
-document.addEventListener("DOMContentLoaded", function () {
-    initContacts();
+document.addEventListener("DOMContentLoaded", async function () {
+    await initContacts();
 });
 
 
@@ -80,29 +80,16 @@ function initialsFrom(string) {
 // ----- Wichtige Funktionen für Contacts im Allgemeinen ------
 // ############################################################
 async function initContacts() {
-cLog('start sCL - initContacts:', sortedContactList)
-cLog('start cL - initContacts:', contactList)
-if(isLoaded == false) {
-    await userAndContacts();
-}
-    // contactList = await loadFromStorage('contacts', contactList);
-    // userList = await loadFromStorage('users', userList);
+    if(isLoaded == false) {
+        await userAndContacts();
+    }
     await loadLastContactId();
     sortedContactList = sortMyList(contactList);
-cLog('after sCL - initContacts:', sortedContactList)
-cLog('after cL - initContacts:', contactList)
     let comeFrom = document.location.pathname;
     if (comeFrom.includes("contacts.html")) {
         renderContactList();
     }
 }
-
-
-// async function loadUsersFromStorage() {
-//     let tempData;
-//     tempData = await loadData("users", userList);
-//     userList = tempData;
-// }
 
 
 function cLog(text, value) {
@@ -136,7 +123,7 @@ function readNewInputs() {
             "email": document.getElementById("addconemail").value,
             "phone": document.getElementById("addconphone").value,
             "badge-color": randomBadgeColor(),
-            "userId": -1
+            "userid": -1
         },
     ];
 }
@@ -177,7 +164,7 @@ function updateContactFields(index) {
     contactList[index].email = document.getElementById("editconemail").value;
     contactList[index].phone = document.getElementById("editconphone").value;
     if(isCurrentUser(contactList[index].userId)) {
-        let userIndex = idToIndex(contactList[index].userId, userList);
+        let userIndex = idToIndex(contactList[index].userid, userList);
         userList[userIndex].name = contactList[index].name;
         userList[userIndex].initials = contactList[index].initials;
         userList[userIndex].email = contactList[index].email;
@@ -217,15 +204,19 @@ function sortIds(arr) {
 }
 
 
+function openMore() {
+    window.location.href = "admin.html";
+}
+
+
 // ############################################################
 // ----- Render-Funktionen für Contacts im Allgemeinen --------
 // ############################################################
 function renderContactList() {
-cLog('sCL - renderContactList:', sortedContactList)
-cLog('cL - renderContactList:', sortedContactList)
     let newContent = "", firstLetter = "";
     for (let i = 0; i < sortedContactList.length; i++) {
-        let isUser = isCurrentUserInfo(sortedContactList[i].userId);
+        cLog(sortedContactList[i].name, sortedContactList[i].userid);
+        let isUser = isCurrentUserInfo(sortedContactList[i].userid);
         let answer = nextLetter(sortedContactList[i].initials[0], firstLetter);
         firstLetter = answer[1];
         newContent += answer[0];
@@ -249,9 +240,10 @@ function nextLetter(currentLetter, firstLetter) {
 
 
 function isCurrentUserInfo(userId) {
+cLog('isCurrentUserInfo:', userId);
     if(userId === loggedInUserID) {
         return " (Me)";
-    } else if(userId > -1) {
+    } else if(userId >= 0) {
         return " (User)";
     } else {
         return "";
@@ -296,7 +288,7 @@ function renderListEntry(i, isUser = "") {
 // ############################################################
 function renderSingleView(id) {
     let index = idToIndex(id, sortedContactList);
-    let isUser = isCurrentUserInfo(sortedContactList[index].userId);
+    let isUser = isCurrentUserInfo(sortedContactList[index].userid);
     document.getElementById("contact-single-info-badge-text").innerHTML = sortedContactList[index].initials;
     document.getElementById("contact-single-info-name-text").innerHTML = sortedContactList[index].name + isUser;
     document.getElementById("contact-single-info-email-text").innerHTML = sortedContactList[index].email;
@@ -310,7 +302,7 @@ function renderSingleView(id) {
 
 function renderOptions(id) {
     let content = "";
-    if(isCurrentUserInfo(sortedContactList[idToIndex(id, sortedContactList)].userId) != " (User)") {
+    if(isCurrentUserInfo(sortedContactList[idToIndex(id, sortedContactList)].userid) != " (User)") {
         content += renderOptionEdit(id);
         content += renderOptionDelete(id);
     }
@@ -354,41 +346,4 @@ function renderPopupEdit(id) {
     document.getElementById("popup-editcon-btn-delete").innerHTML = `
         <button onclick='deleteContact(${id})' type="button" class="btn light">Delete</button>
     `;
-}
-
-
-
-// ############################################################
-// ----- nur temporär enthalten                           -----
-// ############################################################
-async function admin_connectUserContacts() {
-    for(i = 0; i < contactList.length; i++) {
-        if(contactList[i].userId == -1) {
-            // User suchen
-            let conEmail = contactList[i].email;
-            for(j = 0; j < userList.length; j++) {
-                let userEmail = userList[j].email;
-                if(conEmail == userEmail) {
-                    // beide verbinden
-                    userList[j].contacts[0] = contactList[i].id;
-                    contactList[i].userId = userList[j].id;
-                    j = userList.length;
-                }
-            }
-        }
-    }
-    await saveData('contacts', contactList);
-    await saveData('users', userList);
-    await saveData("contacts", contactList);
-}
-
-
-async function admin_createUserToContacts() {
-
-}
-
-
-async function admin_repairBadgeColor(index, arr) {
-    arr[index]['badge-color'] = arr[index].badgecolor;
-    delete arr[index]['badgecolor'];
 }
