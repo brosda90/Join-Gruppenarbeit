@@ -111,11 +111,11 @@
             </div>
         </div>
         <!-- POPUP -->
-        <div id="popup-container" class="popup-container" style="display: none;">
+        <div id="popup-container" class="popup-container" style="display: none;" onclick="closePopup()">
         </div>
         <!-- ADD TASK POPUP -->
-        <div id="popup-container-add-task" class="popup-container" style="display: none;">
-            <div class="popup-add-task-container" w3-include-html="./assets/template/add_task_template.html"></div>
+        <div id="popup-container-add-task" class="popup-container" style="display: none;" onclick="closeAddTaskPopup()">
+            <div class="popup-add-task-container" w3-include-html="./assets/template/add_task_template.html" onclick="stopPropagation(event)"></div>
         </div>
         <!-- CONTACT POPUP -->
         <div w3-include-html="./popup_newcontact.html"></div>

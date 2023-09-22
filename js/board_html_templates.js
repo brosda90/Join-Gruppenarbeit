@@ -133,7 +133,7 @@ function noTaskContainerHTML(taskStateCategory) {
 
 function generatePopupTaskContainerHTML(task,taskID) {
     return /*html*/`
-        <div class="popup-task-container">
+        <div class="popup-task-container" onclick="stopPropagation(event)">
             <div class="popup-task-header">
                 <div class="task-category bc-${task['category_color']}">${task['category']}</div>
                 <button class="close-button icon-button" onclick="closePopup()">
@@ -274,7 +274,7 @@ function generatePopupSubtasksHTML(task) {
 
 function generatePopupEditTaskContainerHTML(task,taskID) {
     return /*html*/`
-        <div class="popup-task-edit-container" onclick="closeContactList(${taskID})">
+        <div class="popup-task-edit-container" onclick="stopPropagation(event),closeContactList(${taskID})">
             <div class="popup-task-edit-header">
                 <div class="empty"></div>
                 <button class="icon-button" onclick="closePopup()" type="button">
