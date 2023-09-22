@@ -65,7 +65,7 @@ function renderContacts() {   //render Contacts
     }
 }
 
-function checkIfContactIsJoinUser(userid) {   //check if Contact is registered Join User
+function checkIfContactIsJoinUserAddTask(userid) {   //check if Contact is registered Join User
     if (userid < 0) {
       return 'noActiveUser';
     } else {
@@ -534,7 +534,7 @@ function contactInitialsHTML(index, inital) {
 
 function renderContactHTML(index, contact) {
     return `
-        <div id="contact${index}" class="singleContact option item brd-r10 ${checkIfContactIsJoinUser(taskContacts[index]['userid'])}" onclick="addedContact(${index})">
+        <div id="contact${index}" class="singleContact option item brd-r10 ${checkIfContactIsJoinUserAddTask(taskContacts[index]['userid'])}" onclick="addedContact(${index})">
             <div class="singleContactInitialName">
                 <div class="font-white profile-badge bc-${contact['badge-color']} brd-white">${contact['initials']}</div>
                 <p>${contact['name']}</p>
