@@ -2,11 +2,6 @@ function openSignUpInNewWindow() {
   window.location.href = "sign_up.html";
 }
 
-//################ GUEST LOGIN #############################//
-function guestLogin() {
-  window.location.href = "board.html";
-}
-
 //################ PASSWORT SICHTBAR MACHEN #############################//
 function togglePasswordVisibility(fieldId, imgId) {
   const passwordField = document.getElementById(fieldId);

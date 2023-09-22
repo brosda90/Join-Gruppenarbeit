@@ -72,8 +72,8 @@
 
 #passwordInfo {
   position: absolute;
-  top: 334px;
-  left: 26px;
+  top: 330px;
+  left: 21px;
   background-color: #29abe2;
   color: white;
   z-index: 10;
@@ -124,6 +124,20 @@
     text-align: center;
     gap: 10px;
     padding-top: 28px;
+  }
+
+  #passwordInfo {
+    position: absolute;
+    top: 350px;
+    left: 73px;
+    background-color: #29abe2;
+    color: white;
+    z-index: 10;
+    border-radius: 10px;
+    margin-top: 12px;
+    padding: 10px;
+    text-align: initial;
+    box-shadow: 0px 0px 14px 3px #0000000a;
   }
 
   #signUpBtn {

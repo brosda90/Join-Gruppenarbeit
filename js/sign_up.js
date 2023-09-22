@@ -1,89 +1,87 @@
 let users = [];
 
 function backToLogin() {
-    window.location.href = "index.html";
+  window.location.href = "index.html";
 }
 
 // Passwort sichtbar machen
 function togglePasswordVisibility(fieldId, imgId) {
-    const passwordField = document.getElementById(fieldId);
+  const passwordField = document.getElementById(fieldId);
 
-    if (passwordField.type === "password") {
-        passwordField.type = "text";
-        if (imgId) {
-            const imageElement = document.getElementById(imgId);
-            imageElement.src = "./assets/img/visibility.svg";
-        }
-    } else {
-        passwordField.type = "password";
-        if (imgId) {
-            const imageElement = document.getElementById(imgId);
-            imageElement.src = "./assets/img/visibility_off.svg";
-        }
+  if (passwordField.type === "password") {
+    passwordField.type = "text";
+    if (imgId) {
+      const imageElement = document.getElementById(imgId);
+      imageElement.src = "./assets/img/visibility.svg";
     }
+  } else {
+    passwordField.type = "password";
+    if (imgId) {
+      const imageElement = document.getElementById(imgId);
+      imageElement.src = "./assets/img/visibility_off.svg";
+    }
+  }
 }
 
 function setVisibilityOff(fieldId, imgId) {
-    const imageElement = document.getElementById(imgId);
-    imageElement.src = "./assets/img/visibility_off.svg";
+  const imageElement = document.getElementById(imgId);
+  imageElement.src = "./assets/img/visibility_off.svg";
 }
 
 function showPasswordRequirements() {
-    document.getElementById("passwordInfo").style.display = "block";
+  document.getElementById("passwordInfo").style.display = "block";
 
-    setTimeout(function () {
-        document.getElementById("passwordInfo").style.display = "none";
-    }, 3000);
+  setTimeout(function () {
+    document.getElementById("passwordInfo").style.display = "none";
+  }, 3000);
 }
 
 async function loadUsers() {
-    let storedUsers = await getItem("users");
-    if (storedUsers) {
-        users = JSON.parse(storedUsers);
-    }
+  let storedUsers = await getItem("users");
+  if (storedUsers) {
+    users = JSON.parse(storedUsers);
+  }
 }
 
 async function loadLastContactId() {
-    let storedLastContactId = await getItem("lastContactId");
-    if (storedLastContactId) {
-        return JSON.parse(storedLastContactId);
-    }
-    return 0;
+  let storedLastContactId = await getItem("lastContactId");
+  if (storedLastContactId) {
+    return JSON.parse(storedLastContactId);
+  }
+  return 0;
 }
 
 function randomBadgeColor() {
-    return Math.floor(Math.random() * 15);
+  return Math.floor(Math.random() * 15);
 }
 
 //################  USER REGISTER #############################//
 async function registerUser() {
-    const nameField = document.getElementById("nameField");
-    const emailField = document.getElementById("emailField");
-    const passwordField = document.getElementById("password");
-    const passwordConfField = document.getElementById("passwordConf");
+  const nameField = document.getElementById("nameField");
+  const emailField = document.getElementById("emailField");
+  const passwordField = document.getElementById("password");
+  const passwordConfField = document.getElementById("passwordConf");
 
-    const name = nameField.value;
-    const email = emailField.value.toLowerCase();
-    const password = passwordField.value;
-    const passwordConf = passwordConfField.value;
-    const privacyCheckBox = document.getElementById("PrivacyCheckBox");
+  const name = nameField.value;
+  const email = emailField.value.toLowerCase();
+  const password = passwordField.value;
+  const passwordConf = passwordConfField.value;
+  const privacyCheckBox = document.getElementById("PrivacyCheckBox");
 
-    document.getElementById("nameField").addEventListener("input", function () {
-        checkAndRemoveErrorClass(this);
+  document.getElementById("nameField").addEventListener("input", function () {
+    checkAndRemoveErrorClass(this);
+  });
+  document.getElementById("emailField").addEventListener("input", function () {
+    checkAndRemoveErrorClass(this);
+  });
+  document.getElementById("password").addEventListener("input", function () {
+    checkAndRemoveErrorClass(this);
+  });
+  document
+    .getElementById("passwordConf")
+    .addEventListener("input", function () {
+      checkAndRemoveErrorClass(this);
     });
-    document
-        .getElementById("emailField")
-        .addEventListener("input", function () {
-            checkAndRemoveErrorClass(this);
-        });
-    document.getElementById("password").addEventListener("input", function () {
-        checkAndRemoveErrorClass(this);
-    });
-    document
-        .getElementById("passwordConf")
-        .addEventListener("input", function () {
-            checkAndRemoveErrorClass(this);
-        });
 
   if (
     !name.trim() ||
@@ -101,41 +99,41 @@ async function registerUser() {
     return;
   }
 
-    if (!privacyCheckBox.checked) {
-        showPrivacyPopup();
-        return;
-    }
+  if (!privacyCheckBox.checked) {
+    showPrivacyPopup();
+    return;
+  }
 
-    if (password !== passwordConf) {
-        showWrongPasswordPopup();
-        return;
-    }
+  if (password !== passwordConf) {
+    showWrongPasswordPopup();
+    return;
+  }
 
-    await loadUsers();
+  await loadUsers();
 
-    let lastContactId = await loadLastContactId();
-    lastContactId++;
-    await setItem("lastContactId", JSON.stringify(lastContactId));
+  let lastContactId = await loadLastContactId();
+  lastContactId++;
+  await setItem("lastContactId", JSON.stringify(lastContactId));
 
-    const emailExists = users.some((user) => user.email === email);
-    if (emailExists) {
-        return;
-    }
+  const emailExists = users.some((user) => user.email === email);
+  if (emailExists) {
+    return;
+  }
 
-    const userId = getNextUserId();
-    const newUser = {
-        id: userId,
-        name: name,
-        initials: getInitials(name),
-        email: email,
-        password: password,
-        phone: "Bitte Telefonnummer eintragen",
-        contacts: [lastContactId],
-    };
+  const userId = getNextUserId();
+  const newUser = {
+    id: userId,
+    name: name,
+    initials: getInitials(name),
+    email: email,
+    password: password,
+    phone: "Bitte Telefonnummer eintragen",
+    contacts: [lastContactId],
+  };
 
-    users.push(newUser);
+  users.push(newUser);
 
-    await setItem("users", JSON.stringify(users));
+  await setItem("users", JSON.stringify(users));
 
   //Wird in der contactList gespeichert
   const newContact = {
@@ -145,38 +143,38 @@ async function registerUser() {
     email: email,
     phone: "Bitte Telefonnummer eintragen",
     "badge-color": randomBadgeColor(),
-    userId: userId, // Änderung von "id" zu "userId"
+    userid: userId, // Änderung von "id" zu "userId"
   };
 
-    await loadFromStorage(); // aus contacts.js
-    contactList.push(newContact);
-    await setItem("contacts", JSON.stringify(contactList));
+  await loadFromStorage(); // aus contacts.js
+  contactList.push(newContact);
+  await setItem("contacts", JSON.stringify(contactList));
 
-    showRegistrationSuccess();
+  showRegistrationSuccess();
 
-    return false;
+  return false;
 }
 
 function checkAndRemoveErrorClass(field) {
-    if (field.value.trim()) {
-        field.closest(".elementbox").classList.remove("elementbox-error");
-    }
+  if (field.value.trim()) {
+    field.closest(".elementbox").classList.remove("elementbox-error");
+  }
 }
 
 //################ USER ID + 1 #############################//
 function getNextUserId() {
-    if (users.length === 0) return 1;
-    return users[users.length - 1].id + 1;
+  if (users.length === 0) return 1;
+  return users[users.length - 1].id + 1;
 }
 
 //################ Get the first two letters and the name and capitalize them #############################//
 function getInitials(name) {
-    const parts = name.split(" ");
-    let initials = "";
-    for (let i = 0; i < parts.length; i++) {
-        initials += parts[i].charAt(0);
-    }
-    return initials.toUpperCase();
+  const parts = name.split(" ");
+  let initials = "";
+  for (let i = 0; i < parts.length; i++) {
+    initials += parts[i].charAt(0);
+  }
+  return initials.toUpperCase();
 }
 
 function isValidEmail(email) {
@@ -186,101 +184,119 @@ function isValidEmail(email) {
 
 //################ CHECKS IF EMAIL EXISTS #############################//
 async function checkEmailExists() {
-    const email = document.getElementById("emailField").value.toLowerCase();
+  const email = document.getElementById("emailField").value.toLowerCase();
 
   if (!email.trim()) return;
 
   if (!isValidEmail(email)) {
-    console.log("Ungültige E-Mail-Adresse");
+    showInvalidEmailPopup(); // Function to show popup for invalid emails
     return;
   }
 
-    await loadUsers();
+  await loadUsers();
 
-    const emailExists = users.some((user) => user.email === email);
+  const emailExists = users.some((user) => user.email === email);
 
-    if (emailExists) {
-        showEmailExistPopup();
-    }
+  if (emailExists) {
+    showEmailExistPopup();
+  }
 }
 
 //################ TEST IF PASSWORD MEETS REGULATIONS  #############################//
 function validatePasswordRequirements() {
-    const passwordField = document.getElementById("password");
-    const password = passwordField.value;
+  const passwordField = document.getElementById("password");
+  const password = passwordField.value;
 
-    if (!password.trim()) return;
+  if (!password.trim()) return;
 
-    const regex =
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/;
+  const regex =
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/;
 
-    if (!regex.test(password)) {
-        document.getElementById("passwordNotSecure").style.display = "flex";
-        return false;
-    }
-    return true;
+  if (!regex.test(password)) {
+    document.getElementById("passwordNotSecure").style.display = "flex";
+    return false;
+  }
+  return true;
 }
 
 //################ PASSWORD MATCH CHECK #############################//
 
 function checkPasswordsMatch() {
-    const passwordField = document.getElementById("password");
-    const passwordConfField = document.getElementById("passwordConf");
+  const passwordField = document.getElementById("password");
+  const passwordConfField = document.getElementById("passwordConf");
 
-    const password = passwordField.value;
-    const passwordConf = passwordConfField.value;
+  const password = passwordField.value;
+  const passwordConf = passwordConfField.value;
 
-    if (password.trim() && passwordConf.trim() && password !== passwordConf) {
-        showWrongPasswordPopup();
-    }
+  if (password.trim() && passwordConf.trim() && password !== passwordConf) {
+    showWrongPasswordPopup();
+  }
 }
 
 //################ SHOW AND CLOSE POPUP FUNCTIONS #############################//
 function closeWrongPassword() {
-    document.getElementById("errorPassword").style.display = "none";
+  document.getElementById("errorPassword").style.display = "none";
 }
 
 function showWrongPasswordPopup() {
-    document.getElementById("errorPassword").style.display = "flex";
-}
-
-function closeEmailExist() {
-    document.getElementById("errorEmailExists").style.display = "none";
-    document.getElementById("emailField").value = "";
-}
-
-function showEmailExistPopup() {
-    document.getElementById("errorEmailExists").style.display = "flex";
-}
-
-function closePrivacyAlert() {
-    document.getElementById("errorPrivacy").style.display = "none";
-}
-
-function showPrivacyPopup() {
-    document.getElementById("errorPrivacy").style.display = "flex";
-}
-
-function showRegistrationSuccess() {
-    document.getElementById("successRegistration").style.display = "flex";
-
-    // Weiterleitung nach 2 Sekunden
-    setTimeout(function () {
-        window.location.href = "index.html";
-    }, 2000);
+  document.getElementById("errorPassword").style.display = "flex";
 }
 
 function closePasswordNotSecurePopup() {
-    document.getElementById("passwordNotSecure").style.display = "none";
+  document.getElementById("passwordNotSecure").style.display = "none";
+}
+
+function showInvalidEmailPopup() {
+  document.getElementById("invalidEmailPopup").style.display = "flex";
+}
+
+function closeInvalidEmailPopup() {
+  document.getElementById("invalidEmailPopup").style.display = "none";
+  document.getElementById("emailField").value = "";
+}
+
+function closeEmailExist() {
+  document.getElementById("errorEmailExists").style.display = "none";
+  document.getElementById("emailField").value = "";
+}
+
+function showEmailExistPopup() {
+  document.getElementById("errorEmailExists").style.display = "flex";
+}
+
+function closePrivacyAlert() {
+  document.getElementById("errorPrivacy").style.display = "none";
+}
+
+function showPrivacyPopup() {
+  document.getElementById("errorPrivacy").style.display = "flex";
+}
+
+function showRegistrationSuccess() {
+  document.getElementById("successRegistration").style.display = "flex";
+
+  startCountdown(3);
+}
+
+function startCountdown(seconds) {
+  let counter = seconds;
+  const countdownElement = document.getElementById("countdown");
+
+  // Timer
+  const timer = setInterval(function () {
+    countdownElement.textContent = counter;
+    counter--;
+
+    if (counter < 0) {
+      clearInterval(timer);
+
+      window.location.href = "index.html";
+    }
+  }, 1000);
 }
 
 //################ DELETE ALL USERS FROM SERVER #############################//
 async function deleteAllUsers() {
-    users = [];
-    await setItem("users", JSON.stringify(users));
-}
-
-function handleFormSubmit(event) {
-  event.preventDefault(); // Verhindert das standardmäßige Absenden des Formulars
-  registerUser();
+  users = [];
+  await setItem("users", JSON.stringify(users));
 }
