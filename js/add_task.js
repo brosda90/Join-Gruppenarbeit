@@ -3,8 +3,8 @@ let selectTrigger = document.querySelector('.select-trigger');
 
 let taskStatus = localStorage.getItem('taskStatus') || 'to-do';
 let taskContacts = [];
-let currentUser = {};
-let users = [];
+let currentTaskUser = {};
+let taskUsers = [];
 let loadedTasks = [];
 let addedContacts = [];
 let addedContactInitial = [];
@@ -20,6 +20,8 @@ async function initAddTask() {
     await includeHTML()
     await loadTaskContactsFromStorage();
     await loadTasksFromRemoteStorage();
+    await loadTaskUsersFromStorage();
+    await loadCurrentFromStorage();
     renderContacts();
 }
 
@@ -34,6 +36,15 @@ async function loadTaskContactsFromStorage() {
 
 async function loadTasksFromRemoteStorage() {
     loadedTasks = JSON.parse(await getItem('tasks'));
+}
+
+async function loadTaskUsersFromStorage() {
+    taskUsers = JSON.parse(await getItem('users'));
+}
+
+async function loadCurrentFromStorage() {
+    let currentUserID = localStorage.getItem('loggedInUserID');
+    currentTaskUser = taskUsers.find( user => user['id'] == currentUserID)
 }
 
 function sortContacts(arr) {
@@ -53,6 +64,22 @@ function renderContacts() {   //render Contacts
         assignedToContact.innerHTML += renderContactHTML(i, contact);
     }
 }
+
+function checkIfContactIsJoinUser(userid) {
+    if (userid < 0) {
+      return 'noActiveUser';
+    } else {
+      return '';
+    }
+  }
+  
+  /* function checkIfContactIsCurrentUser(userID) {
+    if (userID == currentUser['id']) {
+      return '(You)';
+    } else {
+      return '';
+    }
+  } */
 
 function renderContactInitials() {   //render Contact Initals from added Contacts
     let contactInitialDivs = document.getElementById('contactInitial');
@@ -507,9 +534,9 @@ function contactInitialsHTML(index, inital) {
 
 function renderContactHTML(index, contact) {
     return `
-        <div id="contact${index}" class="singleContact option item brd-r10" onclick="addedContact(${index})">
+        <div id="contact${index}" class="singleContact option item brd-r10 ${checkIfContactIsJoinUser(taskContacts[index]['userid'])}" onclick="addedContact(${index})">
             <div class="singleContactInitialName">
-                <div class="profile-badge bc-${contact['badge-color']} brd-white">${contact['initials']}</div>
+                <div class="font-white profile-badge bc-${contact['badge-color']} brd-white">${contact['initials']}</div>
                 <p>${contact['name']}</p>
             </div>
             <img id="check${index}" src="./assets/img/check_button_unchecked.svg">

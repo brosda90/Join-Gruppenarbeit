@@ -82,7 +82,7 @@ textarea {
 }
 
 .font-white {
-    color: white;
+    color: white !important;
 }
 
 .font-white:hover {
@@ -99,6 +99,11 @@ textarea {
 
 .width-396 {
     width: 396px;
+}
+
+.noActiveUser {
+    opacity: 0.725;
+    filter: grayscale(0.625);
 }
 
 .item:hover {
@@ -429,7 +434,7 @@ select option {
 .selector {
     max-height: 150px;
     overflow: auto;
-    width: 379px;
+    width: 376px;
     position: absolute;
     background-color: white;
     border: 1px solid #D1D1D1;
@@ -498,7 +503,7 @@ select option {
 .addNewContact {
     display: flex;
     justify-content: center;
-    padding-bottom: 10px;
+    padding:8px 0px 10px 0px;
 }
 
 .addNewContactBtn {
