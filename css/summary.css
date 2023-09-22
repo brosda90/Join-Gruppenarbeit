@@ -162,8 +162,6 @@ h3 {
   justify-content: center;
   text-align: center;
   align-items: center;
-  padding-top: 20px;
-  padding-bottom: 20px;
   border-radius: 20px;
   box-shadow: 0px 0px 4px 0px #00000031;
 }
@@ -180,8 +178,6 @@ h3 {
   justify-content: center;
   text-align: center;
   align-items: center;
-  padding-top: 20px;
-  padding-bottom: 20px;
   border-radius: 20px;
   box-shadow: 0px 0px 4px 0px #00000031;
 }
@@ -309,6 +305,11 @@ h3 {
     margin-bottom: 20px;
   }
 
+  .h2-61 {
+    font-size: 61px;
+    font-weight: 700;
+  }
+
   #done {
     width: 264px;
     height: 168px;
@@ -408,5 +409,39 @@ h3 {
     padding-top: 20px;
     position: relative;
     left: 71px;
+  }
+}
+
+@media (max-width: 440px) {
+  .third-container {
+    width: 340px;
+    height: 116px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    margin-left: 13px;
+    margin-bottom: 15px;
+    padding-right: 5px;
+    gap: 20px;
+  }
+
+  .first-container {
+    width: 340px;
+    height: 116px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    margin-left: 13px;
+    padding-right: 5px;
+  }
+
+  .second-container {
+    width: 340px;
+    height: 116px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    margin-left: 13px;
+    padding-right: 5px;
   }
 }
