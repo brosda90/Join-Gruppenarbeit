@@ -5,6 +5,10 @@ html {
     word-wrap: break-word; 
 }
 
+::-webkit-scrollbar {
+    display: none;
+}
+
 .board-content div {
     box-sizing: border-box;
 }
@@ -85,7 +89,7 @@ button {
 
 .board-main-container {
     padding: 0 16px;
-    position: fixed;
+    position: absolute;
     top: 80px;
     height: calc(100% - 160px);
     width: 100%;
