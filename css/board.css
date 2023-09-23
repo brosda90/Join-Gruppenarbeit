@@ -894,7 +894,7 @@ input::-webkit-calendar-picker-indicator {
 
 /* no-active-user */
 .no-active-user {
-    opacity: 0.75;
+    /* opacity: 0.75; */
     filter: grayscale(0.625);
 }
 
