@@ -308,6 +308,7 @@ footer a {
   height: 100%;
   background-color: rgba(0, 0, 0, 43%);
   z-index: 1000;
+  font-size: 20px;
   align-items: center;
   justify-content: center;
 }
@@ -323,6 +324,7 @@ footer a {
   justify-content: center;
   align-items: center;
   display: flex;
+  font-size: 20px;
   gap: 17px;
 }
 

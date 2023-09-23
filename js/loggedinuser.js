@@ -1,12 +1,18 @@
+document.addEventListener('click', hideUserOptions);
+
 let loggedInUserID = +localStorage.getItem("loggedInUserID");
 let loggedInUser = localStorage.getItem("loggedInUser");
-
+let isNotAUser = true;
 
 if(!loggedInUserID || !loggedInUser) {
     localStorage.removeItem("loggedInUser");
     localStorage.removeItem("loggedInUserID");
-    window.location.href = 'index.html';
+    let comeFrom = document.location.pathname;
+    if (!comeFrom.includes("legal_notice.html") && !comeFrom.includes("privacy_policy.html")) {
+        window.location.href = 'index.html';
+    }
 } else {
+    isNotAUser = false;
     initLoggedInUser();
 }
 
@@ -14,6 +20,15 @@ if(!loggedInUserID || !loggedInUser) {
 async function initLoggedInUser() {
     await loadHeaderUsersFromStorage();
     renderHeaderUserName();
+}
+
+
+function hideUserOptions(event) {
+    const userOptions = document.getElementById('useroptions');
+    const userButton = document.getElementById('user-name');
+    if(!userOptions.contains(event.target) && event.target !== userButton) {
+        userOptions.classList.remove('inview');
+    }
 }
 
 

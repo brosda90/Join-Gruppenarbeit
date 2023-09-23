@@ -209,3 +209,33 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 logRegisteredUsers();
+
+//################GUEST LOGIN ##############################//
+//##########################################################//
+/**
+ * Loggt einen Gastbenutzer ein.
+ * @returns {void}
+ */
+function guestLogin() {
+  const guestUser = {
+    id: -2,
+    name: "Guest",
+    initials: "G",
+    badgeColor: 1,
+  };
+
+  users.push(guestUser);
+
+  localStorage.setItem("loggedInUser", guestUser.name);
+  localStorage.setItem("loggedInUserID", guestUser.id);
+  window.location.href = "board.html";
+}
+/**
+ * Loggt Gastbenutzer aus .
+ * @returns {void}
+ */
+function guestLogout() {
+  users = users.filter((user) => user.id !== -2);
+
+  userLogout();
+}

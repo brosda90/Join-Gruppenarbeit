@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="./css/popup_newcontact.css">
     <link rel="shortcut icon" href="assets/img/join_favicon.png" type="image/x-icon">
     <script src="./js/storage.js"></script>
+    <script src="./js/loggedinuser.js"></script>
     <script src="./js/add_task.js"></script>
     <script src="./js/popup_newcontact.js"></script>
     <script src="./js/script.js"></script>
@@ -37,9 +38,7 @@
                 <a href="./help.html">
                     <img src="./assets/img/help.png">
                 </a>
-                <button class="user-icon" onclick="useroptions()">
-                    <div id="user-name" class="user-name">&nbsp;&nbsp;</div>
-                </button>
+                <button id="user-name" class="user-icon user-name" onclick="useroptions()">&nbsp;&nbsp;</button>
             </div>
         </div>
         <div class="useroptions" id="useroptions">
