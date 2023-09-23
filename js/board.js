@@ -2,6 +2,7 @@
 let tasks = [];
 let users = [];
 let contacts = [];
+let sortedContacts = [];
 let currentUser = {};
 let taskStateCategories = ["to-do", "in-progress", "await-feedback", "done"];
 let currentTask;
@@ -46,7 +47,7 @@ async function initBoard() {
   await loadContactsFromStorage();
   await loadTasksFromStorage();
   renderAllTasks();
-  sortContacts(contacts);
+  sortContactsOnBoard(contacts);
   initAddTask()
 }
 
@@ -343,8 +344,8 @@ function toggleDropdownArrow() {
 function loadContactsIntoDropdown() {
   let container = document.getElementById('assigned-to-contacts');
   container.innerHTML = '';
-  for (let i = 0; i < sortedContactList.length; i++) {
-    const contact = sortedContactList[i];
+  for (let i = 0; i < sortedContacts.length; i++) {
+    const contact = sortedContacts[i];
     if (contact['name'].toLowerCase().includes(contactSearch)) {
       container.innerHTML += generateContactListItemHTML(contact,i);
     }
@@ -440,16 +441,16 @@ function renderAssignedUserBadgesEditTask() {
 
 
 // ############################################################
-function sortContacts(arr) {
-  sortedContactList = arr;
-  sortedContactList.sort((c1, c2) =>
+function sortContactsOnBoard(arr) {
+  sortedContacts = arr;
+  sortedContacts.sort((c1, c2) =>
     c1.initials < c2.initials ? -1 : c1.initials > c2.initials ? 1 : 0
   );
   // place user at the first position
-  const currentUserIndex = sortedContactList.findIndex(contact => contact['userid'] == currentUser['id']);
-  const currentUserContactInfo = JSON.parse(JSON.stringify(sortedContactList[currentUserIndex]));
-  sortedContactList.splice(currentUserIndex,1);
-  sortedContactList.unshift(currentUserContactInfo);
+  const currentUserIndex = sortedContacts.findIndex(contact => contact['userid'] == currentUser['id']);
+  const currentUserContactInfo = JSON.parse(JSON.stringify(sortedContacts[currentUserIndex]));
+  sortedContacts.splice(currentUserIndex,1);
+  sortedContacts.unshift(currentUserContactInfo);
 }
 
 
