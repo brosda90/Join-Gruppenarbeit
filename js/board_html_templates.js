@@ -283,7 +283,7 @@ function generatePopupSubtasksHTML(task) {
 
 function generatePopupEditTaskContainerHTML(task,taskID) {
     return /*html*/`
-        <div class="popup-task-edit-container" onclick="stopPropagation(event),closeContactList(${taskID})">
+        <div class="popup-task-edit-container" onclick="stopPropagation(event),closeContactList(${taskID}),closeCategoryList()">
             <div class="popup-task-edit-header">
                 <div class="empty"></div>
                 <button class="icon-button" onclick="closePopup()" type="button">
@@ -299,6 +299,20 @@ function generatePopupEditTaskContainerHTML(task,taskID) {
             </div>
             <form  id="popup-task-edit-form" class="popup-task-edit-form" onsubmit="acceptEdit(${taskID}); return false;">
                 <div class="popup-task-edit-main">
+                <!-- Category -->
+                <div class="popup-task-edit-info-container" onclick="stopPropagation(event)">
+                    <div class="popup-task-edit-info-headline">Category</div>
+                    <div class="input-field-container category-container">
+                      <div id="selected-category" style="width: 100%;" onclick="toggleCategoryList(),stopPropagation(event)">${task['category']}</div>
+                      <button id="category-dropdown-button" class="icon-button" onclick="toggleCategoryList(),stopPropagation(event)" type="button">
+                        <img id="categoryArrow" src="./assets/img/arrow_drop_down.svg" alt="" >
+                      </button>
+                    </div>
+                    <div id="category-list-container" class="contact-list-container d-none">
+                        <div class="task-category-option" onclick="selectCategoryOption(this)">Technical Task</div>             
+                        <div class="task-category-option" onclick="selectCategoryOption(this)">User Story</div>             
+                    </div>
+                </div>
                 <!-- Title -->
                 <div class="popup-task-edit-info-container">
                     <div class="popup-task-edit-info-headline">Title</div>

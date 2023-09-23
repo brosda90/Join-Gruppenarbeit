@@ -7,6 +7,7 @@ let currentUser = {};
 let taskStateCategories = ["to-do", "in-progress", "await-feedback", "done"];
 let currentTask;
 let search = '';
+let categoryOpen = false;
 let contactsOpen = false;
 let contactSearch = '';
 
@@ -273,6 +274,56 @@ function setFocusOnInput(id) {
   input.focus();
 }
 
+// Category
+
+function openCategoryList() {
+  let categoryList = document.getElementById('category-list-container');
+  let categoryDropdownBtn = document.getElementById('category-dropdown-button');
+  categoryList.classList.remove('d-none');
+  categoryDropdownBtn.focus();
+  toggleCategoryDropdownArrow();
+  categoryOpen = true;
+  closeContactList();
+}
+
+function closeCategoryList() {
+  let categoryList = document.getElementById('category-list-container');
+  let categoryDropdownBtn = document.getElementById('category-dropdown-button');
+  categoryList.classList.add('d-none');
+  categoryDropdownBtn.blur();
+  toggleCategoryDropdownArrow();
+  categoryOpen = false;
+}
+
+
+function toggleCategoryList() {
+  categoryOpen ? closeCategoryList() : openCategoryList();
+}
+
+
+function toggleCategoryDropdownArrow() {
+  let img = document.getElementById('categoryArrow');
+  if (categoryOpen) {
+    img.src = './assets/img/arrow_up.svg';
+  } else {
+    img.src = './assets/img/arrow_drop_down.svg'
+  }
+}
+
+function selectCategoryOption(option) {
+  let selectedCategory = document.getElementById('selected-category');
+  selectedCategory.innerHTML = option.innerHTML;
+  closeCategoryList();
+}
+
+
+function getCategoryColor() {
+  if (currentTask['category'] == 'Technical Task') {
+    return 6;
+  } else if (currentTask['category'] == 'User Story'){
+    return 11;
+  }
+}
 
 // Date
 
@@ -307,22 +358,24 @@ function removePrioSelection() {
 // Assigned To
 
 function openContactList(taskID) {
-  contactsOpen = false;
-  toggleContactList(taskID)
-}
-
-function closeContactList(taskID) {
-  contactsOpen = true;
-  toggleContactList(taskID);
-}
-
-
-function toggleContactList(taskID) {
   let contactList = document.getElementById('assigned-contacts-list');
-  contactsOpen ? contactList.classList.add('d-none') : contactList.classList.remove('d-none');
-  contactsOpen = contactsOpen ? false : true;
+  contactList.classList.remove('d-none');
   toggleDropdownArrow();
   loadContactsIntoDropdown(taskID);
+  contactsOpen = true;
+  closeCategoryList();
+}
+
+function closeContactList() {
+  let contactList = document.getElementById('assigned-contacts-list');
+  contactList.classList.add('d-none');
+  toggleDropdownArrow();
+  contactsOpen = false;
+
+}
+
+function toggleContactList(taskID) {
+  contactsOpen ? closeContactList() : openContactList(taskID);
 }
 
 function stopPropagation(event) {
@@ -523,10 +576,14 @@ function addNewSubtaskWithEnter(event) {
 async function acceptEdit(taskID) {
   let task = tasks.find(task => task['id'] == taskID);
   // create edited task
+  currentTask['category'] = document.getElementById('selected-category').innerHTML;
+  currentTask['category_color'] = getCategoryColor();
   currentTask['title'] = document.getElementById('input-title').value;
   currentTask['description'] = document.getElementById('input-description').value;
   currentTask['due_date'] = document.getElementById('input-due-date').value;
   // replace old task with edited task
+  task['category'] = currentTask['category'];
+  task['category_color'] = currentTask['category_color'];
   task['title'] = currentTask['title'];
   task['description'] = currentTask['description'];
   task['due_date'] = currentTask['due_date'];

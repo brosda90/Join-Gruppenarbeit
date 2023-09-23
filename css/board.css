@@ -658,6 +658,20 @@ input::-webkit-calendar-picker-indicator {
     overflow: scroll;
 }
 
+/* Category */
+
+.task-category-option {
+    height: 48px;
+    font-size: 16px;
+    padding: 12px 16px;
+    border-radius: 10px;
+}
+
+.task-category-option:hover {
+    background-color: var(--color-lightest-grey);
+}
+
+
 /* Prio Buttons */
 .prio-buttons-container {
     display: flex;
