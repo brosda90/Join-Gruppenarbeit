@@ -56,6 +56,7 @@ function createVisibleTaskClone(event,task) {
     visibleTaskClone.id = 'visibleTaskClone';
     visibleTaskClone.style = `
       pointer-events: none;
+      touch-action: none;
       opacity: 0;
       position: absolute;
       left:  ${pageX - offsetX};
