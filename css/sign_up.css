@@ -34,6 +34,10 @@
   border-radius: 8px;
 }
 
+.border {
+  border: 2px solid #29abe2 !important;
+}
+
 .icon-person {
   background: url(/assets/img/person.svg) no-repeat right;
   background-position: calc(100% - 16px) center;
@@ -74,14 +78,15 @@
   position: absolute;
   top: 330px;
   left: 21px;
-  background-color: #29abe2;
+  background-color: #29abe2e3;
   color: white;
   z-index: 10;
-  border-radius: 10px;
+  border-radius: 8px;
   margin-top: 12px;
-  padding: 10px;
+  padding: 5px;
   text-align: initial;
   box-shadow: 0px 0px 14px 3px #0000000a;
+  font-size: 14px;
 }
 
 .h2-32px {
@@ -94,6 +99,12 @@
   border: 1px solid red;
   border-radius: 5px;
   margin-top: 10px;
+}
+
+#countdown {
+  font-size: 24px;
+  font-weight: 500;
+  color: #29abe2;
 }
 
 @media (min-width: 1000px) {
@@ -126,11 +137,15 @@
     padding-top: 28px;
   }
 
+  .border {
+    border: 2px solid #29abe2 !important;
+  }
+
   #passwordInfo {
     position: absolute;
     top: 350px;
     left: 73px;
-    background-color: #29abe2;
+    background-color: #29abe2e3;
     color: white;
     z-index: 10;
     border-radius: 10px;
@@ -138,6 +153,7 @@
     padding: 10px;
     text-align: initial;
     box-shadow: 0px 0px 14px 3px #0000000a;
+    font-size: 14px;
   }
 
   #signUpBtn {
