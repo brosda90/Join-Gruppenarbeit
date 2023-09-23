@@ -160,16 +160,40 @@ function updateContactFields(index) {
 async function deleteContact(id) {
     let index = idToIndex(id, contactList);
     let userId = contactList[index].userid;
-    if(userId >= 0) {
-        let userIndex = idToIndex(userId, userList);
-        userList.splice(userIndex, 1);
-    }
+    deleteContactFromTasks(id);
+    deleteUser(userId);
     contactList.splice(index, 1);
     await saveData("contacts", contactList);
     sortedContactList = sortContacts(contactList);
     renderContactList();
     closeContact();
     document.getElementById("popup-editcon").classList.remove("inview");
+}
+
+
+async function deleteUser(userId) {
+    if(userId >= 0) {
+        let userIndex = idToIndex(userId, userList);
+        userList.splice(userIndex, 1);
+        await saveData("users", userList);
+        if(userId == loggedInUserID) {
+            userLogout();
+        }
+    }
+}
+
+
+async function deleteContactFromTasks(id) {
+    let tasks = await loadData('tasks');
+    for(i = 0; i < tasks.length; i++) {
+        let arr = tasks[i]['assigned_to'];
+        if(arr.includes(id)) {
+            // let index = idToIndex(id, arr);
+            let index = arr.indexOf(id);
+            // arr.splice(index, 1);
+            cLog('arr.splice(index):', [arr, index]);
+        }
+    }
 }
 
 // ############################################################

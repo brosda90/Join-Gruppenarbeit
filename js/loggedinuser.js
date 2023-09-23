@@ -19,7 +19,11 @@ if(!loggedInUserID || !loggedInUser) {
 
 async function initLoggedInUser() {
     await loadHeaderUsersFromStorage();
-    renderHeaderUserName();
+    if(useridToIndex(loggedInUserID, userList) == -1) {
+        userLogout();
+    } else {
+        renderHeaderUserName();
+    }
 }
 
 
@@ -48,10 +52,9 @@ async function loadHeaderUsersFromStorage() {
 
 
 async function renderHeaderUserName() {
-    let initials = [];
     let index = useridToIndex(loggedInUserID, userList);
-    initials = userList[index];
-    document.getElementById('user-name').innerHTML = initials.initials;
+    let arr = userList[index];
+    document.getElementById('user-name').innerHTML = arr.initials;
 }
 
 
