@@ -219,16 +219,25 @@ function generatePopupContactsHTML(task) {
   for (let i = 0; i < task['assigned_to'].length; i++) {
     let contact = contacts.find( contact => contact['id'] == task['assigned_to'][i]);
     if (contact != undefined) {
-      contactList += /*html*/`
-      <li class="contacts-list-item ${checkIfContactIsNoJoinUser(contact['userid'])}">
-        <div class="profile-badge bc-${contact['badge-color']} width-40 border-2px">${contact['initials']}</div>
-        <div class="contact-name">${contact['name']}</div>
-        <div class="contact-user-state">${checkContactUserState(contact['userid'])}</div>
-      </li>  
-    `;
+        if (contact['userid'] == currentUser['id']) {
+            contactList = contactListItemHTML(contact) + contactList;
+        } else {
+            contactList += contactListItemHTML(contact);
+        }
     }
   }
   return contactList;
+}
+
+
+function contactListItemHTML(contact) {
+    return /*html*/`
+    <li class="contacts-list-item ${checkIfContactIsNoJoinUser(contact['userid'])}">
+      <div class="profile-badge bc-${contact['badge-color']} width-40 border-2px">${contact['initials']}</div>
+      <div class="contact-name">${contact['name']}</div>
+      <div class="contact-user-state">${checkContactUserState(contact['userid'])}</div>
+    </li>  
+  `;
 }
 
 
