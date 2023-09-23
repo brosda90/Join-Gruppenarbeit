@@ -159,6 +159,11 @@ function updateContactFields(index) {
 // ############################################################
 async function deleteContact(id) {
     let index = idToIndex(id, contactList);
+    let userId = contactList[index].userid;
+    if(userId >= 0) {
+        let userIndex = idToIndex(userId, userList);
+        userList.splice(userIndex, 1);
+    }
     contactList.splice(index, 1);
     await saveData("contacts", contactList);
     sortedContactList = sortContacts(contactList);
@@ -194,7 +199,6 @@ function openMore() {
 function renderContactList() {
     let newContent = "", firstLetter = "";
     for (let i = 0; i < sortedContactList.length; i++) {
-        cLog(sortedContactList[i].name, sortedContactList[i].userid);
         let isUser = isCurrentUserInfo(sortedContactList[i].userid);
         let answer = nextLetter(sortedContactList[i].initials[0], firstLetter);
         firstLetter = answer[1];
@@ -268,7 +272,17 @@ function renderSingleView(id) {
     document.getElementById("contact-single-info-badge-circle").className = `contact-single-info-badge-circle bg-contact-${sortedContactList[index]["badge-color"]}`;
     document.getElementById("options").innerHTML = renderOptions(id);
     document.getElementById("contact-single-info-options").innerHTML = renderOptions(id);
-    renderPopupEdit(id);
+    isOptionsView(id, index);
+}
+
+
+function isOptionsView(id, index) {
+    if(isCurrentUserInfo(sortedContactList[index].userid) != " (User)") {
+        document.getElementById('contact-btn-option-box').classList.remove('d-none');
+        renderPopupEdit(id);
+    } else {
+        document.getElementById('contact-btn-option-box').classList.add('d-none');
+    }
 }
 
 function renderOptions(id) {

@@ -1,12 +1,16 @@
 let loggedInUserID = +localStorage.getItem("loggedInUserID");
 let loggedInUser = localStorage.getItem("loggedInUser");
-
+let isNotAUser = true;
 
 if(!loggedInUserID || !loggedInUser) {
     localStorage.removeItem("loggedInUser");
     localStorage.removeItem("loggedInUserID");
-    window.location.href = 'index.html';
+    let comeFrom = document.location.pathname;
+    if (!comeFrom.includes("legal_notice.html") && !comeFrom.includes("privacy_policy.html")) {
+        window.location.href = 'index.html';
+    }
 } else {
+    isNotAUser = false;
     initLoggedInUser();
 }
 
