@@ -32,7 +32,7 @@ button {
 /* ### Ab hier CSS für den Footer */
 /* ################################################################ */
 .insert-bottom {
-    position: fixed;
+    position: absolute;
     top: auto;
     right: 0;
     left: 0;
