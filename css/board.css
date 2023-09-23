@@ -292,6 +292,7 @@ button {
 .task-container {
     min-width: 252px;
     width: 252px;
+    max-width: 252px;
     padding: 16px;
     border-radius: 24px;
     box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.08);
@@ -306,10 +307,11 @@ button {
 #task-container-indication {
     min-width: 252px;
     width: 252px;
-    aspect-ratio:  1 / 1;
+    /* aspect-ratio:  1 / 1; */
     padding: 16px;
     border-radius: 24px;
     border: 1px dashed var(--color-grey);
+    /* flex-shrink: 0; */
     pointer-events: none;
 }
 
@@ -323,6 +325,10 @@ button {
     transform: rotate(5deg);
     opacity: 0.5;
     box-shadow: none;
+}
+
+#visibleTaskClone div {
+    box-sizing: border-box;
 }
 
 .task-category {
@@ -420,6 +426,9 @@ button {
     flex-direction: column;
     gap: 16px;
     max-height: calc(100% - 32px);
+    position: relative;
+    right: -100%;
+    transition: right 225ms ease-in-out;
 }
 
 .popup-task-edit-container {
@@ -911,6 +920,9 @@ input::-webkit-calendar-picker-indicator {
     padding: 64px 64px 64px 74px;
     background-color: var(--color-white);
     border-radius: 30px;
+    position: relative;
+    right: -100%;
+    transition: right 225ms ease-in-out;
 }
 
 .popup-add-task-container .taskInfo {

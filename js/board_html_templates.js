@@ -133,7 +133,7 @@ function noTaskContainerHTML(taskStateCategory) {
 
 function generatePopupTaskContainerHTML(task,taskID) {
     return /*html*/`
-        <div class="popup-task-container">
+        <div class="popup-task-container" onclick="stopPropagation(event)">
             <div class="popup-task-header">
                 <div class="task-category bc-${task['category_color']}">${task['category']}</div>
                 <button class="close-button icon-button" onclick="closePopup()">
@@ -220,9 +220,10 @@ function generatePopupContactsHTML(task) {
     let contact = contacts.find( contact => contact['id'] == task['assigned_to'][i]);
     if (contact != undefined) {
       contactList += /*html*/`
-      <li class="contacts-list-item ${checkIfContactIsJoinUser(contact['userid'])}">
+      <li class="contacts-list-item ${checkIfContactIsNoJoinUser(contact['userid'])}">
         <div class="profile-badge bc-${contact['badge-color']} width-40 border-2px">${contact['initials']}</div>
         <div class="contact-name">${contact['name']}</div>
+        <div class="contact-user-state">${checkContactUserState(contact['userid'])}</div>
       </li>  
     `;
     }
@@ -273,7 +274,7 @@ function generatePopupSubtasksHTML(task) {
 
 function generatePopupEditTaskContainerHTML(task,taskID) {
     return /*html*/`
-        <div class="popup-task-edit-container" onclick="closeContactList(${taskID})">
+        <div class="popup-task-edit-container" onclick="stopPropagation(event),closeContactList(${taskID})">
             <div class="popup-task-edit-header">
                 <div class="empty"></div>
                 <button class="icon-button" onclick="closePopup()" type="button">
@@ -287,7 +288,7 @@ function generatePopupEditTaskContainerHTML(task,taskID) {
                     </svg>                            
                 </button>
             </div>
-            <form class="popup-task-edit-form" onsubmit="acceptEdit(${taskID}); return false;">
+            <form  id="popup-task-edit-form" class="popup-task-edit-form" onsubmit="acceptEdit(${taskID}); return false;">
                 <div class="popup-task-edit-main">
                 <!-- Title -->
                 <div class="popup-task-edit-info-container">
@@ -383,7 +384,7 @@ function generatePopupEditTaskContainerHTML(task,taskID) {
                 <div class="popup-task-edit-info-container">
                     <div class="popup-task-edit-info-headline">Subtasks</div>
                     <div class="input-field-container"  onclick="setFocusOnInput('input-subtasks')">
-                        <input id="input-subtasks" type="text" placeholder="Add new subtask">
+                        <input id="input-subtasks" type="text" placeholder="Add new subtask" onkeydown="addNewSubtaskWithEnter(event)">
                         <button class="createNewSubtask-button icon-button" type="button">
                             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M9 1.5V16.5" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
@@ -391,11 +392,11 @@ function generatePopupEditTaskContainerHTML(task,taskID) {
                             </svg> 
                         </button>
                         <div class="subtask-buttons-container add-new-task-buttons">
-                            <button class="btn-drop-new-subtask icon-button" onclick="dropNewSubtask()" type="button">
+                            <button class="btn-drop-new-subtask icon-button" onclick="stopPropagation(event);addNewSubtask(event);" type="button">
                                 <img src="./assets/img/close.svg" alt="delete-icon">    
                             </button>
                             <div class="v-line-separator"></div>
-                            <button class="btn-add-new-subtask icon-button" onclick="addNewSubtask(${taskID})" type="button">
+                            <button class="btn-add-new-subtask icon-button" onclick="stopPropagation(event);addNewSubtask(event);" type="button">
                                 <img src="./assets/img/input_check.svg" alt="check-icon">
                             </button>
                         </div>
@@ -427,10 +428,11 @@ function generatePopupEditTaskContainerHTML(task,taskID) {
 
 function generateContactListItemHTML(contact,i) {
     return /*html*/`
-    <li id="contact-${contact['id']}" class="assigned-to-contacts-list-item ${checkIfContactIsJoinUser(contact['userid'])} ${addCSSClass_assigned(contact['id'])}" onclick="toggleAssignment(${contact['id']},'contact-${i}-checkbox')">
+    <li id="contact-${contact['id']}" class="assigned-to-contacts-list-item ${checkIfContactIsNoJoinUser(contact['userid'])} ${addCSSClass_assigned(contact['id'])}" onclick="toggleAssignment(${contact['id']},'contact-${i}-checkbox')">
       <div class="assigned-to-contact">
         <div class="profile-badge bc-${contact['badge-color']} width-40px border-2px">${contact['initials']}</div>
-        <div class="contact-name">${contact['name']} ${checkIfContactIsCurrentUser(contact['userid'])}</div>
+        <div class="contact-name">${contact['name']}</div>
+        <div class="contact-user-state">${checkContactUserState(contact['userid'])}</div>
       </div>
       <img id="contact-${i}-checkbox" src="${loadCheckButtonImg(contact['id'])}" alt="">
     </li>

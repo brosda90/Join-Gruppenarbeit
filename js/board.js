@@ -165,7 +165,7 @@ function generateAssignedUserBadges(taskJSON) {
     let contact = contacts.filter((contact) => contact['id'] == assignedContacts[i])[0];
     if (contact && i < 5) {
       assignedUserBadgesHTML += /*html*/`
-      <div class="profile-badge bc-${contact['badge-color']} ${checkIfContactIsJoinUser(contact['userid'])}" style="left: -${(i * 8)}px">${contact['initials']}</div>
+      <div class="profile-badge bc-${contact['badge-color']} ${checkIfContactIsNoJoinUser(contact['userid'])}" style="left: -${(i * 8)}px">${contact['initials']}</div>
     `;
     } else if(i == 5) {
       assignedUserBadgesHTML += /*html*/`
@@ -207,6 +207,10 @@ function openPopup(taskID) {
   let popupContainer = document.getElementById('popup-container');
   popupContainer.style.display = 'flex';
   popupContainer.innerHTML = generatePopupTaskContainerHTML(task,taskID);
+  setTimeout(() => {
+    document.getElementsByClassName('popup-task-container')[0].style.right = 0;
+  }, 150);
+ 
 }
 
 function closePopup() {
@@ -215,11 +219,7 @@ function closePopup() {
   renderAllTasks();
 }
 
-function closeAddTaskPopup() {
-  let popupContainer = document.getElementById('popup-container-add-task');
-  popupContainer.style.display = 'none';
-  renderAllTasks();
-}
+
 
 function prioToText(prio) {
   let prioAsText = ['High', 'Medium', 'Low'];
@@ -374,11 +374,22 @@ function addCSSClass_assigned(contactID) {
 
 
 
-function checkIfContactIsJoinUser(userid) {
+function checkIfContactIsNoJoinUser(userid) {
   if (userid < 0) {
     return 'no-active-user';
   } else {
     return '';
+  }
+}
+
+
+function checkContactUserState(userid) {
+  if (userid == currentUser['id']) {
+    return '(You)'
+  } else if (userid < 0) {
+    return '';
+  } else {
+    return '(User)';
   }
 }
 
@@ -421,7 +432,7 @@ function renderAssignedUserBadgesEditTask() {
     let contact = contacts.find(u => u['id'] == assignedContacts[i]);
     if (contact != undefined) {
       container.innerHTML += /*html*/`
-      <div class="profile-badge bc-${contact['badge-color']} width-40px ${checkIfContactIsJoinUser(contact['userid'])}">${contact['initials']}</div>
+      <div class="profile-badge bc-${contact['badge-color']} width-40px ${checkIfContactIsNoJoinUser(contact['userid'])}">${contact['initials']}</div>
     `;
     }
   };
@@ -484,29 +495,25 @@ function deleteSubtask(subtaskIndex) {
 
 function addNewSubtask() {
   let input = document.getElementById(`input-subtasks`);
-  let newSubtask = {
+  if (input.value != '') {
+    let newSubtask = {
       done: false,
       subtask: `${input.value}`,
-  };
-  currentTask['subtasks'].push(newSubtask);
-  dropNewSubtask();
+    };
+    currentTask['subtasks'].push(newSubtask);
+  }
+  input.value = '';
+  input.blur();
   renderSubtasksInEditTask();
 }
+ 
 
-function dropNewSubtask() {
-  let input = document.getElementById(`input-subtasks`);
-  input.value = '';
-  document.activeElement.blur();
+function addNewSubtaskWithEnter(event) {
+  if (event.key === 'Enter') {
+    event.preventDefault();
+    addNewSubtask();
+  }
 }
-
-let editTaskOpen = false;
-
-if (editTaskOpen) {
-  document.getElementById('input-subtasks').addEventListener('keydown', (e) => {
-      e.preventDefault();
-  })
-}
-
 
 
 
@@ -597,7 +604,18 @@ function openAddNewTaskPopUp(status) {
   if (window.innerWidth > 980) {
     document.getElementById('popup-container-add-task').style.display = 'flex';
     document.getElementById('add-task-closing-button').classList.remove('d-none');
+    setTimeout(() => {
+      document.getElementsByClassName('popup-add-task-container')[0].style.right = 0;
+    }, 150)
   } else {
     window.location.href = 'add_task.html'
   }
 } 
+
+
+function closeAddTaskPopup() {
+  let popupContainer = document.getElementById('popup-container-add-task');
+  popupContainer.style.display = 'none';
+  document.getElementsByClassName('popup-add-task-container')[0].style.right = '-100%';
+  renderAllTasks();
+}
