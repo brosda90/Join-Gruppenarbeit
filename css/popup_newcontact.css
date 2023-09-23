@@ -223,8 +223,6 @@
 .popup-addcon-background {
     z-index: 999;
     position: relative;
-    /* left: 16px; */
-    top: 100%;
     max-width: 1200px;
     width: calc(100% - 32px);
     height: calc(100% - 10%);
@@ -232,10 +230,6 @@
     border-radius: 30px;
     box-shadow: 0 0 4px 0 var(--col-shadow10);
     transition: top 300ms;
-}
-
-.popup-addcon-main.inview .popup-addcon-background {
-    /* top: calc(100% - 95%); */
 }
 
 .popup-addcon-main.inview {

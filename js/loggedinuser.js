@@ -19,7 +19,7 @@ if(!loggedInUserID || !loggedInUser) {
 
 async function initLoggedInUser() {
     await loadHeaderUsersFromStorage();
-    if(useridToIndex(loggedInUserID, userList) == -1) {
+    if(loggedInUserID != -2 && useridToIndex(loggedInUserID, userList) == -1) {
         userLogout();
     } else {
         renderHeaderUserName();
