@@ -1,3 +1,5 @@
+document.addEventListener('click', hideUserOptions);
+
 let loggedInUserID = +localStorage.getItem("loggedInUserID");
 let loggedInUser = localStorage.getItem("loggedInUser");
 let isNotAUser = true;
@@ -18,6 +20,15 @@ if(!loggedInUserID || !loggedInUser) {
 async function initLoggedInUser() {
     await loadHeaderUsersFromStorage();
     renderHeaderUserName();
+}
+
+
+function hideUserOptions(event) {
+    const userOptions = document.getElementById('useroptions');
+    const userButton = document.getElementById('user-name');
+    if(!userOptions.contains(event.target) && event.target !== userButton) {
+        userOptions.classList.remove('inview');
+    }
 }
 
 
