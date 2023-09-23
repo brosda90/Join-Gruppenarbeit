@@ -5,16 +5,29 @@ document.addEventListener("DOMContentLoaded", async function () {
 // ############################################################
 // ----- Funktionen zum öffnen/schließen der Views ------------
 // ############################################################
+/**
+ * This function shows the popup for adding new contacts 
+ */
 function openAddCon() {
     useroptions(true);
     document.getElementById("popup-addcon").classList.add("inview");
 }
 
+
+/**
+ * This function shows the popup for changing new contacts
+ */
 function openEditCon() {
     useroptions(true);
     document.getElementById("popup-editcon").classList.toggle("inview");
 }
 
+
+/**
+ * This function shows the details of contacts
+ * 
+ * @param {number} id - The id of the connected contact
+ */
 function openContact(id) {
     renderSingleView(id);
     document.getElementById("contact-single").classList.remove("d-none");
@@ -22,6 +35,10 @@ function openContact(id) {
     selectContactList(id);
 }
 
+
+/**
+ * Help function to remove selection
+ */
 function unselectContactList() {
     useroptions(true);
     let obj = document.getElementsByClassName("contact-listbox");
@@ -30,19 +47,26 @@ function unselectContactList() {
     }
 }
 
+
+/**
+ * Help function to add selection
+ * 
+ * @param {number} id - The id of the selected contact
+ */
 function selectContactList(id) {
     useroptions(true);
     document.getElementById(`contact-listbox-${id}`).classList.add("select");
 }
 
+
+/**
+ * This function hide the details of contacts
+ */
 function closeContact() {
     document.getElementById("contact-single").classList.add("d-none");
     unselectContactList();
 }
 
-function notClose(event) {
-    event.stopPropagation();
-}
 
 // ############################################################
 // ----- Wichtige Funktionen für Alle Contacts-Zugriffe  ------
@@ -52,6 +76,7 @@ function idToIndex(id, arr = contactList) {
         return item.id === id;
     });
 }
+
 
 function initialsFrom(string) {
     let wordlist = string.split(" ");
@@ -65,6 +90,7 @@ function initialsFrom(string) {
     }
     return result.toUpperCase();
 }
+
 
 // ############################################################
 // ----- Wichtige Funktionen für Contacts im Allgemeinen ------
@@ -87,6 +113,7 @@ function cLog(text, value) {
     console.log(value);
 }
 
+
 // ############################################################
 async function saveNewContact() {
     let newDataSet = readNewInputs();
@@ -102,6 +129,7 @@ async function saveNewContact() {
     }, "800");
 }
 
+
 function readNewInputs() {
     return [
         {
@@ -116,9 +144,11 @@ function readNewInputs() {
     ];
 }
 
+
 function randomBadgeColor() {
     return Math.floor(Math.random() * 15);
 }
+
 
 function clearAddPopup() {
     document.getElementById("popup-addcon").classList.remove("inview");
@@ -127,34 +157,57 @@ function clearAddPopup() {
     document.getElementById("addconphone").value = "";
 }
 
+
 // ############################################################
 async function saveEditContact() {
     let id = +document.getElementById("editconid").value;
     let index = idToIndex(id, contactList);
-    updateContactFields(index);
+    await updateContactFields(index);
     await saveData("contacts", contactList);
-    if (isCurrentUser(contactList[index].userId)) {
-        await saveData("users", userList);
-    }
+    updateLocalStorage(index);
     sortedContactList = sortContacts(contactList);
-    renderContactList();
-    renderSingleView(id);
-    openEditCon();
+    renderSaveEditContact(id);
 }
 
-function updateContactFields(index) {
+
+async function updateContactFields(index) {
     contactList[index].name = document.getElementById("editconname").value;
     contactList[index].initials = initialsFrom(document.getElementById("editconname").value);
     contactList[index].email = document.getElementById("editconemail").value;
     contactList[index].phone = document.getElementById("editconphone").value;
+    await updateUserFields(index);
+}
+
+
+async function updateUserFields(index) {
     if(isCurrentUser(contactList[index].userId)) {
         let userIndex = idToIndex(contactList[index].userid, userList);
         userList[userIndex].name = contactList[index].name;
         userList[userIndex].initials = contactList[index].initials;
         userList[userIndex].email = contactList[index].email;
         userList[userIndex].phone = contactList[index].phone;
+        await saveData("users", userList);
     }
 }
+
+
+function updateLocalStorage(index) {
+    localStorage.setItem('loggedInUser', contactList[index].name);
+    if(localStorage.getItem("rememberEmail")) {
+        localStorage.setItem('rememberEmail', contactList[index].email);
+    }
+    localStorage.setItem('loggedInUser', contactList[index].name);
+    loggedInUser = localStorage.getItem("loggedInUser");
+}
+
+
+function renderSaveEditContact(id) {
+    renderHeaderUserName();
+    renderContactList();
+    renderSingleView(id);
+    openEditCon();
+}
+
 
 // ############################################################
 async function deleteContact(id) {
@@ -239,6 +292,7 @@ function renderContactList() {
     document.getElementById("contact-list").innerHTML = newContent;
 }
 
+
 function nextLetter(currentLetter, firstLetter) {
     let newContent = "";
     if (currentLetter != firstLetter) {
@@ -247,6 +301,7 @@ function nextLetter(currentLetter, firstLetter) {
     }
     return [newContent, firstLetter];
 }
+
 
 function isCurrentUserInfo(userId) {
     if (userId === loggedInUserID) {
@@ -258,10 +313,18 @@ function isCurrentUserInfo(userId) {
     }
 }
 
+
 function isCurrentUser(userId) {
     return userId === loggedInUserID;
 }
 
+
+/**
+ * 
+ * 
+ * @param {string} letter 
+ * @returns - Returns the rendered html code
+ */
 function renderLetterbox(letter = "No Contacts") {
   return `
         <div class="contact-letterbox">
@@ -271,6 +334,14 @@ function renderLetterbox(letter = "No Contacts") {
     `;
 }
 
+
+/**
+ * This function renders an entry in the contact list
+ * 
+ * @param {number} i - This is the index for the array
+ * @param {string} isUser - This text identifies users with "(User)" and the current user with "(You)"
+ * @returns - Returns the rendered html code
+ */
 function renderListEntry(i, isUser = "") {
   return `
         <div id="contact-listbox-${sortedContactList[i].id}" class="contact-listbox" onclick="openContact(${sortedContactList[i].id})">
@@ -288,6 +359,7 @@ function renderListEntry(i, isUser = "") {
         </div>
     `;
 }
+
 
 // ############################################################
 function renderSingleView(id) {
@@ -313,6 +385,7 @@ function isOptionsView(id, index) {
     }
 }
 
+
 function renderOptions(id) {
     let content = "";
     if(isCurrentUserInfo(sortedContactList[idToIndex(id, sortedContactList)].userid) != " (User)") {
@@ -321,6 +394,7 @@ function renderOptions(id) {
     }
     return content;
 }
+
 
 function renderOptionEdit(id) {
   return `
@@ -333,6 +407,7 @@ function renderOptionEdit(id) {
     `;
 }
 
+
 function renderOptionDelete(id) {
   return `
         <div class="options-row" onclick="deleteContact(${id})">
@@ -343,6 +418,7 @@ function renderOptionDelete(id) {
         </div>
     `;
 }
+
 
 // ############################################################
 function renderPopupEdit(id) {
