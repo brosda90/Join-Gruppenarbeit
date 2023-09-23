@@ -185,16 +185,20 @@ async function deleteUser(userId) {
 
 async function deleteContactFromTasks(id) {
     let tasks = await loadData('tasks');
+    let count = false;
     for(i = 0; i < tasks.length; i++) {
         let arr = tasks[i]['assigned_to'];
         if(arr.includes(id)) {
-            // let index = idToIndex(id, arr);
             let index = arr.indexOf(id);
-            // arr.splice(index, 1);
-            cLog('arr.splice(index):', [arr, index]);
+            arr.splice(index, 1);
+            count = true;
         }
     }
+    if(count > 0) {
+        await saveData('tasks', tasks);
+    }
 }
+
 
 // ############################################################
 function sortContacts(arr) {
@@ -246,7 +250,7 @@ function nextLetter(currentLetter, firstLetter) {
 
 function isCurrentUserInfo(userId) {
     if (userId === loggedInUserID) {
-        return " (Me)";
+        return " (You)";
     } else if (userId > -1) {
         return " (User)";
     } else {

@@ -53,8 +53,8 @@ async function loadHeaderUsersFromStorage() {
 
 async function renderHeaderUserName() {
     let index = useridToIndex(loggedInUserID, userList);
-    let arr = userList[index];
-    document.getElementById('user-name').innerHTML = arr.initials;
+    let obj = document.getElementById('user-name');
+    loggedInUserID == -2 ? obj.innerHTML = 'G' : obj.innerHTML = userList[index].initials;
 }
 
 
@@ -66,11 +66,8 @@ function userLogout() {
 
 
 function useroptions(close = false) {
-    if(close) {
-        document.getElementById('useroptions').classList.remove('inview');
-    } else {
-        document.getElementById('useroptions').classList.toggle('inview');
-    }
+    let obj = document.getElementById('useroptions');
+    close ? obj.classList.remove('inview') : obj.classList.toggle('inview');
 }
 
 
