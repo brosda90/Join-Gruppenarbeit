@@ -180,8 +180,8 @@ async function updateContactFields(index) {
 
 
 async function updateUserFields(index) {
-    if(isCurrentUser(contactList[index].userId)) {
-        let userIndex = idToIndex(contactList[index].userid, userList);
+    let userIndex = idToIndex(contactList[index].userid, userList);
+    if(isCurrentUser(contactList[index].userid)) {
         userList[userIndex].name = contactList[index].name;
         userList[userIndex].initials = contactList[index].initials;
         userList[userIndex].email = contactList[index].email;

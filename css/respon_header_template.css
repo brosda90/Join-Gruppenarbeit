@@ -127,6 +127,37 @@ button {
     color: var(--col-white);
 }
 
+
+.msgbox {
+    z-index: 99999;
+    position: fixed;
+    top: calc(100% + 10px);
+    left: calc(50% - (326px / 2));
+    width: 326px;
+    height: 74px;
+    background-color: var(--col-main);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.msgbox.shortpopup {
+    top: calc(60%);
+    /* transition-delay: 400ms; */
+    transition: top 100ms ease-in;
+}
+
+.msgbox:not(.shortpopup) {
+    transition: top 100ms ease-out;
+}
+
+.msgbox h3, .msgbox p {
+    color: var(--col-white);
+}
+
 /* ------------------------------------------------------------ */
 
 

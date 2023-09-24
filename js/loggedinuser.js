@@ -36,6 +36,15 @@ function hideUserOptions(event) {
 }
 
 
+function msgBox(text = 'To edit please register and log in.') {
+    document.getElementById('msgbox-text').innerHTML = text;
+    document.getElementById("msgbox").classList.add("shortpopup");
+    setTimeout(() => {
+        document.getElementById("msgbox").classList.remove("shortpopup");
+    }, "4000");
+}
+
+
 // ab hier erst nutzbar wenn weitere Daten geladen sind.
 function useridToIndex(id, arr = userList) {
     return arr.findIndex(function (item, i) {
