@@ -223,7 +223,8 @@
 .popup-addcon-background {
     z-index: 999;
     position: relative;
-    max-width: 1200px;
+    max-width: 500px;
+    max-height: 650px;
     width: calc(100% - 32px);
     height: calc(100% - 10%);
     background-color: var(--col-white);
@@ -301,6 +302,7 @@
         display: flex;
         flex-direction: row;
         max-height: 592px;
+        max-width: 1200px;
     }
 
     .popup-top-bg {
