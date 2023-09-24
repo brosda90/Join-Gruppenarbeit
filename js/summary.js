@@ -32,13 +32,13 @@ document.addEventListener("DOMContentLoaded", function () {
   let greeting;
 
   if (hour >= 6 && hour < 12) {
-    greeting = "Guten Morgen";
+    greeting = "Good morning";
   } else if (hour >= 12 && hour < 18) {
-    greeting = "Guten Tag";
+    greeting = "Good afternoon";
   } else if (hour >= 18 && hour < 23) {
-    greeting = "Guten Abend";
+    greeting = "Good evening";
   } else {
-    greeting = "Hallo";
+    greeting = "Hello";
   }
 
   const loggedInUser = localStorage.getItem("loggedInUser");
