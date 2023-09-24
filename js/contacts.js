@@ -117,16 +117,25 @@ function cLog(text, value) {
 // ############################################################
 async function saveNewContact() {
     let newDataSet = readNewInputs();
-    await saveData("lastContactId", ++lastContactId);
+    let answer;
     clearAddPopup();
-    contactList.push(newDataSet[0]);
-    await saveData("contacts", contactList);
-    sortedContactList = sortContacts(contactList);
-    renderContactList();
-    document.getElementById("contactsuccess").classList.add("shortpopup");
-    setTimeout(() => {
-        document.getElementById("contactsuccess").classList.remove("shortpopup");
-    }, "800");
+    if(loggedInUserID == -2) {
+        msgBox();
+    } else {
+        contactList.push(newDataSet[0]);
+        answer = await saveData("contacts", contactList);
+        if(answer) {
+            await saveData("lastContactId", ++lastContactId);
+            sortedContactList = sortContacts(contactList);
+            renderContactList();
+            document.getElementById("contactsuccess").classList.add("shortpopup");
+            setTimeout(() => {
+                document.getElementById("contactsuccess").classList.remove("shortpopup");
+            }, "900");
+        } else {
+            msgBox('Contact was not saved.')
+        }
+    }
 }
 
 
