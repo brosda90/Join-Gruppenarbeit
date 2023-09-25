@@ -957,6 +957,7 @@ input::-webkit-calendar-picker-indicator {
   .board-main-container {
     top: 96px;
     left: 232px;
+    max-width: 1440px;
     width: calc(100% - 232px);
     height: calc(100% - 96px);
     padding: 80px 64px 0 64px;

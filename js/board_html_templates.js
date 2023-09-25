@@ -8,7 +8,7 @@ function boardHeaderDesktopHTML() {
     <h1>Board</h1>
     <div class="board-header-right">
         <div class="board-searchbar-container">
-            <input type="text" name="" id="board-searchbar" class="board-searchbar" placeholder="Find Task" onkeyup="searchTasks()">
+            <input type="text" name="" id="board-searchbar" class="board-searchbar" placeholder="Find Task" autocomplete="off" onkeyup="searchTasks()">
             <div class="board-searchbar-container-inner-right">
                 <div class="v-line-separator"></div>
                 <svg class="icon-button" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -43,7 +43,7 @@ function boardHeaderMobileHTML() {
   </button>
   <!-- SEARCHBAR -->
   <div class="board-searchbar-container">
-      <input type="text" name="" id="board-searchbar" class="board-searchbar" placeholder="Find Task" onkeyup="searchTasks()">
+      <input type="text" name="" id="board-searchbar" class="board-searchbar" placeholder="Find Task" autocomplete="off" onkeyup="searchTasks()">
       <div class="board-searchbar-container-inner-right">
           <div class="v-line-separator"></div>
           <svg class="icon-button" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -297,7 +297,7 @@ function generatePopupEditTaskContainerHTML(task,taskID) {
                     </svg>                            
                 </button>
             </div>
-            <form  id="popup-task-edit-form" class="popup-task-edit-form" onsubmit="acceptEdit(${taskID}); return false;">
+            <form  id="popup-task-edit-form" class="popup-task-edit-form" autocomplete="off" onsubmit="acceptEdit(${taskID}); return false;">
                 <div class="popup-task-edit-main">
                 <!-- Category -->
                 <div class="popup-task-edit-info-container" onclick="stopPropagation(event)">
