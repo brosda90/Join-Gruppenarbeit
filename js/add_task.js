@@ -7,6 +7,7 @@ let currentTaskUser = {};
 let taskUsers = [];
 let loadedTasks = [];
 let addedContacts = [];
+let sortetTaskContacts = [];
 let addedContactInitial = [];
 let badges = [];
 let categoryColor;
@@ -42,9 +43,27 @@ async function loadTaskUsersFromStorage() {
     taskUsers = JSON.parse(await getItem('users'));
 }
 
-async function loadCurrentFromStorage() {
+/* async function loadCurrentFromStorage() {
     let currentUserID = localStorage.getItem('loggedInUserID');
     currentTaskUser = taskUsers.find( user => user['id'] == currentUserID)
+} */
+
+async function loadCurrentFromStorage() {
+    let currentUserID = localStorage.getItem('loggedInUserID');
+    if (currentUserID >= 0) {
+        currentTaskUser = taskUsers.find(user => user['id'] == currentUserID)
+    } else if (currentUserID == -2) {
+        currentTaskUser = {
+            'id': -2,
+            'name': 'Guest User',
+            'initials': 'GU',
+            'email': '',
+            'password': '',
+            'phone': '',
+            'badge-color': 1,
+            'contacts': [],
+        };
+    }
 }
 
 function sortContacts(arr) {
@@ -65,21 +84,23 @@ function renderContacts() {   //render Contacts
     }
 }
 
-function checkIfContactIsJoinUserAddTask(userid) {   //check if Contact is registered Join User
+/* function checkIfContactIsJoinUserAddTask(userid) {   //check if Contact is registered Join User
     if (userid < 0) {
       return 'noActiveUser';
     } else {
       return '';
     }
-  }
-  
-  /* function checkIfContactIsCurrentUser(userID) {
-    if (userID == currentUser['id']) {
-      return '(You)';
-    } else {
-      return '';
-    }
   } */
+
+function checkUserState(userid) {
+    if (userid == currentTaskUser['id']) {
+        return '(You)'
+    } else if (userid < 0) {
+        return '';
+    } else {
+        return '(User)';
+    }
+}
 
 function renderContactInitials() {   //render Contact Initals from added Contacts
     let contactInitialDivs = document.getElementById('contactInitial');
@@ -230,15 +251,16 @@ function addedContactsCheckBox(selectedContact, checked, src, id, badge, index) 
     };
 }
 
-function checkContactLength() {   //check if any Contacts are added and displays Initial Badges
-    let contactDisplay = document.getElementById('contactInitial');
-
+function checkContactLength() {
+    const contactDisplay = document.getElementById('contactInitial');
+  
     if (addedContacts.length === 0) {
-        contactDisplay.classList.add('d-none');
+      contactDisplay.classList.add('d-none');
     } else {
-        contactDisplay.classList.remove('d-none');
+      contactDisplay.classList.remove('d-none');
     }
-}
+  }
+  
 
 function isEmpty(inputField) {
     return inputField.value === '';
@@ -533,15 +555,19 @@ function contactInitialsHTML(index, inital) {
 }
 
 function renderContactHTML(index, contact) {
+    const contactClass = contact.userState === '(You)' ? 'currentContact' : '';
+  
     return `
-        <div id="contact${index}" class="singleContact option item brd-r10 ${checkIfContactIsJoinUserAddTask(taskContacts[index]['userid'])}" onclick="addedContact(${index})">
-            <div class="singleContactInitialName">
-                <div class="font-white profile-badge bc-${contact['badge-color']} brd-white">${contact['initials']}</div>
-                <p>${contact['name']}</p>
-            </div>
-            <img id="check${index}" src="./assets/img/check_button_unchecked.svg">
-        </div>`;
-}
+      <div id="contact${index}" class="singleContact option item brd-r10 ${contactClass}" onclick="addedContact(${index})">
+        <div class="singleContactInitialName">
+          <div class="font-white profile-badge bc-${contact['badge-color']} brd-white">${contact['initials']}</div>
+          <p>${contact['name']}</p>
+          <div>${checkUserState(taskContacts[index]['userid'])}</div>
+        </div>
+        <img id="check${index}" src="./assets/img/check_button_unchecked.svg">
+      </div>`;
+  }
+  
 
 function renderSubHTML(sub, index) {
     return `<div id="listElement${index}" class="subListElement">
