@@ -70,7 +70,7 @@ h4 {
     margin-block-end: 0px;
     display: flex;
     align-items: center;
-    font-weight: 500;
+    font-weight: 400;
 }
 
 h4 p {
@@ -137,6 +137,10 @@ textarea {
 
 .width-378 {
     width: 356px;
+}
+
+.index {
+    z-index: 20 !important;
 }
 
 .noActiveUser {
@@ -423,7 +427,7 @@ select option {
 .separator-border {
     width: 1px;
     height: 350px;
-    margin-top: 25px;
+    margin-top: 20px;
     background-color: #D1D1D1;
 }
 
@@ -433,6 +437,8 @@ select option {
 
 .categorySelector {
     /* width: 350px; */
+    position: relative;
+    z-index: 30;
     background-color: white;
     height: 40px;
     border: 1px solid #D1D1D1;
@@ -446,11 +452,15 @@ select option {
 #allOptions {
     width: calc(100% - 22px);
     background-color: white;
-    border: 1px solid #D1D1D1;
+    border: 1px solid white;
     display: flex;
     flex-direction: column;
     gap: 10px;
     padding: 10px;
+    padding-top: 32px;
+    top: 16px;
+    z-index: 25;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
 }
 
 .assignedTo {
@@ -470,6 +480,19 @@ select option {
     background-color: white;
     border: 1px solid #D1D1D1;
     z-index: 999;
+}
+
+.contactSelectField {
+    width: 100%;
+    max-height: 150px;
+    overflow: auto;
+    position: absolute;
+    background-color: white;
+    border: 1px solid white;
+    z-index: 15;
+    padding-top: 16px;
+    top: 74px;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
 }
 
 .scrollbar::-webkit-scrollbar-track {
