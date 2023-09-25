@@ -950,6 +950,10 @@ input::-webkit-calendar-picker-indicator {
   height: auto !important;
 }
 
+.contactSelectField {
+  top: 50px !important;
+}
+
 @media (min-width: 1000px) {
   h1 {
     font-size: 61px;
