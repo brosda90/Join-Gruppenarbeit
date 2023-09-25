@@ -16,6 +16,12 @@
         text-align: start;
     }
 
+    .headAddTask h1 {
+        font-size: 61px;
+        margin-block-start: 24px !important;
+        margin-block-end: 0px !important;
+    }
+
     .taskData {
         width: 800px !important;
         gap: 24px;

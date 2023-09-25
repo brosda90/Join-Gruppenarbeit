@@ -654,6 +654,10 @@ input::-webkit-calendar-picker-indicator {
   background-color: var(--color-lightest-grey);
 }
 
+#allOptions {
+  width: 100% !important;
+}
+
 /* Prio Buttons */
 .prio-buttons-container {
   display: flex;
@@ -900,8 +904,9 @@ input::-webkit-calendar-picker-indicator {
 /* popup-add-task-container */
 
 .popup-add-task-container {
+  height: 860px;
   max-width: 1116px;
-  padding: 64px 64px 64px 74px;
+  padding: 48px 48px 48px 48px;
   background-color: var(--color-white);
   border-radius: 30px;
   position: relative;
@@ -917,10 +922,6 @@ input::-webkit-calendar-picker-indicator {
   margin: 0;
   top: 8px;
   right: 8px;
-}
-
-.popup-add-task-container .subInputButton {
-  height: auto;
 }
 
 .popup-add-task-container .headAddTask {
@@ -943,6 +944,10 @@ input::-webkit-calendar-picker-indicator {
   gap: 32px;
   margin-bottom: 0;
   justify-content: unset;
+}
+
+.rightSite {
+  height: auto !important;
 }
 
 @media (min-width: 1000px) {
