@@ -25,6 +25,7 @@
     .taskData {
         width: 800px !important;
         gap: 24px;
+        overflow-y: unset !important;
     }
 
     .taskDataFields {
