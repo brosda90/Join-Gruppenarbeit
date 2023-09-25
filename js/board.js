@@ -22,7 +22,20 @@ async function loadUsersFromStorage() {
 
 async function loadCurrentUserFromStorage() {
   let currentUserID = localStorage.getItem('loggedInUserID');
-  currentUser = users.find( user => user['id'] == currentUserID)
+  if (currentUserID >= 0) {
+    currentUser = users.find( user => user['id'] == currentUserID)
+  } else if (currentUserID == -2) {
+    currentUser = {
+      'id' : -2,
+      'name' : 'Guest User',
+      'initials' : 'GU',
+      'email' : '',
+      'password' : '',
+      'phone' : '',
+      'badge-color' : 1,
+      'contacts' : [],
+    };
+  }
 }
 
 async function loadContactsFromStorage() {
@@ -500,10 +513,12 @@ function sortContactsOnBoard(arr) {
     c1.initials < c2.initials ? -1 : c1.initials > c2.initials ? 1 : 0
   );
   // place user at the first position
-  const currentUserIndex = sortedContacts.findIndex(contact => contact['userid'] == currentUser['id']);
-  const currentUserContactInfo = JSON.parse(JSON.stringify(sortedContacts[currentUserIndex]));
-  sortedContacts.splice(currentUserIndex,1);
-  sortedContacts.unshift(currentUserContactInfo);
+  if (currentUser['id'] >= 0) {
+    const currentUserIndex = sortedContacts.findIndex(contact => contact['userid'] == currentUser['id']);
+    const currentUserContactInfo = JSON.parse(JSON.stringify(sortedContacts[currentUserIndex]));
+    sortedContacts.splice(currentUserIndex,1);
+    sortedContacts.unshift(currentUserContactInfo);
+  }
 }
 
 
