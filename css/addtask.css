@@ -247,7 +247,7 @@ input:focus {
 
 .prio a {
     background-color: #FFFFFF;
-    border: 1px solid #D1D1D1;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
     outline: none;
     width: 30%;
     display: flex;
@@ -257,6 +257,10 @@ input:focus {
     font-weight: 400;
     font-family: 'Inter';
     height: 41px;
+}
+
+.prio a:hover {
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
 }
 
 .btnSection {
@@ -303,16 +307,19 @@ select option {
 .urgentBtn {
     color: white;
     background-color: #ff3d00 !important;
+    box-shadow: none !important;
 }
 
 .mediumBtn {
     color: white;
     background-color: #ffa800 !important;
+    box-shadow: none !important;
 }
 
 .lowBtn {
     color: white;
     background-color: #7ae229 !important;
+    box-shadow: none !important;
 }
 
 #subTaskInputCover {
