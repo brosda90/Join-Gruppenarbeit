@@ -259,11 +259,15 @@ async function toggleSubtaskState(taskID, subtaskIndex) {
 
 
 async function deleteTask(taskID) {
-  let taskIndex = tasks.findIndex(task => task['id'] == taskID);
-  tasks.splice(taskIndex,1);
-  await saveTasksToStorage();
-  closePopup();
-  renderAllTasks();
+  if (currentUser['id'] == -2) {
+    msgBox();
+  } else {
+    let taskIndex = tasks.findIndex(task => task['id'] == taskID);
+    tasks.splice(taskIndex,1);
+    await saveTasksToStorage();
+    closePopup();
+    renderAllTasks();
+  }
 }
 
 
