@@ -42,6 +42,13 @@ header h1 {
     margin-block-end: 0;
 }
 
+.return-button {
+    aspect-ratio: 1 / 1;
+    outline: none;
+    border: none;
+    background-color: transparent;
+}
+
 .return-button:hover {
     background-color: #E7E7E7;
     border-radius: 100%;
