@@ -245,11 +245,16 @@ function prioToText(prio) {
 async function toggleSubtaskState(taskID, subtaskIndex) {
   let task = tasks.find(task => task['id'] == taskID);
   let subtask = task['subtasks'][subtaskIndex];
-  subtask['done'] = subtask['done']? false:true;
   let checkButtonsSRC = ['./assets/img/check_button_unchecked.svg','./assets/img/check_button_checked.svg']
   let img = document.getElementById(`subtask-${subtaskIndex}-checkbutton`);
-  img.src = checkButtonsSRC[+subtask['done']];
-  await saveTasksToStorage();
+  if (currentUser['id'] == -2) {
+    img.src = (img.src.includes('button_unchecked')) ? checkButtonsSRC[1] : checkButtonsSRC[0];
+    msgBox("Your changes won't be saved.<br> Please register and log in.");
+  } else {
+    subtask['done'] = subtask['done']? false:true;
+    img.src = checkButtonsSRC[+subtask['done']];
+    await saveTasksToStorage();
+  }
 }
 
 
@@ -588,17 +593,21 @@ async function acceptEdit(taskID) {
   currentTask['description'] = document.getElementById('input-description').value;
   currentTask['due_date'] = document.getElementById('input-due-date').value;
   // replace old task with edited task
-  task['category'] = currentTask['category'];
-  task['category_color'] = currentTask['category_color'];
-  task['title'] = currentTask['title'];
-  task['description'] = currentTask['description'];
-  task['due_date'] = currentTask['due_date'];
-  task['priority'] = currentTask['priority'];
-  task['assigned_to'] = currentTask['assigned_to'];
-  task['subtasks'] = currentTask['subtasks'];
-  await setItem('tasks', JSON.stringify(tasks));
-  currentTask = {};
-  closePopup();
+  if (currentUser['id'] == -2) {
+    msgBox();
+  } else {
+    task['category'] = currentTask['category'];
+    task['category_color'] = currentTask['category_color'];
+    task['title'] = currentTask['title'];
+    task['description'] = currentTask['description'];
+    task['due_date'] = currentTask['due_date'];
+    task['priority'] = currentTask['priority'];
+    task['assigned_to'] = currentTask['assigned_to'];
+    task['subtasks'] = currentTask['subtasks'];
+    await setItem('tasks', JSON.stringify(tasks));
+    currentTask = {};
+    closePopup();
+  }
 }
 
 

@@ -95,7 +95,11 @@ async function moveTo(taskStateCategory) {
   let index = tasks.findIndex(task => task['id'] == currentDraggedElement);
   tasks[index]['status'] = taskStateCategory;
   tasks.push(tasks.splice(index,1)[0]); //move task to the last position in the array
-  await saveTasksToStorage();
+  if (currentUser['id'] == -2) {
+    msgBox("Your changes won't be saved.<br> Please register and log in.")
+  } else {
+    await saveTasksToStorage();
+  }
   renderAllTasks();
 }
 

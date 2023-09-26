@@ -27,7 +27,7 @@ button {
 .insert-top {
     position: absolute;
     inset: 0 0 auto 0;
-    z-index: 1;
+    /* z-index: 1; */
     height: 80px;
     max-width: 100%;
     width: 100%;
@@ -144,6 +144,7 @@ button {
     justify-content: center;
     align-items: center;
     gap: 8px;
+    text-align: center;
 }
 
 .msgbox.shortpopup {
