@@ -388,3 +388,20 @@ async function deleteAllUsers() {
   users = [];
   await setItem("users", JSON.stringify(users));
 }
+
+//################ INITIALIZES LOGGED IN USER / FUNCTION FROM STORAGE.JS ######################################//
+//###################################################################################//
+/**
+ * The logged-in user identifier retrieved from local storage.
+ * @type {number}
+ */
+let loggedInUserID = +localStorage.getItem("loggedInUserID");
+
+async function initLoggedInUser() {
+  await loadHeaderUsersFromStorage();
+  if (loggedInUserID != -2 && useridToIndex(loggedInUserID, userList) == -1) {
+    userLogout();
+  } else {
+    renderHeaderUserName();
+  }
+}

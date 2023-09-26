@@ -1,15 +1,15 @@
 :root {
-    --col-main: #2a3647;
-    --col-main-active: #091931;
-    --col-main-hover: #2a3d59;
-    --col-btn-activ: #29abe2;
-    --col-light-grey: #cdcdcd;
-    --col-white: #ffffff;
-    --col-grey: #a8a8a8;
+  --col-main: #2a3647;
+  --col-main-active: #091931;
+  --col-main-hover: #2a3d59;
+  --col-btn-activ: #29abe2;
+  --col-light-grey: #cdcdcd;
+  --col-white: #ffffff;
+  --col-grey: #a8a8a8;
 }
 
 button {
-    font-family: Inter, sans-serif;
+  font-family: Inter, sans-serif;
 }
 
 .insert-bottom div,
@@ -17,193 +17,187 @@ button {
 .insert-bottom main,
 .insert-bottom span,
 .insert-bottom ::after {
-    box-sizing: border-box;
-    transition: all 75ms ease-in;
+  box-sizing: border-box;
+  transition: all 75ms ease-in;
 }
 
 .insert-bottom span {
-    font-family: Inter, sans-serif;
-    font-size: 20px;
-    line-height: 24px;
-    text-overflow: ellipsis;
+  font-family: Inter, sans-serif;
+  font-size: 20px;
+  line-height: 24px;
+  text-overflow: ellipsis;
 }
 
 /* ################################################################ */
 /* ### Ab hier CSS für den Footer */
 /* ################################################################ */
 .insert-bottom {
-    position: absolute;
-    top: auto;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    z-index: 1;
-    height: 80px;
-    width: 100%;
-    overflow: hidden;
-    background-color: var(--col-main);
-    transition-property: width, height;
-    transition-delay: 125ms, 0ms;
-    transition-duration: 100ms, 100ms;
+  position: absolute;
+  top: auto;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 2;
+  height: 80px;
+  width: 100%;
+  overflow: hidden;
+  background-color: var(--col-main);
+  transition-property: width, height;
+  transition-delay: 125ms, 0ms;
+  transition-duration: 100ms, 100ms;
 }
 
 .footer {
-    height: 80px;
-    padding: 2px 16px;
-    background-color: var(--col-main);
+  height: 80px;
+  padding: 2px 16px;
+  background-color: var(--col-main);
 }
 
 .nav-menu {
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .nav-menu-link {
-    height: 100%;
-    width: 80px;
-    aspect-ratio: 1 / 1;
-    color: var(--col-light-grey);
-    font-family: Inter, sans-serif;
-    font-size: 14px;
-    text-decoration: none;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 4px;
+  height: 100%;
+  width: 80px;
+  aspect-ratio: 1 / 1;
+  color: var(--col-light-grey);
+  font-family: Inter, sans-serif;
+  font-size: 14px;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
 }
 
 .nav-menu-link span {
-    font-size: 14px;
-    color: var(--col-light-grey);
-    white-space: nowrap;
+  font-size: 14px;
+  color: var(--col-light-grey);
+  white-space: nowrap;
 }
 
 .link-selected {
-    background-color: var(--col-main-active);
-    border-radius: 8px;
+  background-color: var(--col-main-active);
+  border-radius: 8px;
 }
 
 .link-selected span {
-    color: var(--col-white);
+  color: var(--col-white);
 }
 
 .link-selected svg {
-    filter: brightness(10);
+  filter: brightness(10);
 }
 
 .nav-menu-link:hover {
-    cursor: pointer;
-    background-color: var(--col-main-hover);
-    border-radius: 8px;
+  cursor: pointer;
+  background-color: var(--col-main-hover);
+  border-radius: 8px;
 }
 
 .nav-bottom-linkbox {
-    display: none;
+  display: none;
 }
-
-
-
-
 
 @media (min-width: 1000px) {
-    .insert-bottom {
-        width: 232px;
-        bottom: 0;
-        right: auto;
-        height: 100%;
-        flex-direction: column;
-        transition-property: width, height, top;
-        transition-delay: 0ms, 125ms, 125ms;
-        transition-duration: 100ms, 100ms, 100ms;
-    }
+  .insert-bottom {
+    width: 232px;
+    bottom: 0;
+    right: auto;
+    height: 100%;
+    flex-direction: column;
+    transition-property: width, height, top;
+    transition-delay: 0ms, 125ms, 125ms;
+    transition-duration: 100ms, 100ms, 100ms;
+  }
 
-    .footer {
-        height: 100%;
-        padding: 64px 0;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        flex-shrink: 0;
-    }
+  .footer {
+    height: 100%;
+    padding: 64px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-shrink: 0;
+  }
 
-    .desktop-join-logo {
-        width: 100%;
-        padding: 64px 0px;
-        display: flex;
-        justify-content: center;
-    }
+  .desktop-join-logo {
+    width: 100%;
+    padding: 64px 0px;
+    display: flex;
+    justify-content: center;
+  }
 
-    .nav-menu {
-        width: 100%;
-        height: fit-content;
-        padding: 0;
-        margin-top: 50px;
-        box-sizing: border-box;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 20px;
-    }
+  .nav-menu {
+    width: 100%;
+    height: fit-content;
+    padding: 0;
+    margin-top: 50px;
+    box-sizing: border-box;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
 
-    .nav-menu-link {
-        width: 100%;
-        height: 24px;
-        padding: 12px 0;
-        border-radius: 0;
-        flex-direction: row;
-        justify-content: flex-start;
-        gap: 8px;
-    }
+  .nav-menu-link {
+    width: 100%;
+    height: 24px;
+    padding: 12px 0;
+    border-radius: 0;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 8px;
+  }
 
-    .nav-menu-link:hover {
-        border-radius: 0;
-    }
+  .nav-menu-link:hover {
+    border-radius: 0;
+  }
 
-    .nav-menu-link svg {
-        width: 30px;
-        height: 30px;
-        margin-left: 50px;
-    }
+  .nav-menu-link svg {
+    width: 30px;
+    height: 30px;
+    margin-left: 50px;
+  }
 
-    .nav-menu-link span {
-        font-size: 16px;
-        line-height: 19.2px;
-    }
+  .nav-menu-link span {
+    font-size: 16px;
+    line-height: 19.2px;
+  }
 
-    .nav-bottom-linkbox {
-        width: 100%;
-        padding: 243px 0 0 52px;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-        align-items: flex-start;
-        gap: 8px;
-    }
-    
-    .nav-bottom-link {
-        padding: 8px;
-        text-decoration: none;
-        font-size: 16px;
-        font-weight: 400;
-        line-height: 120%;
-        color: var(--col-grey);
-    }
+  .nav-bottom-linkbox {
+    width: 100%;
+    padding: 243px 0 0 52px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    gap: 8px;
+  }
 
-    .nav-bottom-link:hover {
-        color: var(--col-btn-activ);
-    }
-    
+  .nav-bottom-link {
+    padding: 8px;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 120%;
+    color: var(--col-grey);
+  }
+
+  .nav-bottom-link:hover {
+    color: var(--col-btn-activ);
+  }
 }
 
-
 @media (max-width: 999px) {
-    .desktop-join-logo {
-        display: none;
-    }
+  .desktop-join-logo {
+    display: none;
+  }
 }
 
 .d-none {
-    display: none;
+  display: none;
 }

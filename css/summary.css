@@ -278,6 +278,10 @@ h3 {
   background-color: var(--color-darker-white);
 }
 
+.insert-top {
+  z-index: 1 !important;
+}
+
 @media (min-width: 1000px) {
   .main {
     top: 96px;
