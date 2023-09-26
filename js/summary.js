@@ -19,11 +19,40 @@ function switchToBoard() {
  */
 function updateDisplay() {
   const rightContainer = document.querySelector(".right-container");
+  let resizeTimeout;
 
-  rightContainer.addEventListener("transitionend", function () {});
+  function setOpacityBasedOnWidth(width) {
+    if (width <= 1000) {
+      rightContainer.style.opacity = "0";
+    } else {
+      rightContainer.style.opacity = "1";
+    }
+  }
+
+  function checkViewportWidth() {
+    const viewportWidth = window.innerWidth;
+
+    if (resizeTimeout) {
+      clearTimeout(resizeTimeout);
+    }
+
+    if (viewportWidth <= 1000) {
+      resizeTimeout = setTimeout(() => {
+        setOpacityBasedOnWidth(viewportWidth);
+      }, 1500); //
+    } else {
+      setOpacityBasedOnWidth(viewportWidth);
+    }
+  }
+
+  checkViewportWidth();
+
+  window.addEventListener("resize", checkViewportWidth);
 }
 
-setTimeout(updateDisplay, 2000);
+document.addEventListener("DOMContentLoaded", updateDisplay);
+
+setTimeout(updateDisplay, 1500);
 
 // Event, der beim Laden des Dokuments ausgeführt wird, um den aktuellen Zeitgruß und den eingeloggten Benutzer anzuzeigen.
 document.addEventListener("DOMContentLoaded", function () {

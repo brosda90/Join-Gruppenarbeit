@@ -71,6 +71,7 @@
               id="emailField"
               placeholder="Email"
               required
+              autocomplete="email"
               onblur="if(this.value.trim()) { checkEmailExists(); }"
             />
             <div class="input-imgbox">
@@ -89,6 +90,7 @@
               id="password"
               placeholder="Password"
               required
+              autocomplete="password"
               onclick="showPasswordRequirements(); setVisibilityOff('password', 'passwordImg')"
               onblur="if(this.value.trim()) { validatePasswordRequirements(); checkPasswordsMatch(); }"
             />
@@ -123,6 +125,7 @@
               id="passwordConf"
               placeholder="Password Confirm"
               required
+              autocomplete="password"
               onclick="setVisibilityOff('passwordConf', 'passwordConfImg')"
               onblur="checkPasswordsMatch()"
             />
