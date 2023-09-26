@@ -504,7 +504,7 @@ button {
 }
 
 ::-webkit-scrollbar-track {
-  background-color: transparent;
+  background-color: var(--color-white);
 }
 
 .width-40 {
@@ -878,12 +878,6 @@ input::-webkit-calendar-picker-indicator {
   right: 16px;
   pointer-events: none;
   background-color: var(--color-white);
-}
-
-/* no-active-user */
-.no-active-user {
-  /* opacity: 0.75; */
-  filter: grayscale(0.625);
 }
 
 /* Icon Buttons */
