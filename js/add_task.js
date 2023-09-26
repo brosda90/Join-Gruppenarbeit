@@ -7,7 +7,7 @@ let currentTaskUser = {};
 let taskUsers = [];
 let loadedTasks = [];
 let addedContacts = [];
-let sortetTaskContacts = [];
+let sortedTaskContacts = [];
 let addedContactInitial = [];
 let badges = [];
 let categoryColor;
@@ -18,15 +18,16 @@ let addedSubTasks = [];
 //-------------------------------------------------//
 
 async function initAddTask() {
+    await loadTaskUsersFromStorage();
     await includeHTML()
     await loadTaskContactsFromStorage();
     await loadTasksFromRemoteStorage();
-    await loadTaskUsersFromStorage();
-    await loadCurrentFromStorage();
+    
     renderContacts();
 }
 
 async function loadTaskContactsFromStorage() {
+    await loadCurrentFromStorage();
     taskContacts = JSON.parse(await getItem('contacts'));
     if (taskContacts.length > 1) {
         sortContacts(taskContacts);
@@ -66,11 +67,17 @@ async function loadCurrentFromStorage() {
     }
 }
 
-function sortContacts(arr) {
+async function sortContacts(arr) {
     sortedContactList = arr;
     sortedContactList.sort(
         (c1, c2) =>
             (c1.initials < c2.initials) ? -1 : (c1.initials > c2.initials) ? 1 : 0);
+    if (currentTaskUser['id'] >= 0) {
+        const currentUserIndex = sortedContactList.findIndex(contact => contact['userid'] == currentTaskUser['id']);
+        const currentUserContactInfo = JSON.parse(JSON.stringify(sortedContactList[currentUserIndex]));
+        sortedContactList.splice(currentUserIndex, 1);
+        sortedContactList.unshift(currentUserContactInfo);
+    }
 }
 
 function renderContacts() {   //render Contacts
@@ -253,14 +260,14 @@ function addedContactsCheckBox(selectedContact, checked, src, id, badge, index) 
 
 function checkContactLength() {
     const contactDisplay = document.getElementById('contactInitial');
-  
+
     if (addedContacts.length === 0) {
-      contactDisplay.classList.add('d-none');
+        contactDisplay.classList.add('d-none');
     } else {
-      contactDisplay.classList.remove('d-none');
+        contactDisplay.classList.remove('d-none');
     }
-  }
-  
+}
+
 
 function isEmpty(inputField) {
     return inputField.value === '';
@@ -556,7 +563,7 @@ function contactInitialsHTML(index, inital) {
 
 function renderContactHTML(index, contact) {
     const contactClass = contact.userState === '(You)' ? 'currentContact' : '';
-  
+
     return `
       <div id="contact${index}" class="singleContact option item brd-r10 ${contactClass}" onclick="addedContact(${index})">
         <div class="singleContactInitialName">
@@ -566,8 +573,8 @@ function renderContactHTML(index, contact) {
         </div>
         <img id="check${index}" src="./assets/img/check_button_unchecked.svg">
       </div>`;
-  }
-  
+}
+
 
 function renderSubHTML(sub, index) {
     return `<div id="listElement${index}" class="subListElement">
