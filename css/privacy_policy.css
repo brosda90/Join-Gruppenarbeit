@@ -37,9 +37,6 @@ header h1 {
     margin: 0;
 }
 
-header img:hover {
-    cursor: pointer;
-}
 
 .return-button:hover {
     background-color: #E7E7E7;
