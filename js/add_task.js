@@ -22,7 +22,7 @@ async function initAddTask() {
     await includeHTML()
     await loadTaskContactsFromStorage();
     await loadTasksFromRemoteStorage();
-    
+
     renderContacts();
 }
 
@@ -427,8 +427,12 @@ function createSubTask() {   //create and push Subtask
 
 function createTask() {   //get all Values for the new Task
     const checked = checkInputData();
-
-    if (checked === true) {
+    if (currentTaskUser['id'] == -2) {
+        msgBox(text = 'To create new Task register and log in');
+        setTimeout(function() {
+            window.location.href = 'board.html'
+        }, 3500);
+    } else if (checked === true) {
         let title = document.getElementById('titleInput').value;
         let description = document.getElementById('descriptionInput').value;
         let priority = getSelectedPrio();

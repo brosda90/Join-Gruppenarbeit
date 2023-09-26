@@ -457,7 +457,8 @@ select option {
 }
 
 #allOptions {
-    width: 100%;
+    width: 376px;
+    margin-left: 1px;
     background-color: white;
     border: 1px solid white;
     display: flex;
@@ -496,7 +497,8 @@ select option {
 }
 
 .contactSelectField {
-    width: 100%;
+    width: 376px;
+    margin-left: 1px;
     max-height: 150px;
     overflow: auto;
     position: absolute;
