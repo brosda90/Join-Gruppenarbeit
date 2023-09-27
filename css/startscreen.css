@@ -535,8 +535,9 @@ footer a {
     justify-content: space-between;
     align-items: center;
     text-align: center;
-    bottom: 940px;
-    right: 80px;
+    padding-right: 124px;
+    top: -729px;
+    right: 160px;
   }
 }
 
