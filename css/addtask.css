@@ -165,7 +165,6 @@ textarea {
 .headAddTask h1 {
     font-size: 47px;
     gap: 20px;
-    margin-block-end: 16px;
 }
 
 .h4-gap {
@@ -505,7 +504,7 @@ select option {
 }
 
 .contactSelectField {
-    width: 376px;
+    width: 100%;
     margin-left: 1px;
     max-height: 214px;
     overflow: auto;

@@ -46,6 +46,10 @@
         flex-direction: column;
     }
 
+    .contactSelectField {
+        width: 99%;
+    }
+
     h1 {
         padding-left: 0;
     }
@@ -156,7 +160,7 @@
     }
 
     #allOptions {
-        width: 293px;
+        width: 312px;
     }
 
     #subTaskInputCover {
