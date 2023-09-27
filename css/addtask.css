@@ -20,6 +20,13 @@ footer {
     background-color: var(--color-dark-blue);
 }
 
+form {
+    height: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
 .mainAddTask {
     /* margin-top: 70px; */
     position: absolute;
