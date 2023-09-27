@@ -414,7 +414,7 @@ button {
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.16);
   display: flex;
   flex-direction: column;
-  /* gap: 16px; */
+  gap: 16px;
   max-height: calc(100% - 32px);
   position: relative;
   right: -100%;
@@ -430,7 +430,7 @@ button {
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.16);
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  /* gap: 16px; */
   max-height: calc(100% - 32px);
 }
 
@@ -627,7 +627,6 @@ input::-webkit-calendar-picker-indicator {
 /* Popup Edit Container */
 
 .popup-task-edit-info-container {
-  /*evtl. durch margin ersetzen*/
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -755,6 +754,7 @@ input::-webkit-calendar-picker-indicator {
 }
 
 /* Custom Contact Select */
+.category-container,
 .assigned-to-container {
   position: relative;
   z-index: 2;
@@ -800,6 +800,7 @@ input::-webkit-calendar-picker-indicator {
   align-items: center;
 }
 
+.category-list-container,
 .contact-list-container {
   position: relative;
   top: -16px;

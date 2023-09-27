@@ -308,7 +308,7 @@ function generatePopupEditTaskContainerHTML(task,taskID) {
                         <img id="categoryArrow" src="./assets/img/arrow_drop_down.svg" alt="" >
                       </button>
                     </div>
-                    <div id="category-list-container" class="contact-list-container d-none">
+                    <div id="category-list-container" class="category-list-container d-none">
                         <div class="task-category-option" onclick="selectCategoryOption(this)">Technical Task</div>             
                         <div class="task-category-option" onclick="selectCategoryOption(this)">User Story</div>             
                     </div>
