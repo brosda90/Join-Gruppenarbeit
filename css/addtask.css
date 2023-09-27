@@ -23,7 +23,7 @@ footer {
 .mainAddTask {
     /* margin-top: 70px; */
     position: absolute;
-    top: 60px;
+    top: 70px;
     width: 100%;
     height: calc(100% - 160px);
     padding: 24px 0px 0px 16px;
