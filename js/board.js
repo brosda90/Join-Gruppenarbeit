@@ -678,7 +678,7 @@ function openAddNewTaskPopUp(status) {
   localStorage.removeItem('taskStatus');
   localStorage.setItem('taskStatus', status);
 
-  if (window.innerWidth > 980) {
+  if (window.innerWidth >= 1000) {
     document.getElementById('popup-container-add-task').style.display = 'flex';
     document.getElementById('add-task-closing-button').classList.remove('d-none');
     setTimeout(() => {

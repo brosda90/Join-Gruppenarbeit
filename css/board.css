@@ -86,7 +86,7 @@ button {
 /* BOARD MAIN */
 
 .board-main-container {
-  padding: 0 16px;
+  padding: 48px 16px;
   position: absolute;
   top: 80px;
   height: calc(100% - 160px);
@@ -109,7 +109,6 @@ button {
   max-width: 100%;
   flex-wrap: wrap;
   gap: 40px;
-  margin-top: 48px;
   margin-bottom: 24px;
 }
 
@@ -904,13 +903,14 @@ input::-webkit-calendar-picker-indicator {
 
 .popup-add-task-container {
   height: 860px;
-  max-width: 1116px;
-  padding: 48px 48px 48px 48px;
+  padding: 64px;
   background-color: var(--color-white);
   border-radius: 30px;
   position: relative;
   right: -100%;
   transition: right 225ms ease-in-out;
+  display: flex;
+  flex-direction: column;
 }
 
 .popup-add-task-container .taskInfo {
@@ -925,7 +925,6 @@ input::-webkit-calendar-picker-indicator {
 
 .popup-add-task-container .headAddTask {
   display: flex;
-  align-items: center;
   justify-content: space-between;
   width: 100%;
   margin-bottom: 32px;
@@ -936,6 +935,15 @@ input::-webkit-calendar-picker-indicator {
   margin: 0;
 }
 
+.popup-add-task-container .taskData {
+  width: 100% !important;
+  overflow: scroll;
+}
+
+.popup-add-task-container .taskDataFields {
+  gap: 32px;
+}
+
 .popup-add-task-container .leftSite,
 .popup-add-task-container .rightSite {
   display: flex;
@@ -943,11 +951,24 @@ input::-webkit-calendar-picker-indicator {
   gap: 32px;
   margin-bottom: 0;
   justify-content: unset;
+  max-width: 440px;
+  width: 100%;
 }
 
-.rightSite {
-  height: auto !important;
+.popup-add-task-container input,
+.popup-add-task-container textarea {
+  box-sizing: border-box;
+  width: 100%;
 }
+
+.popup-add-task-container .subInputButton {
+  height: 40px !important;
+}
+
+.popup-add-task-container .addTaskBtns {
+  width: 100% !important;
+}
+
 
 .contactSelectField {
   top: 50px !important;
@@ -1000,6 +1021,22 @@ input::-webkit-calendar-picker-indicator {
   .task-section-body {
     flex-direction: column;
   }
+
+/* popup-add-task-container */
+.popup-add-task-container {
+  width: 1116px;
+  max-width: 1116px;
+}
+
+.popup-add-task-container .taskDataFields {
+  flex-direction: row;
+  gap: 8px;
+}
+
+.popup-add-task-container .separator-border {
+  display: block !important;
+}
+
 }
 
 @media (max-width: 320px) {
