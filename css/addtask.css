@@ -450,7 +450,7 @@ select option {
 .categorySelector {
     /* width: 350px; */
     position: relative;
-    z-index: 30;
+    z-index: 1;
     background-color: white;
     height: 40px;
     border: 1px solid #D1D1D1;
@@ -469,9 +469,10 @@ select option {
     display: flex;
     flex-direction: column;
     padding-top: 24px;
-    top: 16px;
-    z-index: 25;
+    top: -16px;
+    position: relative;
     box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
+    z-index: 0;
 }
 
 .option {
@@ -502,16 +503,16 @@ select option {
 }
 
 .contactSelectField {
-    width: 376px;
+    /* width: 376px; */
     margin-left: 1px;
-    max-height: 150px;
+    max-height: 214px;
     overflow: auto;
-    position: absolute;
+    position: relative;
     background-color: white;
     border: 1px solid white;
-    z-index: 15;
+    border-radius: 10px;
     padding-top: 16px;
-    top: 74px;
+    top: -16px;
     box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
 }
 
@@ -649,4 +650,9 @@ select option {
 
 .d-block {
     display: block !important;
+}
+
+.msgbox h3, .msgbox p {
+    margin: 0;
+    font-family: 'Inter';
 }

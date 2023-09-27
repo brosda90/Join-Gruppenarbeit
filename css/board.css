@@ -970,10 +970,6 @@ input::-webkit-calendar-picker-indicator {
 }
 
 
-.contactSelectField {
-  top: 50px !important;
-}
-
 @media (min-width: 1000px) {
   h1 {
     font-size: 61px;
