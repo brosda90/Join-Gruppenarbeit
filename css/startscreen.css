@@ -530,13 +530,14 @@ footer a {
   }
 
   .sign-up-area {
-    position: absolute;
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
     text-align: center;
-    bottom: 940px;
-    right: 80px;
+    bottom: 384px;
+    left: 839px;
+    padding-right: 124px;
   }
 }
 

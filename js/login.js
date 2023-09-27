@@ -228,7 +228,7 @@ function guestLogin() {
 
   localStorage.setItem("loggedInUser", guestUser.name);
   localStorage.setItem("loggedInUserID", guestUser.id);
-  window.location.href = "board.html";
+  window.location.href = "summary.html";
 }
 /**
  * Loggt Gastbenutzer aus .
