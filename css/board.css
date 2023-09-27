@@ -111,6 +111,10 @@ button {
   box-sizing: border-box;
 }
 
+.board-main-container::-webkit-scrollbar {
+  display: none;
+}
+
 .board-main-container div {
   box-sizing: border-box;
 }
