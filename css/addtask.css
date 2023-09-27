@@ -656,3 +656,7 @@ select option {
     margin: 0;
     font-family: 'Inter';
 }
+
+#popup-addcon div {
+    box-sizing: border-box;
+}

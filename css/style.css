@@ -18,7 +18,7 @@
 
 /* -- Mobile Template -- */
 
-body {
+/* body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -52,6 +52,6 @@ header {
 .user-name {
     font-weight: 700;
     color: var(--color-blue);
-}
+} */
 
 /* -------------------- */
