@@ -17,6 +17,7 @@ async function includeHTML() {
         } else {
             element.innerHTML = 'Page not found';
         }
+        element.removeAttribute("w3-include-html");
     }
 }
 

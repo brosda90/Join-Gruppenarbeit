@@ -5,12 +5,12 @@
   /* Firefox */
   .contact-list-main {
     scrollbar-width: auto;
-    scrollbar-color: #2a3647 #ffffff;
+    scrollbar-color: #a8a8a8 #ffffff;
   }
 
   /* Chrome, Edge, and Safari */
   .contact-list-main::-webkit-scrollbar {
-    width: 16px;
+    width: 8px;
   }
 
   .contact-list-main::-webkit-scrollbar-track {
@@ -18,9 +18,9 @@
   }
 
   .contact-list-main::-webkit-scrollbar-thumb {
-    background-color: #2a3647;
+    background-color: #a8a8a8;
     border-radius: 10px;
-    border: 3px solid #ffffff;
+    border: 1px solid #ffffff;
   }
   
   :root {
