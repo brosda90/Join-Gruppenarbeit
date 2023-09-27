@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   flex-direction: row;
-  margin-top: 100px;
+  /* margin-top: 100px; */
   margin-bottom: 40px;
   margin-left: 20px;
   background-color: #f6f7f8;
@@ -200,13 +200,13 @@ h3 {
   display: flex;
   position: absolute;
   justify-content: center;
-  z-index: 20;
+  /* z-index: 20; */
   top: 80px;
   left: 0px;
   width: 100%;
   height: 76%;
   flex-direction: column;
-  z-index: 20;
+  /* z-index: 20; */
   pointer-events: none;
   transition: opacity 1s ease-in-out;
   opacity: 1;
@@ -521,13 +521,13 @@ h3 {
     display: flex;
     position: absolute;
     justify-content: center;
-    z-index: 20;
-    top: 80px;
+    /* z-index: 20; */
+    top: 0;
     left: 0px;
     width: 100%;
-    height: 76%;
+    height: 100%;
     flex-direction: column;
-    z-index: 20;
+    /* z-index: 20; */
     pointer-events: none;
     transition: opacity 1s ease-in-out;
     opacity: 1;
@@ -535,17 +535,23 @@ h3 {
   }
 
   .summary-container {
+    padding: 0 16px;
+    position: absolute;
+    top: 80px;
+    height: calc(100% - 160px);
+    width: 100%;
+    overflow-y: scroll;
+    background-color: var(--color-darker-white);
+    box-sizing: border-box;
+    padding: 48px 16px 48px 16px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 96%;
-    width: 100vw;
-    background-color: var(--color-darker-white);
   }
 
   .main-container {
     flex-wrap: wrap;
-    width: 60%;
+    width: 100%;
     margin-left: 0px;
   }
 
@@ -596,7 +602,8 @@ h3 {
 }
 @media (max-width: 440px) {
   .third-container {
-    width: 340px;
+    max-width: 340px;
+    width: 100%;
     height: 116px;
     display: flex;
     justify-content: space-between;
@@ -606,7 +613,8 @@ h3 {
   }
 
   .first-container {
-    width: 340px;
+    max-width: 340px;
+    width: 100%;
     height: 116px;
     display: flex;
     justify-content: space-between;
@@ -615,7 +623,8 @@ h3 {
   }
 
   .second-container {
-    width: 340px;
+    max-width: 340px;
+    width: 100%;
     height: 116px;
     display: flex;
     justify-content: space-between;
@@ -629,7 +638,7 @@ h3 {
   }
 
   .right-container {
-    z-index: 20;
+    /* z-index: 20; */
     top: 23px;
     left: -4px;
     width: 100%;
