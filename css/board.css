@@ -1,12 +1,27 @@
+:root {
+  --color-blue: #2AABE2;
+  --color-dark-blue: #2A3647;
+  --color-darker-blue: #091931;
+  --color-white: #FFFFFF;
+  --color-darker-white: #F6F7F8;
+  --color-lightest-grey: #E7E7E7;
+  --color-lighter-grey: #D1D1D1;
+  --color-light-grey: #CDCDCD;
+  --color-grey: #A8A8A8;
+  --col-hr: #d1d1d1;
+  font-family: 'Inter', sans-serif;
+}
+
+
 /* GENERAL STYLING */
 html {
   overflow: hidden !important;
   word-wrap: break-word;
 }
 
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
   display: none;
-}
+} */
 
 .board-content div {
   box-sizing: border-box;
@@ -452,6 +467,7 @@ button {
   flex-direction: column;
   gap: 16px;
   overflow-y: scroll;
+  margin-right: 4px;
 }
 
 .popup-task-edit-main {
@@ -485,12 +501,26 @@ button {
   gap: 10px;
 }
 
+.popup-task-assigned-to-contacts,
+.popup-task-subtasks {
+  overflow-y: scroll;
+  margin-right: 4px;
+  padding-right: 4px;
+}
+
 .overflow-hidden {
   overflow: hidden;
 }
 
 .overflow-y-scroll {
   overflow-y: scroll;
+}
+
+.popup-task-assigned-to-contacts::-webkit-scrollbar,
+.popup-task-subtasks::-webkit-scrollbar,
+.subtasks-container::-webkit-scrollbar,
+.contact-list::-webkit-scrollbar {
+  width: 8px;
 }
 
 ::-webkit-scrollbar {
@@ -707,6 +737,8 @@ input::-webkit-calendar-picker-indicator {
   gap: 8px;
   max-height: 112px;
   overflow-y: auto;
+  margin-right: 4px;
+  padding-right: 4px;
 }
 
 .subtask-buttons-container {
@@ -817,6 +849,8 @@ input::-webkit-calendar-picker-indicator {
   display: flex;
   flex-direction: column;
   gap: 2px;
+  margin-right: 4px;
+  padding-right: 4px;
   overflow-y: scroll;
 }
 
