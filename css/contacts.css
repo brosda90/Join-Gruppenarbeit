@@ -1,7 +1,29 @@
 /* ------------------------------------------------------------ */
 /* ------------------------------------------------------------ */
 /* ------------------------------------------------------------ */
-:root {
+/* ===== Scrollbar CSS ===== */
+  /* Firefox */
+  .contact-list-main {
+    scrollbar-width: auto;
+    scrollbar-color: #2a3647 #ffffff;
+  }
+
+  /* Chrome, Edge, and Safari */
+  .contact-list-main::-webkit-scrollbar {
+    width: 16px;
+  }
+
+  .contact-list-main::-webkit-scrollbar-track {
+    background: #ffffff;
+  }
+
+  .contact-list-main::-webkit-scrollbar-thumb {
+    background-color: #2a3647;
+    border-radius: 10px;
+    border: 3px solid #ffffff;
+  }
+  
+  :root {
     --col-main: #2a3647;
     --col-main-active: #091931;
     --col-main-bg: #f6f7f8;
@@ -71,7 +93,7 @@ body {
     padding: 0;
     font-family: Inter, sans-serif;
     font-size: 16px;
-    position: relative;
+    /* position: relative; */
   }
 
 button {
