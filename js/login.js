@@ -206,6 +206,23 @@ async function logRegisteredUsers() {
 
 document.addEventListener("DOMContentLoaded", function () {
   autofillLoginDetails();
+  logRegisteredUsers();
+
+  document
+    .getElementById("emailLogin")
+    .addEventListener("keydown", function (event) {
+      if (event.key === "Enter") {
+        login();
+      }
+    });
+
+  document
+    .getElementById("passwordLogin")
+    .addEventListener("keydown", function (event) {
+      if (event.key === "Enter") {
+        login();
+      }
+    });
 });
 
 logRegisteredUsers();

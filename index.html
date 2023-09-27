@@ -26,7 +26,11 @@
   <link rel="stylesheet" href="css/fonts.css" />
   <link rel="stylesheet" href="css/elem_predesign.css" />
   <link rel="stylesheet" href="css/startscreen.css" />
-  <link rel="shortcut icon" href="assets/img/join_favicon.png" type="image/x-icon">
+  <link
+    rel="shortcut icon"
+    href="assets/img/join_favicon.png"
+    type="image/x-icon"
+  />
 
   <body>
     <div id="colorOverlay"></div>
@@ -45,7 +49,11 @@
       </picture>
     </div>
 
-    <form class="login-container bc-white" id="loginContainer">
+    <form
+      class="login-container bc-white"
+      id="loginContainer"
+      onsubmit="event.preventDefault();"
+    >
       <h2 class="mb-4 size-61px">Log in</h2>
       <!-- Email input -->
       <div class="elementbox input-desktop input-se border-none bc-white">
@@ -56,8 +64,8 @@
               type="email"
               id="emailLogin"
               placeholder="Email"
-              required
               autocomplete="current-email"
+              required
             />
             <div class="input-imgbox">
               <img src="./assets/img/mail.svg" />
@@ -75,9 +83,9 @@
               type="password"
               id="passwordLogin"
               placeholder="Password"
-              required
               onfocus="setVisibilityOff('passwordLogin', 'toggleVisibility')"
               autocomplete="current-password"
+              required
             />
             <div class="input-imgbox">
               <img
@@ -123,7 +131,7 @@
           Log in
         </button>
         <button
-          type="button"
+          type="submit"
           id="guestLogIn"
           class="btn btn-primary login-site"
           onclick="guestLogin()"
