@@ -23,10 +23,10 @@ footer {
 .mainAddTask {
     /* margin-top: 70px; */
     position: absolute;
-    top: 80px;
+    top: 60px;
     width: 100%;
     height: calc(100% - 160px);
-    padding: 48px 16px 0 16px;
+    padding: 24px 0px 0px 16px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -43,6 +43,7 @@ footer {
 }
 
 .taskData {
+    height: 560px;
     width: 379px;
     overflow-y: auto;
 }
@@ -145,7 +146,7 @@ textarea {
 }
 
 .index {
-    z-index: 20 !important;
+    z-index: 2 !important;
 }
 
 .noActiveUser {
@@ -410,7 +411,8 @@ select option {
     border: 1px solid #2a3647;
 }
 
-.createBtn a {
+.createBtn a,
+.createBtn button {
     min-height: 50px;
     font-size: 20px;
     display: flex;
@@ -450,7 +452,7 @@ select option {
 .categorySelector {
     /* width: 350px; */
     position: relative;
-    z-index: 1;
+    z-index: 4;
     background-color: white;
     height: 40px;
     border: 1px solid #D1D1D1;
@@ -469,10 +471,10 @@ select option {
     display: flex;
     flex-direction: column;
     padding-top: 24px;
-    top: -16px;
-    position: relative;
+    top: 16px;
+    position: absolute;
     box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
-    z-index: 0;
+    z-index: 3;
 }
 
 .option {
@@ -503,18 +505,20 @@ select option {
 }
 
 .contactSelectField {
-    /* width: 376px; */
+    width: 376px;
     margin-left: 1px;
     max-height: 214px;
     overflow: auto;
-    position: relative;
+    position: absolute;
     background-color: white;
     border: 1px solid white;
     border-radius: 10px;
     padding-top: 16px;
-    top: -16px;
+    top: 70px;
     box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
 }
+
+#contactDropDown {}
 
 .scrollbar::-webkit-scrollbar {
     display: none;

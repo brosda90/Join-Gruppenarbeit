@@ -970,6 +970,11 @@ input::-webkit-calendar-picker-indicator {
   width: 100% !important;
 }
 
+.contactSelectField {
+  top: 50px !important;
+  width: 100% !important;
+}
+
 
 @media (min-width: 1000px) {
   h1 {

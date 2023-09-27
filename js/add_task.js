@@ -291,6 +291,14 @@ function resetPrioAlert(urgent, medium, low) {   //reset red border of Prio Butt
     lowBtn.classList.remove('brd-red');
 }
 
+function checkSubInputValue() {   //check if subtask input is empty
+    subInputCover.classList.add('brd-red');
+        setTimeout(function () {
+            subInputCover.classList.remove('brd-red');
+        }, 3000);
+        toggleSubTaskInput();
+}
+
 //----------------------------------------------------//
 //------- Get Values and Create Task Functions -------//
 //----------------------------------------------------//
@@ -427,7 +435,7 @@ function createSubTask() {   //create and push Subtask
 
 function createTask() {   //get all Values for the new Task
     const checked = checkInputData();
-    if (currentTaskUser['id'] == -2) {
+    if (currentTaskUser['id'] == -2  && checked === true) {
         msgBox(text = 'To create new Task register and log in');
         setTimeout(function() {
             window.location.href = 'board.html'
