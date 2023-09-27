@@ -201,7 +201,7 @@ function generatePopupAssignedToContainerHTML(task) {
     html = /*html*/`
     <div id="popup-task-assigned-to-container" class="popup-task-info-container flex-column gap-8px overflow-hidden">
         <div class="popup-task-info-title">Assigned To:</div>
-        <div class="popup-task-info overflow-y-scroll">
+        <div class="popup-task-info popup-task-assigned-to-contacts">
             <ul class="contacts-list">
               ${generatePopupContactsHTML(task)}
             </ul>
@@ -247,7 +247,7 @@ function generatePopupSubtasksContainerHTML(task) {
     html = /*html*/`
       <div class="popup-task-info-container flex-column gap-8px overflow-hidden">
         <div class="popup-task-info-title">Subtasks:</div>
-        <div class="popup-task-info overflow-y-scroll">
+        <div class="popup-task-info popup-task-subtasks">
             <ul class="subtasks-list">
                 ${generatePopupSubtasksHTML(task)} 
             </ul>

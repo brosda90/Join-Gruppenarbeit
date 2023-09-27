@@ -4,9 +4,9 @@ html {
   word-wrap: break-word;
 }
 
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
   display: none;
-}
+} */
 
 .board-content div {
   box-sizing: border-box;
@@ -452,6 +452,7 @@ button {
   flex-direction: column;
   gap: 16px;
   overflow-y: scroll;
+  margin-right: 4px;
 }
 
 .popup-task-edit-main {
@@ -485,12 +486,26 @@ button {
   gap: 10px;
 }
 
+.popup-task-assigned-to-contacts,
+.popup-task-subtasks {
+  overflow-y: scroll;
+  margin-right: 4px;
+  padding-right: 4px;
+}
+
 .overflow-hidden {
   overflow: hidden;
 }
 
 .overflow-y-scroll {
   overflow-y: scroll;
+}
+
+.popup-task-assigned-to-contacts::-webkit-scrollbar,
+.popup-task-subtasks::-webkit-scrollbar,
+.subtasks-container::-webkit-scrollbar,
+.contact-list::-webkit-scrollbar {
+  width: 8px;
 }
 
 ::-webkit-scrollbar {
@@ -707,6 +722,8 @@ input::-webkit-calendar-picker-indicator {
   gap: 8px;
   max-height: 112px;
   overflow-y: auto;
+  margin-right: 4px;
+  padding-right: 4px;
 }
 
 .subtask-buttons-container {
@@ -817,6 +834,8 @@ input::-webkit-calendar-picker-indicator {
   display: flex;
   flex-direction: column;
   gap: 2px;
+  margin-right: 4px;
+  padding-right: 4px;
   overflow-y: scroll;
 }
 
