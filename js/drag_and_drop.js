@@ -13,7 +13,7 @@ let duration = 1000;
 
 let isScrolling = false;
 
-setInterval(dragScroll, 25);
+setInterval(dragScroll, 25); 
 
 
 
@@ -238,6 +238,13 @@ function showNoTaskContainer(id) {
 
 // LONG TOUCH
 
+/**
+ * touchstart for touchdrag
+ * - startDragging only after the duration (long touch)
+ * 
+ * @param {number} id - current task-container id
+ * @param {event} event - touchstart event
+ */
 function touchStart(id,event){
   if (!timer) {
     timer = setTimeout(function() {
@@ -250,6 +257,13 @@ function touchStart(id,event){
 }
 
 
+
+/**
+ * touchend for touchdrag
+ * - reset timer and longtouch state
+ * 
+ * @param {event} event - touchevent
+ */
 function touchEnd(event){
   if (timer) {
     clearTimeout(timer)
@@ -389,7 +403,7 @@ function dragScroll() {
 
 
 
-// check if touchmove / scroll is active 
+// check if touchmove ("touchscroll") is active 
 
 document.addEventListener('touchstart', function(){
   isScrolling = false;

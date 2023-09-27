@@ -499,7 +499,7 @@ function generateSubtaskInEditPopupHTML(subtask,i) {
 
 function generateEditSubtaskHTML(subtask,subtaskIndex) {
     return /*html*/`
-    <input id="subtask-edit-input" class="subtask-edit-input" type="text" value="${subtask['subtask']}">
+    <input id="subtask-edit-input" class="subtask-edit-input" type="text" value="${subtask['subtask']}" onkeydown="editSubtaskWithEnter(event,${subtaskIndex})">
     <div class="subtask-buttons-container">
       <button class="btn-delete" onclick="deleteSubtask(${subtaskIndex})" >
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
