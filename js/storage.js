@@ -6,7 +6,7 @@ async function setItem(key, value) {
     const payload = { key, value, token: STORAGE_TOKEN };
     if(loggedInUserID == -2) {
         msgBox();
-        return [{'status': 'error', 'message': 'Not in Guest-Login.'}];
+        return [{'status': 'error', 'message': 'Not in Guest-Login.git'}];
     } else {
         return fetch(STORAGE_URL, { method: 'POST', body: JSON.stringify(payload) })
             .then(res => res.json());
