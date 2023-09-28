@@ -330,6 +330,7 @@ footer a {
   display: flex;
   font-size: 20px;
   gap: 17px;
+  border: 1px solid #29abe2;
 }
 
 .close-button {
@@ -370,6 +371,67 @@ footer a {
 
 input:invalid {
   border-color: red;
+}
+
+.preview-list {
+  padding: 16px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.input-border {
+  padding: 12px 21px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  border: 1px solid #d1d1d1;
+}
+
+.input-border:has(.input-field:focus) {
+  border-color: #29abe2;
+}
+
+.input-innerbox {
+  display: flex;
+  align-items: center;
+}
+
+.input-field {
+  width: calc(100% - 24px);
+  height: 24px;
+  outline: none;
+  border: none;
+  box-sizing: border-box;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.input-field::placeholder {
+  color: var(--col-hr);
+}
+
+.input-imgbox {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.elementbox {
+  min-width: 250px;
+  width: fit-content;
+  min-height: 50px;
+  height: fit-content;
+  padding: 10px;
+  border: 2px dotted #ddd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @media (min-width: 1000px) {
