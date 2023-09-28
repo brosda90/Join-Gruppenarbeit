@@ -106,6 +106,7 @@ function renderContacts() {   //render Contacts
     }
   } */
 
+
 function checkUserState(userid) {
     if (userid == currentTaskUser['id']) {
         return '(You)'
@@ -143,6 +144,7 @@ function renderSubTaskUpdate() {   //reload edited Sub Task
 //---------------------------------------------------------------//
 //------- Check Buttons, Input Fields and Select Elements -------//
 //---------------------------------------------------------------//
+
 
 function selectPrio(button) {   //set prio button icon variable
     let urgent = document.getElementById('urgent');
@@ -256,13 +258,7 @@ function checkSelectDataFields(categoryInput, selectedPriority) {   //check requ
 
 function addedContactsCheckBox(selectedContact, checked, src, id, badge, index) {   //toggle Checkbox icon of each Contact
     if (src === './assets/img/check_button_unchecked.svg') {
-        selectedContact.classList.add('bg-blue', 'font-white');
-        checked.src = './assets/img/check_button_checked.svg';
-        checked.classList.add('selectedSvg');
-        addedContacts.push(id);
-        badges.push(badge);
-        addedContactInitial.push(taskContacts[index]['initials']);
-        document.getElementById('searchContactInput').value = "";
+        checkedCheckBox(selectedContact, checked, src, id, badge, index);
     } else if (src === './assets/img/check_button_checked.svg') {
         selectedContact.classList.remove('bg-blue', 'font-white');
         checked.src = './assets/img/check_button_unchecked.svg';
@@ -274,6 +270,17 @@ function addedContactsCheckBox(selectedContact, checked, src, id, badge, index) 
             addedContactInitial.splice(indexOfId, 1);
         }
     };
+}
+
+
+function checkedCheckBox(selectedContact, checked, src, id, badge, index) {   //set checked Checkbox
+    selectedContact.classList.add('bg-blue', 'font-white');
+    checked.src = './assets/img/check_button_checked.svg';
+    checked.classList.add('selectedSvg');
+    addedContacts.push(id);
+    badges.push(badge);
+    addedContactInitial.push(taskContacts[index]['initials']);
+    document.getElementById('searchContactInput').value = "";
 }
 
 
@@ -326,6 +333,7 @@ function checkSubInputValue(subInputCover) {   //check if subtask input is empty
 //----------------------------------------------------//
 //------- Get Values and Create Task Functions -------//
 //----------------------------------------------------//
+
 
 function getSelectedPrio() {  //get selected Prio Button Value for new Task
     let selectedPriority;
@@ -530,10 +538,18 @@ function clearTaskInput() {   //clear all Input Data form new created Task
     resetTaskData();
 }
 
+function enterKeyDownCreateSub(event) {
+    if (event.keyCode === 13) {
+        event.preventDefault();
+        createSubTask();
+    }
+}
+
 
 //------------------------------//
 //------- Edit Functions -------//
 //------------------------------//
+
 
 function editSubElement(index) {   //edit Sub Task
     let subValue = document.getElementById(`editSubTask${index}`);
@@ -563,6 +579,7 @@ function deleteSub(index) {   //delete Sub Task
 //------------------------------------------//
 //------- Toggle and Reset Functions -------//
 //------------------------------------------//
+
 
 function toggleSubTaskInput() {   //displays Sub Task Input
     let inputCover = document.getElementById('subTaskInputCover');
