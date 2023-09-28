@@ -124,17 +124,22 @@ async function saveNewContact() {
     } else {
         contactList.push(newDataSet[0]);
         answer = await saveData("contacts", contactList);
-        if(answer) {
-            await saveData("lastContactId", ++lastContactId);
-            sortedContactList = sortContacts(contactList);
-            renderContactList();
-            document.getElementById("contactsuccess").classList.add("shortpopup");
-            setTimeout(() => {
-                document.getElementById("contactsuccess").classList.remove("shortpopup");
-            }, "900");
-        } else {
-            msgBox('Contact was not saved.')
-        }
+        isSavedNewContact(answer);
+    }
+}
+
+
+async function isSavedNewContact(answer) {
+    if(answer) {
+        await saveData("lastContactId", ++lastContactId);
+        sortedContactList = sortContacts(contactList);
+        renderContactList();
+        document.getElementById("contactsuccess").classList.add("shortpopup");
+        setTimeout(() => {
+            document.getElementById("contactsuccess").classList.remove("shortpopup");
+        }, "900");
+    } else {
+        msgBox('Contact was not saved.');
     }
 }
 
@@ -265,11 +270,10 @@ async function deleteContactFromTasks(id) {
 // ############################################################
 function sortContacts(arr) {
     let targetArr = [...arr];
-    targetArr.sort((c1, c2) =>
-        c1.initials < c2.initials ? -1 : c1.initials > c2.initials ? 1 : 0
-    );
+    targetArr.sort((c1, c2) => (c1.initials < c2.initials ? -1 : c1.initials > c2.initials ? 1 : 0));
     return targetArr;
 }
+
 
 function sortIds(arr) {
     let targetArr = [...arr];
