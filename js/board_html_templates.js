@@ -454,8 +454,10 @@ function generateContactListItemHTML(contact,i) {
     <li id="contact-${contact['id']}" class="assigned-to-contacts-list-item ${addCSSClass_assigned(contact['id'])}" onclick="toggleAssignment(${contact['id']},'contact-${i}-checkbox')">
       <div class="assigned-to-contact">
         <div class="profile-badge bc-${contact['badge-color']} width-40px border-2px">${contact['initials']}</div>
-        <div class="contact-name">${contact['name']}</div>
-        <div class="contact-user-state">${checkContactUserState(contact['userid'])}</div>
+        <div class="contact-text">
+            <div class="contact-name">${contact['name']}</div>
+            <div class="contact-user-state">${checkContactUserState(contact['userid'])}</div>
+        </div>
       </div>
       <img id="contact-${i}-checkbox" src="${loadCheckButtonImg(contact['id'])}" alt="">
     </li>
