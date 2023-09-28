@@ -1,7 +1,6 @@
 let users = [];
 
 //###################################################################################//
-//###################################################################################//
 /**
  * Navigiert zurück zur Login-Seite.
  */
@@ -10,7 +9,6 @@ function backToLogin() {
 }
 
 //################## SETS VISIBILITY FROM INPUT ON ##################################//
-//###################################################################################//
 /**
  * Schaltet die Sichtbarkeit des Passworts im gegebenen Feld.
  * @param {string} fieldId - Die ID des Passwortfeldes.
@@ -35,7 +33,6 @@ function togglePasswordVisibility(fieldId, imgId) {
 }
 
 //#################### SETS VISIBILITY FROM INPUT OFF ###############################//
-//###################################################################################//
 /**
  * Setzt die Sichtbarkeit des Passworts auf "aus".
  * @param {string} fieldId - Die ID des Passwortfeldes.
@@ -47,7 +44,6 @@ function setVisibilityOff(fieldId, imgId) {
 }
 
 //################### SHOWS PASSWORD REGULATIONS ####################################//
-//###################################################################################//
 /**
  * Zeigt die Passwortanforderungen für eine kurze Zeit.
  */
@@ -60,7 +56,6 @@ function showPasswordRequirements() {
 }
 
 //#################### LOADS USER FORM USERS ARRAY ##################################//
-//###################################################################################//
 /**
  * Lädt Benutzer aus dem Speicher.
  */
@@ -72,7 +67,6 @@ async function loadUsers() {
 }
 
 //###################### LOADS LAST CONTACT ID ######################################//
-//###################################################################################//
 /**
  * Lädt die letzte Kontakt-ID aus dem Speicher.
  * @returns {number} Die letzte Kontakt-ID.
@@ -86,7 +80,6 @@ async function loadLastContactId() {
 }
 
 //################ RETURNS RANDOM NUMBER FOR COLORBADGE #############################//
-//###################################################################################//
 /**
  * Gibt eine zufällige Farbe für ein Badge zurück.
  * @returns {number} Eine zufällige Zahl zwischen 0 und 14.
@@ -95,8 +88,18 @@ function randomBadgeColor() {
   return Math.floor(Math.random() * 15);
 }
 
+function showFieldPopup(field) {
+  const popup = document.createElement("div");
+  popup.textContent = "Please fill out this field";
+  popup.className = "field-popup";
+  field.parentElement.appendChild(popup);
+
+  setTimeout(() => {
+    field.parentElement.removeChild(popup);
+  }, 1500);
+}
+
 //################### REGISTER USER #################################################//
-//###################################################################################//
 /**
  * Registriert einen neuen Benutzer.
  * @returns {boolean} false, wenn die Registrierung nicht erfolgreich war.
@@ -138,6 +141,7 @@ async function registerUser() {
       (field) => {
         if (!field.value.trim()) {
           field.closest(".elementbox").classList.add("elementbox-error");
+          showFieldPopup(field);
         }
       }
     );
@@ -201,7 +205,6 @@ async function registerUser() {
 }
 
 //################## CHECKS AND REMOVES ERROR CLASS #################################//
-//###################################################################################//
 /**
  * Überprüft und entfernt die Fehlerklasse, wenn das Feld Daten enthält.
  * @param {HTMLElement} field - Das zu überprüfende Feld.
@@ -213,7 +216,6 @@ function checkAndRemoveErrorClass(field) {
 }
 
 //################## CHECKS NEXT AVAILABLE USER ID ##################################//
-//###################################################################################//
 /**
  * Ermittelt die nächste verfügbare Benutzer-ID.
  * @returns {number} Die nächste Benutzer-ID.
@@ -224,7 +226,6 @@ function getNextUserId() {
 }
 
 //################### EXTRACTS AND RETURNS INITIALS #################################//
-//###################################################################################//
 /**
  * Extrahiert und gibt die Initialen eines gegebenen Namens zurück.
  * @param {string} name - Der Name, aus dem die Initialen extrahiert werden sollen.
@@ -239,7 +240,6 @@ function getInitials(name) {
   return initials.toUpperCase();
 }
 //################## CHECKS IF EMAIL MEETS REGULATIONS ##############################//
-//###################################################################################//
 /**
  * Überprüft, ob die gegebene E-Mail gültig ist.
  * @param {string} email - Die zu überprüfende E-Mail.
@@ -251,7 +251,6 @@ function isValidEmail(email) {
 }
 
 //##################### CHECKS IF EMAIL EXISTS ######################################//
-//###################################################################################//
 /**
  * Überprüft, ob eine E-Mail bereits existiert.
  */
@@ -261,7 +260,7 @@ async function checkEmailExists() {
   if (!email.trim()) return;
 
   if (!isValidEmail(email)) {
-    showInvalidEmailPopup(); // Function to show popup for invalid emails
+    showInvalidEmailPopup();
     return;
   }
 
@@ -275,7 +274,6 @@ async function checkEmailExists() {
 }
 
 ///################ CHECKS IF PASSWORD MEETS REGULATIONS ############################//
-//###################################################################################//
 /**
  * Überprüft, ob das Passwort den Anforderungen entspricht.
  * @returns {boolean} true, wenn das Passwort den Anforderungen entspricht, sonst false.
@@ -297,7 +295,6 @@ function validatePasswordRequirements() {
 }
 
 //################# CHECKS IF PASSWORD MATCH ########################################//
-//###################################################################################//
 /**
  * Überprüft, ob zwei Passwörter übereinstimmen.
  */
@@ -314,7 +311,7 @@ function checkPasswordsMatch() {
 }
 
 //#################### POPUP WINDOWS ################################################//
-//###################################################################################//
+
 function closeWrongPassword() {
   document.getElementById("errorPassword").style.display = "none";
 }
@@ -359,7 +356,6 @@ function showRegistrationSuccess() {
   startCountdown(3);
 }
 //#####################STARTS COUNDOWN AFTER REG. ###################################//
-//###################################################################################//
 /**
  * Startet Countdown nach Regestrierung.
  */
@@ -380,7 +376,6 @@ function startCountdown(seconds) {
   }, 1000);
 }
 //################ DELETE ALL USERS FROM ARRAY ######################################//
-//###################################################################################//
 /**
  * Löscht alle Benutzer aus dem Server.
  */
@@ -389,8 +384,7 @@ async function deleteAllUsers() {
   await setItem("users", JSON.stringify(users));
 }
 
-//################ INITIALIZES LOGGED IN USER / FUNCTION FROM STORAGE.JS ######################################//
-//###################################################################################//
+//################ INITIALIZES LOGGED IN USER / FUNCTION FROM STORAGE.JS #############//
 /**
  * The logged-in user identifier retrieved from local storage.
  * @type {number}

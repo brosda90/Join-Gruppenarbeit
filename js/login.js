@@ -141,7 +141,7 @@ async function login() {
 
     localStorage.setItem("loggedInUser", user.name);
     localStorage.setItem("loggedInUserID", user.id);
-    window.location.href = "board.html";
+    window.location.href = "summary.html";
   } else {
     document.getElementById("errorReport").style.display = "flex";
   }
@@ -206,6 +206,17 @@ async function logRegisteredUsers() {
 
 document.addEventListener("DOMContentLoaded", function () {
   autofillLoginDetails();
+  logRegisteredUsers();
+
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Enter") {
+      const passwordField = document.getElementById("passwordLogin");
+      if (passwordField === document.activeElement) {
+        login();
+        event.preventDefault(); // Verhindert die Standardaktion
+      }
+    }
+  });
 });
 
 logRegisteredUsers();
@@ -238,4 +249,14 @@ function guestLogout() {
   users = users.filter((user) => user.id !== -2);
 
   userLogout();
+}
+
+function validateAndLogin() {
+  const form = document.getElementById("loginContainer");
+
+  if (form.checkValidity()) {
+    login();
+  } else {
+    form.reportValidity();
+  }
 }

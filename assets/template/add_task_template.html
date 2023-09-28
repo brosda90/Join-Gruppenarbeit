@@ -1,4 +1,4 @@
-<form action="" onsubmit="return false">
+<form action="" autocomplete="off" onsubmit="return false">
     <div class="headAddTask">
         <h1>Add Task</h1>
         <button id="add-task-closing-button" class="icon-button d-none" onclick="closeAddTaskPopup()" type="button">
@@ -22,14 +22,14 @@
                     <h4 class="title">Title<p style="color:#ff3d00">*</p>
                     </h4>
                     <input class="titleInput brd-r10 item" type="text" placeholder="Enter a title" id="titleInput"
-                        onclick="resetInputAlert('titleInput')" maxlength="50" autocomplete="off" required
+                        onclick="resetInputAlert('titleInput'), setFocus('titleInput')" maxlength="50" autocomplete="off" required
                         title="Please enter a title.">
                 </div>
                 <div class="description h4-gap">
                     <h4>Description<p style="color:#ff3d00">*</p>
                     </h4>
                     <textarea class="descriptionInput brd-r10 item" name="" id="descriptionInput"
-                        placeholder="Enter a Description" onclick="resetInputAlert('descriptionInput')" required
+                        placeholder="Enter a Description" onclick="resetInputAlert('descriptionInput'), setFocus('descriptionInput')" required
                         title="Please enter a description."></textarea>
                 </div>
                 <div class="prio h4-gap">
@@ -54,7 +54,7 @@
                         <h4>Due date<p style="color:#ff3d00">*</p>
                         </h4>
                         <div class="input-add-task-due-date">
-                            <input onclick="today(); resetInputAlert('dateToday')" class="date item brd-r10" type="date"
+                            <input onclick="today(); resetInputAlert('dateToday'), setFocus('dateToday')" class="date item brd-r10" type="date"
                                 id="dateToday" required>
                             <svg class="input-date-img" width="24" height="24" viewBox="0 0 24 24" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -76,7 +76,7 @@
                         <div class="custom-select">
                             <div class="categorySelect">
                                 <div id="categoryInput" class="categorySelector brd-r10 item"
-                                    onclick="selectCategory(); resetInputAlert('categoryInput')">
+                                    onclick="selectCategory(); resetInputAlert('categoryInput'), setFocus('categoryInput')">
                                     <p id="chosenCategory">Select task Category</p>
                                     <img id="categoryArrow" src="./assets/img/arrow_drop_down.svg" alt="">
                                 </div>
@@ -90,8 +90,7 @@
                     <div class="assignedTo">
                         <h4>Assigned to</h4>
                         <div class="selectContacts">
-                            <div id="searchContact" class="categorySelector index brd-r10"
-                                onclick="resetInputAlert('searchContact')">
+                            <div id="searchContact" class="categorySelector index brd-r10">
                                 <input type="text" class="brd-transparent width-100" name="" id="searchContactInput"
                                     placeholder="Select contacts to assign" onclick="showContacts()"
                                     onkeyup="searchContacts()">
@@ -103,7 +102,7 @@
                             <div id="checkBoxes" class="contactSelectField scrollbar brd-r10 d-none">
                                 <div id="contactDropDown"></div>
                                 <div class="addNewContact">
-                                    <button class="addNewContactBtn brd-r10 item" onclick="openAddCon()">Add new contact
+                                    <button type="button" class="addNewContactBtn brd-r10 item" onclick="openAddCon()">Add new contact
                                         <img src="./assets/img/person_add.svg" alt=""></button>
                                 </div>
                             </div>
@@ -117,7 +116,7 @@
                             <img src="./assets/img/add.svg" alt="">
                         </div>
                         <div id="realSubInput" class="subTaskInput d-none">
-                            <input id="newSub" type="text" placeholder="Add new subtask">
+                            <input id="newSub" type="text" placeholder="Add new subtask" onkeydown="enterKeyDownCreateSub(event)">
                             <div class="subInputButton">
                                 <img class="item" src="./assets/img/close.svg" onclick="toggleSubTaskInput()" alt="">
                                 <div class="subBorder"></div>
