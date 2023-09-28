@@ -73,7 +73,7 @@
                     <div class="selectCategory h4-gap">
                         <h4>Category<p style="color:#ff3d00">*</p>
                         </h4>
-                        <div class="custom-select">
+                        <div class="custom-select" onclick="stopPropagation(event)">
                             <div class="categorySelect">
                                 <div id="categoryInput" class="categorySelector brd-r10 item"
                                     onclick="selectCategory(); resetInputAlert('categoryInput'), setFocus('categoryInput')">
@@ -90,7 +90,7 @@
                     <div class="assignedTo">
                         <h4>Assigned to</h4>
                         <div class="selectContacts">
-                            <div id="searchContact" class="categorySelector index brd-r10">
+                            <div id="searchContact" class="categorySelector index brd-r10" onclick="stopPropagation(event)">
                                 <input type="text" class="brd-transparent width-100" name="" id="searchContactInput"
                                     placeholder="Select contacts to assign" onclick="showContacts()"
                                     onkeyup="searchContacts()">
@@ -99,7 +99,7 @@
                             </div>
                         </div>
                         <div>
-                            <div id="checkBoxes" class="contactSelectField scrollbar brd-r10 d-none">
+                            <div id="checkBoxes" class="contactSelectField brd-r10 d-none">
                                 <div id="contactDropDown"></div>
                                 <div class="addNewContact">
                                     <button type="button" class="addNewContactBtn brd-r10 item" onclick="openAddCon()">Add new contact
@@ -111,19 +111,19 @@
                     </div>
                     <div class="subTasks h4-gap">
                         <h4>Subtasks</h4>
-                        <div id="subTaskInputCover" class="item brd-r10" onclick="toggleSubTaskInput()">
+                        <div id="subTaskInputCover" class="item brd-r10" onclick="stopPropagation(event), toggleSubTaskInput()">
                             <p>Add new subtask</p>
                             <img src="./assets/img/add.svg" alt="">
                         </div>
                         <div id="realSubInput" class="subTaskInput d-none">
-                            <input id="newSub" type="text" placeholder="Add new subtask" onkeydown="enterKeyDownCreateSub(event)">
+                            <input id="newSub" type="text" placeholder="Add new subtask" onkeydown="enterKeyDownCreateSub(event)" onclick="stopPropagation(event)">
                             <div class="subInputButton">
                                 <img class="item" src="./assets/img/close.svg" onclick="toggleSubTaskInput()" alt="">
                                 <div class="subBorder"></div>
                                 <img class="item" src="./assets/img/input_check.svg" onclick="createSubTask()" alt="">
                             </div>
                         </div>
-                        <div id="subTaskList" class="listedSubTasks scrollbar">
+                        <div id="subTaskList" class="listedSubTasks">
                         </div>
                     </div>
                 </div>

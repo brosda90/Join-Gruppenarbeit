@@ -284,7 +284,7 @@ function checkedCheckBox(selectedContact, checked, src, id, badge, index) {   //
 }
 
 
-function checkContactLength() {
+function checkContactLength() {   //check contacts length
     const contactDisplay = document.getElementById('contactInitial');
 
     if (addedContacts.length === 0) {
@@ -295,7 +295,7 @@ function checkContactLength() {
 }
 
 
-function isEmpty(inputField) {
+function isEmpty(inputField) {   //check if input field is empty
     return inputField.value === '';
 }
 
@@ -383,7 +383,7 @@ function selectOption(option) {  //show selected Category in Category selector
 }
 
 
-function checkCategoryColor(selectedValue) {
+function checkCategoryColor(selectedValue) {   //set category color
     if (selectedValue == 'Technical Task') {
         categoryColor = 6;
     } else {
@@ -397,18 +397,28 @@ function showContacts() {   //show all Contacts in dropdown Menu
     let checkboxes = document.getElementById('checkBoxes');
     let input = document.getElementById('searchContact');
     if (!expanded) {
-        checkboxes.classList.add('d-block');
-        input.classList.add('brd-focus');
-        expanded = true;
-        arrow.src = "./assets/img/arrow_up.svg"
+        openContactDropDown(arrow, checkboxes, input)
     } else {
-        checkboxes.classList.remove('d-block');
-        input.classList.remove('brd-focus');
-        expanded = false;
-        arrow.src = "./assets/img/arrow_drop_down.svg"
-        document.getElementById('searchContactInput').value = "";
-        searchContacts();
+        closeContactDropDown(arrow, checkboxes, input)
     }
+}
+
+
+function openContactDropDown(arrow, checkboxes, input) {
+    checkboxes.classList.add('d-block');
+    input.classList.add('brd-focus');
+    expanded = true;
+    arrow.src = "./assets/img/arrow_up.svg"
+}
+
+
+function closeContactDropDown(arrow, checkboxes, input) {
+    checkboxes.classList.remove('d-block');
+    input.classList.remove('brd-focus');
+    expanded = false;
+    arrow.src = "./assets/img/arrow_drop_down.svg"
+    document.getElementById('searchContactInput').value = "";
+    searchContacts();
 }
 
 
@@ -486,7 +496,7 @@ function createTask() {   //get all Values for the new Task
 }
 
 
-function setNewTaskData() {
+function setNewTaskData() {   //set new task from values
     let title = document.getElementById('titleInput').value;
     let description = document.getElementById('descriptionInput').value;
     let priority = getSelectedPrio();
@@ -519,7 +529,7 @@ async function addNewTask(title, description, priority, date, category, assigned
 }
 
 
-async function pushNewTask(newTask) {
+async function pushNewTask(newTask) {   //push new Task
     loadedTasks.push(newTask);
     await setItem('tasks', JSON.stringify(loadedTasks));
     clearTaskInput();
@@ -541,10 +551,24 @@ function clearTaskInput() {   //clear all Input Data form new created Task
     resetTaskData();
 }
 
-function enterKeyDownCreateSub(event) {
+
+function enterKeyDownCreateSub(event) {   //set new sub task on enter key button
     if (event.keyCode === 13) {
         event.preventDefault();
         createSubTask();
+    }
+}
+
+
+function enterKeyDownEditSub(event, index) {   //edit sub task on enter key button
+    let input = document.getElementById(`editSubTask${index}`)
+    if (event.keyCode === 13) {
+        event.preventDefault();
+        if (input.value != '') {
+            setNewSubValue(index);
+        } else {
+            deleteSub(index);
+        }
     }
 }
 
@@ -597,6 +621,34 @@ function setFocus(inputId) {   //set border color on focused element
             document.getElementById(inputId).classList.remove('brd-focus');
         }
     });
+}
+
+
+function closeAssignedToDropDown() {
+    let arrow = document.getElementById('contactsArrow');
+    let input = document.getElementById('searchContact');
+    let checkboxes = document.getElementById('checkBoxes');
+    checkboxes.classList.remove('d-block');
+    input.classList.remove('brd-focus');
+    arrow.src = "./assets/img/arrow_drop_down.svg"
+}
+
+
+function closeCategoryDropDown() {
+    let arrow = document.getElementById('categoryArrow');
+    let options = document.getElementById('allOptions');
+
+    options.classList.add('d-none');
+    arrow.src = "./assets/img/arrow_drop_down.svg"
+}
+
+
+function closeSubTaskInput() {
+    let inputCover = document.getElementById('subTaskInputCover');
+    let realInput = document.getElementById('realSubInput');
+
+    inputCover.classList.remove('d-none');
+    realInput.classList.add('d-none');
 }
 
 
@@ -687,7 +739,7 @@ function renderSubHTML(sub, index) {
                 </div>
             </div>
             <div id="editListElement${index}" class="editSub d-none">
-                <input id="editSubTask${index}" type="text">
+                <input id="editSubTask${index}" type="text" onkeydown="enterKeyDownEditSub(event,${index})">
                 <div class="editListElementButton">
                     <img class="item" src="./assets/img/delete_icon.svg" onclick="deleteSub(${index})">
                     <div class="subBorder"></div>
