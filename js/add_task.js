@@ -377,8 +377,11 @@ function selectCategory() {  //get Category for new Task
 function selectOption(option) {  //show selected Category in Category selector
     const selectedValue = option.textContent;
     const categorySelector = document.getElementById('chosenCategory');
+    const categoryInput = document.getElementById('categoryInput');
+
     categorySelector.innerHTML = selectedValue;
     checkCategoryColor(selectedValue);
+    categoryInput.classList.remove('brd-focus');
     selectCategory();
 }
 
