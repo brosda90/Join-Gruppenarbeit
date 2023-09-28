@@ -84,9 +84,9 @@ function editTask(taskID) {
   
   function getCategoryColor() {
     if (currentTask['category'] == 'Technical Task') {
-      return 6;
+      return 5;
     } else if (currentTask['category'] == 'User Story'){
-      return 11;
+      return 10;
     }
   }
   

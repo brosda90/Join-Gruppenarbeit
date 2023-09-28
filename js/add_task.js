@@ -388,9 +388,9 @@ function selectOption(option) {  //show selected Category in Category selector
 
 function checkCategoryColor(selectedValue) {   //set category color
     if (selectedValue == 'Technical Task') {
-        categoryColor = 6;
+        categoryColor = 5;
     } else {
-        categoryColor = 11;
+        categoryColor = 10;
     }
 }
 
