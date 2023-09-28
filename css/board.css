@@ -19,10 +19,6 @@ html {
   word-wrap: break-word;
 }
 
-/* ::-webkit-scrollbar {
-  display: none;
-} */
-
 .board-content div {
   box-sizing: border-box;
 }
@@ -204,21 +200,6 @@ button {
   display: none;
 }
 
-/* .task-section-body::after {
-    content: '';
-    min-width: 252px;
-    aspect-ratio:  1 / 1;
-    padding: 16px;
-    border-radius: 24px;
-    border: 1px dashed var(--color-grey);
-    pointer-events: none;
-    display: none;
-}
-
-.task-section:hover .task-section-body::after {
-    display: unset;
-} */
-
 /* Add Task Button Outlined */
 .btn-add-task-outlined {
   width: 30px;
@@ -320,18 +301,14 @@ button {
 #task-container-indication {
   min-width: 252px;
   width: 252px;
-  /* aspect-ratio:  1 / 1; */
   padding: 16px;
   border-radius: 24px;
   border: 1px dashed var(--color-grey);
-  /* flex-shrink: 0; */
   pointer-events: none;
 }
 
 .task-container:active {
   cursor: grabbing;
-  /* transform: rotate(5deg);
-    opacity: 0.5; */
 }
 
 .grabbed-task {
@@ -345,7 +322,6 @@ button {
 }
 
 .task-category {
-  background-color: #0038ff; /*TODO: dynamic property */
   width: fit-content;
   color: var(--color-white);
   padding: 4px 16px;
@@ -371,13 +347,13 @@ button {
   width: 128px;
   height: 8px;
   border-radius: 8px;
-  background-color: #f4f4f4; /*Variable dekl.*/
+  background-color: #f4f4f4; 
 }
 
 .subtask-progress-bar-fill {
   width: 50%;
   height: 100%;
-  background-color: #4589ff; /*Variable dekl.*/
+  background-color: #4589ff;
   border-radius: 16px;
 }
 
@@ -425,7 +401,6 @@ button {
 }
 
 .popup-task-container {
-  /* min-height:726px; */
   max-width: 525px;
   width: 100%;
   padding: 32px 0px;
@@ -450,7 +425,6 @@ button {
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.16);
   display: flex;
   flex-direction: column;
-  /* gap: 16px; */
   max-height: calc(100% - 32px);
 }
 
@@ -504,7 +478,6 @@ button {
 
 .popup-task-info {
   display: flex;
-  /* align-items: center; */
   gap: 10px;
 }
 
@@ -568,10 +541,6 @@ button {
 .gap-8px {
   gap: 8px;
 }
-
-/* .popup-task-info ul {
-    margin-left: 16px;
-} */
 
 .subtasks-list-item {
   list-style: none;
@@ -1015,7 +984,6 @@ input::-webkit-calendar-picker-indicator {
 }
 
 .contactSelectField {
-  /* position: relative !important; */
   top: 60px !important;
   width: 100% !important;
 }
