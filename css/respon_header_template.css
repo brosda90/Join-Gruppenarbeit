@@ -26,16 +26,17 @@ button {
 /* ################################################################ */
 .insert-top {
     position: absolute;
-    inset: 0 0 auto 0;
+    top: 0;
+    right: 0;
     z-index: 1;
     height: 80px;
     max-width: 100%;
     width: 100%;
     background: var(--col-white);
     box-shadow: var(--col-shadow10);
-    transition-property: width, height;
-    transition-delay: 75ms, 0ms;
-    transition-duration: 75ms, 75ms;
+    transition-property: max-width, height;
+    transition-delay: 125ms, 0ms;
+    transition-duration: 100ms, 100ms;
 }
 
 .header {
@@ -71,12 +72,13 @@ button {
 .user-icon {
     background-color: var(--col-white);
     width: 40px;
+    height: 40px;
     aspect-ratio: 1 / 1;
+    border-radius: 100%;
+    border: 2px solid var(--col-black);
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 100%;
-    border: 2px solid var(--col-black);
     cursor: pointer;
 }
 
@@ -149,7 +151,6 @@ button {
 
 .msgbox.shortpopup {
     top: calc(50%);
-    /* transition-delay: 400ms; */
     transition: top 100ms ease-in;
 }
 
@@ -175,15 +176,15 @@ button {
         justify-content: space-between;
         align-items: center;
         transition-property: max-width, height;
-        transition-delay: 0ms, 75ms;
-        transition-duration: 75ms, 75ms;
+        transition-delay: 125ms, 0ms;
+        transition-duration: 100ms, 100ms;
     }
 
     .header {
         width: 100%;
     }
 
-    .header svg {
+    #headerimg {
         display: none;
     }
 
@@ -214,6 +215,7 @@ button {
 
     .user-icon {
         width: 56px;
+        height: 56px;
         border: 3px solid var(--col-black);
     }
 }

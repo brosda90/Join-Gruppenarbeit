@@ -29,8 +29,9 @@ async function initLoggedInUser() {
 
 function hideUserOptions(event) {
     const userOptions = document.getElementById('useroptions');
-    const userButton = document.getElementById('user-name');
-    if(!userOptions.contains(event.target) && event.target !== userButton) {
+    const userButtonName = document.getElementById('user-name');
+    const userButton = document.getElementById('user-icon');
+    if(!userOptions.contains(event.target) && !userButton.contains(event.target) && event.target !== userButtonName) {
         userOptions.classList.remove('inview');
     }
 }
@@ -63,7 +64,11 @@ async function loadHeaderUsersFromStorage() {
 async function renderHeaderUserName() {
     let index = useridToIndex(loggedInUserID, userList);
     let obj = document.getElementById('user-name');
-    loggedInUserID == -2 ? obj.innerHTML = 'G' : obj.innerHTML = userList[index].initials;
+    if(obj === null) {
+        window.location.reload();
+    } else {
+        loggedInUserID == -2 ? obj.innerHTML = 'G' : obj.innerHTML = userList[index].initials;
+    }
 }
 
 

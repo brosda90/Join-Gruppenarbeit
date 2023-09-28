@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 async function init() {
     await includeHTML();
+    selectMenu();
 }
 
 async function includeHTML() {
@@ -24,4 +25,29 @@ async function includeHTML() {
 
 function stopPropagation(event) {
     event.stopPropagation();
-  }
+}
+
+
+function selectMenu() {
+    let filename = document.location.pathname;
+    let objs = document.getElementsByClassName('nav-menu-link');
+    let id = filenameToId(filename);
+    if(id > -1) {
+        objs[id].classList.add('link-selected');
+    }
+
+}
+
+
+function filenameToId(filename) {
+    if(filename.includes("summary.html")) {
+        return 0;
+    } else if(filename.includes("board.html")) {
+        return 1;
+    } else if(filename.includes("add_task.html")) {
+        return 2;
+    } else if(filename.includes("contacts.html")) {
+        return 3;
+    }
+    return -1;
+}

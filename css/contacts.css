@@ -3,31 +3,36 @@
 /* ------------------------------------------------------------ */
 /* ===== Scrollbar CSS ===== */
   /* Firefox */
-  .contact-list-main {
+.contact-list-main,
+.contact-single-main {
     scrollbar-width: auto;
-    scrollbar-color: #a8a8a8 #ffffff;
-  }
+    scrollbar-color: var(--color-grey) var(--col-white);
+}
 
-  /* Chrome, Edge, and Safari */
-  .contact-list-main::-webkit-scrollbar {
+/* Chrome, Edge, and Safari */
+.contact-list-main::-webkit-scrollbar,
+.contact-single-main::-webkit-scrollbar {
     width: 8px;
-  }
+}
 
-  .contact-list-main::-webkit-scrollbar-track {
-    background: #ffffff;
-  }
+.contact-list-main::-webkit-scrollbar-track,
+.contact-single-main::-webkit-scrollbar-track {
+    background: var(--col-white);
+}
 
-  .contact-list-main::-webkit-scrollbar-thumb {
-    background-color: #a8a8a8;
+.contact-list-main::-webkit-scrollbar-thumb,
+.contact-single-main::-webkit-scrollbar-thumb {
+    background-color: var(--color-grey);
     border-radius: 10px;
-    border: 1px solid #ffffff;
-  }
+    border: 1px solid var(--col-white);
+}
   
-  :root {
+:root {
     --col-main: #2a3647;
     --col-main-active: #091931;
     --col-main-bg: #f6f7f8;
     --col-white: #ffffff;
+    --color-grey: #a8a8a8;
     --col-black: #000000;
     --col-hr: #d1d1d1;
     --col-btn-hover: #eeeeee;
@@ -38,31 +43,21 @@
     --col-shadow10: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
     --col-shadow25: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
 
-    --col-badge-1: #ff7a00; /*  0  */
-    --col-badge-2: #9327ff; /*  3  */
-    --col-badge-3: #6e52ff; /*  2  */
-    --col-badge-4: #fc71ff; /*  8  */
-    --col-badge-5: #ffbb2b; /*  14  */
-    --col-badge-6: #1fd7c1; /*  5  */
-    --col-badge-7: #462f8a; /*  -  */
-    --col-badge-8: #ff4646; /*  13  */
-    --col-badge-9: #ffc700; /*  9  */
-
-    --col-set-0: #ff7a00; /*  1  */
-    --col-set-1: #ff5eb3; /*  -  */
-    --col-set-2: #6e52ff; /*  3  */
-    --col-set-3: #9327ff; /*  2  */
-    --col-set-4: #00bee8; /*  -  */
-    --col-set-5: #1fd7c1; /*  6  */
-    --col-set-6: #ff745e; /*  -  */
-    --col-set-7: #ffa35e; /*  -  */
-    --col-set-8: #fc71ff; /*  4  */
-    --col-set-9: #ffc700; /*  9  */
-    --col-set-10: #0038ff; /*  -  */
-    --col-set-11: #c3ff2b; /*  -  */
-    --col-set-12: #ffe62b; /*  -  */
-    --col-set-13: #ff4646; /*  8  */
-    --col-set-14: #ffbb2b; /*  5  */
+    --col-set-0: #ff7a00; /*  1  1  */
+    --col-set-1: #ff5eb3; /*  -  2  */
+    --col-set-2: #6e52ff; /*  3  3  */
+    --col-set-3: #9327ff; /*  2  4  */
+    --col-set-4: #00bee8; /*  -  5  */
+    --col-set-5: #1fd7c1; /*  6  6  */
+    --col-set-6: #ff745e; /*  -  7  */
+    --col-set-7: #ffa35e; /*  -  8  */
+    --col-set-8: #fc71ff; /*  4  9  */
+    --col-set-9: #ffc700; /*  9  10  */
+    --col-set-10: #0038ff; /*  -  11  */
+    --col-set-11: #c3ff2b; /*  -  12  */
+    --col-set-12: #ffe62b; /*  -  13  */
+    --col-set-13: #ff4646; /*  8  14  */
+    --col-set-14: #ffbb2b; /*  5  15  */
 
     --grad-contact-hover: linear-gradient(
         180deg,
@@ -74,16 +69,6 @@
         rgba(50, 62, 79, 1) 0%,
         rgba(42, 54, 71, 1) 100%
     );
-
-    --color-blue: #2aabe2;
-    --color-dark-blue: #2a3647;
-    --color-darker-blue: #091931;
-    /* --color-white: #ffffff; */
-    --color-darker-white: #f6f7f8;
-    --color-lightest-grey: #e7e7e7;
-    --color-lighter-grey: #d1d1d1;
-    --color-light-grey: #cdcdcd;
-    --color-grey: #a8a8a8;
 }
 
 /* ########################################################### */
@@ -130,6 +115,8 @@ div, nav, main, span, ::after {
     right: 16px;
     bottom: 112px;
     cursor: pointer;
+    transition: width 100ms ease-out 125ms, 
+                padding 100ms ease-out 125ms;
 }
 
 .contact-add-main:hover .contact-add-mainbox {
@@ -164,7 +151,9 @@ div, nav, main, span, ::after {
     height: calc(100% - 160px);
     overflow-y: auto;
     background-color: #fff;
-    transition: all 100ms ease-in-out;
+    transition: left 100ms ease 125ms, 
+                width 100ms ease 0ms,
+                padding-left 100ms ease 125ms;
 }
 
 .contact-list {
@@ -279,6 +268,8 @@ div, nav, main, span, ::after {
     height: calc(100% - 160px);
     overflow-y: auto;
     background-color: var(--col-main-bg);
+    transition: width 100ms ease-out 125ms,
+                left 100ms ease-out 125ms;
 }
 
 /* ------------------------------------------------------------ */
@@ -530,8 +521,6 @@ div, nav, main, span, ::after {
     top: 0;
     left: 0;
     right: 0;
-    /* height: 352px;
-    height: fit-content; */
     padding: 66px 24px;
     background-color: var(--col-main);
     border-radius: 30px 30px 0 0;
@@ -1006,7 +995,9 @@ div, nav, main, span, ::after {
         left: 232px;
         padding-left: 28px;
         box-shadow: 4px 0 6px 0 rgba(0, 0, 0, 0.08);
-        transition: all 100ms ease-in-out;
+        transition: left 100ms ease 125ms, 
+                    width 100ms ease 125ms,
+                    padding-left 100ms ease 125ms;
     }
 
     .contact-add-main {
@@ -1048,6 +1039,8 @@ div, nav, main, span, ::after {
         height: calc(100% - 96px);
         left: 688px;
         top: 96px;
+        transition: left 100ms ease 125ms,
+                    width 100ms ease 125ms;
     }
 
     /* ------------------------------------------------------------ */
@@ -1058,7 +1051,8 @@ div, nav, main, span, ::after {
         height: calc(100% - 96px);
         left: 688px;
         top: 96px;
-
+        transition: left 100ms ease 125ms,
+                    width 100ms ease 125ms;
     }
 
     .backarrow, .contact-btn-option-box {
@@ -1211,14 +1205,6 @@ div, nav, main, span, ::after {
         flex-direction: row;
         max-height: 592px;
     }
-
-    
-
-
-
-
-
-
 }
 
 /* ------------------------------------------------------------ */
@@ -1240,7 +1226,6 @@ div, nav, main, span, ::after {
     .contact-list-main {
         padding-left: 0;
         width: 334px;
-        transition: all 100ms ease-in-out;
     }
 
     .contact-add-main {
@@ -1272,12 +1257,16 @@ div, nav, main, span, ::after {
     .contact-desktop-title-main {
         left: calc(232px + 334px);
         width: calc(100% - 232px - 334px);
+        transition: width 100ms ease-out 125ms,
+                    left 100ms ease-out 125ms;
     }
 
     /* ----- */
     .contact-single-main {
         left: calc(232px + 334px);
         width: calc(100% - 232px - 334px);
+        transition: left 100ms ease 125ms,
+                    width 100ms ease 125ms;
     }
 
     .contact-single-title-box {
@@ -1354,12 +1343,8 @@ div, nav, main, span, ::after {
     }
 }
 
-
-
-
-
 /* ------------------------------------------------------------ */
-/* ------------------------------------------------------------ */
+/* ----- immer am Ende lassen --------------------------------- */
 /* ------------------------------------------------------------ */
 .d-none {
     display: none;
