@@ -70,8 +70,8 @@ form {
     width: 379px;
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    padding: 16px 0;
+    align-items: flex-end;
+    padding-bottom: 16px;
     margin-top: auto;
 }
 
@@ -426,6 +426,10 @@ select option {
     align-items: center;
 }
 
+.createBtn button {
+    min-height: 52px !important;
+}
+
 .create:hover {
     cursor: pointer;
     background-color: #29abe2;
@@ -477,8 +481,8 @@ select option {
     display: flex;
     flex-direction: column;
     padding-top: 24px;
-    top: 16px;
-    position: absolute;
+    top: -16px;
+    position: relative;
     box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
     z-index: 3;
 }
@@ -515,12 +519,12 @@ select option {
     margin-left: 1px;
     max-height: 214px;
     overflow: auto;
-    position: absolute;
+    position: relative;
     background-color: white;
     border: 1px solid white;
     border-radius: 10px;
     padding-top: 16px;
-    top: 70px;
+    top: -16px;
     box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
 }
 
