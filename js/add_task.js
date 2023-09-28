@@ -395,12 +395,15 @@ function checkCategoryColor(selectedValue) {
 function showContacts() {   //show all Contacts in dropdown Menu
     let arrow = document.getElementById('contactsArrow');
     let checkboxes = document.getElementById('checkBoxes');
+    let input = document.getElementById('searchContact');
     if (!expanded) {
         checkboxes.classList.add('d-block');
+        input.classList.add('brd-focus');
         expanded = true;
         arrow.src = "./assets/img/arrow_up.svg"
     } else {
         checkboxes.classList.remove('d-block');
+        input.classList.remove('brd-focus');
         expanded = false;
         arrow.src = "./assets/img/arrow_drop_down.svg"
         document.getElementById('searchContactInput').value = "";
@@ -579,6 +582,22 @@ function deleteSub(index) {   //delete Sub Task
 //------------------------------------------//
 //------- Toggle and Reset Functions -------//
 //------------------------------------------//
+
+
+function stopPropagation(event) {
+    event.stopPropagation();
+}
+
+
+function setFocus(inputId) {   //set border color on focused element
+    document.getElementById(inputId).classList.add('brd-focus');
+    document.addEventListener('click', function (event) {
+
+        if (event.target.id !== inputId) {
+            document.getElementById(inputId).classList.remove('brd-focus');
+        }
+    });
+}
 
 
 function toggleSubTaskInput() {   //displays Sub Task Input

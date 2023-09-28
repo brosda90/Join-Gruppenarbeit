@@ -116,6 +116,10 @@ textarea {
     border: 1px solid #ff3d00 !important;
 }
 
+.brd-focus {
+    border: 1px solid #29abe2 !important;
+}
+
 .brd-white {
     border: 2px solid white !important;
 }
