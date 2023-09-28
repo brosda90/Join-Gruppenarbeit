@@ -1,3 +1,17 @@
+:root {
+  --col-main: #2a3647;
+  --col-main-active: #091931;
+  --col-main-bg: #f6f7f8;
+  --col-white: #ffffff;
+  --col-hr: #d1d1d1;
+  --col-link: #007cee;
+  --col-btn: var(--col-main);
+  --col-btn-activ: #29abe2;
+
+  --col-shadow10: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
+  --col-shadow25: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
 .signUp-container {
   text-align: center;
   width: 396px;
@@ -50,8 +64,8 @@
 
 .arrow-back {
   position: relative;
-  width: 32px;
-  height: 32px;
+  width: 35px;
+  height: 35px;
   top: -230px;
   right: 138px;
   cursor: pointer;
@@ -112,6 +126,40 @@
   color: #29abe2;
 }
 
+.icon-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  aspect-ratio: 1 / 1;
+}
+
+.arrow-back:hover {
+  background-color: #e7e7e7;
+  border-radius: 100%;
+}
+
+.preview-list {
+  padding: 16px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.elementbox {
+  min-width: 250px;
+  width: fit-content;
+  min-height: 50px;
+  height: fit-content;
+  padding: 10px;
+  border: 2px dotted #ddd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 @media (min-width: 1000px) {
   #signUpLogo {
     width: 100% !important;
@@ -124,8 +172,8 @@
   }
   .arrow-back {
     position: relative;
-    width: 184px;
-    height: 32px;
+    width: 35px;
+    height: 35px;
     top: -230px;
     right: 170px;
   }
@@ -163,6 +211,7 @@
 
   #signUpBtn {
     width: 130px;
+    font-size: 18px;
   }
 }
 
@@ -185,8 +234,8 @@
 
   .arrow-back {
     position: relative;
-    width: 32px;
-    height: 32px;
+    width: 35px;
+    height: 35px;
     top: -210px;
     right: 117px;
   }

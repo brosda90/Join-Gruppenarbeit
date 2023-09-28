@@ -368,6 +368,10 @@ footer a {
   border: 1px solid red !important;
 }
 
+input:invalid {
+  border-color: red;
+}
+
 @media (min-width: 1000px) {
   #colorOverlay {
     background-color: white !important;
