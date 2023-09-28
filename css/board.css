@@ -12,9 +12,6 @@
   font-family: 'Inter', sans-serif;
 }
 
-*{
-  word-break: break-word;
-}
 
 /* GENERAL STYLING */
 html {
@@ -762,6 +759,7 @@ input::-webkit-calendar-picker-indicator {
   display: flex;
   justify-content: space-between;
   padding: 0 16px;
+  word-break: break-word;
 }
 
 .popup-task-edit-footer {
@@ -949,6 +947,7 @@ input::-webkit-calendar-picker-indicator {
 
 .popup-add-task-container {
   height: 860px;
+  max-height: calc(100% - 32px);
   padding: 64px;
   background-color: var(--color-white);
   border-radius: 30px;
@@ -1016,7 +1015,8 @@ input::-webkit-calendar-picker-indicator {
 }
 
 .contactSelectField {
-  top: 50px !important;
+  /* position: relative !important; */
+  top: 60px !important;
   width: 100% !important;
 }
 

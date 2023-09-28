@@ -299,7 +299,7 @@ h3 {
     flex-direction: row;
     margin-top: 190px;
     margin-bottom: 51px;
-    margin-left: 300px;
+    margin-left: 296px;
     background-color: #f6f7f8;
   }
 
@@ -309,7 +309,7 @@ h3 {
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
-    margin-left: 300px;
+    margin-left: 296px;
   }
 
   .second-container {
@@ -318,7 +318,7 @@ h3 {
     display: flex;
     justify-content: space-between;
     margin-bottom: 25px;
-    margin-left: 300px;
+    margin-left: 296px;
   }
   .third-container {
     width: 560px;
@@ -326,7 +326,7 @@ h3 {
     display: flex;
     justify-content: space-between;
     flex-direction: row;
-    margin-left: 300px;
+    margin-left: 296px;
     margin-bottom: 20px;
   }
 
@@ -435,18 +435,6 @@ h3 {
   .main-container {
     flex-wrap: wrap;
     width: 60%;
-    margin-left: 280px;
-  }
-
-  .first-container {
-    margin-left: 280px;
-  }
-
-  .second-container {
-    margin-left: 280px;
-  }
-  .third-container {
-    margin-left: 280px;
   }
 
   .right-container {
