@@ -22,14 +22,14 @@
                     <h4 class="title">Title<p style="color:#ff3d00">*</p>
                     </h4>
                     <input class="titleInput brd-r10 item" type="text" placeholder="Enter a title" id="titleInput"
-                        onclick="resetInputAlert('titleInput'), setFocus('titleInput'), closeSubTaskInput(), closeCategoryDropDown(), closeAssignedToDropDown(), closeSubTaskInput(), stopPropagation(event)" maxlength="50" autocomplete="off" required
+                        onclick="resetInputAlert('titleInput'), setFocus('titleInput'), closeSubTaskInput(), closeCategoryDropDown(), closeAssignedToDropDown(), closeSubTaskInput(), toggleFocus('titleInput'), stopPropagation(event)" maxlength="50" autocomplete="off" required
                         title="Please enter a title.">
                 </div>
                 <div class="description h4-gap">
                     <h4>Description<p style="color:#ff3d00">*</p>
                     </h4>
                     <textarea class="descriptionInput brd-r10 item" name="" id="descriptionInput"
-                        placeholder="Enter a Description" onclick="resetInputAlert('descriptionInput'), setFocus('descriptionInput'), closeCategoryDropDown(), closeAssignedToDropDown(), closeSubTaskInput(), stopPropagation(event)" required
+                        placeholder="Enter a Description" onclick="resetInputAlert('descriptionInput'), setFocus('descriptionInput'), closeCategoryDropDown(), closeAssignedToDropDown(), closeSubTaskInput(), toggleFocus('descriptionInput'), stopPropagation(event)" required
                         title="Please enter a description."></textarea>
                 </div>
                 <div class="prio h4-gap">
@@ -54,7 +54,7 @@
                         <h4>Due date<p style="color:#ff3d00">*</p>
                         </h4>
                         <div class="input-add-task-due-date">
-                            <input onclick="today(); resetInputAlert('dateToday'), setFocus('dateToday'), closeCategoryDropDown(), closeAssignedToDropDown(), closeSubTaskInput(), stopPropagation(event)" class="date item brd-r10" type="date"
+                            <input onclick="today(); resetInputAlert('dateToday'), setFocus('dateToday'), closeCategoryDropDown(), closeAssignedToDropDown(), closeSubTaskInput(), toggleFocus('dateToday'), stopPropagation(event)" class="date item brd-r10" type="date"
                                 id="dateToday" required>
                             <svg class="input-date-img" width="24" height="24" viewBox="0 0 24 24" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -76,7 +76,7 @@
                         <div class="custom-select" onclick="stopPropagation(event)">
                             <div class="categorySelect">
                                 <div id="categoryInput" class="categorySelector brd-r10 item"
-                                    onclick="selectCategory(); resetInputAlert('categoryInput'), setFocus('categoryInput'), closeAssignedToDropDown(), closeSubTaskInput(), stopPropagation(event)">
+                                    onclick="selectCategory(); resetInputAlert('categoryInput'), setFocus('categoryInput'), closeAssignedToDropDown(), closeSubTaskInput(), toggleFocus('categoryInput'), stopPropagation(event)">
                                     <p id="chosenCategory">Select task Category</p>
                                     <img id="categoryArrow" src="./assets/img/arrow_drop_down.svg" alt="">
                                 </div>
@@ -90,16 +90,16 @@
                     <div class="assignedTo">
                         <h4>Assigned to</h4>
                         <div class="selectContacts">
-                            <div id="searchContact" class="categorySelector index brd-r10" onclick="closeCategoryDropDown(), closeSubTaskInput(),stopPropagation(event)">
+                            <div id="searchContact" class="categorySelector index brd-r10" onclick="showContacts(), closeCategoryDropDown(), closeSubTaskInput(), stopPropagation(event)">
                                 <input type="text" class="brd-transparent width-100" name="" id="searchContactInput"
-                                    placeholder="Select contacts to assign" onclick="showContacts()"
+                                    placeholder="Select contacts to assign"
                                     onkeyup="searchContacts()">
                                 <img id="contactsArrow" class="item" src="./assets/img/arrow_drop_down.svg"
                                     onclick="showContacts()">
                             </div>
                         </div>
                         <div>
-                            <div id="checkBoxes" class="contactSelectField brd-r10 d-none">
+                            <div id="checkBoxes" class="contactSelectField brd-r10 d-none" onclick="stopPropagation(event)">
                                 <div class="contactSelectField-inner-container">
                                     <div id="contactDropDown"></div>
                                 <div class="addNewContact">
@@ -113,7 +113,7 @@
                     </div>
                     <div class="subTasks h4-gap">
                         <h4>Subtasks</h4>
-                        <div id="subTaskInputCover" class="item brd-r10" onclick="closeCategoryDropDown(), closeAssignedToDropDown() ,stopPropagation(event), toggleSubTaskInput()">
+                        <div id="subTaskInputCover" class="item brd-r10" onclick="closeCategoryDropDown(), closeAssignedToDropDown(), toggleFocus('subTaskInputCover'), stopPropagation(event), toggleSubTaskInput()">
                             <p>Add new subtask</p>
                             <img src="./assets/img/add.svg" alt="">
                         </div>

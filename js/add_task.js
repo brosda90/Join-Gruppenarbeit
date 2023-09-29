@@ -53,7 +53,7 @@ async function loadTaskUsersFromStorage() {
     currentTaskUser = taskUsers.find( user => user['id'] == currentUserID)
 } */
 
-async function loadCurrentFromStorage() {
+async function loadCurrentFromStorage() {   //check witch user is logged in or set user to guest
     let currentUserID = localStorage.getItem('loggedInUserID');
     if (currentUserID >= 0) {
         currentTaskUser = taskUsers.find(user => user['id'] == currentUserID)
@@ -72,7 +72,7 @@ async function loadCurrentFromStorage() {
 }
 
 
-async function sortContacts(arr) {
+async function sortContacts(arr) {   //sort contacts from a-z
     sortedContactList = arr;
     sortedContactList.sort(
         (c1, c2) =>
@@ -107,7 +107,7 @@ function renderContacts() {   //render Contacts
   } */
 
 
-function checkUserState(userid) {
+function checkUserState(userid) {   //check user state in contact list 
     if (userid == currentTaskUser['id']) {
         return '(You)'
     } else if (userid < 0) {
@@ -388,9 +388,9 @@ function selectOption(option) {  //show selected Category in Category selector
 
 function checkCategoryColor(selectedValue) {   //set category color
     if (selectedValue == 'Technical Task') {
-        categoryColor = 5;
+        categoryColor = 6;
     } else {
-        categoryColor = 10;
+        categoryColor = 11;
     }
 }
 
@@ -407,7 +407,7 @@ function showContacts() {   //show all Contacts in dropdown Menu
 }
 
 
-function openContactDropDown(arrow, checkboxes, input) {
+function openContactDropDown(arrow, checkboxes, input) {   //open contacts drop down menu
     checkboxes.classList.add('d-block');
     input.classList.add('brd-focus');
     expanded = true;
@@ -415,7 +415,7 @@ function openContactDropDown(arrow, checkboxes, input) {
 }
 
 
-function closeContactDropDown(arrow, checkboxes, input) {
+function closeContactDropDown(arrow, checkboxes, input) {   //close contacts drop down menu
     checkboxes.classList.remove('d-block');
     input.classList.remove('brd-focus');
     expanded = false;
@@ -627,7 +627,19 @@ function setFocus(inputId) {   //set border color on focused element
 }
 
 
-function closeAssignedToDropDown() {
+function toggleFocus(inputField) {   //remove focus from unfocused inputs
+    const elements = ['titleInput', 'descriptionInput', 'dateToday', 'categoryInput', 'subTaskInputCover'];
+
+    elements.forEach(elementId => {
+        const element = document.getElementById(elementId);
+        if (elementId !== inputField) {
+            element.classList.remove('brd-focus');
+        }
+    });
+}
+
+
+function closeAssignedToDropDown() {   //close contacts drop down
     let arrow = document.getElementById('contactsArrow');
     let input = document.getElementById('searchContact');
     let checkboxes = document.getElementById('checkBoxes');
@@ -637,7 +649,7 @@ function closeAssignedToDropDown() {
 }
 
 
-function closeCategoryDropDown() {
+function closeCategoryDropDown() {   //close category drop down
     let arrow = document.getElementById('categoryArrow');
     let options = document.getElementById('allOptions');
 
@@ -646,23 +658,12 @@ function closeCategoryDropDown() {
 }
 
 
-function closeSubTaskInput() {
+function closeSubTaskInput() {   //remove focus from subtask input
     let inputCover = document.getElementById('subTaskInputCover');
     let realInput = document.getElementById('realSubInput');
 
     inputCover.classList.remove('d-none');
     realInput.classList.add('d-none');
-}
-
-
-function toggleInputFocus() {
-    let title = document.getElementById('titleInput');
-    let description = document.getElementById('descriptionInput');
-    let date = document.getElementById('dateToday');
-
-    title.classList.remove('brd-focus');
-    description.classList.remove('brd-focus');
-    date.classList.remove('brd-focus');
 }
 
 
