@@ -279,7 +279,7 @@ async function deleteContactFromTasks(id) {
             count = true;
         }
     }
-    if(count > 0) {
+    if(count) {
         await saveData('tasks', tasks);
     }
 }

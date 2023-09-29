@@ -60,6 +60,7 @@ async function initBoard() {
   await loadCurrentUserFromStorage();
   await loadContactsFromStorage();
   await loadTasksFromStorage();
+  await loadLastContactId();
   renderAllTasks();
   sortContactsOnBoard(contacts);
   initAddTask()

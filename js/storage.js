@@ -62,8 +62,9 @@ async function loadLastContactId() {
 
 async function loadData(key, defaultValue) {
     let loadedData = await getItem(key);
-    if (loadData == null) {
+    if (loadedData == null) {
         await saveData(key, defaultValue);
+        return defaultValue;
     } else {
         return JSON.parse(loadedData);
     }
