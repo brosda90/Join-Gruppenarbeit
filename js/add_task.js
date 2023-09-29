@@ -388,9 +388,9 @@ function selectOption(option) {  //show selected Category in Category selector
 
 function checkCategoryColor(selectedValue) {   //set category color
     if (selectedValue == 'Technical Task') {
-        categoryColor = 5;
+        categoryColor = 6;
     } else {
-        categoryColor = 10;
+        categoryColor = 11;
     }
 }
 
@@ -627,6 +627,18 @@ function setFocus(inputId) {   //set border color on focused element
 }
 
 
+function toggleFocus(inputField) {
+    const elements = ['titleInput', 'descriptionInput', 'dateToday', 'categoryInput', 'subTaskInputCover'];
+  
+    elements.forEach(elementId => {
+      const element = document.getElementById(elementId);
+      if (elementId !== inputField) {
+        element.classList.remove('brd-focus');
+      }
+    });
+  }
+  
+
 function closeAssignedToDropDown() {
     let arrow = document.getElementById('contactsArrow');
     let input = document.getElementById('searchContact');
@@ -652,17 +664,6 @@ function closeSubTaskInput() {
 
     inputCover.classList.remove('d-none');
     realInput.classList.add('d-none');
-}
-
-
-function toggleInputFocus() {
-    let title = document.getElementById('titleInput');
-    let description = document.getElementById('descriptionInput');
-    let date = document.getElementById('dateToday');
-
-    title.classList.remove('brd-focus');
-    description.classList.remove('brd-focus');
-    date.classList.remove('brd-focus');
 }
 
 
