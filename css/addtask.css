@@ -607,6 +607,10 @@ select option {
     padding: 10px;
     padding-bottom: 0;
     gap: 4px;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 365px;
 }
 
 .addNewContact {
