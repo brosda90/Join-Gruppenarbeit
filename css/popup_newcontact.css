@@ -231,12 +231,18 @@
     border-radius: 30px;
     box-shadow: 0 0 4px 0 var(--col-shadow10);
     transition: top 300ms;
+    transition: right 300ms;
+    right: -100%;
 }
 
 .popup-addcon-main.inview {
     opacity: 1;
     transition: opacity 0.3s ease-in-out;
     pointer-events: all;
+}
+
+.popup-addcon-main.inview .popup-addcon-background {
+    right: 0; 
 }
 
 .popup-addcon-main:not(.inview) .popup.popup-addcon-background {
