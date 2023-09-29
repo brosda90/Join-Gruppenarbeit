@@ -655,6 +655,17 @@ function closeSubTaskInput() {
 }
 
 
+function toggleInputFocus() {
+    let title = document.getElementById('titleInput');
+    let description = document.getElementById('descriptionInput');
+    let date = document.getElementById('dateToday');
+
+    title.classList.remove('brd-focus');
+    description.classList.remove('brd-focus');
+    date.classList.remove('brd-focus');
+}
+
+
 function toggleSubTaskInput() {   //displays Sub Task Input
     let inputCover = document.getElementById('subTaskInputCover');
     let realInput = document.getElementById('realSubInput');
