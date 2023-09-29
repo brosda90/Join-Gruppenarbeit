@@ -1,3 +1,6 @@
+/**
+ * Demo-Data for contacts
+ */
 let dataContactList = [
     {
         'id': 1,

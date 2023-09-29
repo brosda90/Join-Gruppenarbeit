@@ -17,35 +17,33 @@ function initialsFrom(string) {
 }
 
 
-async function loadLastContactId() {
-    let tempData;
-    tempData = await loadData('lastContactId', 0);
-    lastContactId = +JSON.parse(tempData);
-}
-
-
-async function saveData(key, value) {
-    let saveData = await setItem(key, JSON.stringify(value));
-    if(saveData.status == 'success') {
-        return true;
+async function saveNewContact() {
+    if(loggedInUserID == -2) {
+        msgBox();
     } else {
-        return false;
+        lastContactId++;
+        await saveData("lastContactId", lastContactId);
+        let newDataSet = readNewInputs();
+        let answer;
+        clearAddPopup();
+        contactList.push(newDataSet[0]);
+        answer = await saveData("contacts", contactList);
+        isSavedNewContact(answer);
     }
 }
 
 
-async function saveNewContact() {
-    let newDataSet = readNewInputs();
-    await saveData('lastContactId', ++lastContactId);
-    clearAddPopup();
-    contactList.push(newDataSet[0]);
-    await saveData('contacts',contactList);
-    sortContacts(contactList);
-    // renderContactList();
-    document.getElementById('contactsuccess').classList.add('shortpopup');
-    setTimeout(() => {
-        document.getElementById('contactsuccess').classList.remove('shortpopup');
-    }, '800');
+async function isSavedNewContact(answer) {
+    if(answer) {
+        sortedContactList = sortContacts(contactList);
+        renderContactList();
+        document.getElementById("contactsuccess").classList.add("shortpopup");
+        setTimeout(() => {
+            document.getElementById("contactsuccess").classList.remove("shortpopup");
+        }, "900");
+    } else {
+        msgBox('Contact was not saved.');
+    }
 }
 
 

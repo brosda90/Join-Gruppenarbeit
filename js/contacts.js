@@ -68,9 +68,13 @@ function closeContact() {
 }
 
 
-// ############################################################
-// ----- Wichtige Funktionen für Alle Contacts-Zugriffe  ------
-// ############################################################
+/**
+ * Search the id in Array and returns index
+ * 
+ * @param {number} id - field in Array
+ * @param {Array} arr - Array with contacts or users
+ * @returns - index in Array
+ */
 function idToIndex(id, arr = contactList) {
     return arr.findIndex(function (item, i) {
         return item.id === id;
@@ -78,6 +82,13 @@ function idToIndex(id, arr = contactList) {
 }
 
 
+/**
+ * Returns two letters from a String. If String contains a word, two letters of that word are returned.
+ * If String contains two words, one letter from each of the first two words is returned. 
+ * 
+ * @param {string} string - from a name-field
+ * @returns - two letters
+ */
 function initialsFrom(string) {
     let wordlist = string.split(" ");
     let words = wordlist.length;
@@ -92,9 +103,9 @@ function initialsFrom(string) {
 }
 
 
-// ############################################################
-// ----- Wichtige Funktionen für Contacts im Allgemeinen ------
-// ############################################################
+/**
+ * Initializes required data
+ */
 async function initContacts() {
     if(isLoaded == false) {
         await userAndContacts();
@@ -237,15 +248,20 @@ async function deleteContact(id) {
         msgBox();
         closeContact();
         document.getElementById("popup-editcon").classList.remove("inview");
-        console.log('isNotAUser');
     } else {
         deleteNow(id, index, userId);
     }
 }
 
 
+/**
+ * Deletes contact from tasks, from users and from contacts 
+ * 
+ * @param {*} id - id-field in contacts
+ * @param {*} index - the index in array
+ * @param {*} userId - id-field in users
+ */
 async function deleteNow(id, index, userId) {
-    console.log('deleteNow');
     deleteContactFromTasks(id);
     deleteUser(userId);
     contactList.splice(index, 1);
@@ -325,16 +341,6 @@ function renderContactList() {
 }
 
 
-function nextLetter(currentLetter, firstLetter) {
-    let newContent = "";
-    if (currentLetter != firstLetter) {
-        firstLetter = currentLetter;
-        newContent += renderLetterbox(currentLetter);
-    }
-    return [newContent, firstLetter];
-}
-
-
 function isCurrentUserInfo(userId) {
     if (userId === loggedInUserID) {
         return " (You)";
@@ -351,12 +357,16 @@ function isCurrentUser(userId) {
 }
 
 
-/**
- * 
- * 
- * @param {string} letter 
- * @returns - Returns the rendered html code
- */
+function nextLetter(currentLetter, firstLetter) {
+    let newContent = "";
+    if (currentLetter != firstLetter) {
+        firstLetter = currentLetter;
+        newContent += renderLetterbox(currentLetter);
+    }
+    return [newContent, firstLetter];
+}
+
+
 function renderLetterbox(letter = "No Contacts") {
   return `
         <div class="contact-letterbox">
@@ -367,13 +377,6 @@ function renderLetterbox(letter = "No Contacts") {
 }
 
 
-/**
- * This function renders an entry in the contact list
- * 
- * @param {number} i - This is the index for the array
- * @param {string} isUser - This text identifies users with "(User)" and the current user with "(You)"
- * @returns - Returns the rendered html code
- */
 function renderListEntry(i, isUser = "") {
   return `
         <div id="contact-listbox-${sortedContactList[i].id}" class="contact-listbox" onclick="openContact(${sortedContactList[i].id})">
@@ -408,6 +411,7 @@ function renderSingleView(id) {
 }
 
 
+// ############################################################
 function isOptionsView(id, index) {
     if(isCurrentUserInfo(sortedContactList[index].userid) != " (User)") {
         document.getElementById('contact-btn-option-box').classList.remove('d-none');

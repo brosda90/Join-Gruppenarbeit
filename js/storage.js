@@ -54,9 +54,9 @@ function sortMyList(myArray) {
 
 
 async function loadLastContactId() {
-  let tempData;
-  tempData = await loadData("lastContactId", 0);
-  lastContactId = +JSON.parse(tempData);
+    let tempData;
+    tempData = await loadData("lastContactId", 0);
+    lastContactId = +JSON.parse(tempData);
 }
 
 
