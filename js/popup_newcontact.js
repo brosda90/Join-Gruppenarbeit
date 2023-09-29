@@ -36,7 +36,6 @@ async function saveNewContact() {
 async function isSavedNewContact(answer) {
     if(answer) {
         sortedContactList = sortContacts(contactList);
-        renderContactList();
         document.getElementById("contactsuccess").classList.add("shortpopup");
         setTimeout(() => {
             document.getElementById("contactsuccess").classList.remove("shortpopup");
