@@ -224,9 +224,27 @@ function renderSaveEditContact(id) {
 
 
 // ############################################################
+/**
+ * Start delete a contact
+ * 
+ * @param {number} id The id from user in Database
+ */
 async function deleteContact(id) {
     let index = idToIndex(id, contactList);
     let userId = contactList[index].userid;
+    if(isNotAUser || isCurrentUser(userId)) {
+        msgBox();
+        closeContact();
+        document.getElementById("popup-editcon").classList.remove("inview");
+        console.log('isNotAUser');
+    } else {
+        deleteNow(id, index, userId);
+    }
+}
+
+
+async function deleteNow(id, index, userId) {
+    console.log('deleteNow');
     deleteContactFromTasks(id);
     deleteUser(userId);
     contactList.splice(index, 1);

@@ -1,10 +1,12 @@
-document.addEventListener('DOMContentLoaded', function () {
-    init();
+let mainMenuLoaded = false;
+
+document.addEventListener('DOMContentLoaded', async function () {
+    await init();
 });
 
 async function init() {
     await includeHTML();
-    selectMenu();
+    await selectMenu();
 }
 
 async function includeHTML() {
@@ -28,18 +30,18 @@ function stopPropagation(event) {
 }
 
 
-function selectMenu() {
+async function selectMenu() {
     let filename = document.location.pathname;
     let objs = document.getElementsByClassName('nav-menu-link');
-    let id = filenameToId(filename);
+    let id = await filenameToId(filename);
     if(id > -1) {
         objs[id].classList.add('link-selected');
     }
-
+    mainMenuLoaded = true;
 }
 
 
-function filenameToId(filename) {
+async function filenameToId(filename) {
     if(filename.includes("summary.html")) {
         return 0;
     } else if(filename.includes("board.html")) {

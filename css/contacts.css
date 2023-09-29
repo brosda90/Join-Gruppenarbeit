@@ -682,7 +682,9 @@ div, nav, main, span, ::after {
 }
 
 .btn {
+    box-sizing: border-box;
     padding: 16px;
+    border: none;
     border-radius: 10px;
     font-size: 22px;
     font-weight: 400;
@@ -700,11 +702,24 @@ div, nav, main, span, ::after {
     padding: 16px;
 }
 
+.btn.dark:hover {
+    background-color: var(--col-btn-activ);
+    box-shadow: var(--col-shadow25);
+}
+
 .btn.light {
     background-color: var(--col-white);
     color: var(--col-black);
     border: 1px solid var(--col-black);
     padding: 15px 24px;
+    margin-right: 1px;
+}
+
+.btn.light:hover {
+    border: 2px solid var(--col-btn-activ);
+    box-shadow: var(--col-shadow25);
+    color: var(--col-btn-activ);
+    margin-right: 0;
 }
 
 .btn div {
