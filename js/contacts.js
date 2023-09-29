@@ -116,12 +116,14 @@ function cLog(text, value) {
 
 // ############################################################
 async function saveNewContact() {
-    let newDataSet = readNewInputs();
-    let answer;
-    clearAddPopup();
     if(loggedInUserID == -2) {
         msgBox();
     } else {
+        lastContactId++;
+        await saveData("lastContactId", lastContactId);
+        let newDataSet = readNewInputs();
+        let answer;
+        clearAddPopup();
         contactList.push(newDataSet[0]);
         answer = await saveData("contacts", contactList);
         isSavedNewContact(answer);
@@ -131,7 +133,6 @@ async function saveNewContact() {
 
 async function isSavedNewContact(answer) {
     if(answer) {
-        await saveData("lastContactId", ++lastContactId);
         sortedContactList = sortContacts(contactList);
         renderContactList();
         document.getElementById("contactsuccess").classList.add("shortpopup");

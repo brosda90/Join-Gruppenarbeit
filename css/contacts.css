@@ -751,6 +751,7 @@ div, nav, main, span, ::after {
 .popup-addcon-background {
     z-index: 999;
     position: relative;
+    top: 0;
     max-width: 500px;
     max-height: 650px;
     width: calc(100% - 32px);
@@ -769,6 +770,7 @@ div, nav, main, span, ::after {
 
 .popup-addcon-main:not(.inview) .popup.popup-addcon-background {
     top: calc(100% + 10px);
+    transition: top 300ms;
 }
 
 .popup-addcon-main:not(.inview) {
@@ -831,13 +833,17 @@ div, nav, main, span, ::after {
     background-color: #00000040;
     object-position: top center;
     pointer-events: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .popup-editcon-background {
     z-index: 999;
-    position: absolute;
-    left: 16px;
+    position: relative;
     top: calc(100% + 10px);
+    max-width: 500px;
+    max-height: 650px;
     width: calc(100% - 32px);
     height: calc(100% - 10%);
     background-color: var(--col-white);
@@ -847,7 +853,7 @@ div, nav, main, span, ::after {
 }
 
 .popup-editcon-main.inview .popup-editcon-background {
-    top: calc(100% - 95%);
+    top: 0;
 }
 
 .popup-editcon-main.inview {
@@ -1134,11 +1140,18 @@ div, nav, main, span, ::after {
     /* ------------------------------------------------------------ */
     /* ----- popup-addcon ----- */
     .popup-addcon-background {
+        top: calc(100% + 10px);
         display: flex;
         flex-direction: row;
         max-height: 650px;
         max-width: 1200px;
-        }
+        transition: top 0.3s ease-in-out;
+    }
+    
+    .popup-addcon-main.inview .popup-addcon-background {
+        top: 0;
+        transition: top 0.3s ease-in-out;
+    }
 
     .popup-top-bg {
         left: -1px;
@@ -1212,14 +1225,16 @@ div, nav, main, span, ::after {
 
     /* ----- popup-editcon ----- */
     .popup-editcon-main.inview .popup-editcon-background {
-        top: calc(50% - 296px);
+        top: 0;
     }
     
     .popup-editcon-background {
+        position: relative;
         display: flex;
         flex-direction: row;
-        max-height: 592px;
-    }
+        max-height: 650px;
+        max-width: 1200px;
+}
 }
 
 /* ------------------------------------------------------------ */
