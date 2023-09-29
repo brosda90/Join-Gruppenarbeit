@@ -440,7 +440,8 @@ function editTask(taskID) {
    * mark input container red, when not valid iput
    */
   document.addEventListener('input', function() {
-    let inputs = document.getElementsByTagName('input');
+    let editPopup = document.getElementById('popup-task-edit-container');
+    let inputs = editPopup.getElementsByTagName('input');
     for (let i = 0; i < inputs.length; i++) {
       const input = inputs[i];
       if (input.validity.valid) {
@@ -455,7 +456,8 @@ function editTask(taskID) {
    * mark textarea container red, when not valid iput
    */
   document.addEventListener('input', function() {
-    let inputs = document.getElementsByTagName('textarea');
+    let editPopup = document.getElementById('popup-task-edit-container');
+    let inputs = editPopup.getElementsByTagName('input');
     for (let i = 0; i < inputs.length; i++) {
       const input = inputs[i];
       if (input.validity.valid) {

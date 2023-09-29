@@ -283,7 +283,7 @@ function generatePopupSubtasksHTML(task) {
 
 function generatePopupEditTaskContainerHTML(task,taskID) {
     return /*html*/`
-        <div class="popup-task-edit-container" onclick="stopPropagation(event),closeContactList(${taskID}),closeCategoryList()">
+        <div id="popup-task-edit-container" class="popup-task-edit-container" onclick="stopPropagation(event),closeContactList(${taskID}),closeCategoryList()">
             <div class="popup-task-edit-header">
                 <div class="empty"></div>
                 <button class="icon-button" onclick="closePopup()" type="button">
