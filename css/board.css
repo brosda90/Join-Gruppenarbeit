@@ -955,6 +955,9 @@ input::-webkit-calendar-picker-indicator {
 
 .popup-add-task-container .addTaskBtns {
   width: 100% !important;
+  padding: 8px 0 0 0;
+  gap: 8px;
+  /* align-items: center; */
 }
 
 

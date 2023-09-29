@@ -524,8 +524,8 @@ select option {
 .contactSelectField {
     width: 100%;
     margin-left: 1px;
-    max-height: 214px;
-    overflow: auto;
+    max-height: 320px;
+    overflow: hidden;
     position: relative;
     background-color: white;
     border: 1px solid white;
@@ -535,19 +535,29 @@ select option {
     box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
 }
 
-.contactSelectField::-webkit-scrollbar {
+.contactSelectField-inner-container {
+    display: flex;
+    flex-direction: column;
+    max-height: 260px;
+}
+
+#contactDropDown {
+    overflow-y: scroll;
+}
+
+#contactDropDown::-webkit-scrollbar {
     width: 16px;
     padding-right: 10px;
 }
 
-.contactSelectField::-webkit-scrollbar-thumb {
+#contactDropDown::-webkit-scrollbar-thumb {
     background-color: #A8A8A8;
     border-radius: 10px;
     border: 4px solid white;
     padding-top: 100px;
 }
 
-.contactSelectField::-webkit-scrollbar-track {
+#contactDropDown::-webkit-scrollbar-track {
     background-color: white;
 }
 
