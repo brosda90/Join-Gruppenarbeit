@@ -388,9 +388,9 @@ function selectOption(option) {  //show selected Category in Category selector
 
 function checkCategoryColor(selectedValue) {   //set category color
     if (selectedValue == 'Technical Task') {
-        categoryColor = 6;
+        categoryColor = 5;
     } else {
-        categoryColor = 11;
+        categoryColor = 10;
     }
 }
 
@@ -652,6 +652,17 @@ function closeSubTaskInput() {
 
     inputCover.classList.remove('d-none');
     realInput.classList.add('d-none');
+}
+
+
+function toggleInputFocus() {
+    let title = document.getElementById('titleInput');
+    let description = document.getElementById('descriptionInput');
+    let date = document.getElementById('dateToday');
+
+    title.classList.remove('brd-focus');
+    description.classList.remove('brd-focus');
+    date.classList.remove('brd-focus');
 }
 
 

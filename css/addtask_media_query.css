@@ -77,7 +77,7 @@
         height: calc(100% - 96px);
         display: flex;
         align-items: flex-start;
-        padding: 16px 64px 0 64px;
+        padding: 80px 64px 0 64px;
         transition: margin 75ms ease-in;
     }
 

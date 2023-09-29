@@ -1,27 +1,9 @@
-:root {
-  --color-blue: #2AABE2;
-  --color-dark-blue: #2A3647;
-  --color-darker-blue: #091931;
-  --color-white: #FFFFFF;
-  --color-darker-white: #F6F7F8;
-  --color-lightest-grey: #E7E7E7;
-  --color-lighter-grey: #D1D1D1;
-  --color-light-grey: #CDCDCD;
-  --color-grey: #A8A8A8;
-  --col-hr: #d1d1d1;
-  font-family: 'Inter', sans-serif;
-}
-
-
 /* GENERAL STYLING */
+
 html {
   overflow: hidden !important;
   word-wrap: break-word;
 }
-
-/* ::-webkit-scrollbar {
-  display: none;
-} */
 
 .board-content div {
   box-sizing: border-box;
@@ -55,6 +37,7 @@ input::placeholder {
 
 .profile-badge {
   width: 30px;
+  min-width: 30px;
   aspect-ratio: 1 / 1;
   border: 1px solid var(--color-white);
   border-radius: 100%;
@@ -63,18 +46,6 @@ input::placeholder {
   align-items: center;
   color: var(--color-white);
   font-size: 12px;
-}
-
-.bc-orange {
-  background-color: #ff7a00;
-}
-
-.bc-dark-blue {
-  background-color: #6e52ff;
-}
-
-.bc-turquoise {
-  background-color: #1fd7c1;
 }
 
 .bdc-white {
@@ -203,21 +174,6 @@ button {
   display: none;
 }
 
-/* .task-section-body::after {
-    content: '';
-    min-width: 252px;
-    aspect-ratio:  1 / 1;
-    padding: 16px;
-    border-radius: 24px;
-    border: 1px dashed var(--color-grey);
-    pointer-events: none;
-    display: none;
-}
-
-.task-section:hover .task-section-body::after {
-    display: unset;
-} */
-
 /* Add Task Button Outlined */
 .btn-add-task-outlined {
   width: 30px;
@@ -319,18 +275,14 @@ button {
 #task-container-indication {
   min-width: 252px;
   width: 252px;
-  /* aspect-ratio:  1 / 1; */
   padding: 16px;
   border-radius: 24px;
   border: 1px dashed var(--color-grey);
-  /* flex-shrink: 0; */
   pointer-events: none;
 }
 
 .task-container:active {
   cursor: grabbing;
-  /* transform: rotate(5deg);
-    opacity: 0.5; */
 }
 
 .grabbed-task {
@@ -344,7 +296,6 @@ button {
 }
 
 .task-category {
-  background-color: #0038ff; /*TODO: dynamic property */
   width: fit-content;
   color: var(--color-white);
   padding: 4px 16px;
@@ -370,13 +321,13 @@ button {
   width: 128px;
   height: 8px;
   border-radius: 8px;
-  background-color: #f4f4f4; /*Variable dekl.*/
+  background-color: #f4f4f4; 
 }
 
 .subtask-progress-bar-fill {
   width: 50%;
   height: 100%;
-  background-color: #4589ff; /*Variable dekl.*/
+  background-color: #4589ff;
   border-radius: 16px;
 }
 
@@ -424,10 +375,9 @@ button {
 }
 
 .popup-task-container {
-  /* min-height:726px; */
   max-width: 525px;
   width: 100%;
-  padding: 32px 24px;
+  padding: 32px 0px;
   background-color: var(--color-white);
   border-radius: 30px;
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.16);
@@ -449,7 +399,6 @@ button {
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.16);
   display: flex;
   flex-direction: column;
-  /* gap: 16px; */
   max-height: calc(100% - 32px);
 }
 
@@ -464,6 +413,7 @@ button {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin: 0 24px;
 }
 
 .popup-task-main {
@@ -471,13 +421,14 @@ button {
   flex-direction: column;
   gap: 16px;
   overflow-y: scroll;
-  margin-right: 4px;
+  margin: 0 12px 0 24px;
+  padding: 0px 4px 0 0;
 }
 
 .popup-task-edit-main {
   overflow-y: scroll;
-  margin: 0 12px;
-  padding: 0 8px;
+  margin: 0 12px 0 24px;
+  padding: 0px 4px 0 0;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -501,7 +452,6 @@ button {
 
 .popup-task-info {
   display: flex;
-  /* align-items: center; */
   gap: 10px;
 }
 
@@ -528,11 +478,11 @@ button {
 }
 
 ::-webkit-scrollbar {
-  width: 4px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: var(--color-grey);
   border-radius: 10px;
 }
 
@@ -566,10 +516,6 @@ button {
   gap: 8px;
 }
 
-/* .popup-task-info ul {
-    margin-left: 16px;
-} */
-
 .subtasks-list-item {
   list-style: none;
   display: flex;
@@ -589,6 +535,7 @@ button {
   align-items: center;
   justify-content: end;
   gap: 8px;
+  margin: 0 24px;
 }
 
 .popup-task-footer button {
@@ -670,7 +617,7 @@ input::-webkit-calendar-picker-indicator {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  overflow: scroll;
+  overflow: auto;
 }
 
 /* Category */
@@ -755,6 +702,7 @@ input::-webkit-calendar-picker-indicator {
   display: flex;
   justify-content: space-between;
   padding: 0 16px;
+  word-break: break-word;
 }
 
 .popup-task-edit-footer {
@@ -942,6 +890,7 @@ input::-webkit-calendar-picker-indicator {
 
 .popup-add-task-container {
   height: 860px;
+  max-height: calc(100% - 32px);
   padding: 64px;
   background-color: var(--color-white);
   border-radius: 30px;
@@ -1006,12 +955,11 @@ input::-webkit-calendar-picker-indicator {
 
 .popup-add-task-container .addTaskBtns {
   width: 100% !important;
+  padding: 8px 0 0 0;
+  gap: 8px;
+  /* align-items: center; */
 }
 
-.contactSelectField {
-  top: 50px !important;
-  width: 100% !important;
-}
 
 
 @media (min-width: 1000px) {
@@ -1062,36 +1010,48 @@ input::-webkit-calendar-picker-indicator {
     flex-direction: column;
   }
 
-/* popup-add-task-container */
-.popup-add-task-container {
-  width: 1116px;
-  max-width: 1116px;
+  /* popup-add-task-container */
+  .popup-add-task-container {
+    width: 1116px;
+    max-width: 1116px;
+  } 
+
+  .popup-add-task-container .taskDataFields {
+    flex-direction: row;
+    gap: 8px;
+  } 
+
+  .popup-add-task-container .separator-border {
+    display: block !important;
+  }
+
+  .popup-add-task-container .contactSelectField {
+    top: 60px !important;
+    width: 100% !important;
+  }
+  
+
 }
 
-.popup-add-task-container .taskDataFields {
-  flex-direction: row;
-  gap: 8px;
-}
+@media (max-width: 400px) {
 
-.popup-add-task-container .separator-border {
-  display: block !important;
-}
+  /* task popup view */
+  .contacts-list-item {
+    gap: 4px;
+  }
 
-}
+  /* edit task popup view */
+  .prio-buttons-container {
+    flex-direction: column;
+    align-items: center;
+  }
 
-@media (max-width: 320px) {
-  .board-main-container {
-    padding: 0;
+  .assigned-to-contact {
+    gap: 4px;
+  }
+
+  .contact-user-state {
+    font-size: 12px;
   }
 }
 
-/* Media-Queries */
-@media (min-width: 1000px) {
-  main {
-    min-width: 472px;
-    width: calc(100% - 232px);
-    height: calc(100% - 96px);
-    left: 232px;
-    top: 96px;
-  }
-}
