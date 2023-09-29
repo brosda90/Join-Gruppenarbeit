@@ -340,7 +340,7 @@ function openAddNewTaskPopUp(status) {
       document.getElementsByClassName('popup-add-task-container')[0].style.right = 0;
     }, 150)
   } else {
-    window.location.href = 'add_task.html'
+    window.location.href = 'add_task.html';
   }
 } 
 
