@@ -1,19 +1,5 @@
-:root {
-  --color-blue: #2AABE2;
-  --color-dark-blue: #2A3647;
-  --color-darker-blue: #091931;
-  --color-white: #FFFFFF;
-  --color-darker-white: #F6F7F8;
-  --color-lightest-grey: #E7E7E7;
-  --color-lighter-grey: #D1D1D1;
-  --color-light-grey: #CDCDCD;
-  --color-grey: #A8A8A8;
-  --col-hr: #d1d1d1;
-  font-family: 'Inter', sans-serif;
-}
-
-
 /* GENERAL STYLING */
+
 html {
   overflow: hidden !important;
   word-wrap: break-word;
@@ -60,18 +46,6 @@ input::placeholder {
   align-items: center;
   color: var(--color-white);
   font-size: 12px;
-}
-
-.bc-orange {
-  background-color: #ff7a00;
-}
-
-.bc-dark-blue {
-  background-color: #6e52ff;
-}
-
-.bc-turquoise {
-  background-color: #1fd7c1;
 }
 
 .bdc-white {
@@ -983,7 +957,7 @@ input::-webkit-calendar-picker-indicator {
   width: 100% !important;
 }
 
-.contactSelectField {
+.popup-add-task-container .contactSelectField {
   top: 60px !important;
   width: 100% !important;
 }
