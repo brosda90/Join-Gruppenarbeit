@@ -120,7 +120,7 @@ function updateTaskFromServer() {
     (task) => task.status === "await-feedback"
   ).length;
   const urgentCount = tasks.filter((task) => task.priority === 1).length;
-  const doneCount = tasks.filter((task) => task.priority === true).length;
+  const doneCount = tasks.filter((task) => task.status === "done").length;
 
   document.querySelector("#taskInBoard h3").textContent = taskCount;
   document.querySelector("#toDo h3").textContent = toDoCount;
