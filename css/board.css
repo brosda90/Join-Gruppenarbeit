@@ -1037,6 +1037,31 @@ input::-webkit-calendar-picker-indicator {
 
 }
 
+@media (max-width: 450px) {
+  .popup-add-task-container {
+    padding: 32px 16px;
+    width: 100%;
+  }
+
+  .popup-add-task-container .leftSite,
+  .popup-add-task-container .rightSite {
+    gap: 4px;
+  }
+
+  .popup-add-task-container .btnSection {
+    padding: 0;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .popup-add-task-container #dateToday,
+  .popup-add-task-container #categoryInput,
+  .popup-add-task-container #searchContact,
+  .popup-add-task-container #subTaskInputCover{
+    width: 100% !important;
+  }
+}
+
 @media (max-width: 400px) {
 
   /* task popup view */
