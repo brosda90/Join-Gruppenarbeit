@@ -1031,6 +1031,9 @@ input::-webkit-calendar-picker-indicator {
     width: 100% !important;
   }
   
+  .popup-add-task-container #contactInitial {
+    max-width: 100%;
+  }
 
 }
 
