@@ -283,6 +283,10 @@ h3 {
   z-index: 1 !important;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 @media (min-width: 1000px) {
   .main {
     top: 96px;
@@ -528,7 +532,7 @@ h3 {
     top: 80px;
     height: calc(100% - 160px);
     width: 100%;
-    overflow-y: scroll;
+    overflow-y: auto;
     background-color: var(--color-darker-white);
     box-sizing: border-box;
     padding: 48px 16px 48px 16px;
@@ -585,7 +589,7 @@ h3 {
 
   .summary-container {
     margin-top: 0px;
-    margin-left: 2px;
+    /* margin-left: 2px; */
   }
 }
 @media (max-width: 440px) {
