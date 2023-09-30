@@ -50,7 +50,7 @@ function setFocus(inputId) {   //set border color on focused element
 
 
 function toggleFocus(inputField) {   //remove focus from unfocused inputs
-    const elements = ['titleInput', 'descriptionInput', 'dateToday', 'categoryInput', 'subTaskInputCover'];
+    const elements = ['titleInput', 'descriptionInput', 'dateToday', 'categoryInput', 'subTaskInputCover', 'searchContact'];
 
     elements.forEach(elementId => {
         const element = document.getElementById(elementId);

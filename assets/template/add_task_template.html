@@ -90,7 +90,7 @@
                     <div class="assignedTo">
                         <h4>Assigned to</h4>
                         <div class="selectContacts">
-                            <div id="searchContact" class="categorySelector index brd-r10" onclick="showContacts(), closeCategoryDropDown(), closeSubTaskInput(), stopPropagation(event)">
+                            <div id="searchContact" class="categorySelector index brd-r10" onclick="showContacts(), closeCategoryDropDown(), closeSubTaskInput(), toggleFocus('searchContact'),stopPropagation(event)">
                                 <input type="text" class="brd-transparent width-100" name="" id="searchContactInput"
                                     placeholder="Select contacts to assign"
                                     onkeyup="searchContacts()">
