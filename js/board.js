@@ -1,9 +1,18 @@
-
 let tasks = [];
 let users = [];
 let contacts = [];
 let sortedContacts = [];
 let currentUser = {};
+let guestUser = {
+                  'id' : -2,
+                  'name' : 'Guest User',
+                  'initials' : 'GU',
+                  'email' : '',
+                  'password' : '',
+                  'phone' : '',
+                  'badge-color' : 1,
+                  'contacts' : [],
+                };
 let taskStateCategories = ["to-do", "in-progress", "await-feedback", "done"];
 let currentTask;
 let search = '';
@@ -25,16 +34,7 @@ async function loadCurrentUserFromStorage() {
   if (currentUserID >= 0) {
     currentUser = users.find( user => user['id'] == currentUserID)
   } else if (currentUserID == -2) {
-    currentUser = {
-      'id' : -2,
-      'name' : 'Guest User',
-      'initials' : 'GU',
-      'email' : '',
-      'password' : '',
-      'phone' : '',
-      'badge-color' : 1,
-      'contacts' : [],
-    };
+    currentUser = guestUser;
   }
 }
 
@@ -55,7 +55,7 @@ async function saveTasksToStorage() {
  * onload function to load and render the content
  */
 async function initBoard() {
-  renderMobileOrDesktopTemplates(window.innerWidth >= 1000);
+  renderMobileOrDesktopBoardHeader(window.innerWidth >= 1000);
   await loadUsersFromStorage();
   await loadCurrentUserFromStorage();
   await loadContactsFromStorage();
@@ -63,7 +63,7 @@ async function initBoard() {
   await loadLastContactId();
   renderAllTasks();
   sortContactsOnBoard(contacts);
-  initAddTask()
+  initAddTask();
 }
 
 
@@ -95,7 +95,7 @@ function renderTasksInState(taskStateCategory) {
   let tasksIncludeSearch = 0;
   for (let i = 0; i < allTasksInState.length; i++) {
     const taskJSON = allTasksInState[i];
-    if (taskJSONContainsSearch(taskJSON)) {
+    if (checkIfTaskContainsSearch(taskJSON)) {
       tasksContainer.innerHTML += generateBoardTaskHTML(taskJSON);
       tasksIncludeSearch++;
     }
@@ -180,13 +180,9 @@ function generateAssignedUserBadges(taskJSON) {
   for (let i = 0; i < assignedContacts.length; i++) {
     let contact = contacts.filter((contact) => contact['id'] == assignedContacts[i])[0];
     if (contact && i < 5) {
-      assignedUserBadgesHTML += /*html*/`
-      <div class="profile-badge bc-${contact['badge-color']}" style="left: -${(i * 8)}px">${contact['initials']}</div>
-    `;
+      assignedUserBadgesHTML += profileBadgeForBoardHTML(contact,i);
     } else if(i == 5) {
-      assignedUserBadgesHTML += /*html*/`
-      <div class="profile-badge" style="left: -${(i * 8)}px; background-color: #2A3647;">+${assignedContacts.length - 5}</div>
-    `;
+      assignedUserBadgesHTML += additionalProfileBadgeForBoardHTML(assignedContacts,i);
     }
   };
   return assignedUserBadgesHTML;
@@ -198,13 +194,22 @@ function generateAssignedUserBadges(taskJSON) {
 /* ===== BOARD SEARCH ===== */
 /* ======================== */
 
+
+/**
+ * sets search term and then renders all tasks that match the search
+ */
 function searchTasks() {
   let searchbar = document.getElementById('board-searchbar');
   search = searchbar.value.toLowerCase();
   renderAllTasks();
 }
 
-function taskJSONContainsSearch(taskJSON) {
+/**
+ * checks if Task Title/Description contains search term
+ * @param {JSON} taskJSON - JSON of the task with all the information about it
+ * @returns 
+ */
+function checkIfTaskContainsSearch(taskJSON) {
   if (taskJSON['title'].toLowerCase().includes(search) || taskJSON['description'].toLowerCase().includes(search)) {
     return true;
   } else {
@@ -304,24 +309,32 @@ async function deleteTask(taskID) {
 
 const mediaQuery1000px = window.matchMedia("(min-width: 1000px)");
 
-mediaQuery1000px.addEventListener('change', (e) => renderMobileOrDesktopTemplates(e.matches));
+mediaQuery1000px.addEventListener('change', (e) => renderMobileOrDesktopBoardHeader(e.matches));
 
-function renderMobileOrDesktopTemplates(match) {
+
+/**
+ * render the different board headers for desktop / mobile view
+ * @param {boolean} match - media query state
+ */
+function renderMobileOrDesktopBoardHeader(match) {
   let boardHeader = document.getElementById('board-header');
-  let boardSearchbar = document.getElementById('board-searchbar');
   if (match)  {
     boardHeader.innerHTML = boardHeaderDesktopHTML();
-    if (boardSearchbar) {
-      document.getElementById('board-searchbar').value = search;
-    }
   } else {
     boardHeader.innerHTML = boardHeaderMobileHTML();
-    if (boardSearchbar) {
-      document.getElementById('board-searchbar').value = search;
-    }
-  }
+  };
+  setSearchInputValueToCurrentSearch();
 }
 
+/**
+ * transfer the search term from mobile to desktop view and vice versa
+ */
+function setSearchInputValueToCurrentSearch() {
+  let boardSearchbar = document.getElementById('board-searchbar');
+  if (boardSearchbar) {
+    document.getElementById('board-searchbar').value = search;
+  }
+}
 
 
 
@@ -329,6 +342,10 @@ function renderMobileOrDesktopTemplates(match) {
 /* ===== ADD TASK POPUP ===== */
 /* ========================== */
 
+/**
+ * opens add task popup
+ * @param {string} status - state to create the task inside e.g. 'to-do', 'in-progress' or 'await-feedback'
+ */
 function openAddNewTaskPopUp(status) {
   localStorage.removeItem('taskStatus');
   localStorage.setItem('taskStatus', status);
@@ -345,6 +362,9 @@ function openAddNewTaskPopUp(status) {
 } 
 
 
+/**
+ * close add task popup
+ */
 function closeAddTaskPopup() {
   let popupContainer = document.getElementById('popup-container-add-task');
   popupContainer.style.display = 'none';
