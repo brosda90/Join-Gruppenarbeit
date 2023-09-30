@@ -25,15 +25,16 @@
 <body onload="initAddTask()">
     <div class="insert-top" w3-include-html="./assets/template/respon_header_template.html">
     </div>
-    <div id="msgbox" class="msgbox">
-        <h3>Information</h3>
-        <p id="msgbox-text">To edit please register and log in.</p>
-    </div>
     <section class="mainAddTask scrollbar" w3-include-html="./assets/template/add_task_template.html" onclick="closeAssignedToDropDown(), closeCategoryDropDown(), closeSubTaskInput()">
     </section>
     <!-- CONTACT POPUP -->
     <div w3-include-html="./assets/template/popup_newcontact.html"></div>
     <div class="insert-bottom" w3-include-html="./assets/template/respon_footer_template.html">
+    </div>
+    <!-- MSG BOX -->
+    <div id="msgbox" class="msgbox">
+        <h3>Information</h3>
+        <p id="msgbox-text">To edit please register and log in.</p>
     </div>
 </body>
 
