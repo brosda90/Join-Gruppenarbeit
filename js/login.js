@@ -102,13 +102,16 @@ async function login() {
   let error = false;
 
   // Überprüfung, ob E-Mail oder Passwort leer sind
-  if (!email.trim()) {
-    emailBox.classList.add("elementbox-error");
-    error = true;
-  }
 
   if (!password.trim()) {
     passwordBox.classList.add("elementbox-error");
+    passwordField.reportValidity();
+    error = true;
+  }
+
+  if (!email.trim()) {
+    emailBox.classList.add("elementbox-error");
+    emailField.reportValidity();
     error = true;
   }
 
@@ -205,21 +208,24 @@ async function logRegisteredUsers() {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  autofillLoginDetails();
-  logRegisteredUsers();
-
-  document.addEventListener("keydown", function (event) {
-    if (event.key === "Enter") {
-      const passwordField = document.getElementById("passwordLogin");
-      if (passwordField === document.activeElement) {
+  document
+    .getElementById("emailLogin")
+    .addEventListener("keydown", function (event) {
+      if (event.key === "Enter") {
         login();
-        event.preventDefault(); // Verhindert die Standardaktion
+        event.preventDefault();
       }
-    }
-  });
-});
+    });
 
-logRegisteredUsers();
+  document
+    .getElementById("passwordLogin")
+    .addEventListener("keydown", function (event) {
+      if (event.key === "Enter") {
+        login();
+        event.preventDefault();
+      }
+    });
+});
 
 //################GUEST LOGIN ##############################//
 //##########################################################//
@@ -249,14 +255,4 @@ function guestLogout() {
   users = users.filter((user) => user.id !== -2);
 
   userLogout();
-}
-
-function validateAndLogin() {
-  const form = document.getElementById("loginContainer");
-
-  if (form.checkValidity()) {
-    login();
-  } else {
-    form.reportValidity();
-  }
 }
