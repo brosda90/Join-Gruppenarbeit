@@ -120,3 +120,60 @@ let dataContactList = [
         'userid': -1
     },
 ];
+
+let dataUserList = [
+    {
+        'id': 1,
+        'name': 'Max Mustermann',
+        'initials': 'MM',
+        'email': 'max@mustermann.de',
+        'password': 'Test123!',
+        'phone': 'Bitte Telefonnummer eintragen',
+        'contacts': []
+    },
+    {
+        'id': 2,
+        'name': 'Sabine Sum',
+        'initials': 'SS',
+        'email': 'sabine@sum.de',
+        'password': 'Test123!',
+        'phone': 'Bitte Telefonnummer eintragen',
+        'contacts': []
+    },
+    {
+        'id': 3,
+        'name': 'Alexander Leitermann',
+        'initials': 'AL',
+        'email': 'delete@me.com',
+        'password': 'Sauber1!',
+        'phone': 'Bitte Telefonnummer eintragen',
+        'contacts': []
+    },
+    {
+        'id': 4,
+        'name': 'Alexander Dause',
+        'initials': 'AD',
+        'email': 'alexander.dause@web.de',
+        'password': 'Abcd1234!',
+        'phone': 'Bitte Telefonnummer eintragen',
+        'contacts': []
+    },
+    {
+        'id': 5,
+        'name': 'Sebastian Brosda',
+        'initials': 'SB',
+        'email': 'brosda90@web.de',
+        'password': 'Test123!',
+        'phone': 'Bitte Telefonnummer eintragen',
+        'contacts': []
+    },
+    {
+        'id': 6,
+        'name': 'Reiner Janssen',
+        'initials': 'RJ',
+        'email': 'reiner@jannsen.de',
+        'password': 'Test123!',
+        'phone': 'Bitte Telefonnummer eintragen',
+        'contacts': []
+    },
+];

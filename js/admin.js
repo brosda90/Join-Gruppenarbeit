@@ -22,39 +22,41 @@ function randomBadgeColor() {
 }
 
 
+function lockButton(id, lock = true) {
+    document.getElementById(id).disabled = lock;
+}
+
+
 async function resetLastContactId() {
-    document.getElementById('b1').disabled = true;
+    lockButton('b1');
     const obj = document.getElementById('i1').value;
     await saveData("lastContactId", obj);
     await loadLastContactId();
     cLog('lastContactId:', lastContactId);
-    document.getElementById('b1').disabled = false;
+    lockButton('b1', false);
 }
 
 
 async function resetContactList() {
-    let btn = document.getElementById('b2');
-    btn.disabled = true;
+    lockButton('b2');
     await saveData("contacts", []);
     contactList = await loadFromStorage('contacts', []);
     cLog('resetContactList:', contactList);
-    btn.disabled = false;
+    lockButton('b2', false);
 }
 
 
 async function reloadContacts() {
-    let btn = document.getElementById('b3');
-    btn.disabled = true;
+    lockButton('b3');
     await saveData('contacts', dataContactList);
     contactList = await loadFromStorage('contacts', []);
     cLog('reloadContacts:', contactList);
-    btn.disabled = false;
+    lockButton('b3', false);
 }
 
 
 async function insertUsers() {
-    let btn = document.getElementById('b4');
-    btn.disabled = true;
+    lockButton('b4');
     let relUsers = await loadData('users', []);
     for(i = 0; i < relUsers.length; i++) {
         lastContactId++;
@@ -68,7 +70,7 @@ async function insertUsers() {
     userList = await loadFromStorage('users', userList);
     cLog('insertUsers cL:', contactList);
     cLog('insertUsers uL:', userList);
-    btn.disabled = false;
+    lockButton('b4', false);
 }
 
 
@@ -86,16 +88,15 @@ function readUser(i, relUsers) {
     ];
 }
 
+
 async function nextFunction() {
-    let btn = this.querySelector('button');
-    btn.disabled = true;
-    btn.disabled = false;
+    lockButton('b?');
+    lockButton('b?', false);
 }
 
 
 async function repairBadgeColor() {
-    let btn = document.getElementById('b5');
-    btn.disabled = true;
+    lockButton('b5');
     for(i = 0; i < contactList.length; i++) {
         if(contactList[i][badgecolor] ) {
             contactList[i]['badge-color'] = contactList[i].badgecolor;
@@ -105,6 +106,25 @@ async function repairBadgeColor() {
     await saveData("contacts", contactList);
     userList = await loadFromStorage('users', userList);
     cLog('insertUsers cL:', contactList);
-    btn.disabled = false;
+    lockButton('b5', false);
 }
 
+
+async function resetUserList() {
+    lockButton('b6');
+    await saveData('users', dataUserList);
+    userList = await loadFromStorage('users', userList);
+    cLog('resetUserList:', userList);
+    lockButton('b6', false);
+}
+
+
+async function emptyUsersInTasks() {
+    lockButton('b7');
+    let tasks = await loadData('tasks', []);
+    for(i = 0; i < tasks.length; i++) {
+        tasks[i].contacts = [];
+    }
+    await saveData('tasks', tasks);
+    lockButton('b7', false);
+}

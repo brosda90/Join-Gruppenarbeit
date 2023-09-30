@@ -26,28 +26,44 @@
         <h1>Admin - Tools</h1>
         <div class="s1">
             <form onsubmit="resetLastContactId(); return false;">
-                <input id="i1" type="number" value="14" min="0" pattern="[0-9]+"> <button id="b1" type="submit">Save Last-Contact-ID</button>
-            </form>
-        </div>
-        <div class="s1">
-            <form onsubmit="resetContactList(); return false;">
-                <button id="b2" type="submit">Reset Contact-List</button>
+                <input id="i1" type="number" value="13" min="0" pattern="[0-9]+"> <button id="b1" type="submit">Save Last-Contact-ID</button>
             </form>
         </div>
         <div class="s1">
             <form onsubmit="reloadContacts(); return false;">
-                <button id="b3" type="submit">Reload Contacts</button>
+                <button id="b3" type="submit">1. Reset Contacts</button>
             </form>
+            <p>Delete all Contacts and load Demo-Contacts.</p>
+        </div>
+        <div class="s1">
+            <form onsubmit="resetUserList(); return false;">
+                <button id="b6" type="submit">2. Reset Users</button>
+            </form>
+            <p>Delete all Users and load Demo-Users.</p>
         </div>
         <div class="s1">
             <form onsubmit="insertUsers(); return false;">
-                <button id="b4" type="submit">Insert Users</button>
+                <button id="b4" type="submit">3. Insert Users</button>
             </form>
+            <p>Integrates all users into contacts and links them.</p>
         </div>
         <div class="s1">
             <form onsubmit="repairBadgeColor(); return false;">
                 <button id="b5" type="submit">Repair Badge-Color</button>
             </form>
+            <p>Repair 'badgecolor' to 'badge-color'</p>
+        </div>
+        <div class="s1">
+            <form onsubmit="resetContactList(); return false;">
+                <button id="b2" type="submit">Empty Contact-List</button>
+            </form>
+            <p>Delete all Contacts from Contactlist.</p>
+        </div>
+        <div class="s1">
+            <form onsubmit="emptyUsersInTasks(); return false;">
+                <button id="b7" type="submit">Clear all Contacts from all Tasks</button>
+            </form>
+            <p>Delete all Contacts from Tasks.</p>
         </div>
     </div>
 </body>
