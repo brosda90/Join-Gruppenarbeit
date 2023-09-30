@@ -669,9 +669,13 @@ div, nav, main, span, ::after {
     color: var(--col-hr);
 }
 
+.border:has(input:invalid) {
+    border-color: #ff3d00;
+}
+
 .border:has(input:focus) {
     border-color: var(--col-btn-activ);
-}
+}    
 
 /* ------------------------------------------------------------ */
 .btn-row {
