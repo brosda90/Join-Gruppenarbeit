@@ -88,6 +88,31 @@ function generateBoardTaskHTML(taskJSON) {
 
 
 
+/**
+ * HTML for the profile badges on board
+ * @param {JSON} contact contact JSON
+ * @param {number} i - counter for positioning
+ * @returns HTML
+ */
+function profileBadgeForBoardHTML(contact,i) {
+    return /*html*/`
+    <div class="profile-badge bc-${contact['badge-color']}" style="left: -${(i * 8)}px">${contact['initials']}</div>`;
+  }
+  
+  /**
+   * HTML for additional profile badge on board
+   * @param {Array} assignedContacts - array of all assigned contacts
+   * @param {number} i - counter for positioning
+   * @returns HTML
+   */
+  function additionalProfileBadgeForBoardHTML(assignedContacts,i) {
+    return /*html*/`
+    <div class="profile-badge" style="left: -${(i * 8)}px; background-color: #2A3647;">+${assignedContacts.length - 5}</div>`;
+  }
+
+
+  
+
   /**
  * HTML Template - for Subtasks in Board-Task HTML
  * 

@@ -256,3 +256,13 @@ function guestLogout() {
 
   userLogout();
 }
+
+//################ EVENT LISTENER CONTENT LOADED ##############################//
+//##########################################################//
+
+/**
+ * Initialisiert die Seite
+ */
+document.addEventListener("DOMContentLoaded", function() {
+   autofillLoginDetails();
+});
