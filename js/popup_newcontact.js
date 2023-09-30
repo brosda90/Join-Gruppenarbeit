@@ -53,7 +53,8 @@ function readNewInputs() {
         'initials' : initialsFrom(document.getElementById('addconname').value),
         'email': document.getElementById('addconemail').value,
         'phone': document.getElementById('addconphone').value,
-        'badge-color': randomBadgeColor()
+        'badge-color': randomBadgeColor(),
+        "userid": -1
     }];
 }
 

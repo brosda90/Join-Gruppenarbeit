@@ -57,10 +57,11 @@ async function insertUsers() {
     btn.disabled = true;
     let relUsers = await loadData('users', []);
     for(i = 0; i < relUsers.length; i++) {
+        lastContactId++;
         let tempUser = readUser(i, relUsers);
         relUsers[i].contacts[0] = lastContactId;
-        await saveData("lastContactId", ++lastContactId);
         contactList.push(tempUser[0]);
+        await saveData("lastContactId", lastContactId);
         await saveData("contacts", contactList);
     }
     await saveData('users', relUsers);
