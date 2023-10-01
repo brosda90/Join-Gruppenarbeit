@@ -177,7 +177,7 @@ function generatePopupTaskContainerHTML(task,taskID) {
                 <p id="popup-task-description" class="popup-task-description">${maskSpecialChars(task['description'])}</p>
                 <div class="popup-task-info-container">
                     <div class="popup-task-info-title">Due Date:</div>
-                    <div class="popup-task-info">${task['due_date']}</div>
+                    <div class="popup-task-info">${maskSpecialChars(task['due_date'])}</div>
                 </div>
                 <div id="popup-task-priority-container" class="popup-task-info-container">
                     <div class="popup-task-info-title">Priority:</div>
@@ -258,8 +258,8 @@ function generatePopupContactsHTML(task) {
 function contactListItemHTML(contact) {
     return /*html*/`
     <li class="contacts-list-item">
-      <div class="profile-badge bc-${contact['badge-color']} width-40 border-2px">${contact['initials']}</div>
-      <div class="contact-name">${contact['name']}</div>
+      <div class="profile-badge bc-${contact['badge-color']} width-40 border-2px">${maskSpecialChars(contact['initials'])}</div>
+      <div class="contact-name">${maskSpecialChars(contact['name'])}</div>
       <div class="contact-user-state">${checkContactUserState(contact['userid'])}</div>
     </li>  
   `;
@@ -291,7 +291,7 @@ function generatePopupSubtasksHTML(task) {
     html += /*html*/`
       <li class="subtasks-list-item" onclick="toggleSubtaskState(${task['id']},${i})">
           <img id="subtask-${i}-checkbutton" src="${checkButtonsSRC[+done]}" alt="checked-icon">
-          <div>${task['subtasks'][i]['subtask']}</div>
+          <div>${maskSpecialChars(task['subtasks'][i]['subtask'])}</div>
       </li>          
     `;
   }
@@ -480,7 +480,7 @@ function generateContactListItemHTML(contact,i) {
       <div class="assigned-to-contact">
         <div class="profile-badge bc-${contact['badge-color']} width-40px border-2px">${contact['initials']}</div>
         <div class="contact-text">
-            <div class="contact-name">${contact['name']}</div>
+            <div class="contact-name">${maskSpecialChars(contact['name'])}</div>
             <div class="contact-user-state">${checkContactUserState(contact['userid'])}</div>
         </div>
       </div>
@@ -494,7 +494,7 @@ function generateSubtaskInEditPopupHTML(subtask,i) {
     return /*html*/`
     <div id="popup-task-edit-subtask-${i}" class="subtask-list-item">
         <ul style="margin-left: 16px;">
-            <li>${subtask['subtask']}</li>
+            <li>${maskSpecialChars(subtask['subtask'])}</li>
         </ul>
         <div class="subtask-buttons-container">
             <button class="btn-edit icon-button" onclick="editSubtask(${i})">
