@@ -70,7 +70,7 @@ async function loadCurrentFromStorage() {   //check witch user is logged in or s
 
 
 async function sortContacts(arr) {   //sort contacts from a-z
-    sortedContactList = arr;
+    sortedContactList = [...arr];
     sortedContactList.sort(
         (c1, c2) =>
             (c1.initials < c2.initials) ? -1 : (c1.initials > c2.initials) ? 1 : 0);
