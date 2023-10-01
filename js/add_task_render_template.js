@@ -27,7 +27,7 @@ function renderSubHTML(sub, index) {
     return `<div id="listElement${index}" class="subListElement">
                 <div class="subListInnerElement">
                     <img src="./assets/img/dot.png" alt="">
-                    ${sub} 
+                    ${maskSpecialChars(sub)}
                 </div>
                 <div class="subListInnerElement">
                     <img class="item" src="./assets/img/edit_icon.svg" onclick="editSubElement(${index})">
