@@ -16,7 +16,6 @@ let guestUser = {
 let taskStateCategories = ["to-do", "in-progress", "await-feedback", "done"];
 let currentTask;
 let search = '';
-let editPopupOpen = false;
 let categoryOpen = false;
 let contactsOpen = false;
 let contactSearch = '';

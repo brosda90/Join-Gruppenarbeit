@@ -1,3 +1,5 @@
+let editPopupOpen = false;
+
 function openAddCon() {
     document.getElementById('popup-addcon').classList.add('inview');
 }
@@ -28,9 +30,12 @@ async function saveNewContact() {
         clearAddPopup();
         contactList.push(newDataSet[0]);
         answer = await saveData("contacts", contactList);
+        reloadContactList();
         if (editPopupOpen) {
             loadContactListWithAddedContact(currentTask['id']);
         }
+
+        
         isSavedNewContact(answer);
     }
 }
