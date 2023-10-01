@@ -302,7 +302,7 @@ function renderAssignedUserBadgesEditTask() {
  * @param {Array} arr - contacts array
  */
 function sortContactsOnBoard(arr) {
-  sortedContacts = arr;
+  sortedContacts = JSON.parse(JSON.stringify(arr));
   sortedContacts.sort((c1, c2) =>
     c1.initials < c2.initials ? -1 : c1.initials > c2.initials ? 1 : 0
   );
