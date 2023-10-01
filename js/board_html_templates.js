@@ -70,8 +70,8 @@ function generateBoardTaskHTML(taskJSON) {
       <div id="task-${taskJSON['id']}-container" class="task-container" onclick="openPopup(${taskJSON['id']})" draggable="true" ondragstart="startDragging(${taskJSON['id']},event)" ondrag="drag(event)"  ondragend="dragEnd(event)"  ontouchstart="touchStart(${taskJSON['id']},event)" ontouchmove="touchDrag(event)" ontouchend="touchEnd(event)">
           <div class="task-category bc-${taskJSON['category_color']}">${taskJSON['category']}</div>
           <div class="task-text">
-              <div class="task-title">${taskJSON['title']}</div>
-              <div class="task-description">${shortenString(taskJSON['description'],50)}</div>
+              <div class="task-title">${maskSpecialChars(taskJSON['title'])}</div>
+              <div class="task-description">${maskSpecialChars(shortenString(taskJSON['description'],50))}</div>
           </div>
          ${generateBoardSubtasksHTML(taskJSON)}
           <div class="task-assignments-prio-container">
@@ -173,8 +173,8 @@ function generatePopupTaskContainerHTML(task,taskID) {
                 </button>
             </div>
             <div class="popup-task-main">
-                <h2 id="popup-task-title" class="popup-task-title">${task['title']}</h2>
-                <p id="popup-task-description" class="popup-task-description">${task['description']}</p>
+                <h2 id="popup-task-title" class="popup-task-title">${maskSpecialChars(task['title'])}</h2>
+                <p id="popup-task-description" class="popup-task-description">${maskSpecialChars(task['description'])}</p>
                 <div class="popup-task-info-container">
                     <div class="popup-task-info-title">Due Date:</div>
                     <div class="popup-task-info">${task['due_date']}</div>

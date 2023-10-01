@@ -53,3 +53,15 @@ async function filenameToId(filename) {
     }
     return -1;
 }
+
+
+function maskSpecialChars(string) {
+    const specialChars = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;',
+      };
+    return string.replace(/[&<>"']/g, char => specialChars[char]);
+}
