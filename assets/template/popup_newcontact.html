@@ -25,7 +25,7 @@
                 </div>
             </div>
             <div class="popup-addcon-inputbox">
-                <form class="popup-addcon-inputbox-form" onsubmit="saveNewContact(); return false;" autocomplete="off">
+                <form class="popup-addcon-inputbox-form" onsubmit="saveNewContact(), reloadContactList(); return false;" autocomplete="off">
                     <div class="popup-addcon-input-box border">
                         <div class="popup-addcon-input-innerbox">
                             <input type="text" id="addconname" required pattern="[A-Za-zäöüÄÖÜ]+(?: [A-Za-zäöüÄÖÜ\-]+)+" title="First and last name please." placeholder="Name">

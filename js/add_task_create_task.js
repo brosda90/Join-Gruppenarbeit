@@ -50,12 +50,6 @@ async function loadTaskUsersFromStorage() {
 }
 
 
-/* async function loadCurrentFromStorage() {
-    let currentUserID = localStorage.getItem('loggedInUserID');
-    currentTaskUser = taskUsers.find( user => user['id'] == currentUserID)
-} */
-
-
 async function loadCurrentFromStorage() {   //check witch user is logged in or set user to guest
     let currentUserID = localStorage.getItem('loggedInUserID');
     if (currentUserID >= 0) {
@@ -132,6 +126,11 @@ function renderSubTaskUpdate() {   //reload edited Sub Task
         const sub = addedSubTasks[j]['subtask'];
         showSubs.innerHTML += renderSubHTML(sub, j);
     };
+}
+
+
+async function reloadContactList() {
+    await initAddTask();
 }
 
 
