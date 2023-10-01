@@ -24,7 +24,7 @@ async function initAddTask() {
     await includeHTML()
     await loadTaskContactsFromStorage();
     await loadTasksFromRemoteStorage();
-    await loadLastContactId();
+
     renderContacts();
 }
 
@@ -33,7 +33,7 @@ async function loadTaskContactsFromStorage() {
     await loadCurrentFromStorage();
     taskContacts = JSON.parse(await getItem('contacts'));
     if (taskContacts.length > 1) {
-        sortContacts(taskContacts);
+        sortTaskContacts(taskContacts);
     } else {
         sortedContactList = taskContacts;
     }
@@ -69,7 +69,7 @@ async function loadCurrentFromStorage() {   //check witch user is logged in or s
 }
 
 
-async function sortContacts(arr) {   //sort contacts from a-z
+async function sortTaskContacts(arr) {   //sort contacts from a-z
     sortedContactList = [...arr];
     sortedContactList.sort(
         (c1, c2) =>

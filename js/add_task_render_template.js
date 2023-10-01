@@ -16,7 +16,7 @@ function renderContactHTML(index, contact) {
         <div class="singleContactInitialName">
           <div class="font-white profile-badge bc-${contact['badge-color']} brd-white">${contact['initials']}</div>
           <p>${contact['name']}</p>
-          <div>${checkUserState(taskContacts[index]['userid'])}</div>
+          <div>${checkUserState(sortedContactList[index]['userid'])}</div>
         </div>
         <img id="check${index}" src="./assets/img/check_button_unchecked.svg">
       </div>`;
