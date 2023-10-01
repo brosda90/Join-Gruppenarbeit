@@ -186,3 +186,9 @@
         width: 20%;
     }
 }
+
+@media (max-height: 820px) {
+    .listedSubTasks {
+        height: 64px !important;
+    }
+}
