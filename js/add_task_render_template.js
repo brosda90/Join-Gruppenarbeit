@@ -4,7 +4,7 @@
 
 
 function contactInitialsHTML(index, inital) {
-    return `<div class="profile-badge bc-${badges[index]} brd-white">${inital}</div>`;
+    return `<div class="profile-badge bc-${sortedContactList[index]['badge-color']} brd-white">${sortedContactList[index]['initials']}</div>`;
 }
 
 

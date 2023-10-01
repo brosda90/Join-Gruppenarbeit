@@ -110,10 +110,11 @@ function renderContactInitials() {   //render Contact Initals from added Contact
     let contactInitialDivs = document.getElementById('contactInitial');
     contactInitialDivs.innerHTML = '';
 
-    for (let l = 0; l < addedContactInitial.length; l++) {
-        const inital = addedContactInitial[l];
+    for (let l = 0; l < addedContacts.length; l++) {
+        const inital = addedContacts[l];
+        const index = sortedContactList.findIndex(c => c['id'] == inital);
 
-        contactInitialDivs.innerHTML += contactInitialsHTML(l, inital);
+        contactInitialDivs.innerHTML += contactInitialsHTML(index, inital);
     };
 }
 
@@ -253,8 +254,8 @@ function addedContact(index) {  //set each Contact ID compaired to the contact J
     let selectedContact = document.getElementById(`contact${index}`);
     let checked = document.getElementById(`check${index}`);
     let src = checked.getAttribute("src");
-    let id = taskContacts[index]['id'];   //set index from Contacts to ID
-    let badge = taskContacts[index]['badge-color'];
+    let id = sortedContactList[index]['id'];   //set index from Contacts to ID
+    let badge = sortedContactList[index]['badge-color'];
 
     addedContactsCheckBox(selectedContact, checked, src, id, badge, index);
 

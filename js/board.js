@@ -350,6 +350,7 @@ function setSearchInputValueToCurrentSearch() {
 function openAddNewTaskPopUp(status) {
   localStorage.removeItem('taskStatus');
   localStorage.setItem('taskStatus', status);
+  taskStatus = status;
 
   if (window.innerWidth >= 1000) {
     document.getElementById('popup-container-add-task').style.display = 'flex';
