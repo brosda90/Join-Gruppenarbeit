@@ -12,6 +12,12 @@ body {
   overflow: hidden;
 }
 
+.sign-up-area {
+  display: flex;
+  align-items: center;
+  margin-top: 575px;
+}
+
 .logo-container {
   position: absolute;
   top: 50%;
@@ -40,7 +46,7 @@ a:hover {
   justify-content: center;
   align-items: center;
   position: absolute;
-  top: 50%;
+  top: 45%;
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 30px;
@@ -171,15 +177,6 @@ h2::after {
 .forgot-password a {
   text-decoration: none;
   color: #29abe2;
-}
-
-.sign-up-area {
-  position: absolute;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  text-align: center;
-  bottom: 69px;
 }
 
 .sign-up-area p {
@@ -450,6 +447,13 @@ input:invalid {
     animation-fill-mode: forwards;
   }
 
+  .sign-up-area {
+    position: fixed;
+    top: 60px;
+    right: 60px;
+    margin-top: 0px;
+  }
+
   #logo {
     animation: moveLogo 1s forwards;
   }
@@ -594,20 +598,9 @@ input:invalid {
     border-bottom-right-radius: 3px;
     border-top-right-radius: 3px;
   }
-
-  .sign-up-area {
-    position: absolute;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    text-align: center;
-    padding-right: 124px;
-    top: -729px;
-    right: 160px;
-  }
 }
 
-@media (max-width: 410px) {
+@media (max-width: 600px) {
   .login-container {
     text-align: center;
     width: 320px;
@@ -622,6 +615,10 @@ input:invalid {
     transform: translate(-50%, -50%);
     border-radius: 30px;
     box-shadow: 0px 0px 14px 3px #0000000a;
+  }
+
+  .sign-up-area {
+    margin-top: 495px;
   }
   .input-field {
     height: 24px;
@@ -693,10 +690,6 @@ input:invalid {
     border-radius: 8px;
     width: 120px;
     height: 40px;
-  }
-
-  .sign-up-area {
-    bottom: 55px;
   }
 
   .check-box {

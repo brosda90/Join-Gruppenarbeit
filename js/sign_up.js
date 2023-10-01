@@ -1,18 +1,16 @@
 let users = [];
 
-//###################################################################################//
 /**
- * Navigiert zurück zur Login-Seite.
+ * Navigates back to the login page.
  */
 function backToLogin() {
   window.location.href = "index.html";
 }
 
-//################## SETS VISIBILITY FROM INPUT ON ##################################//
 /**
- * Schaltet die Sichtbarkeit des Passworts im gegebenen Feld.
- * @param {string} fieldId - Die ID des Passwortfeldes.
- * @param {string} [imgId] - Die ID des Bildes zur Anzeige des Sichtbarkeitsstatus.
+ * Toggles the visibility of the password in the given field.
+ * @param {string} fieldId - The ID of the password field.
+ * @param {string} [imgId] - The ID of the image to display visibility status.
  */
 function togglePasswordVisibility(fieldId, imgId) {
   const passwordField = document.getElementById(fieldId);
@@ -32,20 +30,18 @@ function togglePasswordVisibility(fieldId, imgId) {
   }
 }
 
-//#################### SETS VISIBILITY FROM INPUT OFF ###############################//
 /**
- * Setzt die Sichtbarkeit des Passworts auf "aus".
- * @param {string} fieldId - Die ID des Passwortfeldes.
- * @param {string} imgId - Die ID des Bildes.
+ * Sets the password visibility to "off".
+ * @param {string} fieldId - The ID of the password field.
+ * @param {string} imgId - The ID of the image.
  */
 function setVisibilityOff(fieldId, imgId) {
   const imageElement = document.getElementById(imgId);
   imageElement.src = "./assets/img/visibility_off.svg";
 }
 
-//################### SHOWS PASSWORD REGULATIONS ####################################//
 /**
- * Zeigt die Passwortanforderungen für eine kurze Zeit.
+ * Displays password requirements for a short time.
  */
 function showPasswordRequirements() {
   document.getElementById("passwordInfo").style.display = "block";
@@ -55,9 +51,8 @@ function showPasswordRequirements() {
   }, 3000);
 }
 
-//#################### LOADS USER FORM USERS ARRAY ##################################//
 /**
- * Lädt Benutzer aus dem Speicher.
+ * Loads users from storage.
  */
 async function loadUsers() {
   let storedUsers = await getItem("users");
@@ -66,10 +61,9 @@ async function loadUsers() {
   }
 }
 
-//###################### LOADS LAST CONTACT ID ######################################//
 /**
- * Lädt die letzte Kontakt-ID aus dem Speicher.
- * @returns {number} Die letzte Kontakt-ID.
+ * Loads the last contact ID from storage.
+ * @returns {number} The last contact ID.
  */
 async function loadLastContactId() {
   let storedLastContactId = await getItem("lastContactId");
@@ -79,15 +73,18 @@ async function loadLastContactId() {
   return 0;
 }
 
-//################ RETURNS RANDOM NUMBER FOR COLORBADGE #############################//
 /**
- * Gibt eine zufällige Farbe für ein Badge zurück.
- * @returns {number} Eine zufällige Zahl zwischen 0 und 14.
+ * Returns a random color for a badge.
+ * @returns {number} A random number between 0 and 14.
  */
 function randomBadgeColor() {
   return Math.floor(Math.random() * 15);
 }
 
+/**
+ * Shows a popup for a field.
+ * @param {HTMLElement} field - The field for which the popup should be shown.
+ */
 function showFieldPopup(field) {
   const popup = document.createElement("div");
   popup.textContent = "Please fill out this field";
@@ -99,115 +96,134 @@ function showFieldPopup(field) {
   }, 1500);
 }
 
-//################### REGISTER USER #################################################//
 /**
- * Registriert einen neuen Benutzer.
- * @returns {boolean} false, wenn die Registrierung nicht erfolgreich war.
+ * Retrieves values from the input fields.
+ * @returns {Object} An object containing references to form fields.
  */
-async function registerUser() {
-  const nameField = document.getElementById("nameField");
-  const emailField = document.getElementById("emailField");
-  const passwordField = document.getElementById("password");
-  const passwordConfField = document.getElementById("passwordConf");
+function getFormFields() {
+  return {
+    nameField: document.getElementById("nameField"),
+    emailField: document.getElementById("emailField"),
+    passwordField: document.getElementById("password"),
+    passwordConfField: document.getElementById("passwordConf"),
+    privacyCheckBox: document.getElementById("PrivacyCheckBox"),
+  };
+}
 
-  const name = nameField.value;
-  const email = emailField.value.toLowerCase();
-  const password = passwordField.value;
-  const passwordConf = passwordConfField.value;
-  const privacyCheckBox = document.getElementById("PrivacyCheckBox");
-
-  document.getElementById("nameField").addEventListener("input", function () {
-    checkAndRemoveErrorClass(this);
-  });
-  document.getElementById("emailField").addEventListener("input", function () {
-    checkAndRemoveErrorClass(this);
-  });
-  document.getElementById("password").addEventListener("input", function () {
-    checkAndRemoveErrorClass(this);
-  });
-  document
-    .getElementById("passwordConf")
-    .addEventListener("input", function () {
+/**
+ * Attaches event listeners to input fields.
+ * @param {Object} fields - The form fields.
+ */
+function attachInputEventListeners(fields) {
+  [
+    fields.nameField,
+    fields.emailField,
+    fields.passwordField,
+    fields.passwordConfField,
+  ].forEach((field) => {
+    field.addEventListener("input", function () {
       checkAndRemoveErrorClass(this);
     });
+  });
+}
 
+/**
+ * Validates field values.
+ * @param {Object} fields - The form fields.
+ * @returns {boolean} true if fields are valid, otherwise false.
+ */
+function areFieldsValid(fields) {
   if (
-    !name.trim() ||
-    !email.trim() ||
-    !password.trim() ||
-    !passwordConf.trim()
+    !fields.nameField.value.trim() ||
+    !fields.emailField.value.trim() ||
+    !fields.passwordField.value.trim() ||
+    !fields.passwordConfField.value.trim()
   ) {
-    [nameField, emailField, passwordField, passwordConfField].forEach(
-      (field) => {
-        if (!field.value.trim()) {
-          field.closest(".elementbox").classList.add("elementbox-error");
-          showFieldPopup(field);
-        }
+    [
+      fields.nameField,
+      fields.emailField,
+      fields.passwordField,
+      fields.passwordConfField,
+    ].forEach((field) => {
+      if (!field.value.trim()) {
+        field.closest(".elementbox").classList.add("elementbox-error");
+        showFieldPopup(field);
       }
-    );
-    return;
+    });
+    return false;
   }
 
-  if (!privacyCheckBox.checked) {
+  if (!fields.privacyCheckBox.checked) {
     showPrivacyPopup();
-    return;
+    return false;
   }
 
-  if (password !== passwordConf) {
+  if (fields.passwordField.value !== fields.passwordConfField.value) {
     showWrongPasswordPopup();
-    return;
+    return false;
   }
 
+  return true;
+}
+
+/**
+ * Registers the user.
+ * @param {Object} fields - The form fields.
+ */
+async function register(fields) {
   await loadUsers();
 
   let lastContactId = await loadLastContactId();
   lastContactId++;
   await setItem("lastContactId", JSON.stringify(lastContactId));
 
-  const emailExists = users.some((user) => user.email === email);
-  if (emailExists) {
-    return;
-  }
-
   const userId = getNextUserId();
   const newUser = {
     id: userId,
-    name: name,
-    initials: getInitials(name),
-    email: email,
-    password: password,
+    name: fields.nameField.value,
+    initials: getInitials(fields.nameField.value),
+    email: fields.emailField.value.toLowerCase(),
+    password: fields.passwordField.value,
     phone: "Bitte Telefonnummer eintragen",
     contacts: [lastContactId],
   };
-
   users.push(newUser);
-
   await setItem("users", JSON.stringify(users));
 
-  //Wird in der contactList gespeichert
   const newContact = {
-    id: lastContactId, // Änderung von "contacts" zu "id"
-    name: name,
-    initials: getInitials(name),
-    email: email,
+    id: lastContactId,
+    name: fields.nameField.value,
+    initials: getInitials(fields.nameField.value),
+    email: fields.emailField.value.toLowerCase(),
     phone: "Bitte Telefonnummer eintragen",
     "badge-color": randomBadgeColor(),
-    userid: userId, // Änderung von "id" zu "userId"
+    userid: userId,
   };
 
-  await loadFromStorage(); // aus contacts.js
+  await loadFromStorage();
   contactList.push(newContact);
   await setItem("contacts", JSON.stringify(contactList));
+}
+
+/**
+ * Registers a user after checking field validity.
+ */
+async function registerUser() {
+  const fields = getFormFields();
+
+  attachInputEventListeners(fields);
+
+  if (!areFieldsValid(fields)) return;
+
+  await register(fields);
 
   showRegistrationSuccess();
-
   return false;
 }
 
-//################## CHECKS AND REMOVES ERROR CLASS #################################//
 /**
- * Überprüft und entfernt die Fehlerklasse, wenn das Feld Daten enthält.
- * @param {HTMLElement} field - Das zu überprüfende Feld.
+ * Checks and removes the error class if the field contains data.
+ * @param {HTMLElement} field - The field to check.
  */
 function checkAndRemoveErrorClass(field) {
   if (field.value.trim()) {
@@ -215,21 +231,19 @@ function checkAndRemoveErrorClass(field) {
   }
 }
 
-//################## CHECKS NEXT AVAILABLE USER ID ##################################//
 /**
- * Ermittelt die nächste verfügbare Benutzer-ID.
- * @returns {number} Die nächste Benutzer-ID.
+ * Determines the next available user ID.
+ * @returns {number} The next user ID.
  */
 function getNextUserId() {
   if (users.length === 0) return 1;
   return users[users.length - 1].id + 1;
 }
 
-//################### EXTRACTS AND RETURNS INITIALS #################################//
 /**
- * Extrahiert und gibt die Initialen eines gegebenen Namens zurück.
- * @param {string} name - Der Name, aus dem die Initialen extrahiert werden sollen.
- * @returns {string} Die Initialen des Namens.
+ * Extracts and returns the initials of a given name.
+ * @param {string} name - The name from which to extract initials.
+ * @returns {string} The initials of the name.
  */
 function getInitials(name) {
   const parts = name.split(" ");
@@ -239,20 +253,19 @@ function getInitials(name) {
   }
   return initials.toUpperCase();
 }
-//################## CHECKS IF EMAIL MEETS REGULATIONS ##############################//
+
 /**
- * Überprüft, ob die gegebene E-Mail gültig ist.
- * @param {string} email - Die zu überprüfende E-Mail.
- * @returns {boolean} true, wenn die E-Mail gültig ist, sonst false.
+ * Validates whether the given email is valid.
+ * @param {string} email - The email to validate.
+ * @returns {boolean} true if the email is valid, otherwise false.
  */
 function isValidEmail(email) {
   const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   return regex.test(email);
 }
 
-//##################### CHECKS IF EMAIL EXISTS ######################################//
 /**
- * Überprüft, ob eine E-Mail bereits existiert.
+ * Checks if an email already exists.
  */
 async function checkEmailExists() {
   const email = document.getElementById("emailField").value.toLowerCase();
@@ -273,10 +286,9 @@ async function checkEmailExists() {
   }
 }
 
-///################ CHECKS IF PASSWORD MEETS REGULATIONS ############################//
 /**
- * Überprüft, ob das Passwort den Anforderungen entspricht.
- * @returns {boolean} true, wenn das Passwort den Anforderungen entspricht, sonst false.
+ * Validates if the password meets requirements.
+ * @returns {boolean} true if the password meets the requirements, otherwise false.
  */
 function validatePasswordRequirements() {
   const passwordField = document.getElementById("password");
@@ -294,9 +306,8 @@ function validatePasswordRequirements() {
   return true;
 }
 
-//################# CHECKS IF PASSWORD MATCH ########################################//
 /**
- * Überprüft, ob zwei Passwörter übereinstimmen.
+ * Validates if two passwords match.
  */
 function checkPasswordsMatch() {
   const passwordField = document.getElementById("password");
@@ -309,8 +320,6 @@ function checkPasswordsMatch() {
     showWrongPasswordPopup();
   }
 }
-
-//#################### POPUP WINDOWS ################################################//
 
 function closeWrongPassword() {
   document.getElementById("errorPassword").style.display = "none";
@@ -330,7 +339,6 @@ function showInvalidEmailPopup() {
 
 function closeInvalidEmailPopup() {
   document.getElementById("invalidEmailPopup").style.display = "none";
-  document.getElementById("emailField").value = "";
 }
 
 function closeEmailExist() {
@@ -355,42 +363,43 @@ function showRegistrationSuccess() {
 
   startCountdown(3);
 }
-//#####################STARTS COUNDOWN AFTER REG. ###################################//
+
 /**
- * Startet Countdown nach Regestrierung.
+ * Starts a countdown after registration.
+ * @param {number} seconds - The countdown duration in seconds.
  */
 function startCountdown(seconds) {
   let counter = seconds;
   const countdownElement = document.getElementById("countdown");
 
-  // Timer
   const timer = setInterval(function () {
     countdownElement.textContent = counter;
     counter--;
 
     if (counter < 0) {
       clearInterval(timer);
-
       window.location.href = "index.html";
     }
   }, 1000);
 }
-//################ DELETE ALL USERS FROM ARRAY ######################################//
+
 /**
- * Löscht alle Benutzer aus dem Server.
+ * Deletes all users from the server.
  */
 async function deleteAllUsers() {
   users = [];
   await setItem("users", JSON.stringify(users));
 }
 
-//################ INITIALIZES LOGGED IN USER / FUNCTION FROM STORAGE.JS #############//
 /**
  * The logged-in user identifier retrieved from local storage.
  * @type {number}
  */
 let loggedInUserID = +localStorage.getItem("loggedInUserID");
 
+/**
+ * Initializes the logged-in user.
+ */
 async function initLoggedInUser() {
   await loadHeaderUsersFromStorage();
   if (loggedInUserID != -2 && useridToIndex(loggedInUserID, userList) == -1) {
