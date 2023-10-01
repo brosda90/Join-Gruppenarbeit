@@ -8,6 +8,7 @@
  * @param {number} taskID - id of the current task
  */
 function editTask(taskID) {
+    editPopupOpen = true;
     let task = tasks.find(task => task['id'] == taskID);
     currentTask = JSON.parse(JSON.stringify(task)); // deep copy to disconect the copy from the original object
     let popupContainer = document.getElementById('popup-container');

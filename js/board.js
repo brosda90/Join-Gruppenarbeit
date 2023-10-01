@@ -16,6 +16,7 @@ let guestUser = {
 let taskStateCategories = ["to-do", "in-progress", "await-feedback", "done"];
 let currentTask;
 let search = '';
+let editPopupOpen = false;
 let categoryOpen = false;
 let contactsOpen = false;
 let contactSearch = '';
@@ -244,6 +245,7 @@ function openPopup(taskID) {
  * close the popup
  */
 function closePopup() {
+  editPopupOpen = false;
   let popupContainer = document.getElementById('popup-container');
   popupContainer.style.display = 'none';
   renderAllTasks();
@@ -373,6 +375,17 @@ function closeAddTaskPopup() {
 }
 
 
+/* ============================== */
+/* ===== NEW CONTACT CLOSE  ===== */
+/* ============================== */
+
+async function loadContactListWithAddedContact(taskID) {
+  await loadContactsFromStorage();
+  sortContactsOnBoard(contacts);
+  openContactList(taskID);
+}
+
+
 
 /* ============================ */
 /* ===== OTHER FUNCTIONS  ===== */
@@ -381,3 +394,5 @@ function closeAddTaskPopup() {
 function stopPropagation(event) {
   event.stopPropagation();
 }
+
+

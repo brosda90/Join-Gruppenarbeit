@@ -28,6 +28,9 @@ async function saveNewContact() {
         clearAddPopup();
         contactList.push(newDataSet[0]);
         answer = await saveData("contacts", contactList);
+        if (editPopupOpen) {
+            loadContactListWithAddedContact(currentTask['id']);
+        }
         isSavedNewContact(answer);
     }
 }

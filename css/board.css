@@ -1033,6 +1033,7 @@ input::-webkit-calendar-picker-indicator {
   .popup-add-task-container .contactSelectField {
     top: 60px !important;
     width: 100% !important;
+    position: absolute;
   }
   
   .popup-add-task-container #contactInitial {
