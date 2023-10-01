@@ -24,7 +24,7 @@ async function initAddTask() {
     await includeHTML()
     await loadTaskContactsFromStorage();
     await loadTasksFromRemoteStorage();
-    await loadLastContactId();
+
     renderContacts();
 }
 
@@ -129,8 +129,8 @@ function renderSubTaskUpdate() {   //reload edited Sub Task
 }
 
 
-function reloadContactList() {   //reload contact after added new contact
-    initAddTask()
+async function reloadContactList() {
+    await initAddTask();
 }
 
 
