@@ -24,7 +24,7 @@ async function initAddTask() {
     await includeHTML()
     await loadTaskContactsFromStorage();
     await loadTasksFromRemoteStorage();
-
+    await loadLastContactId();
     renderContacts();
 }
 
