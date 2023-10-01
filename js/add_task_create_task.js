@@ -129,7 +129,7 @@ function renderSubTaskUpdate() {   //reload edited Sub Task
 }
 
 
-async function reloadContactList() {
+async function reloadContactList() {   //reload contact after added new contact
     await initAddTask();
 }
 
