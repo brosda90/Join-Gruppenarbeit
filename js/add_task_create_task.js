@@ -321,7 +321,7 @@ function setNewTaskData() {   //set new task from values
 async function addNewTask(title, description, priority, date, category, assignedTo, subtasks) {   //push new created Task
     await loadTasksFromRemoteStorage();
     let newTask = {
-        'id': loadedTasks.length + 1,
+        'id': getTaskId(),
         'status': taskStatus,
         'category': category,
         'category_color': categoryColor,
@@ -334,6 +334,12 @@ async function addNewTask(title, description, priority, date, category, assigned
     };
 
     pushNewTask(newTask);
+}
+
+
+function getTaskId() {
+    if (loadedTasks.length === 0) return 1;
+    return loadedTasks[loadedTasks.length - 1]['id'] + 1;
 }
 
 
