@@ -1,29 +1,40 @@
+/**
+ * Adds an event listener to the DOMContentLoaded event and triggers the
+ * @param {Event} event - The DOMContentLoaded event.
+ * @returns {void}
+ */
 window.addEventListener("DOMContentLoaded", (event) => {
   setTimeout(() => {
     moveLogoAndShowLogin();
   }, 600);
 });
 
+/**
+ * Moves the logo and displays the login container.
+ * @returns {void}
+ */
 function moveLogoAndShowLogin() {
   const overlay = document.getElementById("colorOverlay");
   const logoContainer = document.querySelector(".logo-container");
   const logo = document.getElementById("logo");
   const loginContainer = document.getElementById("loginContainer");
 
-  // Logo verschieben
+  // Move the logo
   logoContainer.style.top = "10px";
   logoContainer.style.left = "10px";
   logoContainer.style.transform = "none";
 
-  // Logo ändern und overlay div entfernen wegen mobile touch funktion
+  // Change the logo and remove the overlay for mobile touch functionality
   setTimeout(() => {
     logo.src = "assets/img/mobile-start-animation-black.svg";
     overlay.remove();
-    // Login-Container anzeigen
+
+    // Display the login container
     loginContainer.style.display = "flex";
 
-    // Margins für den logoContainer wenn das bild gewandert ist
+    // Set margins for the logoContainer after the image has moved
     logoContainer.style.marginTop = "40px";
     logoContainer.style.marginLeft = "40px";
-  }, 200); // zeitversetzt starten
+  }, 200); 
 }
+

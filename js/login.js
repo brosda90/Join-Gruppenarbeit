@@ -69,13 +69,22 @@ function saveLoginDetails(email) {
 }
 
 /**
- * Function to log the user in.
- * @returns {void}
- */
-async function login() {
+ * Retrieves the login form elements from the DOM.*/
+function getLoginElements() {
   const emailField = document.getElementById("emailLogin");
   const passwordField = document.getElementById("passwordLogin");
   const rememberMeCheckbox = document.getElementById("rememberBox");
+  
+  return { emailField, passwordField, rememberMeCheckbox };
+}
+
+
+/**
+ * Handles the login process.
+ * @returns {void}
+ */
+async function login() {
+  const { emailField, passwordField, rememberMeCheckbox } = getLoginElements();
 
   clearErrorClasses(emailField, passwordField);
 
@@ -83,23 +92,41 @@ async function login() {
     return;
   }
 
-  let users = await loadUsersData();
+  const users = await loadUsersData();
 
   if (!users) {
-    alert("Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.");
+    handleLoginError();
     return;
   }
 
   const user = authenticateUser(users, emailField.value, passwordField.value);
 
   if (user) {
-    handleRememberMe(rememberMeCheckbox, emailField.value, passwordField.value);
-    setLoggedInUser(user);
-    navigateToSummary();
+    handleSuccessfulLogin(rememberMeCheckbox, user);
   } else {
     displayLoginError();
   }
 }
+/**
+  * Displays an error message when an error occurs during login.
+ * @returns {void}
+ */
+function handleLoginError() {
+  alert("Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.");
+}
+
+/**
+ * Handles a successful login and performs the appropriate actions.
+ * @param {HTMLElement} rememberMeCheckbox 
+ * @param {Object} user 
+ * @param {string} user.email 
+ */
+function handleSuccessfulLogin(rememberMeCheckbox, user) {
+  handleRememberMe(rememberMeCheckbox, user.email, user.password);
+  setLoggedInUser(user);
+  navigateToSummary();
+}
+
 /**
  * Removes error styling from the email and password fields.
  * @param {HTMLElement}
