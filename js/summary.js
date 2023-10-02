@@ -1,103 +1,81 @@
-// Event, der beim Laden des Dokuments ausgeführt wird, um Aufgaben aus dem Remote-Speicher zu laden.
+/**
+ * Event listener
+ */
 document.addEventListener("DOMContentLoaded", function () {
   loadTasksFromRemoteStorage();
+  updateDisplay();
+  displayTimeGreetingAndUser();
+  addImageHoverEffects();
 });
 
-//###################################################################################//
-//###################################################################################//
+setTimeout(function () {
+  const viewportWidth = window.innerWidth;
+  if (viewportWidth <= 1000) {
+    document.querySelector(".right-container").style.opacity = "0";
+  }
+}, 1000);
+
 /**
- * Wechselt zur "board.html"-Seite.
+ * Switches the current window to "board.html".
  */
 function switchToBoard() {
   window.location.href = "board.html";
 }
 
-//################  LOAD FUNCTION FOR NAME AND GREETINGS ############################//
-//###################################################################################//
+// This timeout variable global.
+let resizeTimeout;
+
 /**
- * Aktualisiert die Anzeige.
+ * Sets the opacity of the right-container based on the provided width.
+ * @param {number} width
+ */
+function setOpacityBasedOnWidth(width) {
+  const rightContainer = document.querySelector(".right-container");
+  rightContainer.style.opacity = width <= 1000 ? "0" : "1";
+}
+
+/**
+ * Checks the viewport width and decides the opacity setting for the right-container.
+ */
+function checkViewportWidth() {
+  const viewportWidth = window.innerWidth;
+  clearTimeout(resizeTimeout);
+
+  resizeTimeout = setTimeout(
+    () => {
+      setOpacityBasedOnWidth(viewportWidth);
+    },
+    viewportWidth <= 1000 ? 1500 : 0
+  );
+}
+
+/**
+ * Updates the display based on window resizing.
  */
 function updateDisplay() {
-  const rightContainer = document.querySelector(".right-container");
-  let resizeTimeout;
-
-  function setOpacityBasedOnWidth(width) {
-    if (width <= 1000) {
-      rightContainer.style.opacity = "0";
-    } else {
-      rightContainer.style.opacity = "1";
-    }
-  }
-
-  function checkViewportWidth() {
-    const viewportWidth = window.innerWidth;
-
-    if (resizeTimeout) {
-      clearTimeout(resizeTimeout);
-    }
-
-    if (viewportWidth <= 1000) {
-      resizeTimeout = setTimeout(() => {
-        setOpacityBasedOnWidth(viewportWidth);
-      }, 1500); //
-    } else {
-      setOpacityBasedOnWidth(viewportWidth);
-    }
-  }
-
   checkViewportWidth();
-
   window.addEventListener("resize", checkViewportWidth);
 }
 
-document.addEventListener("DOMContentLoaded", updateDisplay);
-
-setTimeout(updateDisplay, 1500);
-
-// Event, der beim Laden des Dokuments ausgeführt wird, um den aktuellen Zeitgruß und den eingeloggten Benutzer anzuzeigen.
-document.addEventListener("DOMContentLoaded", function () {
+/**
+ * Displays the time greeting and the logged-in user's name.
+ */
+function displayTimeGreetingAndUser() {
   const currentTime = new Date();
-  const hour = currentTime.getHours();
-  let greeting;
-
-  if (hour >= 6 && hour < 12) {
-    greeting = "Good morning";
-  } else if (hour >= 12 && hour < 18) {
-    greeting = "Good afternoon";
-  } else if (hour >= 18 && hour < 23) {
-    greeting = "Good evening";
-  } else {
-    greeting = "Hello";
-  }
+  let greeting = getGreetingByHour(currentTime.getHours());
 
   const loggedInUser = localStorage.getItem("loggedInUser");
-
   if (loggedInUser) {
     document.querySelector(".right-container p:nth-child(1)").textContent =
       greeting + ",";
     document.querySelector(".right-container p:nth-child(2)").textContent =
       loggedInUser;
   }
-});
+}
 
-//###################################################################################//
-//###################################################################################//
-// Event, der beim Laden des Fensters ausgeführt.nach einer 1 Sekunde ändert Opazität eines Elements.
-window.addEventListener("DOMContentLoaded", (event) => {
-  setTimeout(function () {
-    const viewportWidth = window.innerWidth;
-
-    if (viewportWidth <= 1000) {
-      document.querySelector(".right-container").style.opacity = "0";
-    }
-  }, 1000);
-});
-
-//################  LOAD TASKS ######################################################//
-//###################################################################################//
 /**
- * Lädt Aufgaben aus dem Remote-Speicher.
- * @returns {void}
+ * Loads tasks from remote storage and updates the Page accordingly.
+ * @async
  */
 async function loadTasksFromRemoteStorage() {
   tasks = JSON.parse(await getItem("tasks"));
@@ -105,10 +83,8 @@ async function loadTasksFromRemoteStorage() {
   nextDeadline();
 }
 
-//################ ARRAY FILTER  ####################################################//
-//###################################################################################//
 /**
- * Aktualisiert die Aufgabenzahlen basierend auf den Daten vom Server.
+ * Updates task counts on the Page on data from the server.
  */
 function updateTaskFromServer() {
   const taskCount = tasks.length;
@@ -130,10 +106,8 @@ function updateTaskFromServer() {
   document.querySelector("#done h3").textContent = doneCount;
 }
 
-//################  DEADLINE DATE FOR URGENT TASKS ##################################//
-//###################################################################################//
 /**
- * Zeigt das nächste Fälligkeitsdatum für dringende Aufgaben an.
+ * Displays the next deadline for urgent tasks.
  */
 function nextDeadline() {
   const urgentTasks = tasks.filter((task) => task.priority === 1);
@@ -155,11 +129,10 @@ function nextDeadline() {
   document.querySelector("#deadLine p:nth-child(1) b").textContent = formatDate;
 }
 
-//################  HOVER FOR IMAGES ################################################//
-//###################################################################################//
-
-// Event, der beim Laden des Dokuments ausgeführt wird, um Hover-Effekte für bestimmte Bilder zu erstellen.
-document.addEventListener("DOMContentLoaded", function () {
+/**
+ * Adds hover effects to images on the page.
+ */
+function addImageHoverEffects() {
   const toDoElement = document.getElementById("toDo");
   const doneElement = document.getElementById("done");
 
@@ -178,4 +151,21 @@ document.addEventListener("DOMContentLoaded", function () {
   doneElement.addEventListener("mouseout", function () {
     this.querySelector("img").setAttribute("src", "assets/img/done.png");
   });
-});
+}
+
+/**
+ * greeting based on the current hour.
+ * @param {number} hour - The current hour of the day.
+ * @returns {string} - Returns the appropriate greeting .
+ */
+function getGreetingByHour(hour) {
+  if (hour >= 6 && hour < 12) {
+    return "Good morning";
+  } else if (hour >= 12 && hour < 18) {
+    return "Good afternoon";
+  } else if (hour >= 18 && hour < 23) {
+    return "Good evening";
+  } else {
+    return "Hello";
+  }
+}

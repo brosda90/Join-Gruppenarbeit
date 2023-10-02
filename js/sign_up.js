@@ -8,9 +8,9 @@ function backToLogin() {
 }
 
 /**
- * Toggles the visibility of the password in the given field.
- * @param {string} fieldId - The ID of the password field.
- * @param {string} [imgId] - The ID of the image to display visibility status.
+ * Toggles the visibility of the password .
+ * @param {string} fieldId
+ * @param {string} [imgId]
  */
 function togglePasswordVisibility(fieldId, imgId) {
   const passwordField = document.getElementById(fieldId);
@@ -32,8 +32,8 @@ function togglePasswordVisibility(fieldId, imgId) {
 
 /**
  * Sets the password visibility to "off".
- * @param {string} fieldId - The ID of the password field.
- * @param {string} imgId - The ID of the image.
+ * @param {string} fieldId
+ * @param {string} imgId
  */
 function setVisibilityOff(fieldId, imgId) {
   const imageElement = document.getElementById(imgId);
@@ -63,7 +63,7 @@ async function loadUsers() {
 
 /**
  * Loads the last contact ID from storage.
- * @returns {number} The last contact ID.
+ * @returns {number}
  */
 async function loadLastContactId() {
   let storedLastContactId = await getItem("lastContactId");
@@ -75,7 +75,7 @@ async function loadLastContactId() {
 
 /**
  * Returns a random color for a badge.
- * @returns {number} A random number between 0 and 14.
+ * @returns {number}
  */
 function randomBadgeColor() {
   return Math.floor(Math.random() * 15);
@@ -83,7 +83,7 @@ function randomBadgeColor() {
 
 /**
  * Shows a popup for a field.
- * @param {HTMLElement} field - The field for which the popup should be shown.
+ * @param {HTMLElement} field
  */
 function showFieldPopup(field) {
   const popup = document.createElement("div");
@@ -97,8 +97,7 @@ function showFieldPopup(field) {
 }
 
 /**
- * Retrieves values from the input fields.
- * @returns {Object} An object containing references to form fields.
+ * values from the input fields.
  */
 function getFormFields() {
   return {
@@ -112,7 +111,7 @@ function getFormFields() {
 
 /**
  * Attaches event listeners to input fields.
- * @param {Object} fields - The form fields.
+ * @param {fields}
  */
 function attachInputEventListeners(fields) {
   [
@@ -129,8 +128,8 @@ function attachInputEventListeners(fields) {
 
 /**
  * Validates field values.
- * @param {Object} fields - The form fields.
- * @returns {boolean} true if fields are valid, otherwise false.
+ * @param {fields}
+ * @returns {boolean}
  */
 function areFieldsValid(fields) {
   if (
@@ -168,7 +167,7 @@ function areFieldsValid(fields) {
 
 /**
  * Registers the user.
- * @param {Object} fields - The form fields.
+ * @param {fields}
  */
 async function register(fields) {
   await loadUsers();
@@ -223,7 +222,7 @@ async function registerUser() {
 
 /**
  * Checks and removes the error class if the field contains data.
- * @param {HTMLElement} field - The field to check.
+ * @param {field}
  */
 function checkAndRemoveErrorClass(field) {
   if (field.value.trim()) {
@@ -242,8 +241,7 @@ function getNextUserId() {
 
 /**
  * Extracts and returns the initials of a given name.
- * @param {string} name - The name from which to extract initials.
- * @returns {string} The initials of the name.
+ * @param {name}
  */
 function getInitials(name) {
   const parts = name.split(" ");
@@ -256,8 +254,8 @@ function getInitials(name) {
 
 /**
  * Validates whether the given email is valid.
- * @param {string} email - The email to validate.
- * @returns {boolean} true if the email is valid, otherwise false.
+ * @param {email}
+ * @returns {boolean}
  */
 function isValidEmail(email) {
   const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -288,7 +286,7 @@ async function checkEmailExists() {
 
 /**
  * Validates if the password meets requirements.
- * @returns {boolean} true if the password meets the requirements, otherwise false.
+ * @returns {boolean}
  */
 function validatePasswordRequirements() {
   const passwordField = document.getElementById("password");
@@ -366,7 +364,7 @@ function showRegistrationSuccess() {
 
 /**
  * Starts a countdown after registration.
- * @param {number} seconds - The countdown duration in seconds.
+ * @param {number}
  */
 function startCountdown(seconds) {
   let counter = seconds;

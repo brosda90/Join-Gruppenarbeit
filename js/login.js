@@ -1,18 +1,14 @@
-//###################################################################################//
-//###################################################################################//
 /**
- * Öffnet die Registrierungsseite in einem neuen Fenster.
+ * Opens the registration page in a new window.
  */
 function openSignUpInNewWindow() {
   window.location.href = "sign_up.html";
 }
 
-//###################################################################################//
-//###################################################################################//
 /**
- * Schaltet die Sichtbarkeit des Passworts um.
- * @param {string} fieldId - Die ID des Passwort-Eingabefelds.
- * @param {string} imgId - Die ID des Bild-Elements.
+ * Toggles the visibility of the password.
+ * @param {string} fieldId - The ID of the password input field.
+ * @param {string} imgId - The ID of the image element.
  */
 function togglePasswordVisibility(fieldId, imgId) {
   const passwordField = document.getElementById(fieldId);
@@ -32,22 +28,18 @@ function togglePasswordVisibility(fieldId, imgId) {
   }
 }
 
-//###################################################################################//
-//###################################################################################//
 /**
- * Setzt die Sichtbarkeit des Passworts auf unsichtbar.
- * @param {string} fieldId - Die ID des Passwort-Eingabefelds.
- * @param {string} imgId - Die ID des Bild-Elements.
+ * Sets the visibility of the password to hidden.
+ * @param {string} fieldId - The ID of the password input field.
+ * @param {string} imgId - The ID of the image element.
  */
 function setVisibilityOff(fieldId, imgId) {
   const imageElement = document.getElementById(imgId);
   imageElement.src = "./assets/img/visibility_off.svg";
 }
 
-//###################################################################################//
-//###################################################################################//
 /**
- * Zeigt die Passwortanforderungen in einem Popup an.
+ * Displays the password requirements in a popup.
  */
 function showPasswordRequirements() {
   document.getElementById("passwordInfo").style.display = "block";
@@ -57,10 +49,8 @@ function showPasswordRequirements() {
   }, 3000);
 }
 
-//###################################################################################//
-//###################################################################################//
 /**
- * Lädt Benutzer vom Server.
+ * Loads users from the server.
  * @returns {void}
  */
 async function loadUsers() {
@@ -70,20 +60,16 @@ async function loadUsers() {
   }
 }
 
-//###################################################################################//
-//###################################################################################//
 /**
- * Speichert Anmeldedaten, wenn das Kontrollkästchen aktiviert ist.
- * @param {string} email - Die E-Mail des Benutzers.
+ * Saves login details if the checkbox is activated.
+ * @param {string} email - The user's email.
  */
 function saveLoginDetails(email) {
   localStorage.setItem("rememberEmail", email);
 }
 
-//###################################################################################//
-//###################################################################################//
 /**
- * Funktion zum Anmelden des Benutzers.
+ * Function to log the user in.
  * @returns {void}
  */
 async function login() {
@@ -91,78 +77,139 @@ async function login() {
   const passwordField = document.getElementById("passwordLogin");
   const rememberMeCheckbox = document.getElementById("rememberBox");
 
-  const emailBox = emailField.closest(".elementbox");
-  const passwordBox = passwordField.closest(".elementbox");
-  const email = emailField.value;
-  const password = passwordField.value;
+  clearErrorClasses(emailField, passwordField);
 
-  emailBox.classList.remove("elementbox-error");
-  passwordBox.classList.remove("elementbox-error");
-
-  let error = false;
-
-  // Überprüfung, ob E-Mail oder Passwort leer sind
-
-  if (!password.trim()) {
-    passwordBox.classList.add("elementbox-error");
-    passwordField.reportValidity();
-    error = true;
-  }
-
-  if (!email.trim()) {
-    emailBox.classList.add("elementbox-error");
-    emailField.reportValidity();
-    error = true;
-  }
-
-  if (error) {
+  if (isInputEmpty(emailField, passwordField)) {
     return;
   }
 
-  let usersData = await getItem("users");
+  let users = await loadUsersData();
 
-  let users;
-  try {
-    users = JSON.parse(usersData);
-  } catch (error) {
+  if (!users) {
     alert("Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.");
     return;
   }
 
-  const user = users.find(
-    (user) => user.email === email && user.password === password
-  );
+  const user = authenticateUser(users, emailField.value, passwordField.value);
 
   if (user) {
-    if (rememberMeCheckbox.checked) {
-      localStorage.setItem("rememberEmail", email);
-      localStorage.setItem("rememberPassword", password);
-    } else {
-      localStorage.removeItem("rememberEmail");
-      localStorage.removeItem("rememberPassword");
-    }
-
-    localStorage.setItem("loggedInUser", user.name);
-    localStorage.setItem("loggedInUserID", user.id);
-    window.location.href = "summary.html";
+    handleRememberMe(rememberMeCheckbox, emailField.value, passwordField.value);
+    setLoggedInUser(user);
+    navigateToSummary();
   } else {
-    document.getElementById("errorReport").style.display = "flex";
+    displayLoginError();
+  }
+}
+/**
+ * Removes error styling from the email and password fields.
+ * @param {HTMLElement}
+ * @param {HTMLElement}
+ */
+function clearErrorClasses(emailField, passwordField) {
+  emailField.closest(".elementbox").classList.remove("elementbox-error");
+  passwordField.closest(".elementbox").classList.remove("elementbox-error");
+}
+
+/**
+ * Checks if either the email or password fields are empty.
+ * @param {HTMLElement}
+ * @returns {boolean}
+ */
+function isInputEmpty(emailField, passwordField) {
+  let error = false;
+
+  if (!passwordField.value.trim()) {
+    markInputAsError(passwordField);
+    error = true;
+  }
+
+  if (!emailField.value.trim()) {
+    markInputAsError(emailField);
+    error = true;
+  }
+
+  return error;
+}
+
+/**
+ * Marks the given input field as containing an error.
+ * @param {HTMLElement} inputField
+ */
+function markInputAsError(inputField) {
+  inputField.closest(".elementbox").classList.add("elementbox-error");
+  inputField.reportValidity();
+}
+
+/**
+ * Fetches user data from storage.
+ * @returns {Array}
+ */
+async function loadUsersData() {
+  let usersData = await getItem("users");
+  let users;
+
+  try {
+    users = JSON.parse(usersData);
+  } catch (error) {
+    return null;
+  }
+
+  return users;
+}
+
+/**
+ * Authenticates a user based on email and password.
+ * @param {Array} users
+ * @param {string} email
+ * * @param {string} password
+ */
+function authenticateUser(users, email, password) {
+  return users.find(
+    (user) => user.email === email && user.password === password
+  );
+}
+
+/**
+ * Handles the remember me functionality based on the state of a checkbox.
+ * @param {string} email
+ * @param {string} password
+ */
+function handleRememberMe(checkbox, email, password) {
+  if (checkbox.checked) {
+    localStorage.setItem("rememberEmail", email);
+    localStorage.setItem("rememberPassword", password);
+  } else {
+    localStorage.removeItem("rememberEmail");
+    localStorage.removeItem("rememberPassword");
   }
 }
 
-//###################################################################################//
-//###################################################################################//
 /**
- * Löscht Anmeldedaten aus dem Speicher, wenn das Kontrollkästchen deaktiviert ist.
+ * Sets the logged in user's data to local storage.
+ * @param {Object} user
+ */
+function setLoggedInUser(user) {
+  localStorage.setItem("loggedInUser", user.name);
+  localStorage.setItem("loggedInUserID", user.id);
+}
+
+function navigateToSummary() {
+  window.location.href = "summary.html";
+}
+
+function displayLoginError() {
+  document.getElementById("errorReport").style.display = "flex";
+}
+
+/**
+ * Removes login details from storage if the checkbox is unchecked.
  */
 function clearLoginDetailsFromStorage() {
   localStorage.removeItem("rememberEmail");
 }
 
-//###############################AUTOFILL FUNCTION ##################################//
-//###################################################################################//
 /**
- * Füllt die Anmeldedaten automatisch aus, falls gespeichert.
+ * Autofills the login details if saved.
  */
 function autofillLoginDetails() {
   const emailField = document.getElementById("emailLogin");
@@ -182,32 +229,18 @@ function autofillLoginDetails() {
   }
 }
 
-//##########################POPUP CLOSING#################################//
-//########################################################################//
 /**
- * Schließt das Popup für fehlerhafte Anmeldungen.
+ * Closes the popup for incorrect logins.
  */
 function closeWrongLogin() {
   document.getElementById("errorReport").style.display = "none";
 }
 
-//#######################SHOW REGISTERED USER IN CONSOLE########################//
-//##############################################################################//
-/**
- * Zeigt registrierte Benutzer in der Konsole an.
- * @returns {void}
- */
-async function logRegisteredUsers() {
-  const users = JSON.parse(await getItem("users"));
-
-  if (users) {
-    console.log("Registrierte Benutzer:", users);
-  } else {
-    console.log("Keine Benutzer gefunden.");
-  }
-}
-
 document.addEventListener("DOMContentLoaded", function () {
+  // Autofill login details
+  autofillLoginDetails();
+
+  // Add keydown event listeners for email and password fields
   document
     .getElementById("emailLogin")
     .addEventListener("keydown", function (event) {
@@ -227,10 +260,8 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-//################GUEST LOGIN ##############################//
-//##########################################################//
 /**
- * Loggt einen Gastbenutzer ein.
+ * Logs in a guest user.
  * @returns {void}
  */
 function guestLogin() {
@@ -248,7 +279,7 @@ function guestLogin() {
   window.location.href = "summary.html";
 }
 /**
- * Loggt Gastbenutzer aus .
+ * Logs out guest users.
  * @returns {void}
  */
 function guestLogout() {
@@ -257,12 +288,17 @@ function guestLogout() {
   userLogout();
 }
 
-//################ EVENT LISTENER CONTENT LOADED ##############################//
-//##########################################################//
-
+/**!!!HILFSFUNKTION UM SCHON REGISTRIERTE USER ANZUZEIGEN!!!*/
 /**
- * Initialisiert die Seite
+ * Displays registered users in the console.
+ * @returns {void}
  */
-document.addEventListener("DOMContentLoaded", function() {
-   autofillLoginDetails();
-});
+async function logRegisteredUsers() {
+  const users = JSON.parse(await getItem("users"));
+
+  if (users) {
+    console.log("Registrierte Benutzer:", users);
+  } else {
+    console.log("Keine Benutzer gefunden.");
+  }
+}

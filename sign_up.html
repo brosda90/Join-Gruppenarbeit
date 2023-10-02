@@ -79,7 +79,7 @@
               placeholder="Email"
               required
               autocomplete="email"
-              onblur="if(this.value.trim() && isValidEmail(this.value)) { checkEmailExists(); showPasswordRequirements(); }"
+              onblur="checkEmailExists();"
             />
             <div class="input-imgbox">
               <img src="./assets/img/mail.svg" />
