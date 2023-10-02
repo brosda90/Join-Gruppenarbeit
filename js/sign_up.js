@@ -253,13 +253,12 @@ function getInitials(name) {
 }
 
 /**
- * Validates whether the given email is valid.
- * @param {email}
+ * Validates whether the given email contains an "@" character.
+ * @param {string} email
  * @returns {boolean}
  */
 function isValidEmail(email) {
-  const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-  return regex.test(email);
+  return email.includes("@");
 }
 
 /**
