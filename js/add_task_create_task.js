@@ -338,8 +338,13 @@ async function addNewTask(title, description, priority, date, category, assigned
 
 
 function getTaskId() {
-    if (loadedTasks.length === 0) return 1;
-    return loadedTasks[loadedTasks.length - 1]['id'] + 1;
+    let highestID = 0;
+    for (let i = 0; i < loadedTasks.length; i++) {
+        if (highestID < loadedTasks[i]['id']) {
+            highestID = loadedTasks[i]['id'];
+        }
+    }
+    return highestID + 1;
 }
 
 
