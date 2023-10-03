@@ -4,11 +4,19 @@ document.addEventListener('DOMContentLoaded', async function () {
     await init();
 });
 
+
+/**
+ * Function is called after the page has fully loaded and calls important functions for the page.
+ */
 async function init() {
     await includeHTML();
     await selectMenu();
 }
 
+
+/**
+ * Function for reloading templates.
+ */
 async function includeHTML() {
     let includeElements = document.querySelectorAll('[w3-include-html]');
     for (let i = 0; i < includeElements.length; i++) {
@@ -25,11 +33,19 @@ async function includeHTML() {
 }
 
 
+/**
+ * Prevents the event from spreading beyond the object. 
+ * 
+ * @param {object} event - An object that provides information about the circumstances that triggered the event.
+ */
 function stopPropagation(event) {
     event.stopPropagation();
 }
 
 
+/**
+ * Checks the file name for the highlight in the menu.
+ */
 async function selectMenu() {
     let filename = document.location.pathname;
     let objs = document.getElementsByClassName('nav-menu-link');
@@ -41,6 +57,12 @@ async function selectMenu() {
 }
 
 
+/**
+ * Checks filenames and returns ID for menu item.
+ * 
+ * @param {string} filename - The file name to check.
+ * @returns - Number for the menu item.
+ */
 async function filenameToId(filename) {
     if(filename.includes("summary.html")) {
         return 0;
@@ -55,6 +77,12 @@ async function filenameToId(filename) {
 }
 
 
+/**
+ * Function for escaping characters in HTML text.
+ * 
+ * @param {string} string - Text in which the special characters are to be replaced.
+ * @returns - The finished text.
+ */
 function maskSpecialChars(string) {
     const specialChars = {
         '&': '&amp;',

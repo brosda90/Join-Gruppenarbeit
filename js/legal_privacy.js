@@ -1,3 +1,6 @@
+/**
+ * Calls important functions after the page has fully loaded.
+ */
 document.addEventListener("DOMContentLoaded", async function () {
     await includeHTML();
     await selectMenu();
@@ -5,6 +8,9 @@ document.addEventListener("DOMContentLoaded", async function () {
 });
 
 
+/**
+ * Enables or disables HTML elements depending on user type.
+ */
 async function initLegalPrivacy() {
     if(isNotAUser == true) {
         document.getElementById('nav-menu').classList.add('d-none');
