@@ -3,11 +3,25 @@
 //-------------------------------------//
 
 
-function contactInitialsHTML(index, inital) {
-    return `<div class="profile-badge bc-${sortedContactList[index]['badge-color']} brd-white">${sortedContactList[index]['initials']}</div>`;
+/**
+ * Generates HTML markup for a contact's initials badge.
+ * @function
+ * @param {number} index - The index of the contact in the sorted contact list.
+ * @param {string} initial - The initials of the contact.
+ * @returns {string} The HTML markup for the contact's initials badge.
+ */
+function contactInitialsHTML(index, initial) {
+    return `<div class="profile-badge bc-${sortedContactList[index]['badge-color']} brd-white">${initial}</div>`;
 }
 
 
+/**
+ * Generates HTML markup for rendering a contact in the user interface.
+ * @function
+ * @param {number} index - The index of the contact in the sorted contact list.
+ * @param {object} contact - The contact object to render.
+ * @returns {string} The HTML markup for rendering the contact.
+ */
 function renderContactHTML(index, contact) {
     const contactClass = contact.userState === '(You)' ? 'currentContact' : '';
 
@@ -23,6 +37,13 @@ function renderContactHTML(index, contact) {
 }
 
 
+/**
+ * Generates HTML markup for rendering a subtask in the user interface.
+ * @function
+ * @param {string} sub - The subtask content.
+ * @param {number} index - The index of the subtask in the list.
+ * @returns {string} The HTML markup for rendering the subtask.
+ */
 function renderSubHTML(sub, index) {
     return `<div id="listElement${index}" class="subListElement">
                 <div class="subListInnerElement">
